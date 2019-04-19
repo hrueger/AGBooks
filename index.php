@@ -36,6 +36,8 @@ if ($data) {
             case "prefilledValuesRegisterUser":
                 getPrefilledValuesRegisterUser();
                 break;
+            case "submit":
+                submitOrder();
             default: 
                 break;
         }
@@ -236,5 +238,12 @@ function getPrefilledValuesRegisterUser() {
 }
 
 function submitOrder() {
-    $db->query("UPDATE `orders` SET `checked`=1 WHERE `user`='$user'");
+    $db = connect();
+    $user = $db->real_escape_string(getUserToken());
+    $res = $db->query("UPDATE `orders` SET `checked`=1 WHERE `user`='$user'");
+    if ($res) {
+        die(true);
+    } else {
+        die($db->error);
+    }
 }
