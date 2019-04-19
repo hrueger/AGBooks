@@ -1,0 +1,84 @@
+<h1>Infos</h1>
+<form class="needs-validation" [formGroup]="infoForm" (ngSubmit)="onSubmit()">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="inputTeacher">Lehrkraft: </label>
+    <div class="col-sm-10">
+      <input type="text" id="inputTeacher" formControlName="teacher" [ngClass]="{ 'is-invalid': submitted && f.teacher.errors }" class="form-control" name="description" placeholder="Nachname der Lehrkraft" value="" required="">
+
+    </div>
+    <div *ngIf="submitted && f.teacher.errors" class="invalid-feedback">
+        <div *ngIf="f.teacher.errors.required">
+          Dieses Feld muss ausgefüllt werden!
+        </div>
+      </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="inputTeacherShort">Kürzel: </label>
+    <div class="col-sm-10">
+      <input type="text" id="inputTeacherShort" formControlName="teacherShort" [ngClass]="{ 'is-invalid': submitted && f.teacherShort.errors }" class="form-control" name="Kürzel der Lehrkraft" placeholder="Beschreibung" value="" required="">
+
+    </div>
+    <div *ngIf="submitted && f.teacherShort.errors" class="invalid-feedback">
+        <div *ngIf="f.teacherShort.errors.required">
+          Dieses Feld muss ausgefüllt werden!
+        </div>
+      </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="inputGrade">Klasse: </label>
+    <div class="col-sm-10">
+      <select class="form-control" formControlName="grade" [ngClass]="{ 'is-invalid': submitted && f.grade.errors }" required="">
+        <option disabled="" value="" selected="">Bitte wählen</option>
+        <option *ngFor="let grade of grades" value="{{grade}}">{{grade}}</option>
+      </select>
+    
+    </div>
+    <div *ngIf="submitted && f.grade.errors" class="invalid-feedback">
+        <div *ngIf="f.grade.errors.required">
+          Dieses Feld muss ausgefüllt werden!
+        </div>
+      </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="inputRoom">Raum: </label>
+    <div class="col-sm-10">
+      
+        <input type="number" id="inputRoom" formControlName="room" [ngClass]="{ 'is-invalid': submitted && f.room.errors }" class="form-control" name="description" placeholder="Raumnummer" value="" required="">
+
+    
+    </div>
+    <div *ngIf="submitted && f.room.errors" class="invalid-feedback">
+        <div *ngIf="f.room.required">
+          Dieses Feld muss ausgefüllt werden!
+        </div>
+    </div>
+
+    
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="inputClassSize">Klassenstärke: </label>
+    <div class="col-sm-10">
+      
+        <input type="number" id="inputClassSize" formControlName="classSize" [ngClass]="{ 'is-invalid': submitted && f.classSize.errors }" class="form-control" name="description" placeholder="Anzahl der Schülerinnen und Schüler in der Klasse" value="" required="">
+
+    
+    </div>
+    <div *ngIf="submitted && f.classSize.errors" class="invalid-feedback">
+        <div *ngIf="f.classSize.required">
+          Dieses Feld muss ausgefüllt werden!
+        </div>
+    </div>
+
+    
+  </div>
+  
+  
+  
+  <div class="row">
+    <div class="col-12">
+      <input  type="button" class="btn btn-primary float-left" (click)="previous()" value="Zurück">
+      <input type="submit" name="submit" class="btn btn-primary float-right" value="Weiter">
+    </div>
+  </div>
+</form>
