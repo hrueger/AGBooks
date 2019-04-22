@@ -1,0 +1,6 @@
+<h1 *ngIf="!orderReady" >Bestellung abgeschickt</h1>
+<h1 *ngIf="orderReady" >Bestellung bereit</h1>
+<br><br><br>
+<div *ngIf="!orderReady" class="alert alert-success">Vielen Dank für das Ausfüllen des Bestellformulars. Sie werden benachrichtigt, wenn Ihre Bestellung bearbeitet wurde.</div>
+<div *ngIf="!orderReady" class="alert alert-info">Vor Ihnen sind noch <b>{{ordersLeft}}</b> Bestellungen an der Reihe. Geschätzte Zeit: <b>{{estimatedTime}}</b></div>
+<div *ngIf="orderReady" class="alert alert-info"><h3>Ihre Bestellung ist bereit.</h3><br>Bitte kommen Sie <b>jetzt</b> mit der <b>gesamten Klasse</b> zur Lehrmittelbücherei (Raum 123).</div>

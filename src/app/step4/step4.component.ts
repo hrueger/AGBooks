@@ -46,7 +46,7 @@ export class Step4Component implements OnInit {
       if (data == true) {
         this.router.navigate(["step", "5"]);
       } else {
-        this.alertService.error("Fehler");
+        this.alertService.error(data.toString());
       }
    },
    error => {

@@ -15,6 +15,7 @@ import { Step3Component } from './step3/step3.component';
 import { AlertComponent } from './components/alert.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { Step4Component } from './step4/step4.component';
+import { Step5Component } from './step5/step5.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { Step4Component } from './step4/step4.component';
     Error404Component,
     NavbarComponent,
     AlertComponent,
-    Step4Component
+    Step4Component,
+    Step5Component
   ],
   imports: [
     NgbModule,
