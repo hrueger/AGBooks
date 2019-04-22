@@ -1,0 +1,53 @@
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">AG-Books Backend</a>
+  <p class="navbar-middle" *ngIf="currentOrder">{{currentOrder.user.grade}} - {{currentOrder.user.teacher}}</p>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="#">Sign out</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li *ngFor="let order of orders" class="nav-item">
+            <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/{{order.id}}">
+              {{order.user.grade}} - {{order.user.teacher}}
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        
+      </div>
+
+        <div *ngIf="currentOrder">
+          <div class="card-deck">
+
+            <div class="card" *ngFor="let order of currentOrder.order">
+              
+              <div class="card-body">
+                <h5 class="bookinfo-heading card-title"><span>{{order.subject}} {{currentGrade}}</span><br><small>{{order.name}}</small></h5>
+                <p class="bookinfo-number card-text">{{order.number}}</p>
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+      
+      
+    </main>
+  </div>
+</div>
+
+
+
