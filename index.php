@@ -10,6 +10,31 @@ file_put_contents("log.txt", "------------------------------\n", FILE_APPEND);
 file_put_contents("log.txt", $_GET, FILE_APPEND);
 file_put_contents("log.txt", "------------------------------\n------------------------------\n------------------------------\n\n\n", FILE_APPEND);*/
 
+if(isset($_GET["queue"])) {
+    date_default_timezone_set("Europe/Berlin");
+    header('Cache-Control: no-cache');
+    header("Content-Type: text/event-stream\n\n");
+
+    $counter = rand(1, 10);
+    while (1) {
+        echo "event: update\n";
+        $curDate = date(DATE_ISO8601);
+        $data = json_encode(array("estimatedTime"=>$curDate, "ordersLeft"=>5, "orderReady"=>false));
+        echo "data: $data";
+        echo "\n\n";
+        
+        @ob_end_flush();
+        flush();
+        sleep(1);
+    }
+    die();
+}
+
+
+
+
+
+
 $data = file_get_contents('php://input');
 @$data = json_decode($data);
 if ($data) {
@@ -38,11 +63,144 @@ if ($data) {
                 break;
             case "submit":
                 submitOrder();
+
+
+            case "authenticateBackend":
+                authenticateBackend($data);
+                break;
+            case "orders backend":
+                getOrdersBackend();
+                break;
+
+
+
             default: 
                 break;
         }
     }
 }
+
+function authenticateBackend($data)  {
+    if (isset($data->email) &&
+    isset($data->password) &&
+    !empty(trim($data->email)) &&
+    !empty(trim($data->password))) {
+        
+        $db = connect();
+        
+        $email = $db->real_escape_string(strtolower($data->email));
+        $res = $db->query("SELECT id, `password`, email FROM users WHERE email='$email'");
+        
+        if (!$res) {
+            
+            dieWithMessage("Bitte überprüfen Sie Ihre Email Adresse!");
+        } else {
+            $res = $res->fetch_all(MYSQLI_ASSOC);
+            if (!$res) {
+                
+                dieWithMessage("Bitte überprüfen Sie Ihre Email Adresse!");
+            } else {
+                $res = $res[0];
+                if (!$res) {
+                    
+                    dieWithMessage("Bitte überprüfen Sie Ihre Email Adresse!");
+                } else {
+                    $password = $res["password"];
+                    $status = password_verify($data->password, $password);
+                    
+                    if ($status) {                            
+                        
+                        
+                        //putSession("userid", $res["id"]);
+
+                        $token = $db->real_escape_string(uniqid());
+                        $data = array();
+                        $data["userid"] = $res["id"];
+                        $data = $db->real_escape_string(serialize($data));
+                        $sql = "INSERT INTO `session` (token, `data`) VALUES ('Bearer $token', '$data')";
+                        $db->query($sql);
+                        //echo $sql;
+
+
+                        
+                        $ret = array(
+                            "id" => $res["id"],
+                            "email" => $res["email"],
+                            "token" => $token
+                            
+                        );
+                        die(json_encode($ret));
+                    } else {
+                        dieWithMessage("Bitte überprüfen Sie Ihr Passwort!");
+                    }
+                }
+            }  
+        }
+    }
+    dieWithMessage("Nicht alle Felder wurden ausgefüllt!");
+    
+}
+
+function getOrdersBackend() {
+    $db = connect();
+
+    $userinfo = [];
+    $users = $db->query("SELECT * FROM `session`");
+    if ($users) {
+        $users = $users->fetch_all(MYSQLI_ASSOC);
+        if ($users) {
+            foreach ($users as $user) {
+                $userinfo[$user["token"]] = unserialize($user["data"]);
+            }
+        }
+    }
+
+    $bookinfo = [];
+    $books = $db->query("SELECT * FROM `books`");
+    if ($books) {
+        $books = $books->fetch_all(MYSQLI_ASSOC);
+        if ($books) {
+            foreach ($books as $book) {
+                $bookinfo[$book["id"]] = $book;
+            }
+        }
+    }
+
+
+    $data = [];
+    $res = $db->query("SELECT * FROM `orders` WHERE `checked`='1' ORDER BY `time` ASC");
+    if ($res) {
+        $res = $res->fetch_all(MYSQLI_ASSOC);
+        if ($res) {
+            //($res);
+            foreach ($res as $key => $line) {
+                
+                $line["order"] = unserialize($line["order"]);
+                $completeOrder = [];
+                
+                foreach ($line["order"] as $order) {
+                    $completeOrder[] = array(
+                        "name" => $bookinfo[$order["id"]]["name"],
+                        "subject" => $bookinfo[$order["id"]]["subject"],
+                        "number" => $order["number"]
+                    );
+                }
+
+                $line["order"] = $completeOrder;
+
+                $line["user"] = $userinfo[$line["user"]];
+                  
+               
+                
+                $data[] = $line;
+            }
+            die(json_encode($data));
+        }
+    }
+    die($db->error);
+}
+
+
 
 function authenticate($data) {  
     sleep(1); 
@@ -63,7 +221,6 @@ function dieWithMessage($message) {
     http_response_code(400);
     die(json_encode(array("message"=>$message)));
 }
-
 
 function registerUser($data) {
     //var_dump($data);
