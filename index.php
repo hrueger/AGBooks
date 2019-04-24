@@ -261,7 +261,7 @@ function getBooks() {
 	}   else if (startswith($grade, "Q13")) {
 		$grade = "Q13";
 	} else {
-		die("wrong grade!");
+		die("wrong grade!".$grade);
 	}
 	$grade = $db->real_escape_string($grade);
 	$res = $db->query("SELECT * FROM `books` WHERE `$grade` = 1");
@@ -288,6 +288,7 @@ function getBooks() {
     //var_dump($order);
     foreach ($res as &$book) {
         $book["number"] = $classSize;
+        $book["coverPath"] = $book["short"].".jpg";
         foreach ($order as $orderedBook) {
             if ($book["id"] == $orderedBook["id"]) {
                 $book["number"] = $orderedBook["number"];
