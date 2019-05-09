@@ -11,18 +11,15 @@ file_put_contents("log.txt", $_GET, FILE_APPEND);
 file_put_contents("log.txt", "------------------------------\n------------------------------\n------------------------------\n\n\n", FILE_APPEND);*/
 
 if(isset($_GET["queue"])) {
+    set_time_limit(0);
     date_default_timezone_set("Europe/Berlin");
     header('Cache-Control: no-cache');
     header("Content-Type: text/event-stream\n\n");
-
-    $counter = rand(1, 10);
     while (1) {
         echo "event: update\n";
-        $curDate = date(DATE_ISO8601);
-        $data = json_encode(array("estimatedTime"=>$curDate, "ordersLeft"=>5, "orderReady"=>false));
+        $data = json_encode(array("ordersLeft"=>5, "orderReady"=>false));
         echo "data: $data";
         echo "\n\n";
-        
         @ob_end_flush();
         flush();
         sleep(1);
@@ -30,7 +27,23 @@ if(isset($_GET["queue"])) {
     die();
 }
 
-
+if(isset($_GET["queueBackend"])) {
+    set_time_limit(0);
+    header('Cache-Control: no-cache');
+    header("Content-Type: text/event-stream\n\n");
+    while (1) {
+        echo "event: update\n";
+        
+        $data = json_encode(array("orders"=>getOrdersBackend()));
+        echo "data: $data";
+        echo "\n\n";
+        
+        @ob_end_flush();
+        flush();
+        sleep(5);
+    }
+    die();
+}
 
 
 
@@ -69,7 +82,10 @@ if ($data) {
                 authenticateBackend($data);
                 break;
             case "orders backend":
-                getOrdersBackend();
+                die(json_encode(getOrdersBackend()));
+                break;
+            case "setOrderDone backend":
+                setorderDoneBackend($data);
                 break;
 
 
@@ -189,18 +205,28 @@ function getOrdersBackend() {
                 $line["order"] = $completeOrder;
 
                 $line["user"] = $userinfo[$line["user"]];
+            
                   
                
                 
                 $data[] = $line;
             }
-            die(json_encode($data));
+            return $data;
         }
     }
-    die($db->error);
+    return $db->error;
 }
 
-
+function setorderDoneBackend($data) {
+    $db = connect();
+    $id = $db->real_escape_string($data->id);
+    $res = $db->query("UPDATE `orders` SET `done` = '1' WHERE `orders`.`id` = $id");
+    if ($res) {
+        die(json_encode(true));
+    } else {
+        dieWithMessage($db->error);
+    }
+}
 
 function authenticate($data) {  
     sleep(1); 
