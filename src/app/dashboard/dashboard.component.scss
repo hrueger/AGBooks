@@ -1,20 +1,25 @@
 .navbar-middle {
-    line-height: 48px;
-    margin: 0px;
-    font-size: 2em;
-    color: #FFF;
+  line-height: 48px;
+  margin: 0px;
+  font-size: 2em;
+  color: #fff;
 }
 
-.bookinfo-heading span{
-    font-size: 3rem;
-    text-decoration: underline;
+.bookinfo-heading span {
+  font-size: 2rem;
+  text-decoration: underline;
 }
 
 .bookinfo-heading small {
-    font-size: 2rem;
+  font-size: 1.2rem;
 }
 
 .bookinfo-number {
-    font-size: 6em;
-    color: rgb(33, 154, 190);
+  font-size: 5em;
+  color: rgb(33, 154, 190);
+}
+
+.doneBtn {
+  margin-top: 0px;
+  margin-bottom: 4px;
 }

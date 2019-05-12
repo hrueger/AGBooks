@@ -4,8 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { AlertService } from "../_services/alert.service";
-import { Order } from '../_models/order';
-
+import { Order } from "../_models/order";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,20 +15,23 @@ const httpOptions = {
 
 @Injectable({ providedIn: "root" })
 export class RemoteService {
-  private apiUrl = `http://localhost/AGBooks_NEU/api/`;
+  public apiUrl = `http://localhost/AGBooks_NEU/api/`;
 
   constructor(private http: HttpClient, private alertService: AlertService) {}
 
-  
   getOrders(): Observable<Order[]> {
     var action = "orders backend";
-    return this.http
-      .post<Order[]>(`${this.apiUrl}`,
-      { action })
-      .pipe(
-        tap(_ => this.log("fetched orders")),
-        catchError(this.handleError<Order[]>("getOrders", []))
-      );
+    return this.http.post<Order[]>(`${this.apiUrl}`, { action }).pipe(
+      tap(_ => this.log("fetched orders")),
+      catchError(this.handleError<Order[]>("getOrders", []))
+    );
+  }
+  setOrderDone(id: number): Observable<boolean> {
+    var action = "setOrderDone backend";
+    return this.http.post<boolean>(`${this.apiUrl}`, { action, id: id }).pipe(
+      tap(_ => this.log("setOrderDone")),
+      catchError(this.handleError<boolean>("getOrders", false))
+    );
   }
   /*getHeroNo404<Data>(id: number): Observable<User> {
     const url = `${this.apiUrl}/?id=${id}`;

@@ -6,14 +6,21 @@ import { AuthGuard } from "./_guards/auth.guard";
 
 const routes: Routes = [
   /* Home paths*/
-  
-  { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard] },
 
-  {path: "dashboard/:id", component: DashboardComponent, canActivate: [AuthGuard]},
+  {
+    path: "dashboard",
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: "dashboard/:type/:id",
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
 
   /* Authentication paths*/
   { path: "login", component: LoginComponent },
-  
 
   // otherwise redirect to home
   { path: "**", redirectTo: "dashboard" }
