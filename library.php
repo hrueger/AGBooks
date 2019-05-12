@@ -1,5 +1,19 @@
 <?php
 
+function incrementalHash($len = 5){
+  $charset = "0123456789";
+  $base = strlen($charset);
+  $result = '';
+
+  $now = explode(' ', microtime())[1];
+  while ($now >= $base){
+    $i = $now % $base;
+    $result = $charset[$i] . $result;
+    $now /= $base;
+  }
+  return substr($result, -5);
+}
+
 function putSession($key, $value) {
 	//echo "Info: Saving $value in $key\n";
 	$db = connect();

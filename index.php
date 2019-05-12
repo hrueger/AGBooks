@@ -1,5 +1,5 @@
 <?php
-
+define("SSE_DELAY", 1);
 require_once("db.inc.php");
 require_once("library.php");
 
@@ -10,19 +10,79 @@ file_put_contents("log.txt", "------------------------------\n", FILE_APPEND);
 file_put_contents("log.txt", $_GET, FILE_APPEND);
 file_put_contents("log.txt", "------------------------------\n------------------------------\n------------------------------\n\n\n", FILE_APPEND);*/
 
-if(isset($_GET["queue"])) {
+if(isset($_GET["queue"])&&isset($_GET["token"])) {
+    $db = connect();
     set_time_limit(0);
     date_default_timezone_set("Europe/Berlin");
     header('Cache-Control: no-cache');
     header("Content-Type: text/event-stream\n\n");
     while (1) {
         echo "event: update\n";
-        $data = json_encode(array("ordersLeft"=>5, "orderReady"=>false));
+        $ordersLeft = "berechnen...";
+        $orderReady = false;
+        $token = $db->real_escape_string($_GET["token"]);
+        //die($user);
+        $res = $db->query("SELECT COUNT(*) AS ordersLeft FROM orders WHERE `checked`='1' AND `done`='0' AND `accepted` != '1' AND `time` < (SELECT `time` FROM orders WHERE `user`= 'Bearer $token') ORDER BY `time` DESC");
+        //$ordersLeft = $res;
+        if ($res) {
+            $res = $res->fetch_all(MYSQLI_ASSOC);
+            if (isset($res) && isset($res[0]) && isset($res[0]["ordersLeft"])) {
+                $ordersLeft = $res[0]["ordersLeft"];
+            }
+        }
+        if ($ordersLeft == 0) {
+            $res = $db->query("SELECT `done` FROM orders WHERE `user`= 'Bearer $token'");
+            if ($res) {
+                $res = $res->fetch_all(MYSQLI_ASSOC);
+                if (isset($res) && isset($res[0]) && isset($res[0]["done"]) && $res[0]["done"] == 1) {
+                    $orderReady = true;
+                }
+            }
+        } 
+        
+        $data = json_encode(array("ordersLeft"=>$ordersLeft, "orderReady"=>$orderReady));
         echo "data: $data";
         echo "\n\n";
         @ob_end_flush();
         flush();
-        sleep(1);
+        sleep(SSE_DELAY);
+    }
+    die();
+}
+
+if(isset($_GET["queueHandover"])&&isset($_GET["token"])) {
+    $db = connect();
+    set_time_limit(0);
+    date_default_timezone_set("Europe/Berlin");
+    header('Cache-Control: no-cache');
+    header("Content-Type: text/event-stream\n\n");
+    while (1) {
+        echo "event: update\n";
+        $success = false;
+        
+        $token = $db->real_escape_string($_GET["token"]);
+        //die($user);
+        $res = $db->query("SELECT `data` FROM `session` WHERE `token`= 'Bearer $token'");
+        //$ordersLeft = $res;
+        if ($res) {
+            $res = $res->fetch_all(MYSQLI_ASSOC);
+            if (isset($res) && isset($res[0]) && isset($res[0]["data"])) {
+                $data = unserialize($res[0]["data"]);
+                if (isset($data["handoverCode"]) && $data["handoverCode"] == "") {
+                    $success = true;
+                }
+            }
+        } else {
+            echo $db->error;
+        }
+        
+        
+        $data = json_encode(array("success"=>$success));
+        echo "data: $data";
+        echo "\n\n";
+        @ob_end_flush();
+        flush();
+        sleep(SSE_DELAY);
     }
     die();
 }
@@ -40,7 +100,7 @@ if(isset($_GET["queueBackend"])) {
         
         @ob_end_flush();
         flush();
-        sleep(5);
+        sleep(SSE_DELAY);
     }
     die();
 }
@@ -76,6 +136,15 @@ if ($data) {
                 break;
             case "submit":
                 submitOrder();
+            case "accept":
+                acceptOrder();
+            case "handoverCode":
+                handoverCode();
+            case "checkHandoverCode":
+                checkHandoverCode($data);
+            case "returnTo":
+                getReturnTo();
+
 
 
             case "authenticateBackend":
@@ -342,7 +411,7 @@ function orderBooks($data) {
     if ($res) {
         $res = $res->fetch_all(MYSQLI_ASSOC) or false;
         if ($res && isset($res[0]) && isset($res[0]["order"])) {
-            $res = $db->query("UPDATE `orders` SET `order`='$data', `checked`=0 WHERE `user`='$token'");
+            $res = $db->query("UPDATE `orders` SET `order`='$data', `checked`=0, `time`=NOW() WHERE `user`='$token'");
         } else {
             $res = $db->query("INSERT INTO `orders` (`user`, `order`, `checked`) VALUES ('$token', '$data', 0)");
         }
@@ -355,6 +424,67 @@ function orderBooks($data) {
     } else {
         die($db->error);
     }
+}
+
+function handoverCode() {
+    $db = connect();
+    $code = (string)mt_rand (10000 , 99999);
+    putSession("handoverCode", $code);      
+    die($code);
+}
+
+function checkHandoverCode($params) {
+    $db = connect();
+    $userToken = false;
+    $sql = "SELECT `token`, `data` FROM `session`";
+    $res = $db->query($sql);
+    if ($res) {
+        $res = $res->fetch_all(MYSQLI_ASSOC);
+        if ($res) {
+            foreach ($res as $line) {
+                $data = unserialize($line["data"]);
+                if (isset($data["handoverCode"]) && $data["handoverCode"]==$params->handoverCode) {
+                    
+                   
+                    $userToken = $line["token"];
+                    $data["handoverCode"] = "";
+                    $data = $db->real_escape_string(serialize($data));
+                    $res = $db->query("UPDATE `session` SET `data` = '$data' WHERE `token` = '$userToken'");
+                    $userToken = str_replace("Bearer ", "", $userToken);
+                    //echo $db->affected_rows;
+                    
+                   
+                }
+            }
+        }
+	}
+	die(json_encode($userToken));
+}
+
+function getReturnTo() {
+    $db = connect();
+    $token = getUserToken();
+    
+    $res = $db->query("SELECT `checked`, `done`, `accepted` FROM `orders` WHERE `user` = '$token'");
+    if ($res) {
+        $res = $res->fetch_all(MYSQLI_ASSOC);
+        if ($res && isset($res[0])) {
+            if ($res[0]["checked"] == 0) {
+               $returnTo = "/step/2";
+            } else if ($res[0]["checked"] == 1 && $res[0]["done"] == 0 ) {
+                $returnTo = "/step/5";
+            } else if ($res[0]["checked"] == 1 && $res[0]["done"] == 1 && $res[0]["accepted"] == 0) {
+                $returnTo = "/step/5";
+            }  else if ($res[0]["checked"] == 1 && $res[0]["done"] == 1 && $res[0]["accepted"] == 1) {
+                $returnTo = "/step/6";
+            } else {
+                $returnTo = "/step/1";
+            }
+        
+        }
+    }
+    
+	die(json_encode($returnTo));
 }
 
 function getBooksForCheck() {
@@ -424,7 +554,18 @@ function getPrefilledValuesRegisterUser() {
 function submitOrder() {
     $db = connect();
     $user = $db->real_escape_string(getUserToken());
-    $res = $db->query("UPDATE `orders` SET `checked`=1 WHERE `user`='$user'");
+    $res = $db->query("UPDATE `orders` SET `checked`=1, `time`=NOW() WHERE `user`='$user'");
+    if ($res) {
+        die(true);
+    } else {
+        die($db->error);
+    }
+}
+
+function acceptOrder() {
+    $db = connect();
+    $user = $db->real_escape_string(getUserToken());
+    $res = $db->query("UPDATE `orders` SET `accepted`=1 WHERE `user`='$user'");
     if ($res) {
         die(true);
     } else {
