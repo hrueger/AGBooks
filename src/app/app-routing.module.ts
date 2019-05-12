@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: "handover", component: HandoverComponent },
   { path: "step/7", component: Step7Component },
   { path: "", redirectTo: "step/1", pathMatch: "full" },
-  { path: "**", component: Error404Component }
+  { path: "**", redirectTo: "step/1", pathMatch: "full" }
 ];
 
 @NgModule({

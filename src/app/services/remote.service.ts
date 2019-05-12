@@ -112,6 +112,13 @@ export class RemoteService {
         catchError(this.handleError<string>("checkHandoverCode", ""))
       );
   }
+  getReturnTo(): Observable<string> {
+    var action = "returnTo";
+    return this.http.post<string>(`${config.apiUrl}`, { action }).pipe(
+      tap(_ => this.log("got return to")),
+      catchError(this.handleError<string>("getReturnTo", ""))
+    );
+  }
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {

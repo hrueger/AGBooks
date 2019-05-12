@@ -14,25 +14,23 @@ const httpOptions = {
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  //private currentUserSubject: BehaviorSubject<User>;
+  //public currentUser: Observable<User>;
+  public currentUser: User;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(
-      JSON.parse(sessionStorage.getItem("currentUser"))
-    );
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   }
 
   public get currentUserValue(): User {
-    return this.currentUserSubject.value;
+    return this.currentUser;
   }
 
   setNewToken(token: string) {
-    var user = this.currentUserValue;
+    var user = this.currentUserValue || new User();
     user.token = token;
     sessionStorage.setItem("currentUser", JSON.stringify(user));
-    this.currentUserSubject.next(user);
+    this.currentUser = user;
   }
 
   register(): Observable<any> {
@@ -54,7 +52,7 @@ export class AuthenticationService {
           if (user && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             sessionStorage.setItem("currentUser", JSON.stringify(user));
-            this.currentUserSubject.next(user);
+            this.currentUser = user;
           }
 
           return user;
@@ -65,6 +63,6 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     sessionStorage.removeItem("currentUser");
-    this.currentUserSubject.next(null);
+    this.currentUser = null;
   }
 }

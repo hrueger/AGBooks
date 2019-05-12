@@ -13,6 +13,7 @@ export class TakeoverComponent implements OnInit {
   showResult: boolean = false;
   code: any;
   checking: boolean = false;
+  returnTo: string;
   constructor(
     private remoteService: RemoteService,
     private authenticationService: AuthenticationService
@@ -31,6 +32,10 @@ export class TakeoverComponent implements OnInit {
           this.handoverSuccess = true;
 
           this.authenticationService.setNewToken(success);
+
+          this.remoteService
+            .getReturnTo()
+            .subscribe(data => (this.returnTo = data));
         } else {
           this.handoverSuccess = false;
         }
