@@ -1,0 +1,32 @@
+<h1>Sitzung übernehmen</h1>
+<br /><br />
+<div class="alert alert-success" *ngIf="!handoverSuccess">
+  Bitte geben Sie den Code ein:<br /><br /><input
+    type="number"
+    class="form-control"
+    [(ngModel)]="code"
+    (ngModelChange)="changed($event)"
+    placeholder="5-Stelliger Code"
+  />
+</div>
+<div class="alert alert-primary" *ngIf="showResult && checking">
+  Bitte warten...
+</div>
+<div
+  class="alert alert-success"
+  *ngIf="showResult && !checking && handoverSuccess"
+>
+  Die Übergabe war erfolgreich. Bitte warten...
+</div>
+<div
+  class="alert alert-success"
+  *ngIf="showResult && !checking && handoverSuccess && returnTo"
+>
+  Die Übergabe war erfolgreich. <a routerLink="{{ returnTo }}">Weiter</a>
+</div>
+<div
+  class="alert alert-danger"
+  *ngIf="showResult && !checking && !handoverSuccess"
+>
+  Die Übergabe war leider nicht erfolgreich. Vielleicht ein falscher Code?
+</div>

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
+import config from "../config/config";
 import { User } from "../models/user";
 
 const httpOptions = {
@@ -27,12 +28,19 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+  setNewToken(token: string) {
+    var user = this.currentUserValue;
+    user.token = token;
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
+    this.currentUserSubject.next(user);
+  }
+
   register(): Observable<any> {
     var action = "authenticate";
-    
+
     return this.http
       .post<any>(
-        `http://localhost/AGBooks_NEU/api/?authenticate`,
+        `${config.apiUrl}?authenticate`,
         {
           action
         },
