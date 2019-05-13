@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-
+import config from "../config/config";
 import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { AlertService } from "../_services/alert.service";
@@ -15,20 +15,18 @@ const httpOptions = {
 
 @Injectable({ providedIn: "root" })
 export class RemoteService {
-  public apiUrl = `http://localhost/AGBooks_NEU/api/`;
-
   constructor(private http: HttpClient, private alertService: AlertService) {}
 
   getOrders(): Observable<Order[]> {
     var action = "orders backend";
-    return this.http.post<Order[]>(`${this.apiUrl}`, { action }).pipe(
+    return this.http.post<Order[]>(`${config.apiUrl}`, { action }).pipe(
       tap(_ => this.log("fetched orders")),
       catchError(this.handleError<Order[]>("getOrders", []))
     );
   }
   setOrderDone(id: number): Observable<boolean> {
     var action = "setOrderDone backend";
-    return this.http.post<boolean>(`${this.apiUrl}`, { action, id: id }).pipe(
+    return this.http.post<boolean>(`${config.apiUrl}`, { action, id: id }).pipe(
       tap(_ => this.log("setOrderDone")),
       catchError(this.handleError<boolean>("getOrders", false))
     );

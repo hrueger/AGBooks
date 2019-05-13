@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
-
+import config from "../config/config";
 import { User } from "../_models/user";
 
 const httpOptions = {
@@ -31,7 +31,7 @@ export class AuthenticationService {
     var action = "authenticateBackend";
     return this.http
       .post<any>(
-        `http://localhost/AGBooks_NEU/api/`,
+        config.apiUrl,
         {
           action,
           email,

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { first } from "rxjs/operators";
-
+import config from "../config/config";
 import { User } from "../_models/user";
 import { AuthenticationService } from "../_services/authentication.service";
 import { UserService } from "../_services/user.service";
@@ -73,9 +73,7 @@ export class DashboardComponent implements OnInit {
             }
           });
 
-          this.sse = new EventSource(
-            this.remoteService.apiUrl + "?queueBackend"
-          );
+          this.sse = new EventSource(config.apiUrl + "?queueBackend");
           this.sse.addEventListener("update", message => {
             //console.log(message);
             //@ts-ignore
