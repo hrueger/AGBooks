@@ -322,6 +322,9 @@ function registerUser($data) {
     putSession("teacher", $data->teacher);
     putSession("teacherShort", $data->teacherShort);
     putSession("grade", $data->grade);
+    putSession("language", $data->language);
+    putSession("branch", $data->branch);
+    putSession("uebergang", $data->uebergang);
     putSession("room", $data->room);
     putSession("classSize", $data->classSize);
     
@@ -337,31 +340,76 @@ function getClassSize() {
 function getBooks() {
     $grade = getSession("grade");
     $db = connect();
+    $where = "";
+    $checkLang = true;
+    $checkBranch = true;
+    $language = getSession("language");
+    $branch = getSession("branch");
+    $uebergang = getSession("uebergang");
 	if (startswith($grade, "5")) {
-		$grade = "5";
+        $grade = "5";
+        $checkLang = false;
+        $checkBranch = false;
 	} else if (startswith($grade, "6")) {
-		$grade = "6";
+        $grade = "6";
+        $checkBranch = false;
 	}  else if (startswith($grade, "7")) {
-		$grade = "7";
+        $grade = "7";
+        $checkBranch = false;
 	}  else if (startswith($grade, "8")) {
 		$grade = "8";
 	}  else if (startswith($grade, "9")) {
 		$grade = "9";
 	}  else if (startswith($grade, "10")) {
-		$grade = "10";
+        $grade = "10";
+        if ($uebergang == "j") {
+            $where .= "AND `uebergang` = '1'";
+            $checkBranch = false;
+            $checkLanguage = false;
+        }
 	}  else if (startswith($grade, "Q11")) {
-		$grade = "Q11";
+        $grade = "Q11";
+        $checkLang = false;
+        $checkBranch = false;
 	}   else if (startswith($grade, "Q12")) {
-		$grade = "Q12";
+        $grade = "Q12";
+        $checkLang = false;
+        $checkBranch = false;
 	}   else if (startswith($grade, "Q13")) {
-		$grade = "Q13";
+        $grade = "Q13";
+        $checkLang = false;
+        $checkBranch = false;
 	} else {
 		die("wrong grade!".$grade);
-	}
-	$grade = $db->real_escape_string($grade);
-	$res = $db->query("SELECT * FROM `books` WHERE `$grade` = 1");
-	$res = $res->fetch_all(MYSQLI_ASSOC);
+    }
+
+    if ($checkLang == true) {
+        if ($language == "f" || $language == "l") {
+            
+            $where .= "AND (`language` = '$language' OR `language`='' OR `language` IS NULL)";
+        }
+    }
+    if ($checkBranch == true) {
+        if ($branch == "n" || $branch == "s") {
+            $where .= "AND (`branch` = '$branch' OR `branch`='' OR `branch` IS NULL)";
+        }
+        $where .= "AND `branch`!='sf'";
+    }
+
+    
+
+
+
+
+    $grade = $db->real_escape_string($grade);
+    $sql = "SELECT * FROM `books` WHERE `$grade` = 1 $where ORDER BY `subject`";
+    $res = $db->query($sql);
+    //echo $sql;
+    //echo "\n";
     //echo $db->error;
+    //die();
+	$res = $res->fetch_all(MYSQLI_ASSOC);
+    
     
 
 
@@ -464,7 +512,7 @@ function checkHandoverCode($params) {
 function getReturnTo() {
     $db = connect();
     $token = getUserToken();
-    
+    $returnTo = "/step/1";
     $res = $db->query("SELECT `checked`, `done`, `accepted` FROM `orders` WHERE `user` = '$token'");
     if ($res) {
         $res = $res->fetch_all(MYSQLI_ASSOC);
@@ -477,8 +525,6 @@ function getReturnTo() {
                 $returnTo = "/step/5";
             }  else if ($res[0]["checked"] == 1 && $res[0]["done"] == 1 && $res[0]["accepted"] == 1) {
                 $returnTo = "/step/6";
-            } else {
-                $returnTo = "/step/1";
             }
         
         }
@@ -546,6 +592,9 @@ function getPrefilledValuesRegisterUser() {
         "teacher" => getSession("teacher"),
         "teacherShort" => getSession("teacherShort"),
         "grade" => getSession("grade"),
+        "language" => getSession("language"),
+        "uebergang" => getSession("uebergang"),
+        "branch" => getSession("branch"),
         "room" => getSession("room"),
         "classSize" => getSession("classSize")
     ));
