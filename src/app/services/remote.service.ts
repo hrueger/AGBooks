@@ -22,6 +22,9 @@ export class RemoteService {
     teacher: String,
     teacherShort: String,
     grade: String,
+    language,
+    branch,
+    uebergang,
     room: number,
     classSize: number
   ): Observable<String> {
@@ -33,6 +36,9 @@ export class RemoteService {
         teacher,
         teacherShort,
         grade,
+        language,
+        branch,
+        uebergang,
         room,
         classSize
       })

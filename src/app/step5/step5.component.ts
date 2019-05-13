@@ -13,7 +13,7 @@ import config from "../config/config";
   styleUrls: ["./step5.component.scss"]
 })
 export class Step5Component implements OnInit {
-  ordersLeft: String = "...";
+  ordersLeft: any = "...";
   orderReady: boolean = false;
 
   constructor(

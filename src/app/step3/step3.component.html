@@ -14,25 +14,48 @@
       </div>
     </div>
   </div>-->
-  
+
   <form [formGroup]="booksForm" class="w-100" (ngSubmit)="onSubmit()">
-    
-    <div formArrayName="books" *ngFor="let book of booksForm.controls.books?.value; let i = index; trackBy:trackByFn">
+    <div
+      formArrayName="books"
+      *ngFor="
+        let book of booksForm.controls.books?.value;
+        let i = index;
+        trackBy: trackByFn
+      "
+    >
       <ng-container [formGroupName]="i">
-       
         <div class="card m-3 col-md-6" style="max-width: 540px;">
           <div class="row no-gutters">
             <div class="col-md-4">
-              <img src="http://localhost/AGBooks_NEU/api/images/cover/{{book.coverPath}}" class="card-img" alt="Buchcover">
+              <img
+                src="{{ apiUrl }}images/cover/{{ book.coverPath }}"
+                class="card-img"
+                alt="Buchcover"
+              />
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">{{book.name}}</h5>
-                <p class="card-text">Fach: {{book.subject}}</p>
-                <p class="card-text"><small class="text-muted">Wie viele Schülerinnen und Schüler benötigen dieses Buch?</small></p>
+                <h5 class="card-title">{{ book.name }}</h5>
+                <p class="card-text">Fach: {{ book.subject }}</p>
+                <p class="card-text">
+                  <small class="text-muted"
+                    >Wie viele Schülerinnen und Schüler benötigen dieses
+                    Buch?</small
+                  >
+                </p>
                 <div class="row">
-                  <div class="col-md-5"><label for="inputBookNumber">Anzahl:</label></div>
-                  <div class="col-md-7"><input name="inputBookNumber" class="form-control inputBookNumber" placeholder="Anzahl" type="number" formControlName="bookNumber">
+                  <div class="col-md-5">
+                    <label for="inputBookNumber">Anzahl:</label>
+                  </div>
+                  <div class="col-md-7">
+                    <input
+                      name="inputBookNumber"
+                      class="form-control inputBookNumber"
+                      placeholder="Anzahl"
+                      type="number"
+                      formControlName="bookNumber"
+                    />
                   </div>
                 </div>
               </div>
@@ -44,13 +67,19 @@
 
     <div class="row">
       <div class="col-12">
-        <input  type="button" class="btn btn-primary float-left" (click)="previous()" value="Zurück">
-        <input type="submit" name="submit" class="btn btn-primary float-right" value="Weiter">
+        <input
+          type="button"
+          class="btn btn-primary float-left"
+          (click)="previous()"
+          value="Zurück"
+        />
+        <input
+          type="submit"
+          name="submit"
+          class="btn btn-primary float-right"
+          value="Weiter"
+        />
       </div>
     </div>
   </form>
-
-
 </div>
-
-

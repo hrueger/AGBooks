@@ -20,6 +20,7 @@ import { Step6Component } from "./step6/step6.component";
 import { Step7Component } from "./step7/step7.component";
 import { HandoverComponent } from "./handover/handover.component";
 import { TakeoverComponent } from "./takeover/takeover.component";
+import { StartsWithPipe } from "./helpers/startswith.pipe";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TakeoverComponent } from "./takeover/takeover.component";
     Step6Component,
     Step7Component,
     HandoverComponent,
-    TakeoverComponent
+    TakeoverComponent,
+    StartsWithPipe
   ],
   imports: [
     FormsModule,
