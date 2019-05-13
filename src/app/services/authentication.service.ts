@@ -46,9 +46,9 @@ export class AuthenticationService {
       )
       .pipe(
         map(user => {
-          //console.log("test");
+          console.log("test");
           // login successful if there's a jwt token in the response
-          //console.log(user);
+          console.log(user);
           if (user && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             sessionStorage.setItem("currentUser", JSON.stringify(user));
@@ -58,6 +58,10 @@ export class AuthenticationService {
           return user;
         })
       );
+  }
+
+  registerAgain(): Observable<any> {
+    return this.register();
   }
 
   logout() {

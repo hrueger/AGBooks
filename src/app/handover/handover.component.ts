@@ -11,6 +11,7 @@ import config from "../config/config";
 export class HandoverComponent implements OnInit {
   code: string = "Code wird generiert...";
   success: boolean = false;
+  sse: EventSource;
   constructor(
     private remoteService: RemoteService,
     private authenticationService: AuthenticationService
@@ -21,17 +22,20 @@ export class HandoverComponent implements OnInit {
       this.code = code;
 
       var token = this.authenticationService.currentUserValue.token;
-      let source = new EventSource(
+      this.sse = new EventSource(
         `${config.apiUrl}?queueHandover&token=` + token
       );
-      source.addEventListener("update", message => {
+      this.sse.addEventListener("update", message => {
         console.log(message);
         //@ts-ignore
         let data = JSON.parse(message.data);
 
         this.success = data.success;
         if (data.success) {
-          this.authenticationService.logout();
+          this.sse.close();
+          this.authenticationService
+            .register()
+            .subscribe(data => console.log(data));
         }
       });
     });
