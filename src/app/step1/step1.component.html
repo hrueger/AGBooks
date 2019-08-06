@@ -1,21 +1,26 @@
 <p *ngIf="!registrationDone">
-  Registrierung beim Server...<br />Bitte warten...
+    Registrierung beim Server...<br />Bitte warten...
 </p>
 <div *ngIf="registrationDone">
-  <h1>AG-Books</h1>
-  <br />
-  <small>Die Lehrmittelverwaltungsapp für das AG</small>
-  <br /><br />
-  <p>
-    Blindtext, blablabla. Blindtext, blablabla. Blindtext, blablabla. Blindtext,
-    blablabla. Blindtext, blablabla. Blindtext, blablabla. Blindtext, blablabla.
-    Blindtext, blablabla. Blindtext, blablabla. Blindtext, blablabla. Blindtext,
-    blablabla. Blindtext, blablabla. Blindtext, blablabla. Blindtext, blablabla.
-    Blindtext, blablabla. Blindtext, blablabla. Blindtext, blablabla. Blindtext,
-    blablabla. Blindtext, blablabla. Blindtext, blablabla.
-  </p>
-  <br />
-  Ich möchte
-  <a routerLink="/step/2">eine neue Sitzung aufmachen</a> order
-  <a routerLink="/takeover">eine Sitzung von jemand anderem übernehmen</a>
+    <h1>AG-Books</h1>
+
+    <small>Die Lehrmittelverwaltungsapp für das AG</small>
+    <br /><br />
+    <div class="alert alert-success">
+        Liebe Kollegen und Kolleginnen,<br /><br /> wir wünschen Ihnen einen guten Start ins neue Schuljahr und hoffen, unsere neue digitale Bücherausgabe vereinfacht und erleichtert das Procedere.
+    </div>
+    <div class="alert alert-info">Folgen Sie einfach den Anweisungen.</div>
+    <div class="alert alert-warning">
+        <b>
+      HINWEIS: Der Browser darf während der gesamten Bücherausgabe nicht
+      geschlossen werden.
+    </b>
+    </div>
+    <br /> Ich möchte
+    <button class="btn btn-primary" routerLink="/step/2">
+    eine neue Sitzung aufmachen
+  </button> oder
+    <button class="btn btn-primary" routerLink="/takeover">
+    eine Sitzung von jemand anderem übernehmen
+  </button>
 </div>

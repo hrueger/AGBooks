@@ -17,6 +17,10 @@ export class Step2Component implements OnInit {
   infoForm: FormGroup;
   submitted: boolean = false;
 
+  showUebergangsklasse: boolean = false;
+  showBranch: boolean = false;
+  showLanguage: boolean = false;
+
   constructor(
     private NavbarService: NavbarService,
     private remoteService: RemoteService,
@@ -76,9 +80,13 @@ export class Step2Component implements OnInit {
       this.f.branch.setValue("");
       this.f.language.disable();
       this.f.branch.disable();
+      this.showBranch = false;
+      this.showLanguage = false;
     } else if (value == "n") {
       this.f.language.enable();
       this.f.branch.enable();
+      this.showBranch = true;
+      this.showLanguage = true;
     }
   }
 
@@ -86,8 +94,10 @@ export class Step2Component implements OnInit {
     if (value.startsWith("5") || value.startsWith("Q")) {
       this.f.language.setValue("");
       this.f.language.disable();
+      this.showLanguage = false;
     } else {
       this.f.language.enable();
+      this.showLanguage = true;
     }
     if (
       value.startsWith("5") ||
@@ -97,14 +107,18 @@ export class Step2Component implements OnInit {
     ) {
       this.f.branch.setValue("");
       this.f.branch.disable();
+      this.showBranch = false;
     } else {
       this.f.branch.enable();
+      this.showBranch = true;
     }
     if (value.startsWith("10")) {
       this.f.uebergang.enable();
+      this.showUebergangsklasse = true;
     } else {
       this.f.uebergang.setValue("");
       this.f.uebergang.disable();
+      this.showUebergangsklasse = false;
     }
   }
 
