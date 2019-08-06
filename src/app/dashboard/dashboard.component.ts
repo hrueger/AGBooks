@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
     private alertService: AlertService,
     private remoteService: RemoteService,
     private activeRoute: ActivatedRoute
-  ) {}
+  ) { }
   ngOnInit() {
     //this.loadAllUsers();
     this.title.setTitle("AGBooks | Dashboard");
@@ -40,7 +40,10 @@ export class DashboardComponent implements OnInit {
       .pipe(first())
       .subscribe(
         orders => {
-          this.sortOrders(orders);
+          if (orders) {
+            this.sortOrders(orders);
+          }
+
 
           this.activeRoute.params.subscribe(routeParams => {
             if (routeParams.id) {
@@ -78,7 +81,10 @@ export class DashboardComponent implements OnInit {
             //console.log(message);
             //@ts-ignore
             let data = JSON.parse(message.data);
-            this.sortOrders(data.orders);
+            if (data) {
+              this.sortOrders(data.orders);
+            }
+
           });
         },
         error => {
@@ -107,14 +113,18 @@ export class DashboardComponent implements OnInit {
     }
   }
   sortOrders(orders: Order[]) {
-    this.orders = orders.filter(
-      order => order.done == 0 && order.accepted == 0
-    );
-    this.doneOrders = orders.filter(
-      order => order.done == 1 && order.accepted == 0
-    );
-    this.acceptedOrders = orders.filter(
-      order => order.done == 1 && order.accepted == 1
-    );
+    if (orders.length) {
+      this.orders = orders.filter(
+        order => order.done == 0 && order.accepted == 0
+      );
+      this.doneOrders = orders.filter(
+        order => order.done == 1 && order.accepted == 0
+      );
+      this.acceptedOrders = orders.filter(
+        order => order.done == 1 && order.accepted == 1
+      );
+    }
+
+
   }
 }
