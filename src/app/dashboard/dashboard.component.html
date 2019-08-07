@@ -1,147 +1,95 @@
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">AG-Books Backend</a>
-  <div class="navbar-middle" *ngIf="currentOrder">
-    <p class="d-inline">
-      {{ currentOrder.user.grade }} - {{ currentOrder.user.teacher }}
-    </p>
-    <p
-      class="d-inline btn btn-success doneBtn"
-      *ngIf="orderCanBeDone"
-      (click)="orderDone()"
-    >
-      Fertig
-    </p>
-  </div>
-  <div class="navbar-middle" *ngIf="!currentOrder">
-    Bitte eine Bestellung auswählen!
-  </div>
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Sign out</a>
-    </li>
-  </ul>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">AG-Books Backend</a>
+    <div class="navbar-middle" *ngIf="currentOrder">
+        <p class="d-inline">
+            {{ currentOrder.user.grade }} {{currentOrder.user.course}} - {{ currentOrder.user.teacher }} - Raum {{ currentOrder.user.room }}
+        </p>
+        <p class="d-inline btn btn-success doneBtn" *ngIf="orderCanBeDone" (click)="orderDone()">
+            Fertig
+        </p>
+    </div>
+    <div class="navbar-middle" *ngIf="!currentOrder">
+        Bitte eine Bestellung auswählen!
+    </div>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+        </li>
+    </ul>
 </nav>
 
 <div class="container-fluid">
-  <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-      <div class="sidebar-sticky">
-        <h6
-          class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
-        >
-          <span>Bestellungen in der Warteschlange</span>
-          <a class="d-flex align-items-center text-muted" href="#">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="feather feather-plus-circle"
-            >
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Bestellungen in der Warteschlange</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="feather feather-plus-circle">
               <path d="M7 15h12v2H7zm0-6h12v2H7zm0-6h12v2H7z" />
               <circle cx="3" cy="4" r="2" />
               <circle cx="3" cy="10" r="2" />
               <circle cx="3" cy="16" r="2" />
             </svg>
-          </a>
-        </h6>
-        <ul class="nav flex-column">
-          <li *ngFor="let order of orders" class="nav-item">
-            <a
-              class="nav-link"
-              [routerLinkActive]="['active']"
-              routerLink="/dashboard/queue/{{ order.id }}"
-            >
-              {{ order.user.grade }} - {{ order.user.teacher }}
+                    </a>
+                </h6>
+                <ul class="nav flex-column">
+                    <li *ngFor="let order of orders" class="nav-item">
+                        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/queue/{{ order.id }}">
+              {{ order.user.grade }} {{order.user.course}} - {{ order.user.teacher }} - Raum {{ order.user.room }}
             </a>
-          </li>
-        </ul>
-        <h6
-          class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
-        >
-          <span>Wartende Bestellungen</span>
-          <a class="d-flex align-items-center text-muted" href="#">
-            <svg
-              aria-hidden="true"
-              focusable="false"
-              data-prefix="far"
-              data-icon="clock"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              class="feather feather-plus-circle"
-            >
-              <path
-                fill="currentColor"
+                    </li>
+                </ul>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Wartende Bestellungen</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="feather feather-plus-circle">
+              <path fill="currentColor"
                 d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"
-                class=""
-              ></path>
+                class=""></path>
             </svg>
-          </a>
-        </h6>
-        <ul class="nav flex-column">
-          <li *ngFor="let order of doneOrders" class="nav-item">
-            <a
-              class="nav-link"
-              [routerLinkActive]="['active']"
-              routerLink="/dashboard/done/{{ order.id }}"
-            >
-              {{ order.user.grade }} - {{ order.user.teacher }}
+                    </a>
+                </h6>
+                <ul class="nav flex-column">
+                    <li *ngFor="let order of doneOrders" class="nav-item">
+                        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/done/{{ order.id }}">
+              {{ order.user.grade }} {{order.user.course}} - {{ order.user.teacher }} - Raum {{ order.user.room }}
             </a>
-          </li>
-        </ul>
-        <h6
-          class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
-        >
-          <span>Akzeptierte Bestellungen</span>
-          <a class="d-flex align-items-center text-muted" href="#">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="feather feather-plus-circle"
-            >
+                    </li>
+                </ul>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Akzeptierte Bestellungen</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="feather feather-plus-circle">
               <path
-                d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-              />
+                d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z" />
             </svg>
-          </a>
-        </h6>
-        <ul class="nav flex-column">
-          <li *ngFor="let order of acceptedOrders" class="nav-item">
-            <a
-              class="nav-link"
-              [routerLinkActive]="['active']"
-              routerLink="/dashboard/accepted/{{ order.id }}"
-            >
-              {{ order.user.grade }} - {{ order.user.teacher }}
+                    </a>
+                </h6>
+                <ul class="nav flex-column">
+                    <li *ngFor="let order of acceptedOrders" class="nav-item">
+                        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/accepted/{{ order.id }}">
+              {{ order.user.grade }} {{order.user.course}} - {{ order.user.teacher }} - Raum {{ order.user.room }}
             </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <alert></alert>
-      <div *ngIf="currentOrder">
-        <div class="row">
-          <div
-            class="card  col-sm-5 col-md-4 col-lg-2 m-3 "
-            *ngFor="let order of currentOrder.order"
-          >
-            <div class="card-body">
-              <h5 class="bookinfo-heading card-title">
-                <span>{{ order.subject }} {{ currentGrade }}</span
-                ><br /><small>{{ order.name }}</small>
-              </h5>
-              <p class="bookinfo-number card-text">{{ order.number }}</p>
+                    </li>
+                </ul>
             </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <alert></alert>
+            <div *ngIf="currentOrder">
+                <div class="row">
+                    <div class="card  col-sm-5 col-md-4 col-lg-2 m-3 " *ngFor="let order of currentOrder.order">
+                        <div class="card-body">
+                            <h5 class="bookinfo-heading card-title">
+                                <span>{{ order.subject }} {{ currentGrade }}</span><br /><small>{{ order.name }}</small>
+                            </h5>
+                            <p class="bookinfo-number card-text">{{ order.number }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 </div>
