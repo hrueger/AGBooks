@@ -322,6 +322,7 @@ function registerUser($data) {
     putSession("teacher", $data->teacher);
     putSession("teacherShort", $data->teacherShort);
     putSession("grade", $data->grade);
+    putSession("course", $data->course);
     putSession("language", $data->language);
     putSession("branch", $data->branch);
     putSession("uebergang", $data->uebergang);
@@ -566,12 +567,34 @@ function getBooksForCheck() {
 
     $order = [];
     $res = unserialize($res[0]["order"]);
+
+    $religion_gesamt = 0;
+    $religionsbuecher = array("Religion ev", "Religion rk", "Ethik");
     foreach ($res as $book) {
-        if (intval($book["number"]) != $classSize) {
-            $alert = "Die Buchanzahl entspricht nicht der Klassenstärke!";
-        } else {
-            $alert = "";
+        if (in_array($books[$book["id"]]["subject"], $religionsbuecher)) {
+            $religion_gesamt += $book["number"];
         }
+    }
+    $religion_alert = false;
+    if ($religion_gesamt  != $classSize) {
+        $religion_alert = true;
+    }
+
+
+    foreach ($res as $book) {
+        if (in_array($books[$book["id"]]["subject"], $religionsbuecher) ) {
+            if ($religion_alert == true) {
+                $alert = "Die Gesamtanzahl der Religionsbücher entspricht nicht der Klassenstärke!";
+            }
+
+        } else {
+            if (intval($book["number"]) != $classSize) {
+                $alert = "Die Buchanzahl entspricht nicht der Klassenstärke!";
+            } else {
+                $alert = "";
+            }
+        }
+        
         //var_dump($book);
         $order[] = array(
             "id" => $book["id"],
@@ -592,6 +615,7 @@ function getPrefilledValuesRegisterUser() {
         "teacher" => getSession("teacher"),
         "teacherShort" => getSession("teacherShort"),
         "grade" => getSession("grade"),
+        "course" => getSession("course"),
         "language" => getSession("language"),
         "uebergang" => getSession("uebergang"),
         "branch" => getSession("branch"),
