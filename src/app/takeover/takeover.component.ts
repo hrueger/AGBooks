@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { RemoteService } from "../services/remote.service";
 import { empty } from "rxjs";
 import { AuthenticationService } from "../services/authentication.service";
+import { NavbarService } from '../services/navbar.service';
 
 @Component({
   selector: "app-takeover",
@@ -16,18 +17,20 @@ export class TakeoverComponent implements OnInit {
   returnTo: string;
   constructor(
     private remoteService: RemoteService,
-    private authenticationService: AuthenticationService
-  ) {}
+    private authenticationService: AuthenticationService,
+    private navbarService: NavbarService
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   changed(event) {
     var length = (this.code || 0).toString().length;
     this.showResult = length >= 5 ? true : false;
-    if (this.showResult) {
+    if (this.showResult && !this.checking && !this.handoverSuccess) {
       this.checking = true;
 
       this.remoteService.checkHandoverCode(this.code).subscribe(success => {
+
         if (success && success !== "") {
           this.handoverSuccess = true;
 
@@ -35,7 +38,11 @@ export class TakeoverComponent implements OnInit {
 
           this.remoteService
             .getReturnTo()
-            .subscribe(data => (this.returnTo = data));
+            .subscribe(data => {
+              this.returnTo = data;
+              console.log(parseInt(this.returnTo.split("/")[2]));
+              this.navbarService.setStep(parseInt(this.returnTo.split("/")[2]));
+            });
         } else {
           this.handoverSuccess = false;
         }

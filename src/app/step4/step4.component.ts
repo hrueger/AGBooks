@@ -1,5 +1,5 @@
-import { Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { NavbarService } from '../services/navbar.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { first } from 'rxjs/operators';
@@ -15,47 +15,50 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./step4.component.scss']
 })
 export class Step4Component implements OnInit {
-  books: Book[] = [];  
+  books: Book[] = [];
+  bookCount: number;
 
   constructor(
-    private NavbarService: NavbarService, 
-    private remoteService: RemoteService, 
+    private NavbarService: NavbarService,
+    private remoteService: RemoteService,
     private router: Router,
     private alertService: AlertService,
-    
-  ) {}
+
+  ) { }
 
   ngOnInit() {
     this.NavbarService.setStep(4);
-    
+
     this.remoteService.getBooksForCheck().pipe(first()).subscribe(
       books => {
         this.books = books;
+        this.bookCount = books.length;
       },
       error => {
         this.alertService.error(error);
       }
     )
- }
- previous() {
-   this.router.navigate(["step", "3"]);
- }
- next() {
-   this.remoteService.submitOrder().subscribe(
-     data => {
-      if (data == true) {
-        this.router.navigate(["step", "5"]);
-      } else {
-        this.alertService.error(data.toString());
-      }
-   },
-   error => {
-     this.alertService.error(error);
-   });
- }
+  }
+  previous() {
+    this.router.navigate(["step", "3"]);
+  }
+  next() {
+    this.remoteService.submitOrder().subscribe(
+      data => {
+        if (data == true) {
+
+          this.router.navigate(["step", "5"]);
+        } else {
+          this.alertService.error(data.toString());
+        }
+      },
+      error => {
+        this.alertService.error(error);
+      });
+  }
 }
 
-    
-  
 
-  
+
+
+

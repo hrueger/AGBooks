@@ -28,7 +28,7 @@ export class Step3Component implements OnInit {
     private router: Router,
     private alertService: AlertService,
     private formBuilder: FormBuilder,
-    public modalService: NgbModal
+    public modalService: NgbModal,
   ) {
     this.booksForm = this.formBuilder.group({
       books: this.formBuilder.array([])
@@ -95,6 +95,7 @@ export class Step3Component implements OnInit {
       );
   }
   previous() {
+
     this.router.navigate(["step", "2"]);
   }
 }

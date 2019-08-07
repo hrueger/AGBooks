@@ -17,10 +17,10 @@
     </b>
     </div>
     <br /> Ich möchte
-    <button class="btn btn-primary" routerLink="/step/2">
+    <button class="btn btn-primary" (click)="next('/step/2')">
     eine neue Sitzung aufmachen
   </button> oder
-    <button class="btn btn-primary" routerLink="/takeover">
+    <button class="btn btn-primary" (click)="next('/takeover')">
     eine Sitzung von jemand anderem übernehmen
   </button>
 </div>

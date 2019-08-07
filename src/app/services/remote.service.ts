@@ -16,12 +16,13 @@ const httpOptions = {
 
 @Injectable({ providedIn: "root" })
 export class RemoteService {
-  constructor(private http: HttpClient, private alertService: AlertService) {}
+  constructor(private http: HttpClient, private alertService: AlertService) { }
 
   registerUser(
-    teacher: String,
-    teacherShort: String,
-    grade: String,
+    teacher: string,
+    teacherShort: string,
+    grade: string,
+    course: string,
     language,
     branch,
     uebergang,
@@ -36,6 +37,7 @@ export class RemoteService {
         teacher,
         teacherShort,
         grade,
+        course,
         language,
         branch,
         uebergang,

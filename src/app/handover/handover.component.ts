@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { RemoteService } from "../services/remote.service";
 import { AuthenticationService } from "../services/authentication.service";
 import config from "../config/config";
+import { NavbarService } from '../services/navbar.service';
 
 @Component({
   selector: "app-handover",
@@ -14,8 +15,9 @@ export class HandoverComponent implements OnInit {
   sse: EventSource;
   constructor(
     private remoteService: RemoteService,
-    private authenticationService: AuthenticationService
-  ) {}
+    private authenticationService: AuthenticationService,
+    private navbarService: NavbarService
+  ) { }
 
   ngOnInit() {
     this.remoteService.getHandoverCode().subscribe(code => {
@@ -36,6 +38,8 @@ export class HandoverComponent implements OnInit {
           this.authenticationService
             .register()
             .subscribe(data => console.log(data));
+          this.navbarService.setStep(1);
+          this.navbarService.resetHighestStepHandover();
         }
       });
     });

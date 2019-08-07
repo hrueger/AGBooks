@@ -5,7 +5,7 @@ import { AuthenticationService } from "../services/authentication.service";
 import { first } from "rxjs/operators";
 import { AlertService } from "../services/alert.service";
 import { RemoteService } from "../services/remote.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-step2",
@@ -20,39 +20,53 @@ export class Step2Component implements OnInit {
   showUebergangsklasse: boolean = false;
   showBranch: boolean = false;
   showLanguage: boolean = false;
+  showCourse: boolean = false;
 
   constructor(
     private NavbarService: NavbarService,
     private remoteService: RemoteService,
     private router: Router,
     private alertService: AlertService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+
+  ) { }
+
+  public noWhitespaceValidator(control: FormControl) {
+    if (typeof control.value == "string") {
+      var isWhitespace = (control.value || '').trim().length === 0;
+    } else {
+      var isWhitespace = (control.value || '').length === 0;
+    }
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+  }
 
   ngOnInit() {
     this.NavbarService.setStep(2);
     this.infoForm = this.formBuilder.group({
-      teacher: ["", Validators.required],
-      teacherShort: ["", Validators.required],
-      room: ["", Validators.required],
+      teacher: ["", [Validators.required, this.noWhitespaceValidator]],
+      teacherShort: ["", [Validators.required, this.noWhitespaceValidator]],
+      room: ["", [Validators.required, this.noWhitespaceValidator]],
+      course: ["", [Validators.required, this.noWhitespaceValidator]],
       grade: ["", Validators.required],
       branch: ["", Validators.required],
       uebergang: ["", Validators.required],
       language: ["", Validators.required],
-      classSize: ["", Validators.required]
+      classSize: ["", [Validators.required, this.noWhitespaceValidator]]
     });
 
     this.remoteService.getPrefilledValuesRegisterUser().subscribe(
       data => {
         this.infoForm = this.formBuilder.group({
-          teacher: [data.teacher, Validators.required],
-          teacherShort: [data.teacherShort, Validators.required],
-          room: [data.room, Validators.required],
+          teacher: [data.teacher, [Validators.required, this.noWhitespaceValidator]],
+          teacherShort: [data.teacherShort, [Validators.required, this.noWhitespaceValidator]],
+          room: [data.room, [Validators.required, this.noWhitespaceValidator]],
+          course: [data.course, [Validators.required, this.noWhitespaceValidator]],
           grade: [data.grade, Validators.required],
           language: [data.language, Validators.required],
           branch: [data.branch, Validators.required],
           uebergang: [data.uebergang, Validators.required],
-          classSize: [data.classSize, Validators.required]
+          classSize: [data.classSize, [Validators.required, , this.noWhitespaceValidator]]
         });
         this.f.grade.valueChanges.subscribe(value => {
           this.gradeChanged(value);
@@ -74,7 +88,7 @@ export class Step2Component implements OnInit {
   }
 
   uebergangChanged(value) {
-    console.log(value);
+    //console.log(value);
     if (value == "j") {
       this.f.language.setValue("");
       this.f.branch.setValue("");
@@ -120,6 +134,15 @@ export class Step2Component implements OnInit {
       this.f.uebergang.disable();
       this.showUebergangsklasse = false;
     }
+
+    if (value.startsWith("Q")) {
+      this.showCourse = true;
+      this.f.course.enable();
+    } else {
+      this.showCourse = false;
+      this.f.course.disable();
+      this.f.course.setValue("");
+    }
   }
 
   onSubmit() {
@@ -135,6 +158,7 @@ export class Step2Component implements OnInit {
         this.f.teacher.value,
         this.f.teacherShort.value,
         this.f.grade.value,
+        this.f.course.value,
         this.f.language.value,
         this.f.branch.value,
         this.f.uebergang.value,

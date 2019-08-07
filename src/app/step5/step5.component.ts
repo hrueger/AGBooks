@@ -21,8 +21,8 @@ export class Step5Component implements OnInit {
     private remoteService: RemoteService,
     private router: Router,
     private alertService: AlertService,
-    private authService: AuthenticationService
-  ) {}
+    private authService: AuthenticationService,
+  ) { }
 
   ngOnInit() {
     this.NavbarService.setStep(5);

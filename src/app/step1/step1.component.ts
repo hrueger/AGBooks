@@ -16,8 +16,8 @@ export class Step1Component implements OnInit {
     private NavbarService: NavbarService,
     private AuthenticationService: AuthenticationService,
     private router: Router,
-    private alertService: AlertService
-  ) {}
+    private alertService: AlertService,
+  ) { }
 
   ngOnInit() {
     this.NavbarService.setStep(1);
@@ -37,5 +37,9 @@ export class Step1Component implements OnInit {
       //console.log(this.AuthenticationService.currentUserValue);
       this.registrationDone = true;
     }
+  }
+
+  next(url) {
+    this.router.navigateByUrl(url);
   }
 }
