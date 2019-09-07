@@ -15,22 +15,22 @@ import { User } from "./_models/user";
 
 import { AuthenticationService } from "./_services/authentication.service";
 
-@Component({ selector: "app", templateUrl: "app.component.html" })
+@Component({ selector: "app", templateUrl: "app.component.html", styleUrls: ["app.component.scss"] })
 export class AppComponent {
-  currentUser: User;
+  public currentUser: User;
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
   ) {
     this.authenticationService.currentUser.subscribe(
-      x => (this.currentUser = x)
+      (x) => (this.currentUser = x),
     );
   }
 
-  logout() {
+  public logout() {
     this.authenticationService.logout();
     this.router.navigate(["/login"]);
   }
-  ngOnInit() {}
+  public ngOnInit() {}
 }

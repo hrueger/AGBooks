@@ -1,8 +1,10 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "./_guards/auth.guard";
+import { AnalysisComponent } from "./analysis/analysis.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LoginComponent } from "./login/login.component";
-import { AuthGuard } from "./_guards/auth.guard";
+import { AvalibleBooksComponent } from './avalible-books/avalible-books.component';
 
 const routes: Routes = [
   /* Home paths*/
@@ -10,24 +12,36 @@ const routes: Routes = [
   {
     path: "dashboard",
     component: DashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: "analysis",
+    component: AnalysisComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: "avaliblebooks",
+    component: AvalibleBooksComponent,
+    canActivate: [AuthGuard],
   },
 
   {
     path: "dashboard/:type/:id",
     component: DashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
 
   /* Authentication paths*/
   { path: "login", component: LoginComponent },
 
   // otherwise redirect to home
-  { path: "**", redirectTo: "dashboard" }
+  { path: "**", redirectTo: "dashboard" },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

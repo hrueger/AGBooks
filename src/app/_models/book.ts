@@ -1,7 +1,7 @@
 export class Book {
-    name: String;
-    id: number;
-    subject: String;
-    number: number;
-    coverPath: String;
+    public name: string;
+    public id: number;
+    public subject: string;
+    public number: number;
+    public coverPath: string;
 }
