@@ -13,6 +13,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
   styleUrls: ["./step2.component.scss"]
 })
 export class Step2Component implements OnInit {
+  public showFiveAndSeven = (new Date("09/11/2019").setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0) ? true : false);
+  public showQ = (new Date("09/12/2019").setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0) ? true : false);
   registrationDone: boolean = false;
   infoForm: FormGroup;
   submitted: boolean = false;

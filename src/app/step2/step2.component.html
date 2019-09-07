@@ -19,7 +19,7 @@
         <div class="col-sm-10">
             <select class="form-control" formControlName="grade" [ngClass]="{ 'is-invalid': submitted && f.grade.errors }" required="">
         <option disabled="" selected="" value="">Bitte wählen</option>
-        <optgroup label="Jahrgangsstufe 5">
+        <optgroup label="Jahrgangsstufe 5" *ngIf="showFiveAndSeven">
           <option value="5a">5a</option>
           <option value="5b">5b</option>
           <option value="5c">5c</option>
@@ -34,7 +34,7 @@
           <option value="6d">6d</option>
           <option value="6e">6e</option>
         </optgroup>
-        <optgroup label="Jahrgangsstufe 7">
+        <optgroup label="Jahrgangsstufe 7" *ngIf="showFiveAndSeven">
           <option value="7a">7a</option>
           <option value="7b">7b</option>
           <option value="7c">7c</option>
@@ -62,7 +62,7 @@
           <option value="10d">10d</option>
           <option value="10e">10e</option>
         </optgroup>
-        <optgroup label="Oberstufe">
+        <optgroup label="Oberstufe" *ngIf="showQ">
           <option value="Q11">Q11</option>
           <option value="Q12">Q12</option>
         </optgroup>
