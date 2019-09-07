@@ -153,6 +153,12 @@ if ($data) {
             case "orders backend":
                 die(json_encode(getOrdersBackend()));
                 break;
+            case "analysis backend":
+                die(json_encode(analysisBackend()));
+                break;
+            case "avalibleBooks backend":
+                getAvalibleBooksBackend($data);
+                break;
             case "setOrderDone backend":
                 setorderDoneBackend($data);
                 break;
@@ -284,6 +290,138 @@ function getOrdersBackend() {
         }
     }
     return $db->error;
+}
+
+function analysisBackend() {
+    $db = connect();
+
+    $userinfo = [];
+    $users = $db->query("SELECT * FROM `session`");
+    if ($users) {
+        $users = $users->fetch_all(MYSQLI_ASSOC);
+        if ($users) {
+            foreach ($users as $user) {
+                $userinfo[$user["token"]] = unserialize($user["data"]);
+            }
+        }
+    }
+
+    $bookinfo = [];
+    $books = $db->query("SELECT * FROM `books`");
+    if ($books) {
+        $books = $books->fetch_all(MYSQLI_ASSOC);
+        if ($books) {
+            foreach ($books as $book) {
+                $bookinfo[$book["id"]] = $book;
+            }
+        }
+    }
+
+
+    $orders = [];
+    $res = $db->query("SELECT * FROM `orders` WHERE `checked`='1' ORDER BY `time` ASC");
+    if ($res) {
+        $res = $res->fetch_all(MYSQLI_ASSOC);
+        if ($res) {
+            //($res);
+            foreach ($res as $key => $line) {
+                
+                $line["order"] = unserialize($line["order"]);
+                $completeOrder = [];
+                
+                foreach ($line["order"] as $order) {
+                    $completeOrder[] = array(
+                        "name" => $bookinfo[$order["id"]]["name"],
+                        "subject" => $bookinfo[$order["id"]]["subject"],
+                        "number" => $order["number"]
+                    );
+                }
+
+                $line["order"] = $completeOrder;
+
+                $line["user"] = $userinfo[$line["user"]];
+            
+                  
+               
+                
+                $orders[] = $line;
+            }
+            return array("orders"=>$orders, "books"=>$bookinfo);
+        }
+    }
+    return $db->error;
+}
+
+function getAvalibleBooksBackend($data) {
+    $grade = $data->grade;
+    $db = connect();
+    $where = "";
+    $checkLang = true;
+    $checkBranch = true;
+    $language = $data->language;
+    $branch = $data->branch;
+    $uebergang = $data->uebergang;
+	if (startswith($grade, "5")) {
+        $grade = "5";
+        $checkLang = false;
+        $checkBranch = false;
+	} else if (startswith($grade, "6")) {
+        $grade = "6";
+        $checkBranch = false;
+	}  else if (startswith($grade, "7")) {
+        $grade = "7";
+        $checkBranch = false;
+	}  else if (startswith($grade, "8")) {
+		$grade = "8";
+	}  else if (startswith($grade, "9")) {
+		$grade = "9";
+	}  else if (startswith($grade, "10")) {
+        $grade = "10";
+        if ($uebergang == "j") {
+            $where .= "AND `uebergang` = '1'";
+            $checkBranch = false;
+            $checkLanguage = false;
+        }
+	}  else if (startswith($grade, "Q11")) {
+        $grade = "Q11";
+        $checkLang = false;
+        $checkBranch = false;
+	}   else if (startswith($grade, "Q12")) {
+        $grade = "Q12";
+        $checkLang = false;
+        $checkBranch = false;
+	}   else if (startswith($grade, "Q13")) {
+        $grade = "Q13";
+        $checkLang = false;
+        $checkBranch = false;
+	} else {
+		die("wrong grade!".$grade);
+    }
+
+    if ($checkLang == true) {
+        if ($language == "f" || $language == "l") {
+            
+            $where .= "AND (`language` = '$language' OR `language`='' OR `language` IS NULL)";
+        }
+    }
+    if ($checkBranch == true) {
+        if ($branch == "n" || $branch == "s") {
+            $where .= "AND (`branch` = '$branch' OR `branch`='' OR `branch` IS NULL)";
+        }
+        $where .= "AND `branch`!='sf'";
+    }
+
+    
+    $grade = $db->real_escape_string($grade);
+    $sql = "SELECT * FROM `books` WHERE `$grade` = 1 $where ORDER BY `subject`";
+    $res = $db->query($sql);
+    //echo $sql;
+    //echo "\n";
+    //echo $db->error;
+    //die();
+	$res = $res->fetch_all(MYSQLI_ASSOC);
+
+	die(json_encode($res));
 }
 
 function setorderDoneBackend($data) {
