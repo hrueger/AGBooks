@@ -1,31 +1,31 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { NavbarService } from "../services/navbar.service";
-import { AuthenticationService } from "../services/authentication.service";
-import { first } from "rxjs/operators";
 import { AlertService } from "../services/alert.service";
+import { NavbarService } from "../services/navbar.service";
 import { RemoteService } from "../services/remote.service";
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-step2",
+  styleUrls: ["./step2.component.scss"],
   templateUrl: "./step2.component.html",
-  styleUrls: ["./step2.component.scss"]
 })
 export class Step2Component implements OnInit {
-  public showFiveAndSeven = (new Date("09/11/2019").setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0) ? true : false);
-  public showQ = (new Date("09/12/2019").setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0) ? true : false);
-  registrationDone: boolean = false;
-  infoForm: FormGroup;
-  submitted: boolean = false;
+  public showFiveAndSeven = true;
+  // (new Date("09/11/2019").setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0) ? true : false);
+  public showQ = true;
+  // (new Date("09/12/2019").setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0) ? true : false);
+  public registrationDone: boolean = false;
+  public infoForm: FormGroup;
+  public submitted: boolean = false;
 
-  showUebergangsklasse: boolean = false;
-  showBranch: boolean = false;
-  showLanguage: boolean = false;
-  showCourse: boolean = false;
+  public showUebergangsklasse: boolean = false;
+  public showBranch: boolean = false;
+  public showLanguage: boolean = false;
+  public showCourse: boolean = false;
 
   constructor(
-    private NavbarService: NavbarService,
+    private navbarService: NavbarService,
     private remoteService: RemoteService,
     private router: Router,
     private alertService: AlertService,
@@ -34,31 +34,32 @@ export class Step2Component implements OnInit {
   ) { }
 
   public noWhitespaceValidator(control: FormControl) {
+    let isWhitespace;
     if (typeof control.value == "string") {
-      var isWhitespace = (control.value || '').trim().length === 0;
+      isWhitespace = (control.value || "").trim().length === 0;
     } else {
-      var isWhitespace = (control.value || '').length === 0;
+      isWhitespace = (control.value || "").length === 0;
     }
     const isValid = !isWhitespace;
-    return isValid ? null : { 'whitespace': true };
+    return isValid ? null : { whitespace: true };
   }
 
-  ngOnInit() {
-    this.NavbarService.setStep(2);
+  public ngOnInit() {
+    this.navbarService.setStep(2);
     this.infoForm = this.formBuilder.group({
-      teacher: ["", [Validators.required, this.noWhitespaceValidator]],
-      teacherShort: ["", [Validators.required, this.noWhitespaceValidator]],
-      room: ["", [Validators.required, this.noWhitespaceValidator]],
+      branch: ["", Validators.required],
+      classSize: ["", [Validators.required, this.noWhitespaceValidator]],
       course: ["", [Validators.required, this.noWhitespaceValidator]],
       grade: ["", Validators.required],
-      branch: ["", Validators.required],
-      uebergang: ["", Validators.required],
       language: ["", Validators.required],
-      classSize: ["", [Validators.required, this.noWhitespaceValidator]]
+      room: ["", [Validators.required, this.noWhitespaceValidator]],
+      teacher: ["", [Validators.required, this.noWhitespaceValidator]],
+      teacherShort: ["", [Validators.required, this.noWhitespaceValidator]],
+      uebergang: ["", Validators.required],
     });
 
     this.remoteService.getPrefilledValuesRegisterUser().subscribe(
-      data => {
+      (data) => {
         this.infoForm = this.formBuilder.group({
           teacher: [data.teacher, [Validators.required, this.noWhitespaceValidator]],
           teacherShort: [data.teacherShort, [Validators.required, this.noWhitespaceValidator]],
@@ -68,20 +69,20 @@ export class Step2Component implements OnInit {
           language: [data.language, Validators.required],
           branch: [data.branch, Validators.required],
           uebergang: [data.uebergang, Validators.required],
-          classSize: [data.classSize, [Validators.required, , this.noWhitespaceValidator]]
+          classSize: [data.classSize, [Validators.required, , this.noWhitespaceValidator]],
         });
-        this.f.grade.valueChanges.subscribe(value => {
+        this.f.grade.valueChanges.subscribe((value) => {
           this.gradeChanged(value);
         });
-        this.f.uebergang.valueChanges.subscribe(value => {
+        this.f.uebergang.valueChanges.subscribe((value) => {
           this.uebergangChanged(value);
         });
         this.gradeChanged(this.f.grade.value);
         this.uebergangChanged(this.f.uebergang.value);
       },
-      error => {
+      (error) => {
         this.alertService.error(error);
-      }
+      },
     );
   }
 
@@ -89,8 +90,8 @@ export class Step2Component implements OnInit {
     return this.infoForm.controls;
   }
 
-  uebergangChanged(value) {
-    //console.log(value);
+  public uebergangChanged(value) {
+    // console.log(value);
     if (value == "j") {
       this.f.language.setValue("");
       this.f.branch.setValue("");
@@ -106,7 +107,7 @@ export class Step2Component implements OnInit {
     }
   }
 
-  gradeChanged(value) {
+  public gradeChanged(value) {
     if (value.startsWith("5") || value.startsWith("Q")) {
       this.f.language.setValue("");
       this.f.language.disable();
@@ -147,14 +148,14 @@ export class Step2Component implements OnInit {
     }
   }
 
-  onSubmit() {
-    //console.log("here");
+  public onSubmit() {
+    // console.log("here");
     this.submitted = true;
     // stop here if form is invalid
     if (this.infoForm.invalid) {
       return;
     }
-    //console.log("hi");
+    // console.log("hi");
     this.remoteService
       .registerUser(
         this.f.teacher.value,
@@ -165,20 +166,20 @@ export class Step2Component implements OnInit {
         this.f.branch.value,
         this.f.uebergang.value,
         this.f.room.value,
-        this.f.classSize.value
+        this.f.classSize.value,
       )
       .subscribe(
-        data => {
-          //console.warn("hi");
+        (data) => {
+          // console.warn("hi");
           this.router.navigate(["step", "3"]);
         },
-        error => {
+        (error) => {
           this.alertService.error(error);
-        }
+        },
       );
   }
 
-  previous() {
+  public previous() {
     this.router.navigate(["step", "1"]);
   }
 }
