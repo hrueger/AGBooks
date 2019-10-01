@@ -362,36 +362,38 @@ function getAvalibleBooksBackend($data) {
     $branch = $data->branch;
     $uebergang = $data->uebergang;
 	if (startswith($grade, "5")) {
-        $grade = "5";
+        $where .= "`5` = 1";
         $checkLang = false;
         $checkBranch = false;
 	} else if (startswith($grade, "6")) {
-        $grade = "6";
+        $where .= "`6` = 1";
         $checkBranch = false;
 	}  else if (startswith($grade, "7")) {
-        $grade = "7";
+        $where .= "`7` = 1";
         $checkBranch = false;
 	}  else if (startswith($grade, "8")) {
-		$grade = "8";
+        $where .= "`8` = 1";
 	}  else if (startswith($grade, "9")) {
-		$grade = "9";
+        $where .= "`9` = 1";
 	}  else if (startswith($grade, "10")) {
-        $grade = "10";
+        $where .= "(`10` = 1";
         if ($uebergang == "j") {
-            $where .= "AND `uebergang` = '1'";
+            $where .= " OR `10`=0 ) AND `uebergang` = '1'";
             $checkBranch = false;
             $checkLanguage = false;
+        } else {
+            $where .= ")";
         }
 	}  else if (startswith($grade, "Q11")) {
-        $grade = "Q11";
+        $where .= "`Q11` = 1";
         $checkLang = false;
         $checkBranch = false;
 	}   else if (startswith($grade, "Q12")) {
-        $grade = "Q12";
+        $where .= "`Q12` = 1";
         $checkLang = false;
         $checkBranch = false;
 	}   else if (startswith($grade, "Q13")) {
-        $grade = "Q13";
+        $where .= "`Q13` = 1";
         $checkLang = false;
         $checkBranch = false;
 	} else {
@@ -401,24 +403,27 @@ function getAvalibleBooksBackend($data) {
     if ($checkLang == true) {
         if ($language == "f" || $language == "l") {
             
-            $where .= "AND (`language` = '$language' OR `language`='' OR `language` IS NULL)";
+            $where .= " AND (`language` = '$language' OR `language`='' OR `language` IS NULL)";
         }
     }
     if ($checkBranch == true) {
         if ($branch == "n" || $branch == "s") {
-            $where .= "AND (`branch` = '$branch' OR `branch`='' OR `branch` IS NULL)";
+            $where .= " AND (`branch` = '$branch' OR `branch`='' OR `branch` IS NULL)";
         }
-        $where .= "AND `branch`!='sf'";
+        $where .= " AND `branch`!='sf'";
     }
 
     
     $grade = $db->real_escape_string($grade);
-    $sql = "SELECT * FROM `books` WHERE `$grade` = 1 $where ORDER BY `subject`";
+    $sql = "SELECT * FROM `books` WHERE $where ORDER BY `subject`";
     $res = $db->query($sql);
     //echo $sql;
     //echo "\n";
     //echo $db->error;
     //die();
+    if (!$res) {
+        dieWithMessage("Fehler: ".$db->error);
+    }
 	$res = $res->fetch_all(MYSQLI_ASSOC);
 
 	die(json_encode($res));
@@ -486,36 +491,38 @@ function getBooks() {
     $branch = getSession("branch");
     $uebergang = getSession("uebergang");
 	if (startswith($grade, "5")) {
-        $grade = "5";
+        $where .= "`5` = 1";
         $checkLang = false;
         $checkBranch = false;
 	} else if (startswith($grade, "6")) {
-        $grade = "6";
+        $where .= "`6` = 1";
         $checkBranch = false;
 	}  else if (startswith($grade, "7")) {
-        $grade = "7";
+        $where .= "`7` = 1";
         $checkBranch = false;
 	}  else if (startswith($grade, "8")) {
-		$grade = "8";
+        $where .= "`8` = 1";
 	}  else if (startswith($grade, "9")) {
-		$grade = "9";
+        $where .= "`9` = 1";
 	}  else if (startswith($grade, "10")) {
-        $grade = "10";
+        $where .= "(`10` = 1";
         if ($uebergang == "j") {
-            $where .= "AND `uebergang` = '1'";
+            $where .= " OR `10`=0 ) AND `uebergang` = '1'";
             $checkBranch = false;
             $checkLanguage = false;
+        } else {
+            $where .= ")";
         }
 	}  else if (startswith($grade, "Q11")) {
-        $grade = "Q11";
+        $where .= "`Q11` = 1";
         $checkLang = false;
         $checkBranch = false;
 	}   else if (startswith($grade, "Q12")) {
-        $grade = "Q12";
+        $where .= "`Q12` = 1";
         $checkLang = false;
         $checkBranch = false;
 	}   else if (startswith($grade, "Q13")) {
-        $grade = "Q13";
+        $where .= "`Q13` = 1";
         $checkLang = false;
         $checkBranch = false;
 	} else {
@@ -525,28 +532,27 @@ function getBooks() {
     if ($checkLang == true) {
         if ($language == "f" || $language == "l") {
             
-            $where .= "AND (`language` = '$language' OR `language`='' OR `language` IS NULL)";
+            $where .= " AND (`language` = '$language' OR `language`='' OR `language` IS NULL)";
         }
     }
     if ($checkBranch == true) {
         if ($branch == "n" || $branch == "s") {
-            $where .= "AND (`branch` = '$branch' OR `branch`='' OR `branch` IS NULL)";
+            $where .= " AND (`branch` = '$branch' OR `branch`='' OR `branch` IS NULL)";
         }
-        $where .= "AND `branch`!='sf'";
+        $where .= " AND `branch`!='sf'";
     }
 
     
-
-
-
-
     $grade = $db->real_escape_string($grade);
-    $sql = "SELECT * FROM `books` WHERE `$grade` = 1 $where ORDER BY `subject`";
+    $sql = "SELECT * FROM `books` WHERE $where ORDER BY `subject`";
     $res = $db->query($sql);
     //echo $sql;
     //echo "\n";
     //echo $db->error;
     //die();
+    if (!$res) {
+        dieWithMessage("Fehler: ".$db->error);
+    }
 	$res = $res->fetch_all(MYSQLI_ASSOC);
     
     
@@ -676,6 +682,8 @@ function getBooksForCheck() {
     $db = connect();
 
     $classSize = intval(getSession("classSize"));
+    $grade = getSession("grade");
+    $isOberstufe = substr( $grade, 0, 1 ) == "Q";
 
     $books = [];
     $res = $db->query("SELECT * FROM books");
@@ -721,12 +729,12 @@ function getBooksForCheck() {
 
     foreach ($res as $book) {
         if (in_array($books[$book["id"]]["subject"], $religionsbuecher) ) {
-            if ($religion_alert == true) {
+            if ($religion_alert == true && !$isOberstufe) {
                 $alert = "Die Gesamtanzahl der Religionsbücher entspricht nicht der Klassenstärke!";
             }
 
         } else {
-            if (intval($book["number"]) != $classSize) {
+            if (intval($book["number"]) != $classSize && !$isOberstufe) {
                 $alert = "Die Buchanzahl entspricht nicht der Klassenstärke!";
             } else {
                 $alert = "";
