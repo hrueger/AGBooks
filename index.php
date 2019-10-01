@@ -162,7 +162,15 @@ if ($data) {
             case "setOrderDone backend":
                 setorderDoneBackend($data);
                 break;
-
+            case "setOrderAccepted backend":
+                setOrderAcceptedBackend($data);
+                break;
+            case "deleteOrder backend":
+                deleteOrderBackend($data);
+                break;
+            case "getHandoverCodeForOrder backend":
+                getHandoverCodeForOrderBackend($data);
+                break;
 
 
             default: 
@@ -242,6 +250,7 @@ function getOrdersBackend() {
         if ($users) {
             foreach ($users as $user) {
                 $userinfo[$user["token"]] = unserialize($user["data"]);
+                $userinfo[$user["token"]]["token"] = $user["token"];
             }
         }
     }
@@ -438,6 +447,52 @@ function setorderDoneBackend($data) {
     } else {
         dieWithMessage($db->error);
     }
+}
+function setOrderAcceptedBackend($data) {
+    $db = connect();
+    $id = $db->real_escape_string($data->id);
+    $res = $db->query("UPDATE `orders` SET `accepted` = '1' WHERE `orders`.`id` = $id");
+    if ($res) {
+        die(json_encode(true));
+    } else {
+        dieWithMessage($db->error);
+    }
+}
+function deleteOrderBackend($data) {
+    $db = connect();
+    $id = $db->real_escape_string($data->id);
+    $res = $db->query("DELETE FROM `orders` WHERE `orders`.`id` = $id");
+    if ($res) {
+        die(json_encode(true));
+    } else {
+        dieWithMessage($db->error);
+    }
+}
+function getHandoverCodeForOrderBackend($data) {
+    $code = (string)mt_rand (10000 , 99999);
+    $db = connect();
+    $token = $db->real_escape_string($data->token);
+    $res = $db->query("SELECT * FROM `session` WHERE `token` = '$token'");
+    if ($res) {
+        $res = $res->fetch_all(MYSQLI_ASSOC);
+        if ($res && isset($res[0]) && isset($res[0]["data"])) {
+            $data = unserialize($res[0]["data"]);
+            $data["handoverCode"] = $code;
+            $data = serialize($data);
+            $db->query("UPDATE `session` SET `data` = '$data' WHERE `token` = '$token'");
+            die($code);
+            
+        }else {
+            $data = array();
+        }
+    } else {
+        $data = array();
+    }
+    $data["handoverCode"] = $code;
+    $data = $db->real_escape_string(serialize($data));
+    $sql = "INSERT INTO `session` (token, `data`) VALUES ('$token', '$data')";
+    $db->query($sql);
+    die($code);
 }
 
 function authenticate($data) {  
