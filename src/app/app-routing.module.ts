@@ -6,7 +6,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LoginComponent } from "./login/login.component";
 import { AvalibleBooksComponent } from './avalible-books/avalible-books.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   /* Home paths*/
 
   {
@@ -24,7 +24,6 @@ const routes: Routes = [
   {
     path: "avaliblebooks",
     component: AvalibleBooksComponent,
-    canActivate: [AuthGuard],
   },
 
   {
@@ -44,4 +43,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -1,13 +1,21 @@
 {
   "extends": "../tsconfig.json",
-
-  "exclude": ["test.ts", "**/*.spec.ts"],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts",
+    "**/*.tns.ts",
+    "**/*.android.ts",
+    "**/*.ios.ts"
+  ],
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "types": [],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2015", "dom"],
+    "lib": [
+      "es2015",
+      "dom"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
@@ -16,7 +24,9 @@
     "target": "es5",
     "baseUrl": "src",
     "paths": {
-      "@/*": ["app/*"]
+      "@/*": [
+        "app/*"
+      ]
     }
   }
 }
