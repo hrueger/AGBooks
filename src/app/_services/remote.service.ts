@@ -42,7 +42,28 @@ export class RemoteService {
     const action = "setOrderDone backend";
     return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
       tap((_) => this.log("setOrderDone")),
-      catchError(this.handleError<boolean>("getOrders", false)),
+      catchError(this.handleError<boolean>("setOrderDone", false)),
+    );
+  }
+  public setOrderAccepted(id: number): Observable<boolean> {
+    const action = "setOrderAccepted backend";
+    return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
+      tap((_) => this.log("setOrderAccepted")),
+      catchError(this.handleError<boolean>("setOrderAccepted", false)),
+    );
+  }
+  public deleteOrder(id: number): Observable<boolean> {
+    const action = "deleteOrder backend";
+    return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
+      tap((_) => this.log("deleteOrder")),
+      catchError(this.handleError<boolean>("deleteOrder", false)),
+    );
+  }
+  public getHandoverCodeForOrder(token: string): Observable<boolean> {
+    const action = "getHandoverCodeForOrder backend";
+    return this.http.post<boolean>(`${config.apiUrl}`, { action, token }).pipe(
+      tap((_) => this.log("getHandoverCodeForOrder")),
+      catchError(this.handleError<boolean>("getHandoverCodeForOrder", false)),
     );
   }
   /*getHeroNo404<Data>(id: number): Observable<User> {

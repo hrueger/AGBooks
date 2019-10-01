@@ -7,6 +7,18 @@
         <p class="d-inline btn btn-success doneBtn" *ngIf="orderCanBeDone" (click)="orderDone()">
             Fertig
         </p>
+        &nbsp;
+        <p class="d-inline btn btn-warning doneBtn" *ngIf="orderCanBeAccepted" (click)="orderAccepted()">
+            Als akzeptiert markieren
+        </p>
+        &nbsp;
+        <p class="d-inline btn btn-primary doneBtn" *ngIf="currentOrder" (click)="getHandoverCodeForOrder()">
+            Übergeben
+        </p>
+        &nbsp;
+        <p class="d-inline btn btn-danger doneBtn" *ngIf="currentOrder" (click)="deleteOrder()">
+            Löschen
+        </p>
     </div>
     <div class="navbar-middle" *ngIf="!currentOrder">
         Bitte eine Bestellung auswählen!
@@ -15,7 +27,7 @@
         <li class="nav-item">
             <a class="nlink" routerLink="/avaliblebooks">Klassensatz</a>&nbsp;<a class="nlink" routerLink="/analysis">Auswertung</a>&nbsp;<a class="nlink" href="#">Logout</a>
         </li>
-        
+
     </ul>
 </nav>
 

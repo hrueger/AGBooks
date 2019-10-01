@@ -8,4 +8,5 @@ export class Order {
   public books: Book[];
   public accepted: number;
   public done: number;
+  public user?: any;
 }

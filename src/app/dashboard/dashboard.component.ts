@@ -19,6 +19,7 @@ import config from "../config/config";
 export class DashboardComponent implements OnInit {
   public currentOrder: Order = null;
   public orderCanBeDone = true;
+  public orderCanBeAccepted = true;
   public orders: Order[] = [];
   public doneOrders: Order[] = [];
   public acceptedOrders: Order[] = [];
@@ -51,16 +52,19 @@ export class DashboardComponent implements OnInit {
                   (order) => order.id === routeParams.id,
                 )[0];
                 this.orderCanBeDone = true;
+                this.orderCanBeAccepted = false;
               } else if (routeParams.type == "done") {
                 this.currentOrder = this.doneOrders.filter(
                   (order) => order.id === routeParams.id,
                 )[0];
                 this.orderCanBeDone = false;
+                this.orderCanBeAccepted = true;
               } else if (routeParams.type == "accepted") {
                 this.currentOrder = this.acceptedOrders.filter(
                   (order) => order.id === routeParams.id,
                 )[0];
                 this.orderCanBeDone = false;
+                this.orderCanBeAccepted = false;
               } else {
                 console.warn(routeParams.type);
               }
@@ -104,6 +108,48 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+  public orderAccepted() {
+    this.remoteService.setOrderAccepted(this.currentOrder.id).subscribe((data) => {
+      if (data == true) {
+        this.acceptedOrders.push(this.currentOrder);
+        this.doneOrders = this.doneOrders.filter(
+          (order) => order.id !== this.currentOrder.id,
+        );
+        this.currentOrder = null;
+        this.navigateToTopOrder();
+      }
+    });
+  }
+  public getHandoverCodeForOrder() {
+    this.remoteService.getHandoverCodeForOrder(
+      this.currentOrder.user.token.replace("Bearer ", "")).subscribe((data) => {
+      if (data != false) {
+        alert("Der Übergabecode lautet:\n\n" + data);
+      }
+    });
+  }
+
+  public deleteOrder() {
+    if (window.confirm("Soll diese Bestellung wirklich gelöscht werden? Sie kann nicht wiederhergestellt werden.")) {
+      this.remoteService.deleteOrder(this.currentOrder.id).subscribe((data) => {
+        if (data == true) {
+          this.orders = this.orders.filter(
+            (order) => order.id !== this.currentOrder.id,
+          );
+          this.doneOrders = this.doneOrders.filter(
+            (order) => order.id !== this.currentOrder.id,
+          );
+          this.acceptedOrders = this.acceptedOrders.filter(
+            (order) => order.id !== this.currentOrder.id,
+          );
+          this.currentOrder = null;
+          this.navigateToTopOrder();
+        }
+      });
+    }
+  }
+
   public navigateToTopOrder() {
     if (this.orders[0]) {
       this.router.navigate(["dashboard", "queue", this.orders[0].id]);
