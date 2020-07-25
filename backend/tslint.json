@@ -1,0 +1,10 @@
+{
+  "extends": "tslint:recommended",
+  "rulesDirectory": [
+    "codelyzer"
+  ],
+  "rules": {
+    "triple-equals": false,
+    "radix": false
+  }
+}
