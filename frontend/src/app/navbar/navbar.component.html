@@ -1,0 +1,14 @@
+<div>
+  <nav
+    class="navbar navbar-expand-lg navbar-light bg-light justify-content-between"
+  >
+    <a class="navbar-brand">AG-Books</a>
+    <a routerLink="/handover" class="btn btn-primary">
+      Sitzung übergeben
+    </a>
+    <p>
+      <span class="">Schritt {{ stepNumber }}</span> von {{ totalSteps }}
+    </p>
+  </nav>
+  <div class="progressbar" [ngStyle]="{ width: pbwidth }"></div>
+</div>
