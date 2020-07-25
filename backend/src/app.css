@@ -1,0 +1,17 @@
+@import "~nativescript-theme-core/css/core.light.css";
+* {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.action-bar {
+    background-color: #2b669a;
+    color: white;
+}
+
+.action-bar-small {
+    font-size: 10;
+}
+
+.headline {
+    font-size: 22;
+}

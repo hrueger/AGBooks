@@ -1,0 +1,14 @@
+<ActionBar class="action-bar">
+    <Label *ngIf="currentOrder.user.grade" class=" action-bar-title" [text]="'Klasse / Kurs: '+currentOrder.user.grade"></Label>
+    <Label *ngIf="!currentOrder.user && !currentOrder.user.grade" class=" action-bar-title" text="AGBooks"></Label>
+</ActionBar>
+
+<ListView *ngIf="currentOrder" [items]="currentOrder.order" (itemTap)="onBookTap($event)" class="list-group">
+    <ng-template let-book="item">
+        <StackLayout orientation="vertical" class="list-group-item" [class.selected]="book.selected">
+            <Label *ngIf="book" [text]="book.subject"></Label>
+            <Label *ngIf="book" [text]="book.name"></Label>
+            <Label *ngIf="book" [text]="book.number"></Label>
+        </StackLayout>
+    </ng-template>
+</ListView>
