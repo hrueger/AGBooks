@@ -1,0 +1,137 @@
+<h1>Angaben</h1>
+<form class="needs-validation" [formGroup]="infoForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="inputTeacher">Lehrkraft:
+    </label>
+        <div class="col-sm-10">
+            <input type="text" id="inputTeacher" formControlName="teacher" [ngClass]="{ 'is-invalid': submitted && f.teacher.errors }" class="form-control" name="description" placeholder="Nachname der Lehrkraft" value="" required="" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="inputTeacherShort">Kürzel:
+    </label>
+        <div class="col-sm-10">
+            <input type="text" id="inputTeacherShort" formControlName="teacherShort" [ngClass]="{ 'is-invalid': submitted && f.teacherShort.errors }" class="form-control" name="Kürzel der Lehrkraft" placeholder="Beschreibung" value="" required="" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="inputGrade">Klasse: </label>
+        <div class="col-sm-10">
+            <select class="form-control" formControlName="grade" [ngClass]="{ 'is-invalid': submitted && f.grade.errors }" required="">
+        <option disabled="" selected="" value="">Bitte wählen</option>
+        <optgroup label="Jahrgangsstufe 5" *ngIf="showFiveAndSeven">
+          <option value="5a">5a</option>
+          <option value="5b">5b</option>
+          <option value="5c">5c</option>
+          <option value="5d">5d</option>
+          <option value="5e">5e</option>
+          <option value="5f">5f</option>
+        </optgroup>
+        <optgroup label="Jahrgangsstufe 6">
+          <option value="6a">6a</option>
+          <option value="6b">6b</option>
+          <option value="6c">6c</option>
+          <option value="6d">6d</option>
+          <option value="6e">6e</option>
+        </optgroup>
+        <optgroup label="Jahrgangsstufe 7" *ngIf="showFiveAndSeven">
+          <option value="7a">7a</option>
+          <option value="7b">7b</option>
+          <option value="7c">7c</option>
+          <option value="7d">7d</option>
+          <option value="7e">7e</option>
+        </optgroup>
+        <optgroup label="Jahrgangsstufe 8">
+          <option value="8a">8a</option>
+          <option value="8b">8b</option>
+          <option value="8c">8c</option>
+          <option value="8d">8d</option>
+          <option value="8e">8e</option>
+        </optgroup>
+        <optgroup label="Jahrgangsstufe 9">
+          <option value="9a">9a</option>
+          <option value="9b">9b</option>
+          <option value="9c">9c</option>
+          <option value="9d">9d</option>
+          <option value="9e">9e</option>
+        </optgroup>
+        <optgroup label="Jahrgangsstufe 10">
+          <option value="10a">10a</option>
+          <option value="10b">10b</option>
+          <option value="10c">10c</option>
+          <option value="10d">10d</option>
+          <option value="10e">10e</option>
+        </optgroup>
+        <optgroup label="Oberstufe" *ngIf="showQ">
+          <option value="Q11">Q11</option>
+          <option value="Q12">Q12</option>
+        </optgroup>
+      </select>
+        </div>
+    </div>
+
+    <div class="form-group row" *ngIf="showCourse">
+        <label class="col-sm-2 col-form-label" for="inputCourse">Kurs:
+    </label>
+        <div class="col-sm-10">
+            <input type="text" id="inputCourse" formControlName="course" [ngClass]="{ 'is-invalid': submitted && f.course.errors }" class="form-control" name="course" placeholder="Kurs (z.B. M72, D74, ...)" value="" required="" />
+        </div>
+    </div>
+
+
+    <div class="form-group row" *ngIf="showLanguage">
+        <label class="col-sm-2 col-form-label" for="inputLanguage">2. Fremdsprache:
+    </label>
+        <div class="col-sm-10">
+            <select class="form-control" formControlName="language" [ngClass]="{ 'is-invalid': submitted && f.language.errors }" required="">
+        <option disabled="" selected="" value="">Bitte wählen</option>
+        <option value="f">Französisch</option>
+        <option value="l">Latein</option>
+        <option value="g">gemischt</option>
+      </select>
+        </div>
+    </div>
+    <div class="form-group row" *ngIf="showBranch">
+        <label class="col-sm-2 col-form-label" for="inputBranch">Zweig: </label>
+        <div class="col-sm-10">
+            <select class="form-control" formControlName="branch" [ngClass]="{ 'is-invalid': submitted && f.branch.errors }" required="">
+        <option disabled="" selected="" value="">Bitte wählen</option>
+        <option value="n">naturwissenschaftlich</option>
+        <option value="s">sprachlich</option>
+        <option value="g">gemischt</option>
+      </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="inputRoom">Raum: </label>
+        <div class="col-sm-10">
+            <input type="number" id="inputRoom" formControlName="room" [ngClass]="{ 'is-invalid': submitted && f.room.errors }" class="form-control" name="description" placeholder="Raumnummer" value="" required="" />
+        </div>
+    </div>
+    <div class="form-group row" *ngIf="showUebergangsklasse">
+        <label class="col-sm-2 col-form-label" for="inputUebergang">Übergangsklasse:
+    </label>
+        <div class="col-sm-10">
+            <select class="form-control" formControlName="uebergang" [ngClass]="{ 'is-invalid': submitted && f.uebergang.errors }" required="">
+        <option disabled="" selected="" value="">Bitte wählen</option>
+        <option value="j">Ja</option>
+        <option value="n">Nein</option>
+      </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="inputClassSize">Klassenstärke:
+    </label>
+        <div class="col-sm-10">
+            <input type="number" id="inputClassSize" formControlName="classSize" [ngClass]="{ 'is-invalid': submitted && f.classSize.errors }" class="form-control" name="description" placeholder="Anzahl der Schülerinnen und Schüler in der Klasse" value="" required=""
+            />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <input type="button" class="btn btn-primary float-left" (click)="previous()" value="Zurück" />
+            <input type="submit" name="submit" class="btn btn-primary float-right" value="Weiter" />
+        </div>
+    </div>
+</form>

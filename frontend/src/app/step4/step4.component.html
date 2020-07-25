@@ -1,0 +1,30 @@
+<h1>Bestellübersicht</h1>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <td>Fach</td>
+            <td>Buch</td>
+            <td>Anzahl</td>
+            <td>Hinweis</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let book of books">
+            <td>{{book.subject}}</td>
+            <td>{{book.name}}</td>
+            <td>{{book.number}}</td>
+            <td>
+                <div class="alert alert-danger" *ngIf="book.alert">{{book.alert}}</div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="alert alert-primary">
+    Es sollen <b>{{bookCount}}</b> verschiedene Bücher bestellt werden.
+</div>
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-primary float-left" (click)="previous()">Zurück</button>
+        <button class="btn btn-primary float-right" (click)="next()">Weiter</button>
+    </div>
+</div>
