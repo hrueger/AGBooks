@@ -1,72 +1,65 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { catchError, map, tap } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
 import { Order } from "../_models/order";
-import { AlertService } from "../_services/alert.service";
+import { AlertService } from "./alert.service";
 import config from "../config/config";
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    "Access-Control-Allow-Origin": "http://localhost",
-    "Content-Type": "application/json",
-  }),
-};
 
 @Injectable({ providedIn: "root" })
 export class RemoteService {
-  constructor(private http: HttpClient, private alertService: AlertService) {}
-  public getAvalibleBooksByClass(data: any): Observable<any[]> {
-    const action = "avalibleBooks backend";
-    return this.http.post<Order[]>(`${config.apiUrl}`, { action, ...data}).pipe(
-      tap((_) => this.log("fetched avalible books")),
-      catchError(this.handleError<Order[]>("getAvalibleBooksByClass", [])),
-    );
-  }
-  public getAnalysisData() {
-    const action = "analysis backend";
-    return this.http.post<Order[]>(`${config.apiUrl}`, { action }).pipe(
-      tap((_) => this.log("fetched analysis")),
-      catchError(this.handleError<Order[]>("getAnalysisData", [])),
-    );
-  }
+    constructor(private http: HttpClient, private alertService: AlertService) {}
+    public getAvalibleBooksByClass(data: Record<string, unknown>): Observable<any[]> {
+        const action = "avalibleBooks backend";
+        return this.http.post<Order[]>(`${config.apiUrl}`, { action, ...data }).pipe(
+            tap(() => this.log("fetched avalible books")),
+            catchError(this.handleError<Order[]>("getAvalibleBooksByClass", [])),
+        );
+    }
+    public getAnalysisData(): Observable<any> {
+        const action = "analysis backend";
+        return this.http.post<Order[]>(`${config.apiUrl}`, { action }).pipe(
+            tap(() => this.log("fetched analysis")),
+            catchError(this.handleError<Order[]>("getAnalysisData", [])),
+        );
+    }
 
-  public getOrders(): Observable<Order[]> {
-    const action = "orders backend";
-    return this.http.post<Order[]>(`${config.apiUrl}`, { action }).pipe(
-      tap((_) => this.log("fetched orders")),
-      catchError(this.handleError<Order[]>("getOrders", [])),
-    );
-  }
-  public setOrderDone(id: number): Observable<boolean> {
-    const action = "setOrderDone backend";
-    return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
-      tap((_) => this.log("setOrderDone")),
-      catchError(this.handleError<boolean>("setOrderDone", false)),
-    );
-  }
-  public setOrderAccepted(id: number): Observable<boolean> {
-    const action = "setOrderAccepted backend";
-    return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
-      tap((_) => this.log("setOrderAccepted")),
-      catchError(this.handleError<boolean>("setOrderAccepted", false)),
-    );
-  }
-  public deleteOrder(id: number): Observable<boolean> {
-    const action = "deleteOrder backend";
-    return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
-      tap((_) => this.log("deleteOrder")),
-      catchError(this.handleError<boolean>("deleteOrder", false)),
-    );
-  }
-  public getHandoverCodeForOrder(token: string): Observable<boolean> {
-    const action = "getHandoverCodeForOrder backend";
-    return this.http.post<boolean>(`${config.apiUrl}`, { action, token }).pipe(
-      tap((_) => this.log("getHandoverCodeForOrder")),
-      catchError(this.handleError<boolean>("getHandoverCodeForOrder", false)),
-    );
-  }
-  /*getHeroNo404<Data>(id: number): Observable<User> {
+    public getOrders(): Observable<Order[]> {
+        const action = "orders backend";
+        return this.http.post<Order[]>(`${config.apiUrl}`, { action }).pipe(
+            tap(() => this.log("fetched orders")),
+            catchError(this.handleError<Order[]>("getOrders", [])),
+        );
+    }
+    public setOrderDone(id: number): Observable<boolean> {
+        const action = "setOrderDone backend";
+        return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
+            tap(() => this.log("setOrderDone")),
+            catchError(this.handleError<boolean>("setOrderDone", false)),
+        );
+    }
+    public setOrderAccepted(id: number): Observable<boolean> {
+        const action = "setOrderAccepted backend";
+        return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
+            tap(() => this.log("setOrderAccepted")),
+            catchError(this.handleError<boolean>("setOrderAccepted", false)),
+        );
+    }
+    public deleteOrder(id: number): Observable<boolean> {
+        const action = "deleteOrder backend";
+        return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
+            tap(() => this.log("deleteOrder")),
+            catchError(this.handleError<boolean>("deleteOrder", false)),
+        );
+    }
+    public getHandoverCodeForOrder(token: string): Observable<boolean> {
+        const action = "getHandoverCodeForOrder backend";
+        return this.http.post<boolean>(`${config.apiUrl}`, { action, token }).pipe(
+            tap(() => this.log("getHandoverCodeForOrder")),
+            catchError(this.handleError<boolean>("getHandoverCodeForOrder", false)),
+        );
+    }
+    /* getHeroNo404<Data>(id: number): Observable<User> {
     const url = `${this.apiUrl}/?id=${id}`;
     return this.http.get<User[]>(url).pipe(
       map(heroes => heroes[0]), // returns a {0|1} element array
@@ -119,21 +112,23 @@ export class RemoteService {
       tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>("updateHero"))
     );
-  }*/
+  } */
 
-  private handleError<T>(operation = "operation", result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
+    private handleError<T>(operation = "operation", result?: T) {
+        return (error: any): Observable<T> => {
+            // eslint-disable-next-line no-console
+            console.error(error);
 
-      this.log(`${operation} failed: ${error.message}`);
+            this.log(`${operation} failed: ${error.message}`);
 
-      this.alertService.error(error);
+            this.alertService.error(error);
 
-      return of(result as T);
-    };
-  }
+            return of(result as T);
+        };
+    }
 
-  private log(message: string) {
-    console.log(`Remote Service Log: ${message}`);
-  }
+    private log(message: string) {
+        // eslint-disable-next-line no-console
+        console.log(`Remote Service Log: ${message}`);
+    }
 }

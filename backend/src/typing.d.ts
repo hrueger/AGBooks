@@ -1,1 +1,1 @@
-declare var config: any;
+declare let config: any;

@@ -1,10 +1,11 @@
 import { Book } from "./book";
+
 export class Order {
   public id: number;
-  public class: String;
+  public class: string;
   public room: number;
-  public teacher: String;
-  public teacherShort: String;
+  public teacher: string;
+  public teacherShort: string;
   public books: Book[];
   public accepted: number;
   public done: number;

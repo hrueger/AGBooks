@@ -22,28 +22,28 @@ import { LoginComponent } from "./login/login.component";
 // import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 
 @NgModule({
-  bootstrap: [AppComponent],
-  declarations: [
-    AppComponent,
-    AlertComponent,
-    LoginComponent,
-    DashboardComponent,
-    AnalysisComponent,
-    AvalibleBooksComponent,
-  ],
-  imports: [
-    NativeScriptModule,
-    NativeScriptHttpClientModule,
-    NativeScriptUISideDrawerModule,
-    NativeScriptFormsModule,
-    NativeScriptRouterModule.forRoot(routes),
-  ],
-  providers: [
-    { provide: LOCALE_ID, useValue: "de" },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  ],
-  schemas: [NO_ERRORS_SCHEMA],
+    bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+        AlertComponent,
+        LoginComponent,
+        DashboardComponent,
+        AnalysisComponent,
+        AvalibleBooksComponent,
+    ],
+    imports: [
+        NativeScriptModule,
+        NativeScriptHttpClientModule,
+        NativeScriptUISideDrawerModule,
+        NativeScriptFormsModule,
+        NativeScriptRouterModule.forRoot(routes),
+    ],
+    providers: [
+        { provide: LOCALE_ID, useValue: "de" },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
 })
 /*
 Pass your application module to the bootstrapModule function located in main.ts to start your app

@@ -4,43 +4,43 @@ import { AuthGuard } from "./_guards/auth.guard";
 import { AnalysisComponent } from "./analysis/analysis.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LoginComponent } from "./login/login.component";
-import { AvalibleBooksComponent } from './avalible-books/avalible-books.component';
+import { AvalibleBooksComponent } from "./avalible-books/avalible-books.component";
 
 export const routes: Routes = [
-  /* Home paths*/
+    /* Home paths */
 
-  {
-    path: "dashboard",
-    component: DashboardComponent,
-    canActivate: [AuthGuard],
-  },
+    {
+        path: "dashboard",
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
+    },
 
-  {
-    path: "analysis",
-    component: AnalysisComponent,
-    canActivate: [AuthGuard],
-  },
+    {
+        path: "analysis",
+        component: AnalysisComponent,
+        canActivate: [AuthGuard],
+    },
 
-  {
-    path: "avaliblebooks",
-    component: AvalibleBooksComponent,
-  },
+    {
+        path: "avaliblebooks",
+        component: AvalibleBooksComponent,
+    },
 
-  {
-    path: "dashboard/:type/:id",
-    component: DashboardComponent,
-    canActivate: [AuthGuard],
-  },
+    {
+        path: "dashboard/:type/:id",
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
+    },
 
-  /* Authentication paths*/
-  { path: "login", component: LoginComponent },
+    /* Authentication paths */
+    { path: "login", component: LoginComponent },
 
-  // otherwise redirect to home
-  { path: "**", redirectTo: "dashboard" },
+    // otherwise redirect to home
+    { path: "**", redirectTo: "dashboard" },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
 export class AppRoutingModule { }

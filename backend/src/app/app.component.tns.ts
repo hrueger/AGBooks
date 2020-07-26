@@ -4,9 +4,9 @@ import { Order } from "./_models/order";
 import { RemoteService } from "./_services/remote.service";
 
 @Component({
-  selector: 'app',
-  styleUrls: ["./app.component.css"],
-  templateUrl: "./app.component.html",
+    selector: "app",
+    styleUrls: ["./app.component.css"],
+    templateUrl: "./app.component.html",
 })
 
 export class AppComponent {
@@ -16,48 +16,46 @@ export class AppComponent {
   @ViewChild("rsd", { static: false }) public rSideDrawer: ElementRef;
   constructor(private remoteService: RemoteService) { }
 
-  public ngOnInit() {
-    this.remoteService
-      .getOrders()
-      .pipe(first())
-      .subscribe(
-        (orders) => {
-          if (orders) {
-            this.sortOrders(orders);
-          }
-
-          setInterval(() => {
-            this.remoteService
-              .getOrders()
-              .pipe(first())
-              .subscribe(
-                (orders) => {
+  public ngOnInit(): void {
+      this.remoteService
+          .getOrders()
+          .pipe(first())
+          .subscribe(
+              (orders) => {
                   if (orders) {
-                    this.sortOrders(orders);
+                      this.sortOrders(orders);
                   }
-                });
-          }, 30000);
 
-        });
+                  setInterval(() => {
+                      this.remoteService
+                          .getOrders()
+                          .pipe(first())
+                          .subscribe(
+                              (o) => {
+                                  if (o) {
+                                      this.sortOrders(o);
+                                  }
+                              },
+                          );
+                  }, 30000);
+              },
+          );
   }
-  public sortOrders(orders: Order[]) {
-    if (orders.length) {
-      this.orders = orders.filter(
-        // @ts-ignore
-        (order) => order.done == "0" && order.accepted == "0",
-      );
-      this.doneOrders = orders.filter(
-        // @ts-ignore
-        (order) => order.done == "1" && order.accepted == "0",
-      );
-      this.acceptedOrders = orders.filter(
-        // @ts-ignore
-        (order) => order.done == "1" && order.accepted == "1",
-      );
-    }
+  public sortOrders(orders: Order[]): void {
+      if (orders.length) {
+          this.orders = orders.filter(
+              (order: any) => order.done == "0" && order.accepted == "0",
+          );
+          this.doneOrders = orders.filter(
+              (order: any) => order.done == "1" && order.accepted == "0",
+          );
+          this.acceptedOrders = orders.filter(
+              (order: any) => order.done == "1" && order.accepted == "1",
+          );
+      }
   }
 
   public hideDrawer(): void {
-    this.rSideDrawer.nativeElement.toggleDrawerState();
+      this.rSideDrawer.nativeElement.toggleDrawerState();
   }
 }
