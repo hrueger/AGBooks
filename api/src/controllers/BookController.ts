@@ -67,25 +67,8 @@ class BookController {
         const sql = `SELECT * FROM \`book\` WHERE ${where} ORDER BY \`subject\``;
         const books = await bookRepository.query(sql);
 
-        /* const order = db->query("SELECT `order` FROM `orders` WHERE `user`='user'");
-        if (order) {
-            order = order->fetch_all(MYSQLI_ASSOC);
-        } else {
-            die(db->error);
-        }
-
-        if (isset(order[0]["order"])) {
-            order = unserialize(order[0]["order"]);
-        } else {
-            order = array();
-        } */
         for (const book of books) {
-            book.number = me.classSize;
-            /* for (const orderedBook of order) {
-                if (book.id == orderedBook.id) {
-                    book.number = orderedBook.number;
-                }
-            } */
+            book.number = me.order ? me.order[book.id] : me.classSize;
         }
 
         res.send(books);
