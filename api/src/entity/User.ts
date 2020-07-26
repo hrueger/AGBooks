@@ -17,22 +17,22 @@ export class User {
 
     @Column({ default: "" })
     public grade: string;
-    
+
     @Column({ default: "" })
     public course: string;
 
-    @Column({  default: "" })
+    @Column({ default: "" })
     public language: "latein" | "französisch" | "gemischt";
-    
+
     @Column({ default: false })
     public uebergang: boolean;
-    
+
     @Column({ default: "" })
     public branch: "sprachlich" | "naturwissenschaftlich" | "gemischt";
-    
+
     @Column({ default: 0 })
     public room: number;
-    
+
     @Column({ default: 0 })
     public classSize: number;
 

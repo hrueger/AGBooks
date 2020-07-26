@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 import { config } from "../config/config";
 
-export const checkJwt = async (req: Request, res: Response, next: NextFunction) => {
+export const checkJwt = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     // Get the jwt token from the head
     let token = req.headers.authorization as string;
     if (!token) {

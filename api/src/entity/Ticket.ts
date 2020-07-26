@@ -2,13 +2,12 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
-  } from "typeorm";
+} from "typeorm";
 
 @Entity()
-  export class Ticket {
+export class Ticket {
     @PrimaryGeneratedColumn()
     public id: number;
 
@@ -28,4 +27,4 @@ import {
 
     @Column()
     public activated: boolean;
-  }
+}

@@ -1,11 +1,11 @@
 import * as bcrypt from "bcryptjs";
 import {
-Column,
-CreateDateColumn,
-Entity,
-PrimaryGeneratedColumn,
-Unique,
-UpdateDateColumn,
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+    Unique,
+    UpdateDateColumn,
 } from "typeorm";
 
 @Entity()
@@ -17,10 +17,10 @@ export class Admin {
   @Column()
   public email: string;
 
-  @Column({select: false})
+  @Column({ select: false })
   public password: string;
 
-  @Column({select: false, nullable: true})
+  @Column({ select: false, nullable: true })
   public passwordResetToken: string;
 
   @Column()
@@ -31,15 +31,14 @@ export class Admin {
   @UpdateDateColumn()
   public updatedAt: Date;
 
-  public hashPassword() {
-    this.password = bcrypt.hashSync(this.password, 8);
+  public hashPassword(): void {
+      this.password = bcrypt.hashSync(this.password, 8);
   }
 
-  public checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
+  public checkIfUnencryptedPasswordIsValid(unencryptedPassword: string): boolean {
       if (unencryptedPassword) {
           return bcrypt.compareSync(unencryptedPassword, this.password);
-      } else {
-          return false;
       }
+      return false;
   }
 }
