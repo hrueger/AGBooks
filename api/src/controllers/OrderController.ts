@@ -21,6 +21,15 @@ class OrderController {
         res.send({ success: true });
     }
 
+    public static submit = async (req: Request, res: Response): Promise<void> => {
+        const userRepository = getRepository(User);
+        const me = await userRepository.findOne(res.locals.jwtPayload.userId);
+        me.orderSubmitted = true;
+        me.orderTimestamp = new Date();
+        await userRepository.save(me);
+        res.send({ success: true });
+    }
+
     public static forCheck = async (req: Request, res: Response): Promise<void> => {
         const userRepository = getRepository(User);
         const bookRepository = getRepository(Book);

@@ -39,7 +39,7 @@ export class Step4Component implements OnInit {
     public next(): void {
         this.remoteService.post("order/submit").subscribe(
             (data) => {
-                if (data == true) {
+                if (data.success == true) {
                     this.router.navigate(["step", "5"]);
                 } else {
                     this.alertService.error(data.toString());

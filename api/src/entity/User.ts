@@ -41,5 +41,11 @@ export class User {
         [id: number] : number;
     }
 
+    @Column({ default: false })
+    public orderSubmitted: boolean;
+
+    @Column({ nullable: true })
+    public orderTimestamp: Date;
+
     public token?: string;
 }
