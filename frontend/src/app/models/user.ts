@@ -21,24 +21,29 @@
 /* do not edit */
 /* do not edit */     
 /* do not edit */     public grade: string;
-/* do not edit */     
+/* do not edit */
 /* do not edit */     
 /* do not edit */     public course: string;
 /* do not edit */
 /* do not edit */     
 /* do not edit */     public language: "latein" | "französisch" | "gemischt";
-/* do not edit */     
+/* do not edit */
 /* do not edit */     
 /* do not edit */     public uebergang: boolean;
-/* do not edit */     
+/* do not edit */
 /* do not edit */     
 /* do not edit */     public branch: "sprachlich" | "naturwissenschaftlich" | "gemischt";
-/* do not edit */     
+/* do not edit */
 /* do not edit */     
 /* do not edit */     public room: number;
-/* do not edit */     
+/* do not edit */
 /* do not edit */     
 /* do not edit */     public classSize: number;
+/* do not edit */
+/* do not edit */     
+/* do not edit */     public order: {
+/* do not edit */         [id: number] : number;
+/* do not edit */     }
 /* do not edit */
 /* do not edit */     public token?: string;
 /* do not edit */ }
