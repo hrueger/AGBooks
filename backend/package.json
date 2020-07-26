@@ -31,7 +31,6 @@
         "nativescript-theme-core": "~2.0.24",
         "nativescript-ui-sidedrawer": "^8.0.1",
         "node-sass": "^4.14.1",
-        "popper": "^1.0.1",
         "reflect-metadata": "~0.1.13",
         "rxjs": "~6.6.0",
         "tns-core-modules": "6.5.12",
