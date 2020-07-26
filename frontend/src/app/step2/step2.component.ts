@@ -75,7 +75,7 @@ export class Step2Component implements OnInit {
                     grade: [data.grade, Validators.required],
                     language: [data.language, Validators.required],
                     branch: [data.branch, Validators.required],
-                    uebergang: [data.uebergang, Validators.required],
+                    uebergang: [data.uebergang ? "j" : "n", Validators.required],
                     classSize: [data.classSize,
                         [Validators.required, this.noWhitespaceValidator],
                     ],
