@@ -20,6 +20,7 @@ import { Step7Component } from "./step7/step7.component";
 import { HandoverComponent } from "./handover/handover.component";
 import { TakeoverComponent } from "./takeover/takeover.component";
 import { StartsWithPipe } from "./helpers/startswith.pipe";
+import { ErrorInterceptor } from "./helpers/error.interceptor";
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { StartsWithPipe } from "./helpers/startswith.pipe";
         NavbarService,
         { provide: LOCALE_ID, useValue: "de" },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
 
     bootstrap: [AppComponent],
