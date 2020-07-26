@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { NavbarService } from "../services/navbar.service";
 import { AuthenticationService } from "../services/authentication.service";
-import { AlertService } from "../services/alert.service";
 
 @Component({
     selector: "app-step1",
@@ -15,7 +14,6 @@ export class Step1Component implements OnInit {
         private navbarService: NavbarService,
         private authenticationService: AuthenticationService,
         private router: Router,
-        private alertService: AlertService,
     ) { }
 
     public ngOnInit(): void {
@@ -26,9 +24,6 @@ export class Step1Component implements OnInit {
                 () => {
                     // console.log("hi");
                     this.registrationDone = true;
-                },
-                (error) => {
-                    this.alertService.error(error);
                 },
             );
         } else {

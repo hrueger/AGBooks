@@ -2,9 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { NavbarService } from "../services/navbar.service";
 import { RemoteService } from "../services/remote.service";
-import { AlertService } from "../services/alert.service";
 import { AuthenticationService } from "../services/authentication.service";
-import { getApiUrl } from '../helpers/utils';
+import { getApiUrl } from "../helpers/utils";
 
 @Component({
     selector: "app-step5",
@@ -19,7 +18,6 @@ export class Step5Component implements OnInit {
         private navbarService: NavbarService,
         private remoteService: RemoteService,
         private router: Router,
-        private alertService: AlertService,
         private authService: AuthenticationService,
     ) { }
 

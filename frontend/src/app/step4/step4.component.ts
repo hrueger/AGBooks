@@ -31,9 +31,6 @@ export class Step4Component implements OnInit {
                 this.books = books;
                 this.bookCount = books.length;
             },
-            (error) => {
-                this.alertService.error(error);
-            },
         );
     }
     public previous(): void {
@@ -47,9 +44,6 @@ export class Step4Component implements OnInit {
                 } else {
                     this.alertService.error(data.toString());
                 }
-            },
-            (error) => {
-                this.alertService.error(error);
             },
         );
     }

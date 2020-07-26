@@ -61,8 +61,6 @@ export class RemoteService {
 
             this.log(`${operation} failed: ${error.message}`);
 
-            this.alertService.error(error.error.text, true);
-
             return of(result as T);
         };
     }

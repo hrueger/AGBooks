@@ -3,7 +3,6 @@ import {
     FormBuilder, FormControl, FormGroup, Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AlertService } from "../services/alert.service";
 import { NavbarService } from "../services/navbar.service";
 import { RemoteService } from "../services/remote.service";
 import { User } from "../models/user";
@@ -33,7 +32,6 @@ export class Step2Component implements OnInit {
         private navbarService: NavbarService,
         private remoteService: RemoteService,
         private router: Router,
-        private alertService: AlertService,
         private formBuilder: FormBuilder,
 
     ) { }
@@ -88,9 +86,6 @@ export class Step2Component implements OnInit {
                 });
                 this.gradeChanged(this.f.grade.value);
                 this.uebergangChanged(this.f.uebergang.value);
-            },
-            (error) => {
-                this.alertService.error(error);
             },
         );
     }
@@ -180,9 +175,6 @@ export class Step2Component implements OnInit {
             .subscribe(
                 () => {
                     this.router.navigate(["step", "3"]);
-                },
-                (error) => {
-                    this.alertService.error(error);
                 },
             );
     }

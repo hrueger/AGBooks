@@ -5,7 +5,6 @@ import {
     FormBuilder, FormGroup, FormArray,
 } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { AlertService } from "../services/alert.service";
 import { RemoteService } from "../services/remote.service";
 import { Book } from "../models/book";
 import { NavbarService } from "../services/navbar.service";
@@ -28,7 +27,6 @@ export class Step3Component implements OnInit {
         public modalService: NgbModal,
         private remoteService: RemoteService,
         private router: Router,
-        private alertService: AlertService,
         private formBuilder: FormBuilder,
         private navbarService: NavbarService,
     ) {
@@ -39,16 +37,6 @@ export class Step3Component implements OnInit {
 
     public ngOnInit(): void {
         this.navbarService.setStep(3);
-
-        /* this.remoteService.getClassSize().subscribe(
-          classSize => {
-            this.classSize = classSize;
-
-          },
-          error => {
-            this.alertService.error(error, true);
-          }
-        ); */
         this.remoteService
             .get("books")
             .pipe(first())
@@ -69,9 +57,6 @@ export class Step3Component implements OnInit {
                         );
                     });
                 },
-                (error) => {
-                    this.alertService.error(error.error.text, true);
-                },
             );
     }
     public trackByFn(index: number): number {
@@ -90,9 +75,6 @@ export class Step3Component implements OnInit {
                     if (data == true) {
                         this.router.navigate(["step", "4"]);
                     }
-                },
-                (error) => {
-                    this.alertService.error(error, true);
                 },
             );
     }

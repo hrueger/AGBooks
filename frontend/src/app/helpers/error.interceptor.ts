@@ -9,10 +9,15 @@ import { Router } from "@angular/router";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { AuthenticationService } from "../services/authentication.service";
+import { AlertService } from "../services/alert.service";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService, private router: Router) { }
+    constructor(
+        private authenticationService: AuthenticationService,
+        private router: Router,
+        private alertService: AlertService,
+    ) { }
 
     public intercept(
         request: HttpRequest<any>,
@@ -29,7 +34,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
                 const error = err.error && err.error.error
                     ? err.error.error : err.error && err.error.message
-                        ? err.error.message : err.statusText ? err.statusText : err || "Unknown error!";
+                        ? err.error.message : err.statusText ? err.statusText : err || "Unbekannter Fehler!";
+                this.alertService.error(error);
                 return throwError(error);
             }),
         );
