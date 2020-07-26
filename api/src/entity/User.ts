@@ -36,5 +36,10 @@ export class User {
     @Column({ default: 0 })
     public classSize: number;
 
+    @Column({ default: "", type: "simple-json" })
+    public order: {
+        [id: number] : number;
+    }
+
     public token?: string;
 }

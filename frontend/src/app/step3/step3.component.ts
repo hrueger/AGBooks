@@ -68,11 +68,11 @@ export class Step3Component implements OnInit {
             return;
         }
         this.remoteService
-            .post("books/order", { books: this.booksForm.controls.books.value })
+            .post("order", { books: (this.booksForm.controls.books.value as {id: number, bookNumber: number}[]).map((b) => ({ id: b.id, number: b.bookNumber })) })
             .pipe(first())
             .subscribe(
                 (data) => {
-                    if (data == true) {
+                    if (data.success == true) {
                         this.router.navigate(["step", "4"]);
                     }
                 },
