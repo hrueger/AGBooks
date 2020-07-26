@@ -5,9 +5,13 @@
     "author": "H. Rüger",
     "license": "MIT",
     "devDependencies": {
+        "@schoolsquirrel/eslint-config-squirrel": "^0.1.2",
         "@types/i18n": "^0.8.6",
         "@types/node": "^14.0.26",
         "@types/request": "^2.48.5",
+        "eslint": "^7.5.0",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-prettier": "^3.1.4",
         "npx": "^10.2.2",
         "ts-node": "8.10.2",
         "tslint": "^6.1.2",
