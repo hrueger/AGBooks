@@ -1,5 +1,5 @@
 {
-    "name": "AGBooksBackend",
+    "name": "agbooks-backend",
     "version": "0.0.0",
     "scripts": {
         "android": "tns run android",
