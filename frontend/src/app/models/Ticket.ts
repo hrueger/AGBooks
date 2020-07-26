@@ -9,37 +9,25 @@
 /* do not edit */ 
 /* do not edit */
 /* do not edit */ 
-/* do not edit */ export class User {
+/* do not edit */   export class Ticket {
 /* do not edit */     
 /* do not edit */     public id: number;
 /* do not edit */
 /* do not edit */     
-/* do not edit */     public teacher: string;
+/* do not edit */     public guid: string;
 /* do not edit */
 /* do not edit */     
-/* do not edit */     public teacherShort: string;
+/* do not edit */     public name: string;
 /* do not edit */
 /* do not edit */     
-/* do not edit */     public grade: string;
 /* do not edit */     
-/* do not edit */     
-/* do not edit */     public course: string;
+/* do not edit */     public createdAt: string;
 /* do not edit */
 /* do not edit */     
-/* do not edit */     public language: "latein" | "französisch" | "gemischt";
 /* do not edit */     
-/* do not edit */     
-/* do not edit */     public uebergang: boolean;
-/* do not edit */     
-/* do not edit */     
-/* do not edit */     public branch: "sprachlich" | "naturwissenschaftlich" | "gemischt";
-/* do not edit */     
-/* do not edit */     
-/* do not edit */     public room: number;
-/* do not edit */     
-/* do not edit */     
-/* do not edit */     public classSize: number;
+/* do not edit */     public updatedAt: Date;
 /* do not edit */
-/* do not edit */     public token?: string;
-/* do not edit */ }
+/* do not edit */     
+/* do not edit */     public activated: boolean;
+/* do not edit */   }
 /* do not edit */

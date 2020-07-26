@@ -50,7 +50,7 @@ export class Step3Component implements OnInit {
           }
         ); */
         this.remoteService
-            .getBooks()
+            .get("books")
             .pipe(first())
             .subscribe(
                 (books) => {
@@ -83,7 +83,7 @@ export class Step3Component implements OnInit {
             return;
         }
         this.remoteService
-            .orderBooks(this.booksForm.controls.books.value)
+            .post("books/order", { books: this.booksForm.controls.books.value })
             .pipe(first())
             .subscribe(
                 (data) => {

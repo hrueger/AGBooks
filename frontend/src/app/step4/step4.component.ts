@@ -26,7 +26,7 @@ export class Step4Component implements OnInit {
     public ngOnInit(): void {
         this.navbarService.setStep(4);
 
-        this.remoteService.getBooksForCheck().pipe(first()).subscribe(
+        this.remoteService.get("books/forCheck").pipe(first()).subscribe(
             (books) => {
                 this.books = books;
                 this.bookCount = books.length;
@@ -40,7 +40,7 @@ export class Step4Component implements OnInit {
         this.router.navigate(["step", "3"]);
     }
     public next(): void {
-        this.remoteService.submitOrder().subscribe(
+        this.remoteService.post("order/submit").subscribe(
             (data) => {
                 if (data == true) {
                     this.router.navigate(["step", "5"]);

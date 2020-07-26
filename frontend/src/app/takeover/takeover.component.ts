@@ -26,14 +26,14 @@ export class TakeoverComponent {
         if (this.showResult && !this.checking && !this.handoverSuccess) {
             this.checking = true;
 
-            this.remoteService.checkHandoverCode(this.code).subscribe((success) => {
+            this.remoteService.post("handover/checkCode", { code: this.code }).subscribe((success) => {
                 if (success && success !== "") {
                     this.handoverSuccess = true;
 
                     this.authenticationService.setNewToken(success);
 
                     this.remoteService
-                        .getReturnTo()
+                        .post("handover/returnTo")
                         .subscribe((data) => {
                             this.returnTo = data;
                             this.navbarService.setStep(parseInt(this.returnTo.split("/")[2]));

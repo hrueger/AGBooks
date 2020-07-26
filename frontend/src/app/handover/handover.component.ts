@@ -20,7 +20,7 @@ export class HandoverComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        this.remoteService.getHandoverCode().subscribe((code) => {
+        this.remoteService.get("handover/code").subscribe((code) => {
             this.code = code;
 
             const { token } = this.authenticationService.currentUserValue;
