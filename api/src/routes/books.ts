@@ -5,5 +5,6 @@ import { checkJwt } from "../middlewares/checkJwt";
 const router = Router();
 
 router.get("/", [checkJwt], BookController.listAll);
+router.get("/:id", BookController.cover);
 
 export default router;
