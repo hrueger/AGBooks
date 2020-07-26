@@ -2,38 +2,37 @@ import { validate } from "class-validator";
 import { Request, Response } from "express";
 import * as i18n from "i18n";
 import { getRepository } from "typeorm";
-import { User } from "../entity/User";
-class UserController {
+import { Admin } from "../entity/Admin";
+
+class AdminController {
   public static listAll = async (req: Request, res: Response) => {
-    const userRepository = getRepository(User);
+    const userRepository = getRepository(Admin);
     const users = await userRepository.find();
     res.send(users);
   }
 
   public static newUser = async (req: Request, res: Response) => {
-    const { username, pw, pw2, email, isAdmin } = req.body;
+    const { username, pw, pw2, email } = req.body;
     if (!(username && email && pw && pw2)) {
-      res.status(400).send({message: i18n.__("errors.notAllFieldsProvided")});
+      res.status(400).send({message: "errors.notAllFieldsProvided"});
       return;
     }
     if (pw != pw2) {
-      res.status(400).send({message: i18n.__("errors.passwordsDontMatch")});
+      res.status(400).send({message: "errors.passwordsDontMatch"});
       return;
     }
 
-    const user = new User();
-    user.username = username;
+    const user = new Admin();
     user.email = email;
     user.password = pw;
-    user.isAdmin = isAdmin ? true : false;
 
     user.hashPassword();
 
-    const userRepository = getRepository(User);
+    const userRepository = getRepository(Admin);
     try {
       await userRepository.save(user);
     } catch (e) {
-      res.status(409).send({message: i18n.__("errors.existingUsername")});
+      res.status(409).send({message: "errors.existingUsername"});
       return;
     }
     res.status(200).send({status: true});
@@ -44,7 +43,7 @@ class UserController {
 
     const { username, email, pwNew, pwNew2, pwOld } = req.body;
 
-    const userRepository = getRepository(User);
+    const userRepository = getRepository(Admin);
     let user;
     try {
       user = await userRepository.createQueryBuilder("user")
@@ -52,21 +51,21 @@ class UserController {
         .where("user.id = :id", { id })
         .getOne();
     } catch (error) {
-      res.status(404).send({message: i18n.__("errors.userNotFound")});
+      res.status(404).send({message: "errors.userNotFound"});
       return;
     }
 
     if (!(username && email && pwOld)) {
-      res.status(400).send({message: i18n.__("errors.notAllFieldsProvided")});
+      res.status(400).send({message: "errors.notAllFieldsProvided"});
     }
 
     if (pwNew != pwNew2) {
-      res.status(400).send({message: i18n.__("errors.passwordsDontMatch")});
+      res.status(400).send({message: "errors.passwordsDontMatch"});
       return;
     }
 
     if (!user.checkIfUnencryptedPasswordIsValid(pwOld)) {
-      res.status(401).send({message: i18n.__("errors.oldPasswordWrong")});
+      res.status(401).send({message: "errors.oldPasswordWrong"});
       return;
     }
 
@@ -87,7 +86,7 @@ class UserController {
     try {
       await userRepository.save(user);
     } catch (e) {
-      res.status(409).send({message: i18n.__("errors.existingUsername")});
+      res.status(409).send({message: "errors.existingUsername"});
       return;
     }
 
@@ -98,11 +97,11 @@ class UserController {
 
     const id = req.params.id;
 
-    const userRepository = getRepository(User);
+    const userRepository = getRepository(Admin);
     try {
       await userRepository.delete(id);
     } catch (e) {
-      res.status(500).send({message: i18n.__("errors.errorWhileDeletingUser")});
+      res.status(500).send({message: "errors.errorWhileDeletingUser"});
       return;
     }
 
@@ -110,4 +109,4 @@ class UserController {
   }
 }
 
-export default UserController;
+export default AdminController;

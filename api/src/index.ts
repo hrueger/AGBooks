@@ -2,24 +2,17 @@ import * as bodyParser from "body-parser";
 import * as cors from "cors";
 import * as express from "express";
 import * as helmet from "helmet";
-import * as i18n from "i18n";
 import * as path from "path";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { config } from "./config/config";
 import { Ticket } from "./entity/Ticket";
+import { Admin } from "./entity/Admin";
 import { User } from "./entity/User";
 import { createAdminUser1574018391679 } from "./migration/1574018391679-createAdminUser";
 import routes from "./routes";
 import { toInt } from "./utils/utils";
 
-// Setup i18n
-i18n.configure({
-  // tslint:disable-next-line: no-bitwise
-  defaultLocale: config.defaultLanguage ? config.defaultLanguage : "en",
-  directory: path.join(__dirname, "../assets/i18n"),
-  objectNotation: true,
-});
 
 // Connects to the Database -> then starts the express
 createConnection({
@@ -34,6 +27,7 @@ createConnection({
   entities: [
     User,
     Ticket,
+    Admin,
   ],
   host: config.database_host,
   logging: false,
