@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { User } from "../models/user";
-import { getApiUrl } from '../helpers/utils';
+import { getApiUrl } from "../helpers/utils";
 
 const httpOptions = {
     headers: new HttpHeaders({
