@@ -1,2 +1,8 @@
-images/*
-!images/cover/
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/
+src/config/*
+!.gitkeep
