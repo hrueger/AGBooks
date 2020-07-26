@@ -26,7 +26,7 @@ export class Step4Component implements OnInit {
     public ngOnInit(): void {
         this.navbarService.setStep(4);
 
-        this.remoteService.get("books/forCheck").pipe(first()).subscribe(
+        this.remoteService.get("order").pipe(first()).subscribe(
             (books) => {
                 this.books = books;
                 this.bookCount = books.length;

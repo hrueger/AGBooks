@@ -5,7 +5,7 @@
             <td>Fach</td>
             <td>Buch</td>
             <td>Anzahl</td>
-            <td>Hinweis</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +15,7 @@
             <td>{{book.number}}</td>
             <td>
                 <div class="alert alert-danger" *ngIf="book.alert">{{book.alert}}</div>
+                <span class="text-success font-weight-bold" *ngIf="!book.alert">✓</span>
             </td>
         </tr>
     </tbody>
