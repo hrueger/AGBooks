@@ -57,18 +57,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "agbooks:build"
+                        "browserTarget": "agbooks-frontend:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "agbooks:build:production"
+                            "browserTarget": "agbooks-frontend:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "agbooks:build"
+                        "browserTarget": "agbooks-frontend:build"
                     }
                 }
             }
