@@ -1,10 +1,13 @@
-<div
-  *ngIf="message"
-  [ngClass]="{
+<div *ngIf="message" [ngClass]="{
     alert: message,
     'alert-success': message.type === 'success',
     'alert-danger': message.type === 'error'
-  }"
->
-  {{ message.text }}
+  }">
+    <ng-container *ngIf="message.type == 'error'">
+        <b>Ein Fehler ist aufgetreten:</b><br><br>
+    </ng-container>
+    {{ message.text }}
+    <ng-container *ngIf="message.type == 'error'">
+        <br><br> Bitte melden Sie sich mit der genauen Fehlermeldung bei der Lehrmittelbücherei.
+    </ng-container>
 </div>
