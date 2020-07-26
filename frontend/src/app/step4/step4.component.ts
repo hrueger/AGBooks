@@ -13,7 +13,7 @@ import { Book } from "../models/book";
 })
 export class Step4Component implements OnInit {
     books: Book[] = [];
-    bookCount: number;
+    hasAlerts = false;
 
     constructor(
         private navbarService: NavbarService,
@@ -29,7 +29,7 @@ export class Step4Component implements OnInit {
         this.remoteService.get("order").pipe(first()).subscribe(
             (books) => {
                 this.books = books;
-                this.bookCount = books.length;
+                this.hasAlerts = this.books.filter((b) => !!b.alert).length > 0;
             },
         );
     }

@@ -21,7 +21,10 @@
     </tbody>
 </table>
 <div class="alert alert-primary">
-    Es sollen <b>{{bookCount}}</b> verschiedene Bücher bestellt werden.
+    Es sollen <b>{{books.length}}</b> verschiedene Bücher bestellt werden.
+</div>
+<div class="alert alert-warning" *ngIf="hasAlerts">
+    <b>Achtung!</b><br> Bitte beachten Sie obenstehende Hinweise. Wenn Sie die Bestellung nochmals ändern wollen, klicken Sie auf <i>Zurück</i>, ansonsten klicken Sie auf <i>Weiter</i>.
 </div>
 <div class="row">
     <div class="col-12">
