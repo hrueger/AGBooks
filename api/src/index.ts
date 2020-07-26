@@ -6,12 +6,13 @@ import * as path from "path";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { config } from "./config/config";
-import { Ticket } from "./entity/Ticket";
+import { Book } from "./entity/Book";
 import { Admin } from "./entity/Admin";
 import { User } from "./entity/User";
 import { createAdminUser1574018391679 } from "./migration/1574018391679-createAdminUser";
 import routes from "./routes";
 import { toInt } from "./utils/utils";
+import { createBooks1536535135468 } from "./migration/1536535135468-createBooks";
 
 // Connects to the Database -> then starts the express
 createConnection({
@@ -25,13 +26,13 @@ createConnection({
     // List all your entities here
     entities: [
         User,
-        Ticket,
+        Book,
         Admin,
     ],
     host: config.database_host,
     logging: false,
     // List all your migrations here
-    migrations: [createAdminUser1574018391679],
+    migrations: [createAdminUser1574018391679, createBooks1536535135468],
     migrationsRun: true,
     password: config.database_password,
     port: toInt(config.database_port),
