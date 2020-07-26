@@ -68,7 +68,7 @@ class BookController {
         const books = await bookRepository.query(sql);
 
         for (const book of books) {
-            book.number = me.order ? me.order[book.id] : me.classSize;
+            book.number = me.order && me.order[book.id] ? me.order[book.id] : me.classSize;
         }
 
         res.send(books);
