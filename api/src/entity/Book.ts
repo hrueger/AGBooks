@@ -56,4 +56,8 @@ export class Book {
 
     @Column()
     public Q13: string;
+
+    public alert?: string;
+
+    public number?: number;
 }
