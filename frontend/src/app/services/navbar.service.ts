@@ -1,40 +1,36 @@
-import { Injectable, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Injectable, Output, EventEmitter } from "@angular/core";
 @Injectable()
 export class NavbarService {
-  resetHighestStepHandover() {
-    this._highestStep = 1;
-    sessionStorage.setItem("highestStep", "1");
-  }
-
-  constructor() {
-    var step = sessionStorage.getItem("highestStep");
-    if (step) {
-      this.setStep(step);
-
+    public resetHighestStepHandover(): void {
+        this._highestStep = 1;
+        sessionStorage.setItem("highestStep", "1");
     }
-  }
-  stepNummber: number = 0;
 
-  _highestStep: number = 0;
-
-  @Output() change: EventEmitter<number> = new EventEmitter();
-
-  setStep(step) {
-    this.stepNummber = step;
-    if (step > this._highestStep) {
-      this._highestStep = step;
-      sessionStorage.setItem("highestStep", step);
+    constructor() {
+        const step = sessionStorage.getItem("highestStep");
+        if (step) {
+            this.setStep(parseInt(step, 10));
+        }
     }
-    this.change.emit(this.stepNummber);
-  }
+    stepNummber = 0;
 
-  get currentStep() {
-    return this.stepNummber;
-  }
-  get highestStep() {
-    return this._highestStep;
-  }
+    _highestStep = 0;
 
+    @Output() change: EventEmitter<number> = new EventEmitter();
+
+    public setStep(step: number): void {
+        this.stepNummber = step;
+        if (step > this._highestStep) {
+            this._highestStep = step;
+            sessionStorage.setItem("highestStep", step.toString());
+        }
+        this.change.emit(this.stepNummber);
+    }
+
+    public get currentStep(): number {
+        return this.stepNummber;
+    }
+    public get highestStep(): number {
+        return this._highestStep;
+    }
 }

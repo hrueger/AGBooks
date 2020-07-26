@@ -1,4 +1,3 @@
 export class Grade {
-    
-    name: String;
+    name: string;
 }

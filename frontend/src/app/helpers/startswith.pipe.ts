@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "startsWith"
+    name: "startsWith",
 })
 export class StartsWithPipe implements PipeTransform {
-  transform(fullText: string, textMatch: string): boolean {
-    return fullText.startsWith(textMatch);
-  }
+    transform(fullText: string, textMatch: string): boolean {
+        return fullText.startsWith(textMatch);
+    }
 }

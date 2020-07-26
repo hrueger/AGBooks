@@ -1,21 +1,20 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { NavbarService } from "../services/navbar.service";
-import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-step6",
-  templateUrl: "./step6.component.html",
-  styleUrls: ["./step6.component.scss"]
+    selector: "app-step6",
+    templateUrl: "./step6.component.html",
+    styleUrls: ["./step6.component.scss"],
 })
 export class Step6Component implements OnInit {
-  constructor(private NavbarService: NavbarService, private router: Router,
-  ) { }
+    constructor(private navbarService: NavbarService, private router: Router) { }
 
-  ngOnInit() {
-    this.NavbarService.setStep(6);
-  }
+    public ngOnInit(): void {
+        this.navbarService.setStep(6);
+    }
 
-  next(url) {
-    this.router.navigateByUrl(url);
-  }
+    public next(url: string): void {
+        this.router.navigateByUrl(url);
+    }
 }

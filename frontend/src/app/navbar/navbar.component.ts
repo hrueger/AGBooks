@@ -1,28 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import {NavbarService} from "../services/navbar.service"
+import { Component, OnInit } from "@angular/core";
+import { NavbarService } from "../services/navbar.service";
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: "app-navbar",
+    templateUrl: "./navbar.component.html",
+    styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit {
-  stepNumber: number = 0;
-  pbwidth: String = "90%";
-  totalSteps: number = 7;
-  constructor(private NavbarService: NavbarService) { }
+    stepNumber = 0;
+    pbwidth = "90%";
+    totalSteps = 7;
+    constructor(private navbarService: NavbarService) { }
 
-  ngOnInit() {
-    this.NavbarService.change.subscribe(step => {
-      this.stepNumber = step;
+    public ngOnInit(): void {
+        this.navbarService.change.subscribe((step) => {
+            this.stepNumber = step;
+            const percent: number = (100 / this.totalSteps) * step;
+            this.pbwidth = `${percent}%`;
+        });
+    }
+    /* public setStep(step:number): void {
+      this.stepnumber = step;
       var percent:number = 100 / this.totalSteps *  step;
       this.pbwidth = `${percent}%`;
-    });
-  }
-  /*public setStep(step:number): void {
-    this.stepnumber = step;
-    var percent:number = 100 / this.totalSteps *  step;
-    this.pbwidth = `${percent}%`;
-    //console.warn(this.stepnumber);
-  }*/
+      //console.warn(this.stepnumber);
+    } */
 }

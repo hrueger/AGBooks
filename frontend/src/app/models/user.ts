@@ -1,4 +1,3 @@
 export class User {
-    token: String;
-    
+    token: string;
 }
