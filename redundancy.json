@@ -1,0 +1,18 @@
+{
+    "version": 1,
+    "files": [{
+            "src": "api/src/entity/*.ts",
+            "dest": "frontend/src/app/models/",
+            "removeDecorators": true,
+            "removeMethods": ["hashPassword", "checkIfUnencryptedPasswordIsValid"],
+            "removeImports": ["bcryptjs", "typeorm"]
+        },
+        {
+            "src": "api/src/entity/*.ts",
+            "dest": "backend/src/app/_models/",
+            "removeDecorators": true,
+            "removeMethods": ["hashPassword", "checkIfUnencryptedPasswordIsValid"],
+            "removeImports": ["bcryptjs", "typeorm"]
+        }
+    ]
+}
