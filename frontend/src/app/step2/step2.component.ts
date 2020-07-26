@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { AlertService } from "../services/alert.service";
 import { NavbarService } from "../services/navbar.service";
 import { RemoteService } from "../services/remote.service";
+import { User } from "../models/user";
 
 @Component({
     selector: "app-step2",
@@ -62,8 +63,8 @@ export class Step2Component implements OnInit {
             uebergang: ["", Validators.required],
         });
 
-        this.remoteService.getPrefilledValuesRegisterUser().subscribe(
-            (data) => {
+        this.remoteService.get("auth/userdata").subscribe(
+            (data: User) => {
                 this.infoForm = this.formBuilder.group({
                     teacher: [data.teacher, [Validators.required, this.noWhitespaceValidator]],
                     teacherShort: [data.teacherShort,
@@ -172,7 +173,7 @@ export class Step2Component implements OnInit {
                 this.f.course.value,
                 this.f.language.value,
                 this.f.branch.value,
-                this.f.uebergang.value,
+                this.f.uebergang.value == "j",
                 this.f.room.value,
                 this.f.classSize.value,
             )
