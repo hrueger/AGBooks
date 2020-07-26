@@ -2,9 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-
-import config from "../config/config";
 import { User } from "../models/user";
+import { getApiUrl } from '../helpers/utils';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -38,7 +37,7 @@ export class AuthenticationService {
 
         return this.http
             .post<any>(
-                `${config.apiUrl}?authenticate`,
+                `${getApiUrl()}auth/register`,
                 {
                     action,
                 },

@@ -5,11 +5,11 @@ import {
     FormBuilder, FormGroup, FormArray,
 } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import config from "../config/config";
 import { AlertService } from "../services/alert.service";
 import { RemoteService } from "../services/remote.service";
 import { Book } from "../models/book";
 import { NavbarService } from "../services/navbar.service";
+import { getApiUrl } from "../helpers/utils";
 
 @Component({
     selector: "app-step3",
@@ -23,7 +23,7 @@ export class Step3Component implements OnInit {
     fieldProps: any;
     formControls = {};
     classSize: number = null;
-    apiUrl = config.apiUrl;
+    apiUrl = getApiUrl();
     constructor(
         public modalService: NgbModal,
         private remoteService: RemoteService,

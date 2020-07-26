@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { RemoteService } from "../services/remote.service";
 import { AuthenticationService } from "../services/authentication.service";
-import config from "../config/config";
 import { NavbarService } from "../services/navbar.service";
+import { getApiUrl } from "../helpers/utils";
 
 @Component({
     selector: "app-handover",
@@ -25,7 +25,7 @@ export class HandoverComponent implements OnInit {
 
             const { token } = this.authenticationService.currentUserValue;
             this.sse = new EventSource(
-                `${config.apiUrl}?queueHandover&token=${token}`,
+                `${getApiUrl()}?queueHandover&token=${token}`,
             );
             this.sse.addEventListener("update", (message: any) => {
                 const data = JSON.parse(message.data);

@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import config from "../config/config";
 import { AlertService } from "./alert.service";
 import { Book } from "../models/book";
+import { getApiUrl } from "../helpers/utils";
 
 @Injectable({ providedIn: "root" })
 export class RemoteService {
@@ -24,7 +24,7 @@ export class RemoteService {
         const action = "registerUser";
 
         return this.http
-            .post<string>(`${config.apiUrl}`, {
+            .post<string>(`${getApiUrl()}`, {
                 action,
                 teacher,
                 teacherShort,
@@ -44,7 +44,7 @@ export class RemoteService {
 
     getBooks(): Observable<Book[]> {
         const action = "books";
-        return this.http.post<Book[]>(`${config.apiUrl}`, { action }).pipe(
+        return this.http.post<Book[]>(`${getApiUrl()}`, { action }).pipe(
             tap(() => this.log("fetched books")),
             catchError(this.handleError<Book[]>("getBooks", [])),
         );
@@ -52,7 +52,7 @@ export class RemoteService {
 
     getClassSize(): Observable<number> {
         const action = "classSize";
-        return this.http.post<number>(`${config.apiUrl}`, { action }).pipe(
+        return this.http.post<number>(`${getApiUrl()}`, { action }).pipe(
             tap(() => this.log("fetched class size")),
             catchError(this.handleError<number>("getClassSize", null)),
         );
@@ -60,7 +60,7 @@ export class RemoteService {
 
     orderBooks(books: Book[]): Observable<boolean> {
         const action = "order";
-        return this.http.post<boolean>(`${config.apiUrl}`, { action, books }).pipe(
+        return this.http.post<boolean>(`${getApiUrl()}`, { action, books }).pipe(
             tap(() => this.log("ordered books")),
             catchError(this.handleError<boolean>("orderBooks", false)),
         );
@@ -68,14 +68,14 @@ export class RemoteService {
 
     submitOrder(): Observable<boolean> {
         const action = "submit";
-        return this.http.post<boolean>(`${config.apiUrl}`, { action }).pipe(
+        return this.http.post<boolean>(`${getApiUrl()}`, { action }).pipe(
             tap(() => this.log("submitted order")),
             catchError(this.handleError<boolean>("submitOrder", false)),
         );
     }
     acceptOrder(): Observable<boolean> {
         const action = "accept";
-        return this.http.post<boolean>(`${config.apiUrl}`, { action }).pipe(
+        return this.http.post<boolean>(`${getApiUrl()}`, { action }).pipe(
             tap(() => this.log("accepted order")),
             catchError(this.handleError<boolean>("acceptOrder", false)),
         );
@@ -83,7 +83,7 @@ export class RemoteService {
 
     getBooksForCheck(): Observable<Book[]> {
         const action = "check";
-        return this.http.post<Book[]>(`${config.apiUrl}`, { action }).pipe(
+        return this.http.post<Book[]>(`${getApiUrl()}`, { action }).pipe(
             tap(() => this.log("fetched books for check")),
             catchError(this.handleError<Book[]>("getBooksForCheck", [])),
         );
@@ -91,14 +91,14 @@ export class RemoteService {
 
     getPrefilledValuesRegisterUser(): Observable<any> {
         const action = "prefilledValuesRegisterUser";
-        return this.http.post<any>(`${config.apiUrl}`, { action }).pipe(
+        return this.http.post<any>(`${getApiUrl()}`, { action }).pipe(
             tap(() => this.log("fetched prefilled values for register user")),
             catchError(this.handleError<any>("getPrefilledValuesRegisterUser", [])),
         );
     }
     getHandoverCode(): Observable<string> {
         const action = "handoverCode";
-        return this.http.post<string>(`${config.apiUrl}`, { action }).pipe(
+        return this.http.post<string>(`${getApiUrl()}`, { action }).pipe(
             tap(() => this.log("fetched handover code")),
             catchError(this.handleError<string>("getHandoverCode", "")),
         );
@@ -106,7 +106,7 @@ export class RemoteService {
     checkHandoverCode(handoverCode: number): Observable<string> {
         const action = "checkHandoverCode";
         return this.http
-            .post<string>(`${config.apiUrl}`, { action, handoverCode })
+            .post<string>(`${getApiUrl()}`, { action, handoverCode })
             .pipe(
                 tap(() => this.log("checked handover code")),
                 catchError(this.handleError<string>("checkHandoverCode", "")),
@@ -114,7 +114,7 @@ export class RemoteService {
     }
     getReturnTo(): Observable<string> {
         const action = "returnTo";
-        return this.http.post<string>(`${config.apiUrl}`, { action }).pipe(
+        return this.http.post<string>(`${getApiUrl()}`, { action }).pipe(
             tap(() => this.log("got return to")),
             catchError(this.handleError<string>("getReturnTo", "")),
         );
