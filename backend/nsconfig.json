@@ -1,7 +1,8 @@
 {
-  "appResourcesPath": "App_Resources",
-  "appPath": "src",
-  "nsext": ".tns",
-  "webext": "",
-  "shared": true
+    "appResourcesPath": "App_Resources",
+    "appPath": "src",
+    "nsext": ".tns",
+    "webext": "",
+    "shared": true,
+    "useLegacyWorkflow": false
 }
