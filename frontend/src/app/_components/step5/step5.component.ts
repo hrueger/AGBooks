@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { NavbarService } from "../services/navbar.service";
-import { RemoteService } from "../services/remote.service";
-import { AuthenticationService } from "../services/authentication.service";
-import { getApiUrl } from "../helpers/utils";
+import { NavbarService } from "../../_services/navbar.service";
+import { RemoteService } from "../../_services/remote.service";
+import { AuthenticationService } from "../../_services/authentication.service";
+import { getApiUrl } from "../../_utils/utils";
 
 @Component({
     selector: "app-step5",

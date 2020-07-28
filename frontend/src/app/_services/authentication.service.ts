@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { User } from "../models/user";
-import { getApiUrl } from "../helpers/utils";
+import { User } from "../_models/user";
+import { getApiUrl } from "../_utils/utils";
 
 const httpOptions = {
     headers: new HttpHeaders({

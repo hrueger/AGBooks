@@ -3,7 +3,7 @@ import {
     CanActivate, ActivatedRouteSnapshot, UrlTree, Router,
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { NavbarService } from "../services/navbar.service";
+import { NavbarService } from "../_services/navbar.service";
 
 @Injectable({
     providedIn: "root",

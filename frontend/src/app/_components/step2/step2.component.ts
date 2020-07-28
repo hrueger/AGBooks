@@ -3,9 +3,9 @@ import {
     FormBuilder, FormControl, FormGroup, Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
-import { NavbarService } from "../services/navbar.service";
-import { RemoteService } from "../services/remote.service";
-import { User } from "../models/user";
+import { NavbarService } from "../../_services/navbar.service";
+import { RemoteService } from "../../_services/remote.service";
+import { User } from "../../_models/user";
 
 @Component({
     selector: "app-step2",

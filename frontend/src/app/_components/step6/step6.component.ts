@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { NavbarService } from "../services/navbar.service";
+import { NavbarService } from "../../_services/navbar.service";
 
 @Component({
     selector: "app-step6",

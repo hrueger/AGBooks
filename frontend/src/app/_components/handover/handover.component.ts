@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { RemoteService } from "../services/remote.service";
-import { AuthenticationService } from "../services/authentication.service";
-import { NavbarService } from "../services/navbar.service";
-import { getApiUrl } from "../helpers/utils";
+import { RemoteService } from "../../_services/remote.service";
+import { AuthenticationService } from "../../_services/authentication.service";
+import { NavbarService } from "../../_services/navbar.service";
+import { getApiUrl } from "../../_utils/utils";
 
 @Component({
     selector: "app-handover",

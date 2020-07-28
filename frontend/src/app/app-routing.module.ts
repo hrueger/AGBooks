@@ -1,15 +1,15 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { Step1Component } from "./step1/step1.component";
-import { Step2Component } from "./step2/step2.component";
-import { Step3Component } from "./step3/step3.component";
-import { Step4Component } from "./step4/step4.component";
-import { Step5Component } from "./step5/step5.component";
-import { Step6Component } from "./step6/step6.component";
-import { Step7Component } from "./step7/step7.component";
-import { TakeoverComponent } from "./takeover/takeover.component";
-import { HandoverComponent } from "./handover/handover.component";
-import { StepResolvedCheckGuard } from "./guards/step-resolved-check.guard";
+import { Step1Component } from "./_components/step1/step1.component";
+import { Step2Component } from "./_components/step2/step2.component";
+import { Step3Component } from "./_components/step3/step3.component";
+import { Step4Component } from "./_components/step4/step4.component";
+import { Step5Component } from "./_components/step5/step5.component";
+import { Step6Component } from "./_components/step6/step6.component";
+import { Step7Component } from "./_components/step7/step7.component";
+import { TakeoverComponent } from "./_components/takeover/takeover.component";
+import { HandoverComponent } from "./_components/handover/handover.component";
+import { StepResolvedCheckGuard } from "./_guards/step-resolved-check.guard";
 
 const routes: Routes = [
     { path: "step/1", component: Step1Component, canActivate: [StepResolvedCheckGuard] },

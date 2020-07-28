@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
-import { RemoteService } from "../services/remote.service";
-import { AuthenticationService } from "../services/authentication.service";
-import { NavbarService } from "../services/navbar.service";
+import { RemoteService } from "../../_services/remote.service";
+import { AuthenticationService } from "../../_services/authentication.service";
+import { NavbarService } from "../../_services/navbar.service";
 
 @Component({
     selector: "app-takeover",

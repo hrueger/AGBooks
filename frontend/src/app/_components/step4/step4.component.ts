@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { first } from "rxjs/operators";
-import { NavbarService } from "../services/navbar.service";
-import { AlertService } from "../services/alert.service";
-import { RemoteService } from "../services/remote.service";
-import { Book } from "../models/book";
+import { NavbarService } from "../../_services/navbar.service";
+import { AlertService } from "../../_services/alert.service";
+import { RemoteService } from "../../_services/remote.service";
+import { Book } from "../../_models/book";
 
 @Component({
     selector: "app-step4",

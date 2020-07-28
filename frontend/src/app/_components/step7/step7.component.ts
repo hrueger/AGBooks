@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import Stepper from "bs-stepper";
-import { NavbarService } from "../services/navbar.service";
+import { NavbarService } from "../../_services/navbar.service";
 
 @Component({
     selector: "app-step7",

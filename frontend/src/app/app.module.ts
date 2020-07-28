@@ -6,21 +6,21 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { Step1Component } from "./step1/step1.component";
-import { Step2Component } from "./step2/step2.component";
-import { NavbarComponent } from "./navbar/navbar.component";
-import { NavbarService } from "./services/navbar.service";
-import { Step3Component } from "./step3/step3.component";
-import { AlertComponent } from "./components/alert.component";
-import { JwtInterceptor } from "./helpers/jwt.interceptor";
-import { Step4Component } from "./step4/step4.component";
-import { Step5Component } from "./step5/step5.component";
-import { Step6Component } from "./step6/step6.component";
-import { Step7Component } from "./step7/step7.component";
-import { HandoverComponent } from "./handover/handover.component";
-import { TakeoverComponent } from "./takeover/takeover.component";
-import { StartsWithPipe } from "./helpers/startswith.pipe";
-import { ErrorInterceptor } from "./helpers/error.interceptor";
+import { Step1Component } from "./_components/step1/step1.component";
+import { Step2Component } from "./_components/step2/step2.component";
+import { NavbarComponent } from "./_components/navbar/navbar.component";
+import { NavbarService } from "./_services/navbar.service";
+import { Step3Component } from "./_components/step3/step3.component";
+import { AlertComponent } from "./_components/alert/alert.component";
+import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
+import { Step4Component } from "./_components/step4/step4.component";
+import { Step5Component } from "./_components/step5/step5.component";
+import { Step6Component } from "./_components/step6/step6.component";
+import { Step7Component } from "./_components/step7/step7.component";
+import { HandoverComponent } from "./_components/handover/handover.component";
+import { TakeoverComponent } from "./_components/takeover/takeover.component";
+import { StartsWithPipe } from "./_pipes/startswith.pipe";
+import { ErrorInterceptor } from "./_interceptors/error.interceptor";
 
 @NgModule({
     declarations: [

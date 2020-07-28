@@ -5,10 +5,10 @@ import {
     FormBuilder, FormGroup, FormArray,
 } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { RemoteService } from "../services/remote.service";
-import { Book } from "../models/book";
-import { NavbarService } from "../services/navbar.service";
-import { getApiUrl } from "../helpers/utils";
+import { RemoteService } from "../../_services/remote.service";
+import { Book } from "../../_models/book";
+import { NavbarService } from "../../_services/navbar.service";
+import { getApiUrl } from "../../_utils/utils";
 
 @Component({
     selector: "app-step3",
