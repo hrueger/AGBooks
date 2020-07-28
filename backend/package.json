@@ -32,6 +32,7 @@
         "@ng-bootstrap/ng-bootstrap": "^7.0.0",
         "bootstrap": "^4.5.0",
         "core-js": "^3.6.5",
+        "events": "^3.2.0",
         "nativescript-sse": "^4.0.2",
         "nativescript-theme-core": "~2.0.24",
         "nativescript-ui-sidedrawer": "^8.0.1",
