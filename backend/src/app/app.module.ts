@@ -1,5 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { NgModule, LOCALE_ID } from "@angular/core";
+import {
+    NgModule, LOCALE_ID, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA,
+} from "@angular/core";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
@@ -42,5 +44,6 @@ import { AvalibleBooksComponent } from "./avalible-books/avalible-books.componen
     // fakeBackendProvider
     ],
     bootstrap: [AppComponent],
+    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
