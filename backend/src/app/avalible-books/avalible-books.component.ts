@@ -49,10 +49,10 @@ export class AvalibleBooksComponent implements OnInit {
           uebergang: ["", Validators.required],
           language: ["", Validators.required],
       });
-      this.f.grade.valueChanges.subscribe((value) => {
+      this.f.grade.valueChanges.subscribe((value: string) => {
           this.gradeChanged(value);
       });
-      this.f.uebergang.valueChanges.subscribe((value) => {
+      this.f.uebergang.valueChanges.subscribe((value: string) => {
           this.uebergangChanged(value);
       });
       this.gradeChanged(this.f.grade.value);
