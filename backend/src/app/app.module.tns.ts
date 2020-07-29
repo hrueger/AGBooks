@@ -7,7 +7,6 @@ import {
     NativeScriptModule, NativeScriptHttpClientModule,
 } from "@nativescript/angular";
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
-import { AlertComponent } from "./_components/alert/alert.component";
 import { ErrorInterceptor } from "./_interceptors/error.interceptor";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { AnalysisComponent } from "./_components/analysis/analysis.component";
@@ -21,7 +20,6 @@ import { LoginComponent } from "./_components/login/login.component";
     bootstrap: [AppComponent],
     declarations: [
         AppComponent,
-        AlertComponent,
         LoginComponent,
         DashboardComponent,
         AnalysisComponent,

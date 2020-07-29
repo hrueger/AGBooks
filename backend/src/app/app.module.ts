@@ -5,7 +5,8 @@ import {
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-import { AlertComponent } from "./_components/alert/alert.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
 import { ErrorInterceptor } from "./_interceptors/error.interceptor";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { AnalysisComponent } from "./_components/analysis/analysis.component";
@@ -22,10 +23,11 @@ import { AvalibleBooksComponent } from "./_components/avalible-books/avalible-bo
         HttpClientModule,
         AppRoutingModule,
         FormsModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
     ],
     declarations: [
         AppComponent,
-        AlertComponent,
         LoginComponent,
         DashboardComponent,
         AnalysisComponent,
