@@ -11,7 +11,6 @@ import { Admin } from "./entity/Admin";
 import { User } from "./entity/User";
 import { createAdminUser1574018391679 } from "./migration/1574018391679-createAdminUser";
 import routes from "./routes";
-import { toInt } from "./utils/utils";
 import { createBooks1536535135468 } from "./migration/1536535135468-createBooks";
 import { globals, envOptions } from "./globals";
 import { getConfig, setConfig } from "./utils/config";
@@ -70,6 +69,8 @@ createConnection({
         const app = express();
 
         app.locals.config = config;
+
+        app.locals.live = {};
 
         // Call midlewares
         // This sets up secure rules for CORS, see https://developer.mozilla.org/de/docs/Web/HTTP/CORS

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { getRepository } from "typeorm";
+import { getRepository, LessThan } from "typeorm";
+import * as SSE from "express-sse";
 import { User } from "../entity/User";
 import { Book } from "../entity/Book";
 import { Order } from "../entity/Order";
@@ -36,6 +37,9 @@ class OrderController {
         const user = await userRepository.findOne(req.params.id);
         user.orderDone = true;
         await userRepository.save(user);
+        for (const [userId, sse] of Object.entries(res.app.locals.live) as [string, SSE][]) {
+            sse.send(await OrderController.getOrderStatus(userId));
+        }
         res.send({ success: true });
     }
 
@@ -57,6 +61,31 @@ class OrderController {
         user.orderTimestamp = undefined;
         await userRepository.save(user);
         res.send({ success: true });
+    }
+
+    public static live = async (req: Request, res: Response): Promise<void> => {
+        const sse = new SSE([await OrderController.getOrderStatus(res.locals.jwtPayload.userId)]);
+        res.app.locals.live[res.locals.jwtPayload.userId] = sse;
+        sse.init(req, res);
+    }
+
+    private static async getOrderStatus(userId: string): Promise<any> {
+        return {
+            ordersLeft: await OrderController
+                .getQueueCountBeforeOrder(parseInt(userId, 10)),
+            orderReady: (await getRepository(User).findOne(parseInt(userId, 10))).orderDone,
+        };
+    }
+
+    private static async getQueueCountBeforeOrder(userId: number) {
+        const userRepository = getRepository(User);
+        const myOrder = await userRepository.findOne(userId);
+        return userRepository.count({
+            where: {
+                orderDone: false,
+                orderTimestamp: LessThan(myOrder.orderTimestamp),
+            },
+        });
     }
 
     public static listAll = async (req: Request, res: Response): Promise<void> => {
