@@ -2,18 +2,19 @@
 <h1 *ngIf="orderReady">Bestellung bereit</h1>
 <br /><br /><br />
 <div *ngIf="!orderReady" class="alert alert-success">
-  Vielen Dank für das Ausfüllen des Bestellformulars. Sie werden benachrichtigt,
-  wenn Ihre Bestellung bearbeitet wurde.
+    Vielen Dank für das Ausfüllen des Bestellformulars. Sie werden benachrichtigt, wenn Ihre Bestellung bearbeitet wurde.
+</div>
+<div *ngIf="error" class="alert alert-danger">
+    Die Verbindung ist abgebrochen. Versuche in 5s erneut zu verbinden...
 </div>
 <div *ngIf="!orderReady && ordersLeft != 0" class="alert alert-info">
-  Vor Ihnen sind noch <b>{{ ordersLeft }}</b> Bestellungen an der Reihe.
+    Vor Ihnen sind noch <b>{{ ordersLeft }}</b> Bestellungen an der Reihe.
 </div>
 <div *ngIf="!orderReady && ordersLeft == 0" class="alert alert-info">
-  Ihre Bestellung wird gerade bearbeitet.
+    Ihre Bestellung wird gerade bearbeitet.
 </div>
 <div *ngIf="orderReady" class="alert alert-warning">
-  <h3>Ihre Bestellung ist bereit.</h3>
-  <br />Bitte kommen Sie <b>jetzt</b> mit der <b>gesamten Klasse</b> zur
-  Lehrmittelbücherei (Raum 123).<br /><br />
-  <button class="btn btn-success" (click)="btnAccept()">Ich komme</button>
+    <h3>Ihre Bestellung ist bereit.</h3>
+    <br />Bitte kommen Sie <b>jetzt</b> mit der <b>gesamten Klasse</b> zur Lehrmittelbücherei (Raum 123).<br /><br />
+    <button class="btn btn-success" (click)="btnAccept()">Ich komme</button>
 </div>
