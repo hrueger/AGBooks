@@ -165,4 +165,73 @@ export class DashboardComponent implements OnInit {
             );
         }
     }
+
+    public getColorForSubject(str: string): string {
+        const subjects = {
+            Biologie: "#20bf6b",
+            Chemie: "#778ca3",
+            Deutsch: "#d1d8e0",
+            Englisch: "#26de81",
+            Ethik: "#fed330",
+            Französisch: "#f7b731",
+            Geographie: "#0fb9b1",
+            Geschichte: "#a5b1c2",
+            Informatik: "#fc5c65",
+            Latein: "#4b6584",
+            Mathematik: "#eb3b5a",
+            Musik: "#45aaf2",
+            Physik: "#4b7bec",
+            "Religion ev": "#fed330",
+            "Religion rk": "#fed330",
+            Sozialkunde: "#2d98da",
+            Spanisch: "#fd9644",
+            Sport: "#fa8231",
+            "W&R": "#a55eea",
+        };
+        return subjects[str] || "#fff";
+    }
+    public getForegroundColorForSubject(str: string): string {
+        const subjects = {
+            Biologie: "#fff",
+            Chemie: "#fff",
+            Deutsch: "#000",
+            Englisch: "#fff",
+            Ethik: "#fff",
+            Französisch: "#fff",
+            Geographie: "#fff",
+            Geschichte: "#fff",
+            Informatik: "#fff",
+            Latein: "#fff",
+            Mathematik: "#fff",
+            Musik: "#fff",
+            Physik: "#fff",
+            "Religion ev": "#fff",
+            "Religion rk": "#fff",
+            Sozialkunde: "#fff",
+            Spanisch: "#fff",
+            Sport: "#fff",
+            "W&R": "#fff",
+        };
+        return subjects[str] || "#000";
+    }
+}
+
+function shadeColor(color, percent) {
+    let R = parseInt(color.substring(1, 3), 16);
+    let G = parseInt(color.substring(3, 5), 16);
+    let B = parseInt(color.substring(5, 7), 16);
+
+    R = parseInt(R * (100 + percent) / 100);
+    G = parseInt(G * (100 + percent) / 100);
+    B = parseInt(B * (100 + percent) / 100);
+
+    R = (R < 255) ? R : 255;
+    G = (G < 255) ? G : 255;
+    B = (B < 255) ? B : 255;
+
+    const RR = ((R.toString(16).length == 1) ? `0${R.toString(16)}` : R.toString(16));
+    const GG = ((G.toString(16).length == 1) ? `0${G.toString(16)}` : G.toString(16));
+    const BB = ((B.toString(16).length == 1) ? `0${B.toString(16)}` : B.toString(16));
+
+    return `#${RR}${GG}${BB}`;
 }
