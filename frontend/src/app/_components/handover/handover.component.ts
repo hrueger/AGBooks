@@ -1,4 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import {
+    Component, OnInit, ChangeDetectorRef, NgZone,
+} from "@angular/core";
+import { Router } from "@angular/router";
 import { RemoteService } from "../../_services/remote.service";
 import { AuthenticationService } from "../../_services/authentication.service";
 import { NavbarService } from "../../_services/navbar.service";
@@ -17,6 +20,9 @@ export class HandoverComponent implements OnInit {
         private remoteService: RemoteService,
         private authenticationService: AuthenticationService,
         private navbarService: NavbarService,
+        private cdr: ChangeDetectorRef,
+        private zone: NgZone,
+        private router: Router,
     ) { }
 
     public ngOnInit(): void {
@@ -38,9 +44,17 @@ export class HandoverComponent implements OnInit {
                         .subscribe(() => {
                             this.navbarService.setStep(1);
                             this.navbarService.resetHighestStepHandover();
+                            this.cdr.detectChanges();
                         });
                 }
+                this.cdr.detectChanges();
             };
+        });
+    }
+
+    public next(): void {
+        this.zone.run(() => {
+            this.router.navigate(["step", "1"]);
         });
     }
 }
