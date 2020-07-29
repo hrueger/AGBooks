@@ -103,7 +103,7 @@ export class DashboardComponent implements OnInit {
 
     public orderAccepted(): void {
         this.remoteService.post(`order/${this.currentOrder.user.id}/accepted`, {}).subscribe((data) => {
-            if (data == true) {
+            if (data.success == true) {
                 this.acceptedOrders.push(this.currentOrder);
                 this.doneOrders = this.doneOrders.filter(
                     (order) => order.user.id !== this.currentOrder.user.id,
