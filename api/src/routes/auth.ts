@@ -8,5 +8,6 @@ router.post("/register", AuthController.register);
 router.get("/userdata", [checkJwt], AuthController.getUserdata);
 router.post("/userdata", [checkJwt], AuthController.setUserdata);
 router.post("/login", AuthController.adminLogin);
+router.post("/handover/code", [checkJwt], AuthController.getHandoverCode);
 
 export default router;

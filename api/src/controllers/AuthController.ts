@@ -26,6 +26,14 @@ class AuthController {
         res.send(response);
     }
 
+    public static getHandoverCode = async (req: Request, res: Response): Promise<void> => {
+        const userRepository = getRepository(User);
+        const user = await userRepository.findOne(res.locals.jwtPayload.userId);
+        user.handoverCode = Math.floor(100000 + Math.random() * 900000).toString();
+        await userRepository.save(user);
+        res.send({ code: user.handoverCode });
+    }
+
     public static setUserdata = async (req: Request, res: Response): Promise<void> => {
         const {
             teacher, teacherShort, grade, course, language, branch, uebergang, room, classSize,

@@ -53,5 +53,8 @@ export class User {
     @Column({ nullable: true })
     public orderTimestamp: Date;
 
+    @Column({ nullable: true })
+    public handoverCode: string;
+
     public token?: string;
 }
