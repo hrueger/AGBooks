@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { RemoteService } from "../../_services/remote.service";
-import { Order } from "../../_models/order";
+import { Order } from "../../_models/Order";
 
 @Component({
     selector: "app-analysis",

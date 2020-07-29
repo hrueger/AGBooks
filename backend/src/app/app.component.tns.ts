@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { first } from "rxjs/operators";
-import { Order } from "./_models/order";
+import { Order } from "./_models/Order";
 import { RemoteService } from "./_services/remote.service";
 
 @Component({
