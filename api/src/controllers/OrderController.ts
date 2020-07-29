@@ -44,10 +44,12 @@ class OrderController {
     }
 
     public static orderAccepted = async (req: Request, res: Response): Promise<void> => {
-        const userRepository = getRepository(User);
-        const user = await userRepository.findOne(req.params.id);
-        user.orderAccepted = true;
-        await userRepository.save(user);
+        await OrderController.acceptOrder(req.params.id);
+        res.send({ success: true });
+    }
+
+    public static accept = async (req: Request, res: Response): Promise<void> => {
+        await OrderController.acceptOrder(res.locals.jwtPayload.userId);
         res.send({ success: true });
     }
 
@@ -67,6 +69,13 @@ class OrderController {
         const sse = new SSE([await OrderController.getOrderStatus(res.locals.jwtPayload.userId)]);
         res.app.locals.live[res.locals.jwtPayload.userId] = sse;
         sse.init(req, res);
+    }
+
+    private static async acceptOrder(id: string) {
+        const userRepository = getRepository(User);
+        const user = await userRepository.findOne(id);
+        user.orderAccepted = true;
+        await userRepository.save(user);
     }
 
     private static async getOrderStatus(userId: string): Promise<any> {
