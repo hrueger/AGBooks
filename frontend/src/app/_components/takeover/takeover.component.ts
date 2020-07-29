@@ -27,7 +27,6 @@ export class TakeoverComponent {
             this.checking = true;
 
             this.remoteService.post("auth/takeover", { code: this.code }).subscribe((data) => {
-                console.log(data);
                 this.checking = false;
                 if (data.success) {
                     this.handoverSuccess = true;

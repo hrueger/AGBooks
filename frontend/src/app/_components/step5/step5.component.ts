@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef, NgZone } from "@angular/core";
+import {
+    Component, OnInit, ChangeDetectorRef, NgZone,
+} from "@angular/core";
 import { Router } from "@angular/router";
 import { NavbarService } from "../../_services/navbar.service";
 import { RemoteService } from "../../_services/remote.service";
