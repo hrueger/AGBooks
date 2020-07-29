@@ -5,12 +5,9 @@ import {
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-// used to create fake backend
-// import { fakeBackendProvider } from "./_helpers/fake-backend";
-
 import { AlertComponent } from "./_components/alert/alert.component";
-import { ErrorInterceptor } from "./_helpers/error.interceptor";
-import { JwtInterceptor } from "./_helpers/jwt.interceptor";
+import { ErrorInterceptor } from "./_interceptors/error.interceptor";
+import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { AnalysisComponent } from "./_components/analysis/analysis.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
