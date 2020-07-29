@@ -117,7 +117,7 @@ export class AvalibleBooksComponent implements OnInit {
       if (this.infoForm.invalid) {
           return;
       }
-      this.remoteService.getAvalibleBooksByClass({
+      this.remoteService.post("books/list", {
           grade: this.f.grade.value,
           language: this.f.language.value,
           branch: this.f.branch.value,

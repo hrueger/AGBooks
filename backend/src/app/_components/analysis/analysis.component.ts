@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { RemoteService } from "../../_services/remote.service";
+import { Order } from "../../_models/order";
 
 @Component({
     selector: "app-analysis",
@@ -22,7 +23,7 @@ export class AnalysisComponent implements OnInit {
   constructor(private remoteService: RemoteService) { }
 
   public ngOnInit(): void {
-      this.remoteService.getAnalysisData().subscribe((data: any) => {
+      this.remoteService.get("statistics").subscribe((data: {orders: Order[]}) => {
           this.orders = data.orders;
           this.grades.forEach((grade) => {
               const gi = this.grades.indexOf(grade);
