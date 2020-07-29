@@ -4,19 +4,16 @@
         <p class="d-inline">
             {{ currentOrder.user.grade }} {{currentOrder.user.course}} - {{ currentOrder.user.teacher }} - Raum {{ currentOrder.user.room }}
         </p>
-        <p class="d-inline btn btn-success doneBtn" *ngIf="orderCanBeDone" (click)="orderDone()">
+        <p class="d-inline-block btn btn-success doneBtn mx-1 mb-1" *ngIf="orderCanBeDone" (click)="orderDone()">
             Fertig
         </p>
-        &nbsp;
-        <p class="d-inline btn btn-warning doneBtn" *ngIf="orderCanBeAccepted" (click)="orderAccepted()">
+        <p class="d-inline-block btn btn-warning doneBtn mx-1 mb-1" *ngIf="orderCanBeAccepted" (click)="orderAccepted()">
             Als akzeptiert markieren
         </p>
-        &nbsp;
-        <p class="d-inline btn btn-primary doneBtn" *ngIf="currentOrder" (click)="getHandoverCodeForOrder()">
+        <p class="d-inline-block btn btn-primary doneBtn mx-1 mb-1" *ngIf="currentOrder" (click)="getHandoverCodeForOrder()">
             Übergeben
         </p>
-        &nbsp;
-        <p class="d-inline btn btn-danger doneBtn" *ngIf="currentOrder" (click)="deleteOrder()">
+        <p class="d-inline-block btn btn-danger doneBtn mx-1 mb-1" *ngIf="currentOrder" (click)="deleteOrder()">
             Löschen
         </p>
     </div>
