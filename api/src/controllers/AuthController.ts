@@ -76,6 +76,9 @@ class AuthController {
                     response.returnToStep = 6;
                 }
                 res.send(response);
+                if (req.app.locals.handoverLive[user[0].id]) {
+                    req.app.locals.handoverLive[user[0].id].send({ success: true });
+                }
                 return;
             }
         } catch {
