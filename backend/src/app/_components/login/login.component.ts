@@ -56,8 +56,11 @@ export class LoginComponent implements OnInit {
           .login(this.f.email.value, this.f.password.value)
           .pipe(first())
           .subscribe(
-              () => {
-                  this.router.navigate([this.returnUrl]);
+              (d) => {
+                  this.loading = false;
+                  if (d) {
+                      this.router.navigate([this.returnUrl]);
+                  }
               },
           );
   }
