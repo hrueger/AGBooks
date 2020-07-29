@@ -93,7 +93,7 @@
             <alert></alert>
             <div *ngIf="currentOrder">
                 <div class="row">
-                    <div class="card  col-sm-5 col-md-4 col-lg-2 m-3 " *ngFor="let order of currentOrder.order">
+                    <div class="card  col-sm-5 col-md-4 col-lg-2 m-3 " *ngFor="let order of currentOrder.books">
                         <div class="card-body">
                             <h5 class="bookinfo-heading card-title">
                                 <span>{{ order.subject }} {{ currentGrade }}</span><br /><small>{{ order.name }}</small>
