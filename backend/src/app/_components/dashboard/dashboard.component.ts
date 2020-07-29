@@ -63,15 +63,11 @@ export class DashboardComponent implements OnInit {
                                 this.orderCanBeDone = false;
                                 this.orderCanBeAccepted = false;
                             }
-                            this.currentOrder.books = this.currentOrder.books.sort(
-                                (a, b) => a.subject.localeCompare(b.subject),
-                            );
-                            /* this.orders.forEach(value => {
-                  if (value.id == routeParams.id) {
-                    this.currentOrder = value;
-                    console.log(this.currentOrder);
-                  }
-                }); */
+                            if (this.currentOrder) {
+                                this.currentOrder.books = this.currentOrder.books.sort(
+                                    (a, b) => a.subject.localeCompare(b.subject),
+                                );
+                            }
                         } else {
                             this.navigateToTopOrder();
                         }
