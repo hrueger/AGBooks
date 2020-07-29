@@ -4,21 +4,21 @@ import { Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { Order } from "../_models/order";
 import { AlertService } from "./alert.service";
-import config from "../config/config";
+import { getApiUrl } from "../_utils/utils";
 
 @Injectable({ providedIn: "root" })
 export class RemoteService {
     constructor(private http: HttpClient, private alertService: AlertService) {}
     public getAvalibleBooksByClass(data: Record<string, unknown>): Observable<any[]> {
         const action = "avalibleBooks backend";
-        return this.http.post<Order[]>(`${config.apiUrl}`, { action, ...data }).pipe(
+        return this.http.post<Order[]>(`${getApiUrl()}`, { action, ...data }).pipe(
             tap(() => this.log("fetched avalible books")),
             catchError(this.handleError<Order[]>("getAvalibleBooksByClass", [])),
         );
     }
     public getAnalysisData(): Observable<any> {
         const action = "analysis backend";
-        return this.http.post<Order[]>(`${config.apiUrl}`, { action }).pipe(
+        return this.http.post<Order[]>(`${getApiUrl()}`, { action }).pipe(
             tap(() => this.log("fetched analysis")),
             catchError(this.handleError<Order[]>("getAnalysisData", [])),
         );
@@ -26,35 +26,35 @@ export class RemoteService {
 
     public getOrders(): Observable<Order[]> {
         const action = "orders backend";
-        return this.http.post<Order[]>(`${config.apiUrl}`, { action }).pipe(
+        return this.http.post<Order[]>(`${getApiUrl()}`, { action }).pipe(
             tap(() => this.log("fetched orders")),
             catchError(this.handleError<Order[]>("getOrders", [])),
         );
     }
     public setOrderDone(id: number): Observable<boolean> {
         const action = "setOrderDone backend";
-        return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
+        return this.http.post<boolean>(`${getApiUrl()}`, { action, id }).pipe(
             tap(() => this.log("setOrderDone")),
             catchError(this.handleError<boolean>("setOrderDone", false)),
         );
     }
     public setOrderAccepted(id: number): Observable<boolean> {
         const action = "setOrderAccepted backend";
-        return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
+        return this.http.post<boolean>(`${getApiUrl()}`, { action, id }).pipe(
             tap(() => this.log("setOrderAccepted")),
             catchError(this.handleError<boolean>("setOrderAccepted", false)),
         );
     }
     public deleteOrder(id: number): Observable<boolean> {
         const action = "deleteOrder backend";
-        return this.http.post<boolean>(`${config.apiUrl}`, { action, id }).pipe(
+        return this.http.post<boolean>(`${getApiUrl()}`, { action, id }).pipe(
             tap(() => this.log("deleteOrder")),
             catchError(this.handleError<boolean>("deleteOrder", false)),
         );
     }
     public getHandoverCodeForOrder(token: string): Observable<boolean> {
         const action = "getHandoverCodeForOrder backend";
-        return this.http.post<boolean>(`${config.apiUrl}`, { action, token }).pipe(
+        return this.http.post<boolean>(`${getApiUrl()}`, { action, token }).pipe(
             tap(() => this.log("getHandoverCodeForOrder")),
             catchError(this.handleError<boolean>("getHandoverCodeForOrder", false)),
         );

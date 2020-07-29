@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import * as applicationSettings from "tns-core-modules/application-settings";
 import { User } from "../_models/user";
-import config from "../config/config";
+import { getApiUrl } from "../_utils/utils";
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -35,7 +35,7 @@ export class AuthenticationService {
       const action = "authenticateBackend";
       return this.http
           .post<any>(
-              config.apiUrl,
+              getApiUrl(),
               {
                   action,
                   email,

@@ -5,7 +5,7 @@ import {
 import { Router } from "@angular/router";
 import { AlertService } from "../../_services/alert.service";
 import { RemoteService } from "../../_services/remote.service";
-import config from "../../config/config";
+import { getApiUrl } from "../../_utils/utils";
 
 @Component({
     selector: "app-avalible-books",
@@ -14,7 +14,7 @@ import config from "../../config/config";
 })
 export class AvalibleBooksComponent implements OnInit {
   public books: any[];
-  public apiUrl = config.apiUrl;
+  public apiUrl = getApiUrl();
   public registrationDone = false;
   public infoForm: FormGroup;
   public submitted = false;

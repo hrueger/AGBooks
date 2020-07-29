@@ -5,7 +5,7 @@ import { first } from "rxjs/operators";
 import { Order } from "../../_models/order";
 import { AlertService } from "../../_services/alert.service";
 import { RemoteService } from "../../_services/remote.service";
-import config from "../../config/config";
+import { getApiUrl } from "../../_utils/utils";
 
 @Component({
     selector: "app-dashboard",
@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
                       }
                   });
 
-                  this.sse = new EventSource(`${config.apiUrl}?queueBackend`);
+                  this.sse = new EventSource(`${getApiUrl()}?queueBackend`);
                   this.sse.addEventListener("update", (message: any) => {
                       const data = JSON.parse(message.data);
                       if (data) {
