@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, NgZone } from "@angular/core";
 import { Router } from "@angular/router";
 import { NavbarService } from "../../_services/navbar.service";
 import { RemoteService } from "../../_services/remote.service";
@@ -21,6 +21,7 @@ export class Step5Component implements OnInit {
         private router: Router,
         private authService: AuthenticationService,
         private cdr: ChangeDetectorRef,
+        private zone: NgZone,
     ) { }
 
     public ngOnInit(): void {
@@ -49,7 +50,9 @@ export class Step5Component implements OnInit {
     public btnAccept(): void {
         this.remoteService.post("order/accept").subscribe((data) => {
             if (data.success == true) {
-                this.router.navigate(["step", "6"]);
+                this.zone.run(() => {
+                    this.router.navigate(["step", "6"]);
+                });
             }
         });
     }
