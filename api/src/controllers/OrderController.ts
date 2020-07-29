@@ -103,6 +103,9 @@ class OrderController {
             where: {
                 orderSubmitted: true,
             },
+            order: {
+                orderTimestamp: "ASC",
+            },
         });
         const books = await getRepository(Book).find();
         const orders: Order[] = [];
