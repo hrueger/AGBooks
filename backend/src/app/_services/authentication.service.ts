@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { User } from "../_models/user";
-import { getApiUrl } from "../_utils/utils";
+import { RemoteService } from "./remote.service";
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -19,7 +19,7 @@ export class AuthenticationService {
   public currentUser: Observable<User>;
   private currentUserSubject: BehaviorSubject<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(private remoteService: RemoteService) {
       this.currentUserSubject = new BehaviorSubject<User>(
           JSON.parse(sessionStorage.getItem("currentUser")),
       );
@@ -27,17 +27,7 @@ export class AuthenticationService {
   }
 
   public login(email: string, password: string): Observable<any> {
-      const action = "authenticateBackend";
-      return this.http
-          .post<any>(
-              getApiUrl(),
-              {
-                  action,
-                  email,
-                  password,
-              },
-              httpOptions,
-          )
+      return this.remoteService.post("auth/login", { email, password })
           .pipe(
               map((user) => {
                   // login successful if there's a jwt token in the response
