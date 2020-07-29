@@ -5,7 +5,7 @@ import { Animation } from "tns-core-modules/ui/animation";
 import { View } from "tns-core-modules/ui/core/view";
 import { prompt } from "tns-core-modules/ui/dialogs";
 import { Page } from "tns-core-modules/ui/page";
-import { AuthenticationService } from "../_services/authentication.service";
+import { AuthenticationService } from "../../_services/authentication.service";
 
 @Component({
     selector: "app-login",

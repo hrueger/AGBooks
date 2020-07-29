@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import * as applicationSettings from "tns-core-modules/application-settings";
-import { User } from "../_models/user";
+import { User } from "../_models/User";
 import { getApiUrl } from "../_utils/utils";
 
 const httpOptions = {
