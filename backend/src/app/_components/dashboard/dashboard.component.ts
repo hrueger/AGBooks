@@ -41,23 +41,24 @@ export class DashboardComponent implements OnInit {
                         this.sortOrders(orders);
                     }
 
-                    this.activeRoute.params.subscribe((routeParams) => {
+                    this.activeRoute.params.subscribe((routeParams: {type: string, id: string}) => {
                         if (routeParams.id) {
+                            const id = parseInt(routeParams.id, 10);
                             if (routeParams.type == "queue") {
                                 this.currentOrder = this.orders.find(
-                                    (order) => order.user.id === routeParams.id,
+                                    (order) => order.user.id === id,
                                 );
                                 this.orderCanBeDone = true;
                                 this.orderCanBeAccepted = false;
                             } else if (routeParams.type == "done") {
                                 this.currentOrder = this.doneOrders.find(
-                                    (order) => order.user.id === routeParams.id,
+                                    (order) => order.user.id === id,
                                 );
                                 this.orderCanBeDone = false;
                                 this.orderCanBeAccepted = true;
                             } else if (routeParams.type == "accepted") {
                                 this.currentOrder = this.acceptedOrders.find(
-                                    (order) => order.user.id === routeParams.id,
+                                    (order) => order.user.id === id,
                                 );
                                 this.orderCanBeDone = false;
                                 this.orderCanBeAccepted = false;
