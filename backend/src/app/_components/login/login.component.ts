@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
-import { AlertService } from "../_services/alert.service";
-import { AuthenticationService } from "../_services/authentication.service";
+import { AlertService } from "../../_services/alert.service";
+import { AuthenticationService } from "../../_services/authentication.service";
 
 @Component({ templateUrl: "login.component.html" })
 export class LoginComponent implements OnInit {

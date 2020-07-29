@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
-import { Order } from "../_models/order";
-import { AlertService } from "../_services/alert.service";
-import { RemoteService } from "../_services/remote.service";
-import config from "../config/config";
+import { Order } from "../../_models/order";
+import { AlertService } from "../../_services/alert.service";
+import { RemoteService } from "../../_services/remote.service";
+import config from "../../config/config";
 
 @Component({
     selector: "app-dashboard",

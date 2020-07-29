@@ -1,9 +1,9 @@
 import { Routes } from "@angular/router";
-import { DashboardComponent } from "./dashboard/dashboard.component";
+import { DashboardComponent } from "./_components/dashboard/dashboard.component";
 import { AuthGuard } from "./_guards/auth.guard";
-import { AnalysisComponent } from "./analysis/analysis.component";
-import { AvalibleBooksComponent } from "./avalible-books/avalible-books.component";
-import { LoginComponent } from "./login/login.component";
+import { AnalysisComponent } from "./_components/analysis/analysis.component";
+import { AvalibleBooksComponent } from "./_components/avalible-books/avalible-books.component";
+import { LoginComponent } from "./_components/login/login.component";
 
 export const routes: Routes = [
     /* Home paths */

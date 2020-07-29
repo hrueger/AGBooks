@@ -3,19 +3,19 @@ import {
     LOCALE_ID, NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA,
 } from "@angular/core";
 import {
-    NativeScriptFormsModule, NativeScriptRouterModule,
+    NativeScriptFormsModule,
     NativeScriptModule, NativeScriptHttpClientModule,
 } from "@nativescript/angular";
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
-import { AlertComponent } from "./_components/alert.component";
+import { AlertComponent } from "./_components/alert/alert.component";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
-import { AnalysisComponent } from "./analysis/analysis.component";
+import { AnalysisComponent } from "./_components/analysis/analysis.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AvalibleBooksComponent } from "./avalible-books/avalible-books.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
-import { LoginComponent } from "./login/login.component";
+import { AvalibleBooksComponent } from "./_components/avalible-books/avalible-books.component";
+import { DashboardComponent } from "./_components/dashboard/dashboard.component";
+import { LoginComponent } from "./_components/login/login.component";
 
 @NgModule({
     bootstrap: [AppComponent],

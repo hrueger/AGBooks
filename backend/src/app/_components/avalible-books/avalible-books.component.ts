@@ -3,9 +3,9 @@ import {
     FormBuilder, FormControl, FormGroup, Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AlertService } from "../_services/alert.service";
-import { RemoteService } from "../_services/remote.service";
-import config from "../config/config";
+import { AlertService } from "../../_services/alert.service";
+import { RemoteService } from "../../_services/remote.service";
+import config from "../../config/config";
 
 @Component({
     selector: "app-avalible-books",

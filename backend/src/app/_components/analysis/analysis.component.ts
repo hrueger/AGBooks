@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { RemoteService } from "../_services/remote.service";
+import { RemoteService } from "../../_services/remote.service";
 
 @Component({
     selector: "app-analysis",

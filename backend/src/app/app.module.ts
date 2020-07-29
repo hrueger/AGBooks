@@ -8,15 +8,15 @@ import { BrowserModule } from "@angular/platform-browser";
 // used to create fake backend
 // import { fakeBackendProvider } from "./_helpers/fake-backend";
 
-import { AlertComponent } from "./_components/alert.component";
+import { AlertComponent } from "./_components/alert/alert.component";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
-import { AnalysisComponent } from "./analysis/analysis.component";
+import { AnalysisComponent } from "./_components/analysis/analysis.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
-import { LoginComponent } from "./login/login.component";
-import { AvalibleBooksComponent } from "./avalible-books/avalible-books.component";
+import { DashboardComponent } from "./_components/dashboard/dashboard.component";
+import { LoginComponent } from "./_components/login/login.component";
+import { AvalibleBooksComponent } from "./_components/avalible-books/avalible-books.component";
 
 @NgModule({
     imports: [
