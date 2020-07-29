@@ -57,6 +57,9 @@
 /* do not edit */     
 /* do not edit */     public orderTimestamp: Date;
 /* do not edit */
+/* do not edit */     
+/* do not edit */     public handoverCode: string;
+/* do not edit */
 /* do not edit */     public token?: string;
 /* do not edit */ }
 /* do not edit */

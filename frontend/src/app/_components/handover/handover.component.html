@@ -1,15 +1,14 @@
 <h1>Sitzung an eine andere Lehrkraft weitergeben</h1>
 <br /><br />
 <div *ngIf="!success">
-  <div class="alert alert-success">
-    Die andere Lehrkraft muss nun auf Ihrem Gerät auf "Sitzung übernehmen"
-    klicken. Dann muss sie den untenstehenden Code eingeben:
-  </div>
-  <div class="alert alert-warning">
-    <h2>{{ code }}</h2>
-  </div>
+    <div class="alert alert-success">
+        Die andere Lehrkraft muss nun auf Ihrem Gerät auf "Sitzung übernehmen" klicken. Dann muss sie den untenstehenden Code eingeben:
+    </div>
+    <div class="alert alert-warning text-center">
+        <h2>{{ code }}</h2>
+    </div>
 </div>
 <div class="alert alert-primary" *ngIf="success">
-  Sitzung erfolgreich übergeben.
-  <a routerLink="/step/1">Weiter</a>
+    Sitzung erfolgreich übergeben.
+    <a routerLink="/step/1">Weiter</a>
 </div>
