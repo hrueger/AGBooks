@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 import { getRepository } from "typeorm";
+import * as SSE from "express-sse";
 import { User } from "../entity/User";
 import { Admin } from "../entity/Admin";
 
@@ -29,9 +30,58 @@ class AuthController {
     public static getHandoverCode = async (req: Request, res: Response): Promise<void> => {
         const userRepository = getRepository(User);
         const user = await userRepository.findOne(res.locals.jwtPayload.userId);
-        user.handoverCode = Math.floor(100000 + Math.random() * 900000).toString();
+        user.handoverCode = Math.floor(10000 + Math.random() * 90000).toString();
         await userRepository.save(user);
         res.send({ code: user.handoverCode });
+    }
+
+    public static handoverLive = async (req: Request, res: Response): Promise<void> => {
+        const sse = new SSE();
+        res.app.locals.handoverLive[res.locals.jwtPayload.userId] = sse;
+        sse.init(req, res);
+    }
+
+    public static takeover = async (req: Request, res: Response): Promise<void> => {
+        const { code } = req.body;
+        if (!code) {
+            res.status(400).send("Code nicht bekommen!");
+            return;
+        }
+        const userRepository = getRepository(User);
+        try {
+            const user = await userRepository.find({
+                where: {
+                    handoverCode: code,
+                },
+                take: 1,
+            });
+            if (user && user[0]) {
+                const token = jwt.sign(
+                    { userId: user[0].id },
+                    req.app.locals.config.JWT_SECRET,
+                    { expiresIn: "8h" },
+                );
+                const response = {
+                    ...(user[0]),
+                    token,
+                    success: true,
+                } as any;
+                if (!user[0].orderSubmitted) {
+                    response.returnToStep = 2;
+                } else if (user[0].orderSubmitted && !user[0].orderDone) {
+                    response.returnToStep = 5;
+                } else if (user[0].orderSubmitted && user[0].orderDone && !user[0].orderAccepted) {
+                    response.returnToStep = 5;
+                } else if (user[0].orderSubmitted && user[0].orderDone && user[0].orderAccepted) {
+                    response.returnToStep = 6;
+                }
+                res.send(response);
+                return;
+            }
+        } catch {
+            //
+        }
+        res.send({ success: false });
     }
 
     public static setUserdata = async (req: Request, res: Response): Promise<void> => {

@@ -71,6 +71,7 @@ createConnection({
         app.locals.config = config;
 
         app.locals.live = {};
+        app.locals.handoverLive = {};
 
         // Call midlewares
         // This sets up secure rules for CORS, see https://developer.mozilla.org/de/docs/Web/HTTP/CORS
