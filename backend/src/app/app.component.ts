@@ -7,6 +7,7 @@ import { AuthenticationService } from "./_services/authentication.service";
 @Component({ selector: "app", templateUrl: "app.component.html", styleUrls: ["app.component.scss"] })
 export class AppComponent {
     public currentUser: User;
+    public currentYear = new Date().getFullYear();
 
     constructor(
         private router: Router,
