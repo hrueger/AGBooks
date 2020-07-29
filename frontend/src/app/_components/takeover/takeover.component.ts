@@ -26,23 +26,17 @@ export class TakeoverComponent {
         if (this.showResult && !this.checking && !this.handoverSuccess) {
             this.checking = true;
 
-            this.remoteService.post("handover/checkCode", { code: this.code }).subscribe((success) => {
-                if (success && success !== "") {
+            this.remoteService.post("auth/takeover", { code: this.code }).subscribe((data) => {
+                console.log(data);
+                this.checking = false;
+                if (data.success) {
                     this.handoverSuccess = true;
-
-                    this.authenticationService.setNewToken(success);
-
-                    this.remoteService
-                        .post("handover/returnTo")
-                        .subscribe((data) => {
-                            this.returnTo = data;
-                            this.navbarService.setStep(parseInt(this.returnTo.split("/")[2]));
-                        });
+                    this.authenticationService.setNewToken(data.token);
+                    this.returnTo = data.returnToStep;
+                    this.navbarService.setStep(data.returnToStep);
                 } else {
                     this.handoverSuccess = false;
                 }
-
-                this.checking = false;
             });
         }
     }

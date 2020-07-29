@@ -25,9 +25,9 @@ export class HandoverComponent implements OnInit {
 
             const { token } = this.authenticationService.currentUserValue;
             this.sse = new EventSource(
-                `${getApiUrl()}?queueHandover&token=${token}`,
+                `${getApiUrl()}auth/handover/live?authorization=${token}`,
             );
-            this.sse.addEventListener("update", (message: any) => {
+            this.sse.onmessage = (message: any) => {
                 const data = JSON.parse(message.data);
 
                 this.success = data.success;
@@ -40,7 +40,7 @@ export class HandoverComponent implements OnInit {
                             this.navbarService.resetHighestStepHandover();
                         });
                 }
-            });
+            };
         });
     }
 }
