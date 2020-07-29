@@ -30,6 +30,7 @@
         "@nativescript/core": "^6.5.12",
         "@nativescript/theme": "^2.3.3",
         "@ng-bootstrap/ng-bootstrap": "^7.0.0",
+        "angular-gridster2": "^10.1.2",
         "bootstrap": "^4.5.0",
         "core-js": "^3.6.5",
         "events": "^3.2.0",

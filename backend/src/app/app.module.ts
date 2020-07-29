@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
+import { GridsterModule } from "angular-gridster2";
 import { ErrorInterceptor } from "./_interceptors/error.interceptor";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { AnalysisComponent } from "./_components/analysis/analysis.component";
@@ -15,7 +16,6 @@ import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./_components/dashboard/dashboard.component";
 import { LoginComponent } from "./_components/login/login.component";
 import { AvalibleBooksComponent } from "./_components/avalible-books/avalible-books.component";
-
 @NgModule({
     imports: [
         BrowserModule,
@@ -25,6 +25,7 @@ import { AvalibleBooksComponent } from "./_components/avalible-books/avalible-bo
         FormsModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
+        GridsterModule,
     ],
     declarations: [
         AppComponent,

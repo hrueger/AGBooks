@@ -31,8 +31,8 @@
     </ul>
 </nav>
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid h-100">
+    <div class="row h-100">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -89,20 +89,15 @@
             </div>
         </nav>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <alert></alert>
-            <div *ngIf="currentOrder">
-                <div class="row">
-                    <div class="card  col-sm-5 col-md-4 col-lg-2 m-3 " *ngFor="let order of currentOrder.books">
-                        <div class="card-body">
-                            <h5 class="bookinfo-heading card-title">
-                                <span>{{ order.subject }} {{ currentGrade }}</span><br /><small>{{ order.name }}</small>
-                            </h5>
-                            <p class="bookinfo-number card-text">{{ order.number }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 h-100 px-0">
+            <gridster [options]="{}" class="h-100" *ngIf="currentOrder" class="bg-white">
+                <gridster-item [item]="order" *ngFor="let order of currentOrder.books" class="border p-3">
+                    <h5 class="bookinfo-heading card-Pfortitle">
+                        <span>{{ order.subject }} {{ currentGrade }}</span><br /><small>{{ order.name }}</small>
+                    </h5>
+                    <p class="bookinfo-number card-text">{{ order.number }}</p>
+                </gridster-item>
+            </gridster>
         </main>
     </div>
 </div>
