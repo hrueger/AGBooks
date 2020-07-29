@@ -48,7 +48,7 @@ export class Step5Component implements OnInit {
     }
     public btnAccept(): void {
         this.remoteService.post("order/accept").subscribe((data) => {
-            if (data == true) {
+            if (data.success == true) {
                 this.router.navigate(["step", "6"]);
             }
         });
