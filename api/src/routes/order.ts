@@ -9,8 +9,8 @@ router.get("/", [checkJwt], OrderController.forCheck);
 router.get("/all", [checkJwt, checkForAdmin], OrderController.listAll);
 router.post("/", [checkJwt], OrderController.order);
 router.post("/submit", [checkJwt], OrderController.submit);
-router.post("/:id/done", [checkJwt], OrderController.orderDone);
-router.post("/:id/accepted", [checkJwt], OrderController.orderAccepted);
-router.delete("/:id", [checkJwt], OrderController.deleteOrder);
+router.post("/:id/done", [checkJwt, checkForAdmin], OrderController.orderDone);
+router.post("/:id/accepted", [checkJwt, checkForAdmin], OrderController.orderAccepted);
+router.delete("/:id", [checkJwt, checkForAdmin], OrderController.deleteOrder);
 
 export default router;
