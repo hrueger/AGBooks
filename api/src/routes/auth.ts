@@ -7,6 +7,6 @@ const router = Router();
 router.post("/register", AuthController.register);
 router.get("/userdata", [checkJwt], AuthController.getUserdata);
 router.post("/userdata", [checkJwt], AuthController.setUserdata);
-// router.post("/admin/login", AuthController.adminLogin);
+router.post("/login", AuthController.adminLogin);
 
 export default router;
