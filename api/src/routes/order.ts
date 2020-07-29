@@ -11,5 +11,6 @@ router.post("/", [checkJwt], OrderController.order);
 router.post("/submit", [checkJwt], OrderController.submit);
 router.post("/:id/done", [checkJwt], OrderController.orderDone);
 router.post("/:id/accepted", [checkJwt], OrderController.orderAccepted);
+router.delete("/:id", [checkJwt], OrderController.deleteOrder);
 
 export default router;

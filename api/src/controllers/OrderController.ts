@@ -47,6 +47,18 @@ class OrderController {
         res.send({ success: true });
     }
 
+    public static deleteOrder = async (req: Request, res: Response): Promise<void> => {
+        const userRepository = getRepository(User);
+        const user = await userRepository.findOne(req.params.id);
+        user.order = {};
+        user.orderSubmitted = false;
+        user.orderDone = false;
+        user.orderAccepted = false;
+        user.orderTimestamp = undefined;
+        await userRepository.save(user);
+        res.send({ success: true });
+    }
+
     public static listAll = async (req: Request, res: Response): Promise<void> => {
         const userRepository = getRepository(User);
         const users = await userRepository.find({
