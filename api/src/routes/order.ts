@@ -9,5 +9,6 @@ router.get("/", [checkJwt], OrderController.forCheck);
 router.get("/all", [checkJwt, checkForAdmin], OrderController.listAll);
 router.post("/", [checkJwt], OrderController.order);
 router.post("/submit", [checkJwt], OrderController.submit);
+router.post("/:id/done", [checkJwt], OrderController.orderDone);
 
 export default router;

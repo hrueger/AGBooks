@@ -31,6 +31,14 @@ class OrderController {
         res.send({ success: true });
     }
 
+    public static orderDone = async (req: Request, res: Response): Promise<void> => {
+        const userRepository = getRepository(User);
+        const user = await userRepository.findOne(req.params.id);
+        user.orderDone = true;
+        await userRepository.save(user);
+        res.send({ success: true });
+    }
+
     public static listAll = async (req: Request, res: Response): Promise<void> => {
         const userRepository = getRepository(User);
         const users = await userRepository.find({
