@@ -44,6 +44,12 @@ export class User {
     @Column({ default: false })
     public orderSubmitted: boolean;
 
+    @Column({ default: false })
+    public orderDone: boolean;
+
+    @Column({ default: false })
+    public orderAccepted: boolean;
+
     @Column({ nullable: true })
     public orderTimestamp: Date;
 

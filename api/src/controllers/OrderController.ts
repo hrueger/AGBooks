@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { User } from "../entity/User";
 import { Book } from "../entity/Book";
+import { Order } from "../entity/Order";
 
 class OrderController {
     public static order = async (req: Request, res: Response): Promise<void> => {
@@ -28,6 +29,29 @@ class OrderController {
         me.orderTimestamp = new Date();
         await userRepository.save(me);
         res.send({ success: true });
+    }
+
+    public static listAll = async (req: Request, res: Response): Promise<void> => {
+        const userRepository = getRepository(User);
+        const users = await userRepository.find({
+            where: {
+                orderSubmitted: true,
+            },
+        });
+        const books = await getRepository(Book).find();
+        const orders: Order[] = [];
+        for (const user of users) {
+            const o = new Order();
+            o.user = user;
+            o.books = [];
+            for (const [bookId, number] of Object.entries(user.order)) {
+                const book = books.find((b) => b.id == parseInt(bookId, 10));
+                book.number = number;
+                o.books.push(book);
+            }
+            orders.push(o);
+        }
+        res.send(orders);
     }
 
     public static forCheck = async (req: Request, res: Response): Promise<void> => {
