@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
-import { Order } from "../../_models/order";
+import { Order } from "../../_models/Order";
 import { AlertService } from "../../_services/alert.service";
 import { RemoteService } from "../../_services/remote.service";
 import { getApiUrl } from "../../_utils/utils";
@@ -45,19 +45,19 @@ export class DashboardComponent implements OnInit {
                         if (routeParams.id) {
                             if (routeParams.type == "queue") {
                                 this.currentOrder = this.orders.find(
-                                    (order) => order.id === routeParams.id,
+                                    (order) => order.user.id === routeParams.id,
                                 );
                                 this.orderCanBeDone = true;
                                 this.orderCanBeAccepted = false;
                             } else if (routeParams.type == "done") {
                                 this.currentOrder = this.doneOrders.find(
-                                    (order) => order.id === routeParams.id,
+                                    (order) => order.user.id === routeParams.id,
                                 );
                                 this.orderCanBeDone = false;
                                 this.orderCanBeAccepted = true;
                             } else if (routeParams.type == "accepted") {
                                 this.currentOrder = this.acceptedOrders.find(
-                                    (order) => order.id === routeParams.id,
+                                    (order) => order.user.id === routeParams.id,
                                 );
                                 this.orderCanBeDone = false;
                                 this.orderCanBeAccepted = false;
@@ -88,11 +88,11 @@ export class DashboardComponent implements OnInit {
     }
 
     public orderDone(): void {
-        this.remoteService.post(`order/${this.currentOrder.id}/done`, {}).subscribe((data) => {
+        this.remoteService.post(`order/${this.currentOrder.user.id}/done`, {}).subscribe((data) => {
             if (data == true) {
                 this.doneOrders.push(this.currentOrder);
                 this.orders = this.orders.filter(
-                    (order) => order.id !== this.currentOrder.id,
+                    (order) => order.user.id !== this.currentOrder.user.id,
                 );
                 this.currentOrder = null;
                 this.navigateToTopOrder();
@@ -101,11 +101,11 @@ export class DashboardComponent implements OnInit {
     }
 
     public orderAccepted(): void {
-        this.remoteService.post(`order/${this.currentOrder.id}/accepted`, {}).subscribe((data) => {
+        this.remoteService.post(`order/${this.currentOrder.user.id}/accepted`, {}).subscribe((data) => {
             if (data == true) {
                 this.acceptedOrders.push(this.currentOrder);
                 this.doneOrders = this.doneOrders.filter(
-                    (order) => order.id !== this.currentOrder.id,
+                    (order) => order.user.id !== this.currentOrder.user.id,
                 );
                 this.currentOrder = null;
                 this.navigateToTopOrder();
@@ -126,16 +126,16 @@ export class DashboardComponent implements OnInit {
     public deleteOrder(): void {
         // eslint-disable-next-line no-alert
         if (window.confirm("Soll diese Bestellung wirklich gelöscht werden? Sie kann nicht wiederhergestellt werden.")) {
-            this.remoteService.delete(`orders/${this.currentOrder.id}`).subscribe((data) => {
+            this.remoteService.delete(`orders/${this.currentOrder.user.id}`).subscribe((data) => {
                 if (data == true) {
                     this.orders = this.orders.filter(
-                        (order) => order.id !== this.currentOrder.id,
+                        (order) => order.user.id !== this.currentOrder.user.id,
                     );
                     this.doneOrders = this.doneOrders.filter(
-                        (order) => order.id !== this.currentOrder.id,
+                        (order) => order.user.id !== this.currentOrder.user.id,
                     );
                     this.acceptedOrders = this.acceptedOrders.filter(
-                        (order) => order.id !== this.currentOrder.id,
+                        (order) => order.user.id !== this.currentOrder.user.id,
                     );
                     this.currentOrder = null;
                     this.navigateToTopOrder();
@@ -146,7 +146,7 @@ export class DashboardComponent implements OnInit {
 
     public navigateToTopOrder(): void {
         if (this.orders[0]) {
-            this.router.navigate(["dashboard", "queue", this.orders[0].id]);
+            this.router.navigate(["dashboard", "queue", this.orders[0].user.id]);
         } else {
             this.currentOrder = null;
         }
@@ -154,13 +154,13 @@ export class DashboardComponent implements OnInit {
     public sortOrders(orders: Order[]): void {
         if (orders.length) {
             this.orders = orders.filter(
-                (order) => order.done == 0 && order.accepted == 0,
+                (order) => !order.user.orderDone && !order.user.orderAccepted,
             );
             this.doneOrders = orders.filter(
-                (order) => order.done == 1 && order.accepted == 0,
+                (order) => order.user.orderDone && !order.user.orderAccepted,
             );
             this.acceptedOrders = orders.filter(
-                (order) => order.done == 1 && order.accepted == 1,
+                (order) => order.user.orderDone && order.user.orderAccepted,
             );
         }
     }

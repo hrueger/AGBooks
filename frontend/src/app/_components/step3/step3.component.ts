@@ -6,7 +6,7 @@ import {
 } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RemoteService } from "../../_services/remote.service";
-import { Book } from "../../_models/book";
+import { Book } from "../../_models/Book";
 import { NavbarService } from "../../_services/navbar.service";
 import { getApiUrl } from "../../_utils/utils";
 

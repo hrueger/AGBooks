@@ -5,7 +5,7 @@ import {
 import { Router } from "@angular/router";
 import { NavbarService } from "../../_services/navbar.service";
 import { RemoteService } from "../../_services/remote.service";
-import { User } from "../../_models/user";
+import { User } from "../../_models/User";
 
 @Component({
     selector: "app-step2",

@@ -4,7 +4,7 @@ import { first } from "rxjs/operators";
 import { NavbarService } from "../../_services/navbar.service";
 import { AlertService } from "../../_services/alert.service";
 import { RemoteService } from "../../_services/remote.service";
-import { Book } from "../../_models/book";
+import { Book } from "../../_models/Book";
 
 @Component({
     selector: "app-step4",

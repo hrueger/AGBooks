@@ -48,7 +48,7 @@
                 </h6>
                 <ul class="nav flex-column">
                     <li *ngFor="let order of orders" class="nav-item">
-                        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/queue/{{ order.id }}">
+                        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/queue/{{ order.user.id }}">
               {{ order.user.grade }} {{order.user.course}} - {{ order.user.teacher }} - Raum {{ order.user.room }}
             </a>
                     </li>
@@ -65,7 +65,7 @@
                 </h6>
                 <ul class="nav flex-column">
                     <li *ngFor="let order of doneOrders" class="nav-item">
-                        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/done/{{ order.id }}">
+                        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/done/{{ order.user.id }}">
               {{ order.user.grade }} {{order.user.course}} - {{ order.user.teacher }} - Raum {{ order.user.room }}
             </a>
                     </li>
@@ -81,7 +81,7 @@
                 </h6>
                 <ul class="nav flex-column">
                     <li *ngFor="let order of acceptedOrders" class="nav-item">
-                        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/accepted/{{ order.id }}">
+                        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/accepted/{{ order.user.id }}">
               {{ order.user.grade }} {{order.user.course}} - {{ order.user.teacher }} - Raum {{ order.user.room }}
             </a>
                     </li>

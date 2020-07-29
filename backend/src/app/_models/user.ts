@@ -45,6 +45,18 @@
 /* do not edit */         [id: number] : number;
 /* do not edit */     }
 /* do not edit */
+/* do not edit */     
+/* do not edit */     public orderSubmitted: boolean;
+/* do not edit */
+/* do not edit */     
+/* do not edit */     public orderDone: boolean;
+/* do not edit */
+/* do not edit */     
+/* do not edit */     public orderAccepted: boolean;
+/* do not edit */
+/* do not edit */     
+/* do not edit */     public orderTimestamp: Date;
+/* do not edit */
 /* do not edit */     public token?: string;
 /* do not edit */ }
 /* do not edit */
