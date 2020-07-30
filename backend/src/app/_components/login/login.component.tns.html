@@ -4,11 +4,12 @@
 
     <GridLayout rows="auto, auto, auto">
         <StackLayout row="0" class="input-field">
-            <TextField hint="Server-URL" returnKeyType="next" (returnPress)="focusUsername()" [(ngModel)]="serverUrl" [isEnabled]="!isAuthenticating" autocorrect="false" autocapitalizationType="none" class="input" [class.light]="!isAuthenticating" row="0"></TextField>
+            <TextField hint="Server-URL" returnKeyType="next" keyboardType="url" (returnPress)="focusEmail()" [(ngModel)]="serverUrl" [isEnabled]="!isAuthenticating" autocorrect="false" autocapitalizationType="none" class="input" [class.light]="!isAuthenticating"
+                row="0"></TextField>
         </StackLayout>
 
         <StackLayout row="1" class="input-field">
-            <TextField #usernameField hint="Benutzername" returnKeyType="next" (returnPress)="focusPassword()" [(ngModel)]="username" [isEnabled]="!isAuthenticating" autocorrect="false" autocapitalizationType="none" class="input" [class.light]="!isAuthenticating"
+            <TextField #emailField hint="Email" keyboardType="email" returnKeyType="next" (returnPress)="focusPassword()" [(ngModel)]="email" [isEnabled]="!isAuthenticating" autocorrect="false" autocapitalizationType="none" class="input" [class.light]="!isAuthenticating"
                 row="1"></TextField>
         </StackLayout>
 

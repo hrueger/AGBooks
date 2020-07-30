@@ -15,12 +15,12 @@ import { AuthenticationService } from "../../_services/authentication.service";
 })
 export class LoginComponent {
     public serverUrl = "";
-    public username = "";
+    public email = "";
     public password = "";
     public isAuthenticating = false;
 
     @ViewChild("passwordField", { static: false }) public passwordEl: ElementRef;
-    @ViewChild("usernameField", { static: false }) public usernameEl: ElementRef;
+    @ViewChild("emailField", { static: false }) public emailEl: ElementRef;
 
     constructor(private authService: AuthenticationService,
         private page: Page,
@@ -35,8 +35,8 @@ export class LoginComponent {
         this.passwordEl.nativeElement.focus();
     }
 
-    public focusUsername(): void {
-        this.usernameEl.nativeElement.focus();
+    public focusEmail(): void {
+        this.emailEl.nativeElement.focus();
     }
 
     public submit(): void {
@@ -52,7 +52,7 @@ export class LoginComponent {
             return;
         }
 
-        this.authService.login(this.username, this.password).subscribe(
+        this.authService.login(this.email, this.password).subscribe(
             () => {
                 this.isAuthenticating = false;
                 this.router.navigate(["/dashboard"]);
