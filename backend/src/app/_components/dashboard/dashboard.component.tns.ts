@@ -4,7 +4,6 @@ import { first } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { Order } from "../../_models/Order";
-import { AlertService } from "../../_services/alert.service";
 import { RemoteService } from "../../_services/remote.service";
 
 @Component({
@@ -22,7 +21,6 @@ export class DashboardComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private alertService: AlertService,
         private remoteService: RemoteService,
         private activeRoute: ActivatedRoute,
     ) { }
@@ -38,17 +36,17 @@ export class DashboardComponent implements OnInit {
                             if (routeParams.id) {
                                 if (routeParams.type == "queue") {
                                     this.currentOrder = this.orders.find(
-                                        (order) => order.id === routeParams.id,
+                                        (order) => order.user.id === routeParams.id,
                                     );
                                     this.orderCanBeDone = true;
                                 } else if (routeParams.type == "done") {
                                     this.currentOrder = this.doneOrders.find(
-                                        (order) => order.id === routeParams.id,
+                                        (order) => order.user.id === routeParams.id,
                                     );
                                     this.orderCanBeDone = false;
                                 } else if (routeParams.type == "accepted") {
                                     this.currentOrder = this.acceptedOrders.find(
-                                        (order) => order.id === routeParams.id,
+                                        (order) => order.user.id === routeParams.id,
                                     );
                                     this.orderCanBeDone = false;
                                 }
@@ -68,11 +66,11 @@ export class DashboardComponent implements OnInit {
     }
 
     public orderDone(): void {
-        this.remoteService.setOrderDone(this.currentOrder.id).subscribe((data) => {
+        this.remoteService.post(`order/${this.currentOrder.user.id}/done`, {}).subscribe((data) => {
             if (data == true) {
                 this.doneOrders.push(this.currentOrder);
                 this.orders = this.orders.filter(
-                    (order) => order.id !== this.currentOrder.id,
+                    (order) => order.user.id !== this.currentOrder.user.id,
                 );
                 this.currentOrder = null;
                 this.navigateToTopOrder();
@@ -81,7 +79,7 @@ export class DashboardComponent implements OnInit {
     }
     public navigateToTopOrder(): void {
         if (this.orders[0]) {
-            this.router.navigate(["dashboard", "queue", this.orders[0].id]);
+            this.router.navigate(["dashboard", "queue", this.orders[0].user.id]);
         } else {
             this.currentOrder = null;
         }
