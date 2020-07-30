@@ -22,6 +22,7 @@
         "bootstrap": "^4.5.0",
         "bs-stepper": "^1.7.0",
         "core-js": "^3.6.5",
+        "event-source-polyfill": "^1.0.15",
         "jquery": "^3.5.1",
         "rxjs": "~6.6.0",
         "tslib": "^2.0.0",
