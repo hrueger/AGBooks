@@ -15,7 +15,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./_components/dashboard/dashboard.component";
 import { LoginComponent } from "./_components/login/login.component";
-import { AvalibleBooksComponent } from "./_components/avalible-books/avalible-books.component";
+import { AvailableBooksComponent } from "./_components/available-books/available-books.component";
 @NgModule({
     imports: [
         BrowserModule,
@@ -32,7 +32,7 @@ import { AvalibleBooksComponent } from "./_components/avalible-books/avalible-bo
         LoginComponent,
         DashboardComponent,
         AnalysisComponent,
-        AvalibleBooksComponent,
+        AvailableBooksComponent,
 
     ],
     providers: [

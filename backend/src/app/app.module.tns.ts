@@ -12,7 +12,7 @@ import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { AnalysisComponent } from "./_components/analysis/analysis.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AvalibleBooksComponent } from "./_components/avalible-books/avalible-books.component";
+import { AvailableBooksComponent } from "./_components/available-books/available-books.component";
 import { DashboardComponent } from "./_components/dashboard/dashboard.component";
 import { LoginComponent } from "./_components/login/login.component";
 
@@ -23,7 +23,7 @@ import { LoginComponent } from "./_components/login/login.component";
         LoginComponent,
         DashboardComponent,
         AnalysisComponent,
-        AvalibleBooksComponent,
+        AvailableBooksComponent,
     ],
     imports: [
         NativeScriptModule,

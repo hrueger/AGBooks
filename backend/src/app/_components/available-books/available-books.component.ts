@@ -8,11 +8,11 @@ import { RemoteService } from "../../_services/remote.service";
 import { getApiUrl } from "../../_utils/utils";
 
 @Component({
-    selector: "app-avalible-books",
-    styleUrls: ["./avalible-books.component.scss"],
-    templateUrl: "./avalible-books.component.html",
+    selector: "app-available-books",
+    styleUrls: ["./available-books.component.scss"],
+    templateUrl: "./available-books.component.html",
 })
-export class AvalibleBooksComponent implements OnInit {
+export class AvailableBooksComponent implements OnInit {
   public books: any[];
   public apiUrl = getApiUrl();
   public registrationDone = false;

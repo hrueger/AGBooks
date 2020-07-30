@@ -2,7 +2,7 @@ import { Routes } from "@angular/router";
 import { DashboardComponent } from "./_components/dashboard/dashboard.component";
 import { AuthGuard } from "./_guards/auth.guard";
 import { AnalysisComponent } from "./_components/analysis/analysis.component";
-import { AvalibleBooksComponent } from "./_components/avalible-books/avalible-books.component";
+import { AvailableBooksComponent } from "./_components/available-books/available-books.component";
 import { LoginComponent } from "./_components/login/login.component";
 
 export const routes: Routes = [
@@ -21,8 +21,8 @@ export const routes: Routes = [
     },
 
     {
-        path: "avaliblebooks",
-        component: AvalibleBooksComponent,
+        path: "availablebooks",
+        component: AvailableBooksComponent,
     },
 
     {
