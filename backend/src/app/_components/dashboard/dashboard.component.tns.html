@@ -1,7 +1,7 @@
-<ActionBar class="action-bar">
+<!--<ActionBar class="action-bar">
     <Label *ngIf="currentOrder.user.grade" class=" action-bar-title" [text]="'Klasse / Kurs: '+currentOrder.user.grade"></Label>
     <Label *ngIf="!currentOrder.user && !currentOrder.user.grade" class=" action-bar-title" text="AGBooks"></Label>
-</ActionBar>
+</ActionBar>-->
 
 <ListView *ngIf="currentOrder" [items]="currentOrder.order" (itemTap)="onBookTap($event)" class="list-group">
     <ng-template let-book="item">

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import * as applicationSettings from "tns-core-modules/application-settings";
+import { ApplicationSettings } from "@nativescript/core";
 import { User } from "../_models/User";
 import { getApiUrl } from "../_utils/utils";
 
@@ -21,7 +21,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
 
   constructor(private http: HttpClient) {
-      let cu = applicationSettings.getString("currentUser");
+      let cu = ApplicationSettings.getString("currentUser");
       if (cu) {
           cu = JSON.parse(cu);
       } else {
@@ -49,7 +49,7 @@ export class AuthenticationService {
                   if (user && user.token) {
                       // store user details and jwt token in local storage
                       // to keep user logged in between page refreshes
-                      applicationSettings.setString("currentUser", JSON.stringify(user));
+                      ApplicationSettings.setString("currentUser", JSON.stringify(user));
                       this.currentUserSubject.next(user);
                   }
 
@@ -60,7 +60,7 @@ export class AuthenticationService {
 
   public logout(): void {
       // remove user from local storage to log user out
-      applicationSettings.remove("currentUser");
+      ApplicationSettings.remove("currentUser");
       this.currentUserSubject.next(null);
   }
 }
