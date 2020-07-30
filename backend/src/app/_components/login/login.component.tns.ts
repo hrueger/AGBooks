@@ -5,6 +5,7 @@ import { Animation } from "tns-core-modules/ui/animation";
 import { View } from "tns-core-modules/ui/core/view";
 import { prompt } from "tns-core-modules/ui/dialogs";
 import { Page } from "tns-core-modules/ui/page";
+import { ApplicationSettings } from "@nativescript/core";
 import { AuthenticationService } from "../../_services/authentication.service";
 
 @Component({
@@ -13,6 +14,7 @@ import { AuthenticationService } from "../../_services/authentication.service";
     templateUrl: "./login.component.html",
 })
 export class LoginComponent {
+    public serverUrl = "";
     public username = "";
     public password = "";
     public isAuthenticating = false;
@@ -21,6 +23,7 @@ export class LoginComponent {
     @ViewChild("mainContainer", { static: false }) public mainContainer: ElementRef;
     @ViewChild("formControls", { static: false }) public formControls: ElementRef;
     @ViewChild("passwordField", { static: false }) public passwordEl: ElementRef;
+    @ViewChild("usernameField", { static: false }) public usernameEl: ElementRef;
 
     constructor(private authService: AuthenticationService,
         private page: Page,
@@ -35,6 +38,10 @@ export class LoginComponent {
         this.passwordEl.nativeElement.focus();
     }
 
+    public focusUsername(): void {
+        this.usernameEl.nativeElement.focus();
+    }
+
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public startBackgroundAnimation(background): void {
         background.animate({
@@ -44,6 +51,7 @@ export class LoginComponent {
     }
 
     public submit(): void {
+        ApplicationSettings.setString("apiUrl", this.serverUrl);
         this.isAuthenticating = true;
         this.login();
     }
