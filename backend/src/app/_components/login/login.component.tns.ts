@@ -19,9 +19,6 @@ export class LoginComponent {
     public password = "";
     public isAuthenticating = false;
 
-    @ViewChild("initialContainer", { static: false }) public initialContainer: ElementRef;
-    @ViewChild("mainContainer", { static: false }) public mainContainer: ElementRef;
-    @ViewChild("formControls", { static: false }) public formControls: ElementRef;
     @ViewChild("passwordField", { static: false }) public passwordEl: ElementRef;
     @ViewChild("usernameField", { static: false }) public usernameEl: ElementRef;
 
@@ -68,61 +65,5 @@ export class LoginComponent {
           Bitte überprüfe deinen Benutzernamen nochmals!");
             },
         );
-    }
-
-    public forgotPassword(): void {
-        prompt({
-            cancelButtonText: "Cancel",
-            defaultText: "",
-            message: "Bitte gib deine Email-Adresse ein, um dein Passwort zurückzusetzen.",
-            okButtonText: "Ok",
-            title: "Passwort vergesssen",
-        }).then((data) => {
-            if (data.result) {
-                /* this.authService.resetPassword(data.text.trim())
-             .subscribe(() => {
-               alert("Your password was successfully reset. Please check\
-               your email for instructions on choosing a new password.");
-             }, () => {
-               alert("Unfortunately, an error occurred resetting your password.");
-             }); */
-                // eslint-disable-next-line no-alert
-                alert("Geht noch nicht!");
-            }
-        });
-    }
-
-    public showMainContent(): void {
-        const initialContainer = this.initialContainer.nativeElement as View;
-        const mainContainer = this.mainContainer.nativeElement as View;
-        const formControls = this.formControls.nativeElement as View;
-        const animations = [];
-
-        // Fade out the initial content over one half second
-        initialContainer.animate({
-            duration: 500,
-            opacity: 0,
-        }).then(() => {
-            // After the animation completes, hide the initial container and
-            // show the main container and logo. The main container and logo will
-            // not immediately appear because their opacity is set to 0 in CSS.
-            initialContainer.style.visibility = "collapse";
-            mainContainer.style.visibility = "visible";
-
-            // Fade in the main container and logo over one half second.
-            animations.push({ target: mainContainer, opacity: 1, duration: 500 });
-
-            // Slide up the form controls and sign up container.
-            animations.push({
-                target: formControls,
-                translate: { x: 0, y: 0 },
-                opacity: 1,
-                delay: 650,
-                duration: 150,
-            });
-
-            // Kick off the animation queue
-            new Animation(animations, false).play();
-        });
     }
 }
