@@ -142,7 +142,7 @@ class OrderController {
     private static async sendChangesToBackend(res: Response) {
         const data = await OrderController.getAllOrders();
         for (const sse of res.app.locals.backendLive) {
-            sse.send({ orders: data });
+            sse.send(data);
         }
     }
 
