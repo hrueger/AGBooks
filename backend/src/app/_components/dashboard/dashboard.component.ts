@@ -1,4 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import {
+    Component, OnInit, ChangeDetectorRef, NgZone,
+} from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
@@ -6,6 +8,7 @@ import { Order } from "../../_models/Order";
 import { AlertService } from "../../_services/alert.service";
 import { RemoteService } from "../../_services/remote.service";
 import { getApiUrl } from "../../_utils/utils";
+import { AuthenticationService } from "../../_services/authentication.service";
 
 @Component({
     selector: "app-dashboard",
@@ -23,10 +26,14 @@ export class DashboardComponent implements OnInit {
 
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         private title: Title,
         private alertService: AlertService,
+        private authenticationService: AuthenticationService,
         private remoteService: RemoteService,
         private activeRoute: ActivatedRoute,
+        private cdr: ChangeDetectorRef,
+        private zone: NgZone,
     ) { }
     public ngOnInit(): void {
         // this.loadAllUsers();
@@ -37,54 +44,73 @@ export class DashboardComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 (orders: Order[]) => {
-                    if (orders) {
-                        this.sortOrders(orders);
-                    }
-
-                    this.activeRoute.params.subscribe((routeParams: {type: string, id: string}) => {
-                        if (routeParams.id) {
-                            const id = parseInt(routeParams.id, 10);
-                            if (routeParams.type == "queue") {
-                                this.currentOrder = this.orders.find(
-                                    (order) => order.user.id === id,
-                                );
-                                this.orderCanBeDone = true;
-                                this.orderCanBeAccepted = false;
-                            } else if (routeParams.type == "done") {
-                                this.currentOrder = this.doneOrders.find(
-                                    (order) => order.user.id === id,
-                                );
-                                this.orderCanBeDone = false;
-                                this.orderCanBeAccepted = true;
-                            } else if (routeParams.type == "accepted") {
-                                this.currentOrder = this.acceptedOrders.find(
-                                    (order) => order.user.id === id,
-                                );
-                                this.orderCanBeDone = false;
-                                this.orderCanBeAccepted = false;
+                    this.gotOrders(orders);
+                    this.setupSSE();
+                    this.activeRoute.params.subscribe(
+                        (routeParams: { type: string; id: string; }) => {
+                            if (routeParams.id) {
+                                this.findCurrentOrder(routeParams.type, routeParams.id);
+                            } else {
+                                this.navigateToTopOrder();
                             }
-                            if (this.currentOrder) {
-                                this.currentOrder.books = this.currentOrder.books.sort(
-                                    (a, b) => a.subject.localeCompare(b.subject),
-                                );
-                            }
-                        } else {
-                            this.navigateToTopOrder();
-                        }
-                    });
-
-                    this.sse = new EventSource(`${getApiUrl()}?queueBackend`);
-                    this.sse.addEventListener("update", (message: any) => {
-                        const data = JSON.parse(message.data);
-                        if (data) {
-                            this.sortOrders(data.orders);
-                        }
-                    });
+                        },
+                    );
                 },
                 (error: any) => {
                     this.alertService.error(error);
                 },
             );
+    }
+
+    private findCurrentOrder(type: string, i: string) {
+        const id = parseInt(i, 10);
+        if (type == "queue") {
+            this.currentOrder = this.orders.find(
+                (order) => order.user.id === id,
+            );
+            this.orderCanBeDone = true;
+            this.orderCanBeAccepted = false;
+        } else if (type == "done") {
+            this.currentOrder = this.doneOrders.find(
+                (order) => order.user.id === id,
+            );
+            this.orderCanBeDone = false;
+            this.orderCanBeAccepted = true;
+        } else if (type == "accepted") {
+            this.currentOrder = this.acceptedOrders.find(
+                (order) => order.user.id === id,
+            );
+            this.orderCanBeDone = false;
+            this.orderCanBeAccepted = false;
+        }
+        if (this.currentOrder) {
+            this.currentOrder.books = this.currentOrder.books.sort(
+                (a, b) => a.subject.localeCompare(b.subject),
+            );
+        }
+    }
+
+    private gotOrders(orders: Order[]) {
+        if (orders) {
+            this.sortOrders(orders);
+            this.findCurrentOrder(this.route.snapshot.params.type, this.route.snapshot.params.id);
+        }
+    }
+
+    private setupSSE() {
+        this.sse = new EventSource(`${getApiUrl()}order/all/live?authorization=${this.authenticationService.currentUserValue.token}`);
+        this.sse.onmessage = (message: any) => {
+            this.zone.run(() => {
+                const data = JSON.parse(message.data);
+                this.gotOrders(data);
+            });
+        };
+        this.sse.onerror = () => {
+            this.alertService.error("Verbindung unterbrochen. Neuer Versuch in 5 Sekunden...");
+            setTimeout(() => {
+                this.setupSSE();
+            }, 5000);
+        };
     }
 
     public orderDone(): void {

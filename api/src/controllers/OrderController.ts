@@ -29,6 +29,7 @@ class OrderController {
         me.orderSubmitted = true;
         me.orderTimestamp = new Date();
         await userRepository.save(me);
+        OrderController.sendChangesToBackend(res);
         res.send({ success: true });
     }
 
@@ -40,16 +41,19 @@ class OrderController {
         for (const [userId, sse] of Object.entries(res.app.locals.live) as [string, SSE][]) {
             sse.send(await OrderController.getOrderStatus(userId));
         }
+        OrderController.sendChangesToBackend(res);
         res.send({ success: true });
     }
 
     public static orderAccepted = async (req: Request, res: Response): Promise<void> => {
         await OrderController.acceptOrder(req.params.id);
+        OrderController.sendChangesToBackend(res);
         res.send({ success: true });
     }
 
     public static accept = async (req: Request, res: Response): Promise<void> => {
         await OrderController.acceptOrder(res.locals.jwtPayload.userId);
+        OrderController.sendChangesToBackend(res);
         res.send({ success: true });
     }
 
@@ -62,6 +66,7 @@ class OrderController {
         user.orderAccepted = false;
         user.orderTimestamp = undefined;
         await userRepository.save(user);
+        OrderController.sendChangesToBackend(res);
         res.send({ success: true });
     }
 
@@ -98,6 +103,17 @@ class OrderController {
     }
 
     public static listAll = async (req: Request, res: Response): Promise<void> => {
+        const orders: Order[] = await OrderController.getAllOrders();
+        res.send(orders);
+    }
+
+    public static listAllLive = async (req: Request, res: Response): Promise<void> => {
+        const sse = new SSE();
+        res.app.locals.backendLive.push(sse);
+        sse.init(req, res);
+    }
+
+    private static async getAllOrders() {
         const userRepository = getRepository(User);
         const users = await userRepository.find({
             where: {
@@ -120,7 +136,14 @@ class OrderController {
             }
             orders.push(o);
         }
-        res.send(orders);
+        return orders;
+    }
+
+    private static async sendChangesToBackend(res: Response) {
+        const data = await OrderController.getAllOrders();
+        for (const sse of res.app.locals.backendLive) {
+            sse.send(data);
+        }
     }
 
     public static forCheck = async (req: Request, res: Response): Promise<void> => {

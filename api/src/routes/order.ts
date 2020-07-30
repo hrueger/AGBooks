@@ -7,6 +7,7 @@ const router = Router();
 
 router.get("/", [checkJwt], OrderController.forCheck);
 router.get("/all", [checkJwt, checkForAdmin], OrderController.listAll);
+router.get("/all/live", [checkJwt, checkForAdmin], OrderController.listAllLive);
 router.get("/live", [checkJwt], OrderController.live);
 router.post("/", [checkJwt], OrderController.order);
 router.post("/submit", [checkJwt], OrderController.submit);
