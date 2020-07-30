@@ -1,29 +1,26 @@
-<GridLayout>
+<StackLayout class="page">
+    <Image class="logo" src="~/assets/logo.png"></Image>
+    <Label class="header" text="AGBooks"></Label>
 
-    <GridLayout #background scaleX="1.4" scaleY="1.4" class="background" (loaded)="startBackgroundAnimation(background)">
+    <GridLayout rows="auto, auto, auto">
+        <StackLayout row="0" class="input-field">
+            <TextField hint="Server-URL" returnKeyType="next" (returnPress)="focusUsername()" [(ngModel)]="serverUrl" [isEnabled]="!isAuthenticating" autocorrect="false" autocapitalizationType="none" class="input" [class.light]="!isAuthenticating" row="0"></TextField>
+        </StackLayout>
+
+        <StackLayout row="1" class="input-field">
+            <TextField #usernameField hint="Benutzername" returnKeyType="next" (returnPress)="focusPassword()" [(ngModel)]="username" [isEnabled]="!isAuthenticating" autocorrect="false" autocapitalizationType="none" class="input" [class.light]="!isAuthenticating"
+                row="1"></TextField>
+        </StackLayout>
+
+        <StackLayout row="2" class="input-field">
+            <TextField #passwordField hint="Passwort" secure="true" class="input" returnKeyType="done" (returnPress)="submit()" [(ngModel)]="password" [isEnabled]="!isAuthenticating" [class.light]="!isAuthenticating" row="2"></TextField>
+        </StackLayout>
+
+
+        <ActivityIndicator [busy]="isAuthenticating" rowSpan="3"></ActivityIndicator>
     </GridLayout>
 
-    <GridLayout rows="auto, auto, auto, auto, *, auto" columns="*" #initialContainer class="initial-container">
+    <Button text="Login" [isEnabled]="!isAuthenticating" class="submit-button" (tap)="submit()"></Button>
 
-        <Label col="0" row="0" text="AGBooks" class="initial-label"></Label>
-        <Label col="0" row="1" text="Version 0.1.4 vom 10.09.2019" class="version-label"></Label>
-
-        <Button text="Login" col="0" row="2" (tap)="showMainContent()" class="initial-button"></Button>
-    </GridLayout>
-
-    <StackLayout #mainContainer class="main-container">
-        <Label class="main-label" text="AGBooks"></Label>
-
-        <GridLayout #formControls class="form-controls" rows="auto, auto, auto" translateY="50">
-            <TextField hint="Server-URL" returnKeyType="next" (returnPress)="focusUsername()" [(ngModel)]="serverUrl" [isEnabled]="!isAuthenticating" autocorrect="false" autocapitalizationType="none" [class.light]="!isAuthenticating" row="0"></TextField>
-            <TextField #usernameField hint="Benutzername" returnKeyType="next" (returnPress)="focusPassword()" [(ngModel)]="username" [isEnabled]="!isAuthenticating" autocorrect="false" autocapitalizationType="none" [class.light]="!isAuthenticating" row="1"></TextField>
-            <TextField #passwordField hint="Passwort" secure="true" returnKeyType="done" (returnPress)="submit()" [(ngModel)]="password" [isEnabled]="!isAuthenticating" [class.light]="!isAuthenticating" row="2"></TextField>
-
-            <ActivityIndicator [busy]="isAuthenticating" rowSpan="2"></ActivityIndicator>
-        </GridLayout>
-
-        <Button text="Login" [isEnabled]="!isAuthenticating" class="submit-button" (tap)="submit()"></Button>
-
-        <Label class="forgot-password-label" text="Passwort vergessen?" (tap)="forgotPassword()"></Label>
-    </StackLayout>
-</GridLayout>
+    <Label class="forgot-password-label" text="Passwort vergessen?" (tap)="forgotPassword()"></Label>
+</StackLayout>

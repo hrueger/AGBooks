@@ -10,7 +10,7 @@ import { AuthenticationService } from "../../_services/authentication.service";
 
 @Component({
     selector: "app-login",
-    styleUrls: ["./login.component.css"],
+    styleUrls: ["./login.component.scss"],
     templateUrl: "./login.component.html",
 })
 export class LoginComponent {
@@ -40,14 +40,6 @@ export class LoginComponent {
 
     public focusUsername(): void {
         this.usernameEl.nativeElement.focus();
-    }
-
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    public startBackgroundAnimation(background): void {
-        background.animate({
-            duration: 10000,
-            scale: { x: 1.0, y: 1.0 },
-        });
     }
 
     public submit(): void {
