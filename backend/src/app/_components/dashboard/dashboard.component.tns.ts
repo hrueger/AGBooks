@@ -1,7 +1,12 @@
-import { Component } from "@angular/core";
-import * as app from "tns-core-modules/application";
+import { Component, NgZone } from "@angular/core";
+import { Application } from "@nativescript/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+import { Router, ActivatedRoute } from "@angular/router";
+import { Title } from "@angular/platform-browser";
 import { DashboardComponentCommon } from "./dashboard.component.common";
+import { AlertService } from "../../_services/alert.service";
+import { AuthenticationService } from "../../_services/authentication.service";
+import { RemoteService } from "../../_services/remote.service";
 
 @Component({
     selector: "app-dashboard",
@@ -9,8 +14,29 @@ import { DashboardComponentCommon } from "./dashboard.component.common";
     styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent extends DashboardComponentCommon {
+    constructor(
+        router: Router,
+        route: ActivatedRoute,
+        title: Title,
+        alertService: AlertService,
+        authenticationService: AuthenticationService,
+        remoteService: RemoteService,
+        activeRoute: ActivatedRoute,
+        zone: NgZone,
+    ) {
+        super(
+            router,
+            route,
+            title,
+            alertService,
+            authenticationService,
+            remoteService,
+            activeRoute,
+            zone,
+        );
+    }
     public showSideDrawer(): void {
-        const sideDrawer = app.getRootView() as RadSideDrawer;
+        const sideDrawer = Application.getRootView() as unknown as RadSideDrawer;
         sideDrawer.showDrawer();
     }
 }
