@@ -2,7 +2,6 @@ import * as bodyParser from "body-parser";
 import * as cors from "cors";
 import * as express from "express";
 import * as helmet from "helmet";
-import * as path from "path";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import * as fs from "fs";
@@ -93,10 +92,14 @@ createConnection({
         app.use("/", express.static("/app/dist/frontend"));
         app.use("*", express.static("/app/dist/frontend/index.html"));
 
-        // That starts the server on the given port
-        app.listen(config.PORT, () => {
+        let port = 80;
+        if (process.env.NODE_ENV == "development") {
+            port = 3000;
+        }
+        // That starts the server
+        app.listen(port, () => {
             // eslint-disable-next-line no-console
-            console.log(`Server started on port ${config.PORT}!`);
+            console.log(`Server started on port ${port}!`);
         });
     })
     // If an error happens, print it on the console
