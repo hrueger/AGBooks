@@ -40,7 +40,7 @@ export class LoginComponent {
     }
 
     public submit(): void {
-        ApplicationSettings.setString("apiUrl", this.serverUrl);
+        ApplicationSettings.setString("apiUrl", `${this.serverUrl}/api/`);
         this.isAuthenticating = true;
         this.login();
     }
