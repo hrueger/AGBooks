@@ -4,13 +4,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import * as applicationSettings from "tns-core-modules/application-settings";
 import { User } from "../_models/User";
-import { getApiUrl } from "../_utils/utils";
-
-const httpOptions = {
-    headers: new HttpHeaders({
-        "Content-Type": "application/json",
-    }),
-};
+import { RemoteService } from "./remote.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
@@ -20,7 +14,7 @@ export class AuthenticationService {
   public currentUser: Observable<User>;
   private currentUserSubject: BehaviorSubject<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(private remoteService: RemoteService) {
       let cu = applicationSettings.getString("currentUser");
       if (cu) {
           cu = JSON.parse(cu);
@@ -32,17 +26,7 @@ export class AuthenticationService {
   }
 
   public login(email: string, password: string): Observable<any> {
-      const action = "authenticateBackend";
-      return this.http
-          .post<any>(
-              getApiUrl(),
-              {
-                  action,
-                  email,
-                  password,
-              },
-              httpOptions,
-          )
+      return this.remoteService.post("auth/login", { email, password })
           .pipe(
               map((user) => {
                   // login successful if there's a jwt token in the response
