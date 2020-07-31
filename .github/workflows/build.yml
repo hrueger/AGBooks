@@ -42,7 +42,7 @@ jobs:
   build_backend_web:
     strategy:
       matrix:
-      os: [windows-latest, ubuntu-latest, macOS-latest]
+        os: [windows-latest, ubuntu-latest, macOS-latest]
     name: Web on ${{matrix.os}}
     runs-on: ${{matrix.os}}
     steps:
