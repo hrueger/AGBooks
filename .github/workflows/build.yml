@@ -48,15 +48,15 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
+      uses: actions/setup-node@v1
+      with:
         node-version: 12
     - name: Install dependencies
-        working-directory: backend
-        run: npm i
+      working-directory: backend
+      run: npm i
     - name: Build
-        working-directory: backend
-        run: npm run build
+      working-directory: backend
+      run: npm run build
   build_docker:
     name: Docker Build
     runs-on: ubuntu-latest
