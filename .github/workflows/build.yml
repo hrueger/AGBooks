@@ -1,0 +1,106 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build_api:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macOS-latest]
+    name: API on ${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - name: Install dependencies
+      working-directory: api
+      run: npm i
+    - name: Build
+      working-directory: api
+      run: npm run build
+  build_frontend_web:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macOS-latest]
+    name: Web on ${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - name: Install dependencies
+      working-directory: frontend
+      run: npm i
+    - name: Build
+      working-directory: frontend
+      run: npm run build
+  build_backend_web:
+    strategy:
+      matrix:
+      os: [windows-latest, ubuntu-latest, macOS-latest]
+    name: Web on ${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+        node-version: 12
+    - name: Install dependencies
+        working-directory: backend
+        run: npm i
+    - name: Build
+        working-directory: backend
+        run: npm run build
+  build_docker:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - name: Install frontend dependencies
+      working-directory: frontend
+      run: npm i
+    - name: Install backend dependencies
+      working-directory: backend
+      run: npm i
+    - name: Install api dependencies
+      working-directory: api
+      run: npm i
+    - name: Build
+      working-directory: docker
+      run: sudo bash ./build.sh
+    - name: Deploy to Docker Hub
+      working-directory: docker
+      run: sudo bash ./deploy.sh ${{ secrets.DOCKER_HUB_USERNAME }} ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+  build_android:
+    name: Android Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - name: Setup Nativescript
+      uses: hrueger/setup-nativescript@v1.0.0
+    - name: Install frontend dependencies
+      working-directory: backend
+      run: npm i
+    - name: Build
+      working-directory: backend
+      run: npm run android:prod
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+        name: agbooks-backend-android
+        path: backend/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+    
