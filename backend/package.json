@@ -4,7 +4,7 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "build": "ng build",
+        "build": "ng build --prod --base-href /backend/",
         "lint": "eslint .",
         "ngcc": "ngcc --properties es2015 module main --first-only",
         "postinstall": "npm run ngcc",
