@@ -86,7 +86,12 @@ createConnection({
         app.use("/api", routes);
 
         // Set routes for static built frontend
-        app.use("/", express.static(path.join(__dirname, "../../frontend_build")));
+        app.use("/backend", express.static("/app/dist/backend"));
+        app.use("/backend/*", express.static("/app/dist/backend/index.html"));
+
+        // Set routes for static built frontend
+        app.use("/", express.static("/app/dist/frontend"));
+        app.use("*", express.static("/app/dist/frontend/index.html"));
 
         // That starts the server on the given port
         app.listen(config.PORT, () => {
