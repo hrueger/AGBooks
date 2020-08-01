@@ -22,7 +22,9 @@
     </div>
     <ul class="navbar-nav px-3">
         <li class="nav-item">
-            <a class="nlink" routerLink="/availablebooks">Klassensatz</a>&nbsp;<a class="nlink" routerLink="/statistics">Statistiken</a>&nbsp;<a class="nlink" routerLink="" (click)="authenticationService.logout()">Logout</a>
+            <a class="nlink" routerLink="/availablebooks" title="Klassensatz"><i class="fas fa-list"></i></a>
+            <a class="nlink mx-5" routerLink="/statistics" title="Statistiken"><i class="fas fa-chart-bar"></i></a>
+            <a class="nlink" routerLink="" (click)="authenticationService.logout()" title="Abmelden"><i class="fas fa-sign-out-alt"></i></a>
         </li>
 
     </ul>
