@@ -17,6 +17,7 @@ import { DashboardComponent } from "./_components/dashboard/dashboard.component"
 import { LoginComponent } from "./_components/login/login.component";
 import { AvailableBooksComponent } from "./_components/available-books/available-books.component";
 import { NavbarComponent } from "./_components/navbar/navbar.component";
+import { UsersComponent } from "./_components/users/users.component";
 @NgModule({
     imports: [
         BrowserModule,
@@ -35,6 +36,7 @@ import { NavbarComponent } from "./_components/navbar/navbar.component";
         StatisticsComponent,
         AvailableBooksComponent,
         NavbarComponent,
+        UsersComponent,
 
     ],
     providers: [

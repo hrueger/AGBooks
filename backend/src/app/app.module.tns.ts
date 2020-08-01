@@ -16,6 +16,7 @@ import { AvailableBooksComponent } from "./_components/available-books/available
 import { DashboardComponent } from "./_components/dashboard/dashboard.component";
 import { LoginComponent } from "./_components/login/login.component";
 import { NavbarComponent } from "./_components/navbar/navbar.component";
+import { UsersComponent } from "./_components/users/users.component";
 
 // eslint-disable-next-line
 registerElement("PullToRefresh", () => require("@nstudio/nativescript-pulltorefresh").PullToRefresh);
@@ -29,6 +30,7 @@ registerElement("PullToRefresh", () => require("@nstudio/nativescript-pulltorefr
         StatisticsComponent,
         AvailableBooksComponent,
         NavbarComponent,
+        UsersComponent,
     ],
     imports: [
         NativeScriptModule,
