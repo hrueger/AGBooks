@@ -34,4 +34,14 @@ export class UsersComponent {
             }
         });
     }
+
+    public removeAdmin(admin: Admin): void {
+        // eslint-disable-next-line
+        if (!confirm("Soll dieser Benutzer wirklich gelöscht werden?")) {
+            return;
+        }
+        this.remoteService.delete(`auth/admins/${admin.id}`).subscribe(() => {
+            this.ngOnInit();
+        });
+    }
 }
