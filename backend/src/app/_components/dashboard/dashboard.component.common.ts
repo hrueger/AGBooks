@@ -21,11 +21,11 @@ export class DashboardComponentCommon implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private title: Title,
-        private alertService: AlertService,
+        public alertService: AlertService,
         public authenticationService: AuthenticationService,
         private remoteService: RemoteService,
         private activeRoute: ActivatedRoute,
-        private zone: NgZone,
+        public zone: NgZone,
     ) { }
     public ngOnInit(done?: () => void): void {
         // this.loadAllUsers();
@@ -85,14 +85,14 @@ export class DashboardComponentCommon implements OnInit {
         }
     }
 
-    private gotOrders(orders: Order[]) {
+    public gotOrders(orders: Order[]): void {
         if (orders) {
             this.sortOrders(orders);
             this.findCurrentOrder(this.route.snapshot.params.type, this.route.snapshot.params.id);
         }
     }
 
-    private setupSSE() {
+    public setupSSE(): void {
         this.sse = new EventSource(`${getApiUrl()}order/all/live?authorization=${this.authenticationService.currentUserValue.token}`);
         this.sse.onmessage = (message: any) => {
             this.zone.run(() => {
