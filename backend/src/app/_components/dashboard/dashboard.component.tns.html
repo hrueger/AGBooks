@@ -11,16 +11,19 @@
         </ng-container>
         <Label row="0" col="1" rowspan="2" class="h2 single-headline" *ngIf="!currentOrder || !currentOrder.user || !currentOrder.user.grade || viewOrderList" text="AGBooks"></Label>
     </GridLayout>
-    <ListView row="1" *ngIf="viewOrderList" [items]="orders.concat(doneOrders).concat(acceptedOrders)" class="list-group">
-        <ng-template let-order="item">
-            <GridLayout rows="auto, auto" columns="80, *, 80" class="list-group-item" (tap)="setCurrentOrder(order)" [class.done]="order.user.orderDone && !order.user.orderAccepted" [class.accepted]="order.user.orderAccepted">
-                <Label row="0" col="0" rowspan="2" class="h1" [text]="order.user.grade ? order.user.grade : order.user.course"></Label>
-                <Label row="0" col="1" class="h3 p-y-0 m-y-0" textDecoration="underline" [text]="order.user.teacher"></Label>
-                <Label row="1" col="1" class="h3 p-y-0 m-y-0" [text]="'Klassenstärke: ' + order.user.classSize"></Label>
-                <Label row="0" col="2" rowspan="2" class="h2" [text]="order.user.room"></Label>
-            </GridLayout>
-        </ng-template>
-    </ListView>
+
+    <PullToRefresh (refresh)="refreshOrders($event)" row="1" *ngIf="viewOrderList">
+        <ListView [items]="orders.concat(doneOrders).concat(acceptedOrders)" class="list-group">
+            <ng-template let-order="item">
+                <GridLayout rows="auto, auto" columns="80, *, 80" class="list-group-item" (tap)="setCurrentOrder(order)" [class.done]="order.user.orderDone && !order.user.orderAccepted" [class.accepted]="order.user.orderAccepted">
+                    <Label row="0" col="0" rowspan="2" class="h1" [text]="order.user.grade ? order.user.grade : order.user.course"></Label>
+                    <Label row="0" col="1" class="h3 p-y-0 m-y-0" textDecoration="underline" [text]="order.user.teacher"></Label>
+                    <Label row="1" col="1" class="h3 p-y-0 m-y-0" [text]="'Klassenstärke: ' + order.user.classSize"></Label>
+                    <Label row="0" col="2" rowspan="2" class="h2" [text]="order.user.room"></Label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </PullToRefresh>
 
     <ListView row="1" *ngIf="currentOrder && !viewOrderList" [items]="currentOrder.books" class="list-group">
         <ng-template let-book="item">

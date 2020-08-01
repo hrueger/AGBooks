@@ -3,7 +3,7 @@ import {
     LOCALE_ID, NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA,
 } from "@angular/core";
 import {
-    NativeScriptFormsModule,
+    NativeScriptFormsModule, registerElement,
     NativeScriptModule, NativeScriptHttpClientModule,
 } from "@nativescript/angular";
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
@@ -15,6 +15,9 @@ import { AppComponent } from "./app.component";
 import { AvailableBooksComponent } from "./_components/available-books/available-books.component";
 import { DashboardComponent } from "./_components/dashboard/dashboard.component";
 import { LoginComponent } from "./_components/login/login.component";
+
+// eslint-disable-next-line
+registerElement("PullToRefresh", () => require("@nstudio/nativescript-pulltorefresh").PullToRefresh);
 
 @NgModule({
     bootstrap: [AppComponent],

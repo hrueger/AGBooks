@@ -48,4 +48,11 @@ export class DashboardComponent extends DashboardComponentCommon {
         this.currentOrder = order;
         this.viewOrderList = false;
     }
+
+    public refreshOrders(args: { object: any; }): void {
+        const pullRefresh = args.object;
+        this.ngOnInit(() => {
+            pullRefresh.refreshing = false;
+        });
+    }
 }

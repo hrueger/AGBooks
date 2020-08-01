@@ -27,7 +27,7 @@ export class DashboardComponentCommon implements OnInit {
         private activeRoute: ActivatedRoute,
         private zone: NgZone,
     ) { }
-    public ngOnInit(): void {
+    public ngOnInit(done?: () => void): void {
         // this.loadAllUsers();
         this.title.setTitle("AGBooks | Dashboard");
 
@@ -36,6 +36,9 @@ export class DashboardComponentCommon implements OnInit {
             .pipe(first())
             .subscribe(
                 (orders: Order[]) => {
+                    if (typeof done == "function") {
+                        done();
+                    }
                     this.gotOrders(orders);
                     this.setupSSE();
                     this.activeRoute.params.subscribe(
