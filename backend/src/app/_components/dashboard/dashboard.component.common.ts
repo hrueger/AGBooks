@@ -131,12 +131,10 @@ export class DashboardComponentCommon implements OnInit {
         });
     }
     public getHandoverCodeForOrder(): void {
-        this.remoteService.post("handover/admin", {
-            token: this.currentOrder.user.token.replace("Bearer ", ""),
-        }).subscribe((data) => {
-            if (data != false) {
+        this.remoteService.post(`auth/handover/${this.currentOrder.user.id}/code`, {}).subscribe((data) => {
+            if (data && data.code) {
                 // eslint-disable-next-line no-alert
-                alert(`Der Übergabecode lautet:\n\n${data}`);
+                alert(`Der Übergabecode lautet:\n\n${data.code}`);
             }
         });
     }
