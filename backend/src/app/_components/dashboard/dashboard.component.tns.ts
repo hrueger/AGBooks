@@ -7,6 +7,7 @@ import { DashboardComponentCommon } from "./dashboard.component.common";
 import { AlertService } from "../../_services/alert.service";
 import { AuthenticationService } from "../../_services/authentication.service";
 import { RemoteService } from "../../_services/remote.service";
+import { Order } from "../../_models/Order";
 
 @Component({
     selector: "app-dashboard",
@@ -14,7 +15,7 @@ import { RemoteService } from "../../_services/remote.service";
     styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent extends DashboardComponentCommon {
-    viewOrderList = true;
+    public viewOrderList = true;
     constructor(
         router: Router,
         route: ActivatedRoute,
@@ -39,5 +40,10 @@ export class DashboardComponent extends DashboardComponentCommon {
     public showSideDrawer(): void {
         const sideDrawer = Application.getRootView() as unknown as RadSideDrawer;
         sideDrawer.showDrawer();
+    }
+
+    public setCurrentOrder(order: Order): void {
+        this.currentOrder = order;
+        this.viewOrderList = false;
     }
 }
