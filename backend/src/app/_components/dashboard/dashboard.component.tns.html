@@ -2,7 +2,7 @@
     <GridLayout row="0" rows="auto, auto" columns="50, *" class="fake-action-bar">
         <Button row="0" col="0" rowspan="2" class="fas" text="bars" (tap)="onDrawerButtonTap()"></Button>
         <ng-container *ngIf="currentOrder && currentOrder.user && currentOrder.user.grade">
-            <Label row="0" col="1" class="h3" [text]="'Klasse / Kurs: '+currentOrder.user.grade"></Label>
+            <Label row="0" col="1" class="h3" [text]="currentOrder.user.grade + (currentOrder.user.course ? ' ' + currentOrder.user.course + ' ' : '') + ' (' + currentOrder.user.room+ ')'"></Label>
             <Label row="2" col="1" class="h3" [text]="currentOrder.user.teacher"></Label>
         </ng-container>
         <Label row="0" col="1" rowspan="2" class="h2 single-headline" *ngIf="!currentOrder || !currentOrder.user || !currentOrder.user.grade" text="AGBooks"></Label>
