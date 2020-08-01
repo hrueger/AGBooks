@@ -27,6 +27,7 @@
         color: white;
     }
     Button {
+        margin-top: -5;
         background-color: transparent;
         font-size: 30;
         width: 40;
@@ -37,5 +38,11 @@
     }
     Label.single-headline {
         margin-top: 5;
+    }
+    Label.h3 {
+        padding-top: 0;
+        margin-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
     }
 }
