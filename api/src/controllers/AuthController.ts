@@ -41,6 +41,15 @@ class AuthController {
         res.send({ success: true });
     }
 
+    public static deleteAdmin = async (req: Request, res: Response): Promise<void> => {
+        try {
+            await getRepository(Admin).delete(req.params.id);
+            res.send({ success: true });
+        } catch {
+            res.status(404).send("Benutzer nicht gefunden!");
+        }
+    }
+
     public static getHandoverCode = async (req: Request, res: Response): Promise<void> => {
         const code = await AuthController.generateHandoverCode(res.locals.jwtPayload.userId);
         res.send({ code });

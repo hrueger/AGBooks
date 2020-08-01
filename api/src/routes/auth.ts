@@ -17,5 +17,6 @@ router.post("/takeover", [checkJwt], AuthController.takeover);
 
 router.get("/admins", [checkJwt, checkForAdmin], AuthController.listAdmins);
 router.post("/admins", [checkJwt, checkForAdmin], AuthController.newAdmin);
+router.delete("/admins/:id", [checkJwt, checkForAdmin], AuthController.deleteAdmin);
 
 export default router;
