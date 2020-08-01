@@ -121,7 +121,7 @@ export class AvailableBooksComponent implements OnInit {
           grade: this.f.grade.value,
           language: this.f.language.value,
           branch: this.f.branch.value,
-          uebergang: this.f.uebergang.value,
+          uebergang: this.f.uebergang.value == "j",
       }).subscribe((data) => {
           this.books = data;
       });
