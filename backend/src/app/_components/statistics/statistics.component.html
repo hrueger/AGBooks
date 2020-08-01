@@ -9,7 +9,7 @@
     <h3>Schuljahr {{year}}</h3>
     <h4>Insgesamt ausgeteilte Bücher: {{totalBooks}}</h4>
     <br><br>
-    <table class="table table-striped table-sm">
+    <table class="table table-sm" [class.table-striped]="!showPrintOnly" [class.table-bordered]="showPrintOnly">
         <thead>
             <tr>
                 <td></td>

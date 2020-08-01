@@ -76,8 +76,9 @@ export class StatisticsComponent implements OnInit {
   public print(): boolean {
       this.showPrintOnly = true;
       const that = this;
-      // eslint-disable-next-line no-alert
-      alert("Bitte schließen Sie diesen Dialog und drücken Sie dann Strg + P um die Seite zu drucken.");
+      setTimeout(() => {
+          window.print();
+      }, 300);
       window.addEventListener("afterprint", () => {
           that.showPrintOnly = false;
       });
