@@ -10,7 +10,7 @@ import { ToastrModule } from "ngx-toastr";
 import { GridsterModule } from "angular-gridster2";
 import { ErrorInterceptor } from "./_interceptors/error.interceptor";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
-import { AnalysisComponent } from "./_components/analysis/analysis.component";
+import { StatisticsComponent } from "./_components/statistics/statistics.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./_components/dashboard/dashboard.component";
@@ -31,7 +31,7 @@ import { AvailableBooksComponent } from "./_components/available-books/available
         AppComponent,
         LoginComponent,
         DashboardComponent,
-        AnalysisComponent,
+        StatisticsComponent,
         AvailableBooksComponent,
 
     ],

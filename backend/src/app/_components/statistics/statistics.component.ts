@@ -3,11 +3,11 @@ import { RemoteService } from "../../_services/remote.service";
 import { Order } from "../../_models/Order";
 
 @Component({
-    selector: "app-analysis",
-    styleUrls: ["./analysis.component.scss"],
-    templateUrl: "./analysis.component.html",
+    selector: "app-statistics",
+    styleUrls: ["./statistics.component.scss"],
+    templateUrl: "./statistics.component.html",
 })
-export class AnalysisComponent implements OnInit {
+export class StatisticsComponent implements OnInit {
   public orders: any[];
   public orderedBySubject: any[];
   public totalBooks = 0;
@@ -23,7 +23,7 @@ export class AnalysisComponent implements OnInit {
   constructor(private remoteService: RemoteService) { }
 
   public ngOnInit(): void {
-      this.remoteService.get("statistics").subscribe((data: {orders: Order[]}) => {
+      this.remoteService.get("order/statistics").subscribe((data: {orders: Order[]}) => {
           this.orders = data.orders;
           this.grades.forEach((grade) => {
               const gi = this.grades.indexOf(grade);
