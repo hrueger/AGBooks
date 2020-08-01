@@ -1,34 +1,4 @@
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">AG-Books Backend</a>
-    <div class="navbar-middle" *ngIf="currentOrder">
-        <p class="d-inline">
-            {{ currentOrder.user.grade }} {{currentOrder.user.course}} - {{ currentOrder.user.teacher }} - Raum {{ currentOrder.user.room }}
-        </p>
-        <p class="d-inline-block btn btn-success doneBtn mx-1 mb-1" *ngIf="orderCanBeDone" (click)="orderDone()">
-            <i class="fas fa-check"></i>
-        </p>
-        <p class="d-inline-block btn btn-warning doneBtn mx-1 mb-1" *ngIf="orderCanBeAccepted" (click)="orderAccepted()">
-            <i class="fas fa-user-check"></i>
-        </p>
-        <p class="d-inline-block btn btn-primary doneBtn mx-1 mb-1" *ngIf="currentOrder" (click)="getHandoverCodeForOrder()">
-            <i class="fas fa-handshake"></i>
-        </p>
-        <p class="d-inline-block btn btn-danger doneBtn mx-1 mb-1" *ngIf="currentOrder" (click)="deleteOrder()">
-            <i class="fas fa-trash"></i>
-        </p>
-    </div>
-    <div class="navbar-middle" *ngIf="!currentOrder">
-        Bitte eine Bestellung auswählen!
-    </div>
-    <ul class="navbar-nav px-3">
-        <li class="nav-item">
-            <a class="nlink" routerLink="/availablebooks" title="Klassensatz"><i class="fas fa-list"></i></a>
-            <a class="nlink mx-5" routerLink="/statistics" title="Statistiken"><i class="fas fa-chart-bar"></i></a>
-            <a class="nlink" routerLink="" (click)="authenticationService.logout()" title="Abmelden"><i class="fas fa-sign-out-alt"></i></a>
-        </li>
-
-    </ul>
-</nav>
+<app-navbar [currentOrder]="currentOrder" [orderCanBeDone]="orderCanBeDone" [orderCanBeAccepted]="orderCanBeAccepted" (orderDone)="orderDone()" (orderAccepted)="orderAccepted()" (getHandoverCodeForOrder)="getHandoverCodeForOrder()" (deleteOrder)="deleteOrder()"></app-navbar>
 
 <div class="container-fluid h-100">
     <div class="row h-100">

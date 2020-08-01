@@ -9,12 +9,13 @@ import {
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 import { ErrorInterceptor } from "./_interceptors/error.interceptor";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
-import { AnalysisComponent } from "./_components/analysis/analysis.component";
+import { StatisticsComponent } from "./_components/statistics/statistics.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { AvailableBooksComponent } from "./_components/available-books/available-books.component";
 import { DashboardComponent } from "./_components/dashboard/dashboard.component";
 import { LoginComponent } from "./_components/login/login.component";
+import { NavbarComponent } from "./_components/navbar/navbar.component";
 
 // eslint-disable-next-line
 registerElement("PullToRefresh", () => require("@nstudio/nativescript-pulltorefresh").PullToRefresh);
@@ -25,8 +26,9 @@ registerElement("PullToRefresh", () => require("@nstudio/nativescript-pulltorefr
         AppComponent,
         LoginComponent,
         DashboardComponent,
-        AnalysisComponent,
+        StatisticsComponent,
         AvailableBooksComponent,
+        NavbarComponent,
     ],
     imports: [
         NativeScriptModule,
