@@ -1,64 +1,27 @@
-<RadSideDrawer #rsd>
-    <!-- [drawerTransition]="sideDrawerTransition"-->
-    <GridLayout tkDrawerContent rows="*" class="sidedrawer sidedrawer-left">
-        <ScrollView row="0">
-            <StackLayout class="sidedrawer-content">
-                <GridLayout columns="auto, *" class="sidedrawer-list-item infotext">
-                    <Button col="1" class="p-r-10 sidedrawer-button">
-            <FormattedString style="background-color: transparent;">
-              <Span text="Warteschlange"></Span>
-            </FormattedString>
-          </Button>
-                </GridLayout>
-                <StackLayout class="hr hr-light"></StackLayout>
+<RadSideDrawer>
+    <GridLayout tkDrawerContent rows="auto, *, auto" class="nt-drawer nt-drawer-left">
+        <StackLayout row="0" class="nt-drawer__header">
+            <Image class="nt-drawer__header-image" src="~/assets/logo.png"></Image>
+            <Label class="nt-drawer__header-brand" text="AGBooks"></Label>
+            <Label class="footnote" [text]="'Version ' + version"></Label>
+        </StackLayout>
 
-                <GridLayout *ngFor="let order of orders" columns="auto, *" class="sidedrawer-list-item" nsRouterLinkActive="active">
-                    <Button col="1" pageTransition="fade" [nsRouterLink]="['/dashboard/queue/'+order.id]" (tap)="hideDrawer()" class="p-r-10 sidedrawer-button">
-            <FormattedString style="background-color: transparent;">
-              <Span
-                [text]="order.user.grade + ' ' +order.user.course + ' - ' + order.user.teacher + ' - Raum ' + order.user.room"></Span>
-            </FormattedString>
-          </Button>
+        <ScrollView row="1">
+            <StackLayout class="nt-drawer-content">
+                <GridLayout columns="auto, *" class="nt-drawer__list-item">
+                    <Label col="0" text="&#xf015;" class="fas"></Label>
+                    <Label col="1" text="Home" class="m-l-10"></Label>
                 </GridLayout>
 
-                <GridLayout columns="auto, *" class="sidedrawer-list-item infotext">
-                    <Button col="1" class="p-r-10 sidedrawer-button">
-            <FormattedString style="background-color: transparent;">
-              <Span text="Abgeschickt"></Span>
-            </FormattedString>
-          </Button>
+                <GridLayout columns="auto, *" class="nt-drawer__list-item" (tap)="goToGitHub()">
+                    <Label col="0" text="github" class="fab"></Label>
+                    <Label col="1" text="GitHub" class="m-l-10"></Label>
                 </GridLayout>
-                <StackLayout class="hr hr-light"></StackLayout>
-
-                <GridLayout *ngFor="let order of doneOrders" columns="auto, *" class="sidedrawer-list-item" nsRouterLinkActive="active">
-                    <Button col="1" pageTransition="fade" [nsRouterLink]="['/dashboard/done/'+order.id]" (tap)="hideDrawer()" class="p-r-10 sidedrawer-button">
-            <FormattedString style="background-color: transparent;">
-              <Span
-                [text]="order.user.grade + ' ' +order.user.course + ' - ' + order.user.teacher + ' - Raum ' + order.user.room"></Span>
-            </FormattedString>
-          </Button>
-                </GridLayout>
-
-                <GridLayout columns="auto, *" class="sidedrawer-list-item infotext">
-                    <Button col="1" class="p-r-10 sidedrawer-button">
-      <FormattedString style="background-color: transparent;">
-        <Span text="Akzeptiert"></Span>
-      </FormattedString>
-    </Button>
-                </GridLayout>
-                <StackLayout class="hr hr-light"></StackLayout>
-
-                <GridLayout *ngFor="let order of acceptedOrders" columns="auto, *" class="sidedrawer-list-item" nsRouterLinkActive="active">
-                    <Button col="1" pageTransition="fade" [nsRouterLink]="['/dashboard/accepted/'+order.id]" (tap)="hideDrawer()" class="p-r-10 sidedrawer-button">
-      <FormattedString style="background-color: transparent;">
-        <Span
-          [text]="order.user.grade + ' ' +order.user.course + ' - ' + order.user.teacher + ' - Raum ' + order.user.room"></Span>
-      </FormattedString>
-    </Button>
-                </GridLayout>
-
             </StackLayout>
         </ScrollView>
+        <StackLayout row="2" verticalAlignment="bottom">
+            <Label class="footer p-5" text="© Hannes Rüger, 2018 - {{currentYear}}"></Label>
+        </StackLayout>
     </GridLayout>
 
     <page-router-outlet tkMainContent class="page page-content"></page-router-outlet>
