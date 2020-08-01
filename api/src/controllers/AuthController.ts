@@ -27,6 +27,11 @@ class AuthController {
         res.send(response);
     }
 
+    public static listAdmins = async (req: Request, res: Response): Promise<void> => {
+        const admins = await getRepository(Admin).find();
+        res.send(admins);
+    }
+
     public static getHandoverCode = async (req: Request, res: Response): Promise<void> => {
         const code = await AuthController.generateHandoverCode(res.locals.jwtPayload.userId);
         res.send({ code });
