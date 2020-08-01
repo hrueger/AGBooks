@@ -139,9 +139,9 @@ export class DashboardComponentCommon implements OnInit {
         });
     }
 
-    public deleteOrder(): void {
-        // eslint-disable-next-line no-alert
-        if (window.confirm("Soll diese Bestellung wirklich gelöscht werden? Sie kann nicht wiederhergestellt werden.")) {
+    public async deleteOrder(): Promise<void> {
+        // eslint-disable-next-line
+        if (await confirm("Soll diese Bestellung wirklich gelöscht werden? Sie kann nicht wiederhergestellt werden.")) {
             this.remoteService.delete(`order/${this.currentOrder.user.id}`).subscribe((data) => {
                 if (data.success == true) {
                     this.orders = this.orders.filter(
