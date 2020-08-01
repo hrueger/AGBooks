@@ -16,4 +16,22 @@ export class UsersComponent {
             this.admins = admins;
         });
     }
+
+    public newAdmin(): void {
+        // eslint-disable-next-line no-alert
+        const email = prompt("Email:");
+        if (!email) {
+            return;
+        }
+        // eslint-disable-next-line no-alert
+        const password = prompt("Passwort:");
+        if (!password) {
+            return;
+        }
+        this.remoteService.post("auth/admins", { email, password }).subscribe((d) => {
+            if (d && d.success) {
+                this.ngOnInit();
+            }
+        });
+    }
 }
