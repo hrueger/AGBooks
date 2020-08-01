@@ -6,60 +6,80 @@ import { User } from "../entity/User";
 
 class BookController {
     public static listAll = async (req: Request, res: Response): Promise<void> => {
-        const bookRepository = getRepository(Book);
         const me = await getRepository(User).findOne(res.locals.jwtPayload.userId);
-        // const books = await bookRepository.find();
+        const books = await BookController.findBooks(me);
+        if (books === false) {
+            res.status(400).send(`Fehlerhafte Klasse:${me.grade}`);
+            return;
+        }
+        res.send(books);
+    }
 
+    public static availableBooks = async (req: Request, res: Response): Promise<void> => {
+        const me = new User();
+        me.grade = req.body.grade;
+        me.language = req.body.language;
+        me.branch = req.body.branch;
+        me.uebergang = req.body.uebergang;
+        const books = await BookController.findBooks(me);
+        if (books === false) {
+            res.status(400).send(`Fehlerhafte Klasse:${me.grade}`);
+            return;
+        }
+        res.send(books);
+    }
+
+    public static async findBooks(user: User): Promise<Book[] | false> {
+        const bookRepository = getRepository(Book);
         let where = "";
         let checkLang = true;
         let checkBranch = true;
-        if (me.grade.startsWith("5")) {
+        if (user.grade.startsWith("5")) {
             where += "`5` = 1";
             checkLang = false;
             checkBranch = false;
-        } else if (me.grade.startsWith("6")) {
+        } else if (user.grade.startsWith("6")) {
             where += "`6` = 1";
             checkBranch = false;
-        } else if (me.grade.startsWith("7")) {
+        } else if (user.grade.startsWith("7")) {
             where += "`7` = 1";
             checkBranch = false;
-        } else if (me.grade.startsWith("8")) {
+        } else if (user.grade.startsWith("8")) {
             where += "`8` = 1";
-        } else if (me.grade.startsWith("9")) {
+        } else if (user.grade.startsWith("9")) {
             where += "`9` = 1";
-        } else if (me.grade.startsWith("10")) {
+        } else if (user.grade.startsWith("10")) {
             where += "(`10` = 1";
-            if (me.uebergang) {
+            if (user.uebergang) {
                 where += " OR `10`= 0 ) AND `uebergang` = '1'";
                 checkBranch = false;
                 checkLang = false;
             } else {
                 where += ")";
             }
-        } else if (me.grade == "Q11") {
+        } else if (user.grade == "Q11") {
             where += "`Q11` = 1";
             checkLang = false;
             checkBranch = false;
-        } else if (me.grade == "Q12") {
+        } else if (user.grade == "Q12") {
             where += "`Q12` = 1";
             checkLang = false;
             checkBranch = false;
-        } else if (me.grade == "Q13") {
+        } else if (user.grade == "Q13") {
             where += "`Q13` = 1";
             checkLang = false;
             checkBranch = false;
         } else {
-            res.status(400).send(`Fehlerhafte Klasse:${me.grade}`);
-            return;
+            return false;
         }
 
         if (checkLang == true) {
-            if (me.language == "französisch" || me.language == "latein") {
-                where += ` AND (\`language\` = '${me.language == "französisch" ? "f" : "l"}' OR \`language\`='' OR \`language\` IS NULL)`;
+            if (user.language == "französisch" || user.language == "latein") {
+                where += ` AND (\`language\` = '${user.language == "französisch" ? "f" : "l"}' OR \`language\`='' OR \`language\` IS NULL)`;
             }
         }
         if (checkBranch == true) {
-            if (me.branch == "naturwissenschaftlich" || me.branch == "sprachlich") {
+            if (user.branch == "naturwissenschaftlich" || user.branch == "sprachlich") {
                 where += " AND (`branch` = 'branch' OR `branch`='' OR `branch` IS NULL)";
             }
             where += " AND `branch`!='sf'";
@@ -68,10 +88,9 @@ class BookController {
         const books = await bookRepository.query(sql);
 
         for (const book of books) {
-            book.number = me.order && me.order[book.id] ? me.order[book.id] : me.classSize;
+            book.number = user.order && user.order[book.id] ? user.order[book.id] : user.classSize;
         }
-
-        res.send(books);
+        return books;
     }
 
     public static cover = async (req: Request, res: Response): Promise<void> => {
