@@ -9,6 +9,7 @@ router.get("/", [checkJwt], OrderController.forCheck);
 router.get("/all", [checkJwt, checkForAdmin], OrderController.listAll);
 router.get("/all/live", [checkJwt, checkForAdmin], OrderController.listAllLive);
 router.get("/live", [checkJwt], OrderController.live);
+router.get("/statistics", [checkJwt], OrderController.statistics);
 router.post("/", [checkJwt], OrderController.order);
 router.post("/submit", [checkJwt], OrderController.submit);
 router.post("/accept", [checkJwt], OrderController.accept);

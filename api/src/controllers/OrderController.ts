@@ -70,6 +70,37 @@ class OrderController {
         res.send({ success: true });
     }
 
+    public static statistics = async (req: Request, res: Response): Promise<void> => {
+        const userRepository = getRepository(User);
+        const bookRepository = getRepository(Book);
+        const users = await userRepository.find({
+            where: {
+                orderDone: true,
+                orderAccepted: true,
+                orderSubmitted: true,
+            },
+        });
+
+        const books = await bookRepository.find();
+        const orders = [];
+        for (const user of users) {
+            const completeOrder = [];
+            for (const [bookId, number] of Object.entries(user.order)) {
+                const bid = parseInt(bookId);
+                completeOrder.push({
+                    name: books.find((b) => b.id == bid).name,
+                    subject: books.find((b) => b.id == bid).subject,
+                    number,
+                });
+            }
+            const order = {} as any;
+            order.order = completeOrder;
+            order.user = user;
+            orders.push(order);
+        }
+        res.send({ orders });
+    }
+
     public static live = async (req: Request, res: Response): Promise<void> => {
         const sse = new SSE([await OrderController.getOrderStatus(res.locals.jwtPayload.userId)]);
         res.app.locals.live[res.locals.jwtPayload.userId] = sse;
