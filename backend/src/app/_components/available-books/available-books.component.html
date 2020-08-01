@@ -4,7 +4,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="inputGrade">Klasse: </label>
             <div class="col-sm-10">
-                <select class="form-control" formControlName="grade" [ngClass]="{ 'is-invalid': submitted && f.grade.errors }" required="">
+                <select class="form-control" formControlName="grade" (change)="books = []" [ngClass]="{ 'is-invalid': submitted && f.grade.errors }" required="">
                     <option disabled="" selected="" value="">Bitte wählen</option>
                     <option value="5">Jahrgangsstufe 5</option>
                     <option value="6">Jahrgangsstufe 6</option>
@@ -23,7 +23,7 @@
             <label class="col-sm-2 col-form-label" for="inputLanguage">2. Fremdsprache:
       </label>
             <div class="col-sm-10">
-                <select class="form-control" formControlName="language" [ngClass]="{ 'is-invalid': submitted && f.language.errors }" required="">
+                <select class="form-control" formControlName="language" (change)="books = []" [ngClass]="{ 'is-invalid': submitted && f.language.errors }" required="">
                     <option disabled="" selected="" value="">Bitte wählen</option>
                     <option value="französisch">Französisch</option>
                     <option value="latein">Latein</option>
@@ -34,7 +34,7 @@
         <div class="form-group row" *ngIf="showBranch">
             <label class="col-sm-2 col-form-label" for="inputBranch">Zweig: </label>
             <div class="col-sm-10">
-                <select class="form-control" formControlName="branch" [ngClass]="{ 'is-invalid': submitted && f.branch.errors }" required="">
+                <select class="form-control" formControlName="branch" (change)="books = []" [ngClass]="{ 'is-invalid': submitted && f.branch.errors }" required="">
                     <option disabled="" selected="" value="">Bitte wählen</option>
                     <option value="naturwissenschaftlich">naturwissenschaftlich</option>
                     <option value="sprachlich">sprachlich</option>
@@ -46,7 +46,7 @@
             <label class="col-sm-2 col-form-label" for="inputUebergang">Übergangsklasse:
       </label>
             <div class="col-sm-10">
-                <select class="form-control" formControlName="uebergang" [ngClass]="{ 'is-invalid': submitted && f.uebergang.errors }" required="">
+                <select class="form-control" formControlName="uebergang" (change)="books = []" [ngClass]="{ 'is-invalid': submitted && f.uebergang.errors }" required="">
                     <option disabled="" selected="" value="">Bitte wählen</option>
                     <option value="j">Ja</option>
                     <option value="n">Nein</option>
