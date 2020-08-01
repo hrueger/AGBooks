@@ -16,5 +16,6 @@ router.get("/handover/live", [checkJwt], AuthController.handoverLive);
 router.post("/takeover", [checkJwt], AuthController.takeover);
 
 router.get("/admins", [checkJwt, checkForAdmin], AuthController.listAdmins);
+router.post("/admins", [checkJwt, checkForAdmin], AuthController.newAdmin);
 
 export default router;

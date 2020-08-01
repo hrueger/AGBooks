@@ -32,6 +32,15 @@ class AuthController {
         res.send(admins);
     }
 
+    public static newAdmin = async (req: Request, res: Response): Promise<void> => {
+        const admin = new Admin();
+        admin.email = req.body.email;
+        admin.password = req.body.password;
+        admin.hashPassword();
+        await getRepository(Admin).save(admin);
+        res.send({ success: true });
+    }
+
     public static getHandoverCode = async (req: Request, res: Response): Promise<void> => {
         const code = await AuthController.generateHandoverCode(res.locals.jwtPayload.userId);
         res.send({ code });
