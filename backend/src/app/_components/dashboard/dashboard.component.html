@@ -5,16 +5,16 @@
             {{ currentOrder.user.grade }} {{currentOrder.user.course}} - {{ currentOrder.user.teacher }} - Raum {{ currentOrder.user.room }}
         </p>
         <p class="d-inline-block btn btn-success doneBtn mx-1 mb-1" *ngIf="orderCanBeDone" (click)="orderDone()">
-            Fertig
+            <i class="fas fa-check"></i>
         </p>
         <p class="d-inline-block btn btn-warning doneBtn mx-1 mb-1" *ngIf="orderCanBeAccepted" (click)="orderAccepted()">
-            Als akzeptiert markieren
+            <i class="fas fa-user-check"></i>
         </p>
         <p class="d-inline-block btn btn-primary doneBtn mx-1 mb-1" *ngIf="currentOrder" (click)="getHandoverCodeForOrder()">
-            Übergeben
+            <i class="fas fa-handshake"></i>
         </p>
         <p class="d-inline-block btn btn-danger doneBtn mx-1 mb-1" *ngIf="currentOrder" (click)="deleteOrder()">
-            Löschen
+            <i class="fas fa-trash"></i>
         </p>
     </div>
     <div class="navbar-middle" *ngIf="!currentOrder">
