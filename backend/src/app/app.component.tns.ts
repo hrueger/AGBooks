@@ -2,7 +2,6 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 import * as appversion from "nativescript-appversion";
 import { Utils } from "@nativescript/core";
 
-
 @Component({
     selector: "app",
     styleUrls: ["./app.component.scss"],
