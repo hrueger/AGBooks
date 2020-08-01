@@ -28,11 +28,13 @@ class AuthController {
     }
 
     public static getHandoverCode = async (req: Request, res: Response): Promise<void> => {
-        const userRepository = getRepository(User);
-        const user = await userRepository.findOne(res.locals.jwtPayload.userId);
-        user.handoverCode = Math.floor(10000 + Math.random() * 90000).toString();
-        await userRepository.save(user);
-        res.send({ code: user.handoverCode });
+        const code = await AuthController.generateHandoverCode(res.locals.jwtPayload.userId);
+        res.send({ code });
+    }
+
+    public static getHandoverCodeForId = async (req: Request, res: Response): Promise<void> => {
+        const code = await AuthController.generateHandoverCode(req.params.id);
+        res.send({ code });
     }
 
     public static handoverLive = async (req: Request, res: Response): Promise<void> => {
@@ -167,6 +169,14 @@ class AuthController {
 
         // Send the jwt in the response
         res.send(response);
+    }
+
+    private static async generateHandoverCode(userId: string) {
+        const userRepository = getRepository(User);
+        const user = await userRepository.findOne(userId);
+        user.handoverCode = Math.floor(10000 + Math.random() * 90000).toString();
+        await userRepository.save(user);
+        return user.handoverCode;
     }
 }
 export default AuthController;
