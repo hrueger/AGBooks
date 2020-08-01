@@ -14,6 +14,7 @@ import { RemoteService } from "../../_services/remote.service";
     styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent extends DashboardComponentCommon {
+    viewOrderList = true;
     constructor(
         router: Router,
         route: ActivatedRoute,

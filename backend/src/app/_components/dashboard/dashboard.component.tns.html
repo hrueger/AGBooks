@@ -1,14 +1,26 @@
-<ActionBar class="action-bar">
-    <Label *ngIf="currentOrder.user.grade" class=" action-bar-title" [text]="'Klasse / Kurs: '+currentOrder.user.grade"></Label>
-    <Label *ngIf="!currentOrder.user && !currentOrder.user.grade" class=" action-bar-title" text="AGBooks"></Label>
-</ActionBar>
+<GridLayout>
+    <ActionBar class="action-bar">
+        <Label *ngIf="currentOrder && currentOrder.user && currentOrder.user.grade" class="action-bar-title" [text]="'Klasse / Kurs: '+currentOrder.user.grade"></Label>
+        <Label *ngIf="!currentOrder || !currentOrder.user || !currentOrder.user.grade" class="action-bar-title" text="AGBooks"></Label>
+    </ActionBar>
+    <ListView *ngIf="viewOrderList" [items]="orders.concat(doneOrders).concat(acceptedOrders)" class="list-group">
+        <ng-template let-order="item">
+            <GridLayout rows="auto, auto" columns="80, *, 80" class="list-group-item" [class.done]="order.user.orderDone && !order.user.orderAccepted" [class.accepted]="order.user.orderAccepted">
+                <Label row="0" col="0" rowspan="2" class="h1" [text]="order.user.grade ? order.user.grade : order.user.course"></Label>
+                <Label row="0" col="1" [text]="order.user.teacher"></Label>
+                <Label row="1" col="1" [text]="'Klassenstärke: ' + order.user.classSize"></Label>
+                <Label row="0" col="2" rowspan="2" class="h2" [text]="order.user.room"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
 
-<ListView *ngIf="currentOrder" [items]="currentOrder.order" (itemTap)="onBookTap($event)" class="list-group">
-    <ng-template let-book="item">
-        <StackLayout orientation="vertical" class="list-group-item" [class.selected]="book.selected">
-            <Label *ngIf="book" [text]="book.subject"></Label>
-            <Label *ngIf="book" [text]="book.name"></Label>
-            <Label *ngIf="book" [text]="book.number"></Label>
-        </StackLayout>
-    </ng-template>
-</ListView>
+    <ListView *ngIf="currentOrder && !viewOrderList" [items]="currentOrder.order" (itemTap)="onBookTap($event)" class="list-group">
+        <ng-template let-book="item">
+            <StackLayout orientation="vertical" class="list-group-item" [class.selected]="book.selected">
+                <Label *ngIf="book" [text]="book.subject"></Label>
+                <Label *ngIf="book" [text]="book.name"></Label>
+                <Label *ngIf="book" [text]="book.number"></Label>
+            </StackLayout>
+        </ng-template>
+    </ListView>
+</GridLayout>
