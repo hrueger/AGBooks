@@ -80,7 +80,7 @@ class BookController {
         }
         if (checkBranch == true) {
             if (user.branch == "naturwissenschaftlich" || user.branch == "sprachlich") {
-                where += " AND (`branch` = 'branch' OR `branch`='' OR `branch` IS NULL)";
+                where += ` AND (\`branch\` = '${user.branch == "naturwissenschaftlich" ? "n" : "s"}' OR \`branch\`='' OR \`branch\` IS NULL)`;
             }
             where += " AND `branch`!='sf'";
         }
