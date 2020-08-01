@@ -1,11 +1,11 @@
 <GridLayout rows="50, *">
     <GridLayout row="0" rows="auto, auto" columns="50, *" class="fake-action-bar">
-        <Button row="0" col="0" rowspan="2" class="fas" text="bars" (tap)="onDrawerButtonTap()"></Button>
-        <ng-container *ngIf="currentOrder && currentOrder.user && currentOrder.user.grade">
+        <Button row="0" col="0" rowspan="2" class="fas" [text]="viewOrderList ? 'bars' : 'arrow-left'" (tap)="viewOrderList ? onDrawerButtonTap() : (viewOrderList = true)"></Button>
+        <ng-container *ngIf="currentOrder && currentOrder.user && currentOrder.user.grade && !viewOrderList">
             <Label row="0" col="1" class="h3" [text]="currentOrder.user.grade + (currentOrder.user.course ? ' ' + currentOrder.user.course + ' ' : '') + ' (' + currentOrder.user.room+ ')'"></Label>
             <Label row="2" col="1" class="h3" [text]="currentOrder.user.teacher"></Label>
         </ng-container>
-        <Label row="0" col="1" rowspan="2" class="h2 single-headline" *ngIf="!currentOrder || !currentOrder.user || !currentOrder.user.grade" text="AGBooks"></Label>
+        <Label row="0" col="1" rowspan="2" class="h2 single-headline" *ngIf="!currentOrder || !currentOrder.user || !currentOrder.user.grade || viewOrderList" text="AGBooks"></Label>
     </GridLayout>
     <ListView row="1" *ngIf="viewOrderList" [items]="orders.concat(doneOrders).concat(acceptedOrders)" class="list-group">
         <ng-template let-order="item">
