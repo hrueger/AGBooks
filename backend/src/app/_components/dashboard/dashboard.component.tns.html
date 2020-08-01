@@ -14,9 +14,9 @@
         </ng-template>
     </ListView>
 
-    <ListView *ngIf="currentOrder && !viewOrderList" [items]="currentOrder.order" (itemTap)="onBookTap($event)" class="list-group">
+    <ListView *ngIf="currentOrder && !viewOrderList" [items]="currentOrder.books" class="list-group">
         <ng-template let-book="item">
-            <StackLayout orientation="vertical" class="list-group-item" [class.selected]="book.selected">
+            <StackLayout orientation="vertical" class="list-group-item" (tap)="book.selected = !book.selected" [class.selected]="book.selected">
                 <Label *ngIf="book" [text]="book.subject"></Label>
                 <Label *ngIf="book" [text]="book.name"></Label>
                 <Label *ngIf="book" [text]="book.number"></Label>
