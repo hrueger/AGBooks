@@ -25,6 +25,9 @@ export class LoginComponent {
     constructor(private authService: AuthenticationService,
         private page: Page,
         private router: Router) {
+        this.email = ApplicationSettings.getString("email") || "";
+        this.password = ApplicationSettings.getString("password") || "";
+        this.serverUrl = ApplicationSettings.getString("serverUrl") || "";
     }
 
     public ngOnInit(): void {
@@ -41,6 +44,9 @@ export class LoginComponent {
 
     public submit(): void {
         ApplicationSettings.setString("apiUrl", `${this.serverUrl}/api/`);
+        ApplicationSettings.setString("email", this.email);
+        ApplicationSettings.setString("password", this.password);
+        ApplicationSettings.setString("serverUrl", this.serverUrl);
         this.isAuthenticating = true;
         this.login();
     }
