@@ -1,6 +1,4 @@
-import {
-    Component, OnInit, ChangeDetectorRef, NgZone,
-} from "@angular/core";
+import { OnInit, NgZone } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
@@ -24,7 +22,7 @@ export class DashboardComponentCommon implements OnInit {
         private route: ActivatedRoute,
         private title: Title,
         private alertService: AlertService,
-        private authenticationService: AuthenticationService,
+        public authenticationService: AuthenticationService,
         private remoteService: RemoteService,
         private activeRoute: ActivatedRoute,
         private zone: NgZone,
