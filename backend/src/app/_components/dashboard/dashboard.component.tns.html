@@ -1,9 +1,13 @@
 <GridLayout rows="50, *">
-    <GridLayout row="0" rows="auto, auto" columns="50, *" class="fake-action-bar">
+    <GridLayout row="0" rows="auto, auto" columns="50, *, auto, auto, auto" class="fake-action-bar">
         <Button row="0" col="0" rowspan="2" class="fas" [text]="viewOrderList ? 'bars' : 'arrow-left'" (tap)="viewOrderList ? onDrawerButtonTap() : (viewOrderList = true)"></Button>
         <ng-container *ngIf="currentOrder && currentOrder.user && currentOrder.user.grade && !viewOrderList">
             <Label row="0" col="1" class="h3" [text]="currentOrder.user.grade + (currentOrder.user.course ? ' ' + currentOrder.user.course + ' ' : '') + ' (' + currentOrder.user.room+ ')'"></Label>
             <Label row="2" col="1" class="h3" [text]="currentOrder.user.teacher"></Label>
+            <Button *ngIf="!currentOrder.user.orderDone" color="#44d91a" (tap)="orderDone()" text="check" class="fas" row="0" rowspan="2" col="2"></Button>
+            <Button *ngIf="currentOrder.user.orderDone && !currentOrder.user.orderAccepted" color="#fbd238" (tap)="orderAccepted()" text="user-check" class="fas" row="0" rowspan="2" col="2"></Button>
+            <Button (tap)="getHandoverCodeForOrder()" color="#00d0ff" text="handshake" class="fas" row="0" rowspan="2" col="3"></Button>
+            <Button (tap)="deleteOrder()" text="trash" color="#dc3545" class="fas" row="0" rowspan="2" col="4"></Button>
         </ng-container>
         <Label row="0" col="1" rowspan="2" class="h2 single-headline" *ngIf="!currentOrder || !currentOrder.user || !currentOrder.user.grade || viewOrderList" text="AGBooks"></Label>
     </GridLayout>
