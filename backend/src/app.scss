@@ -1,0 +1,41 @@
+@import "~@nativescript/theme/css/core.css";
+@import "~@nativescript/theme/css/forest.css";
+@import "variables.scss";
+* {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.fas {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-weight: 900;
+}
+
+.far {
+    font-family: "Font Awesome 5 Free", "fa-regular-400";
+    font-weight: 400;
+}
+
+.fab {
+    font-family: "Font Awesome 5 Free", "fa-brands-400";
+    font-weight: 400;
+}
+
+.fake-action-bar {
+    background-color: $primary;
+    height: 50;
+    * {
+        color: white;
+    }
+    Button {
+        background-color: transparent;
+        font-size: 30;
+        width: 40;
+        height: 40;
+        border-color: $primary;
+        border-width: 1;
+        z-index: 0;
+    }
+    Label.single-headline {
+        margin-top: 5;
+    }
+}
