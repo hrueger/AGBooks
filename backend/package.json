@@ -26,6 +26,7 @@
         "@angular/platform-browser": "^9.1.11",
         "@angular/platform-browser-dynamic": "^9.1.11",
         "@angular/router": "^9.1.11",
+        "@fortawesome/fontawesome-free": "^5.14.0",
         "@nativescript/angular": "^9.0.0",
         "@nativescript/core": "^6.5.12",
         "@nativescript/theme": "^2.3.3",

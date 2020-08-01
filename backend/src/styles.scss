@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap.scss";
-@import '~ngx-toastr/toastr';
+@import "~ngx-toastr/toastr";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
 html {
     position: relative;
     min-height: 100%;
