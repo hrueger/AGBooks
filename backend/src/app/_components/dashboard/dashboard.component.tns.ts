@@ -1,5 +1,5 @@
 import { Component, NgZone } from "@angular/core";
-import { Application } from "@nativescript/core";
+import { Application, Page } from "@nativescript/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Title } from "@angular/platform-browser";
@@ -25,6 +25,7 @@ export class DashboardComponent extends DashboardComponentCommon {
         remoteService: RemoteService,
         activeRoute: ActivatedRoute,
         zone: NgZone,
+        page: Page,
     ) {
         super(
             router,
@@ -36,8 +37,9 @@ export class DashboardComponent extends DashboardComponentCommon {
             activeRoute,
             zone,
         );
+        page.actionBarHidden = true;
     }
-    public showSideDrawer(): void {
+    public onDrawerButtonTap(): void {
         const sideDrawer = Application.getRootView() as unknown as RadSideDrawer;
         sideDrawer.showDrawer();
     }
