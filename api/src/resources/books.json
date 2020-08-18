@@ -1,5 +1,6 @@
-[{
-        "id": "1",
+[
+    {
+        "id": 1,
         "name": "NuT Nautilus 5",
         "publisher": "Oldenbourg",
         "subject": "Biologie",
@@ -18,7 +19,7 @@
         "Q13": "0"
     },
     {
-        "id": "2",
+        "id": 2,
         "name": "NuT Biologie 6",
         "publisher": "C.C.Buchner",
         "subject": "Biologie",
@@ -37,7 +38,7 @@
         "Q13": "0"
     },
     {
-        "id": "3",
+        "id": 3,
         "name": "Netzwerk Biologie 8",
         "publisher": "Schroedel",
         "subject": "Biologie",
@@ -56,7 +57,7 @@
         "Q13": "0"
     },
     {
-        "id": "4",
+        "id": 4,
         "name": "Netzwerk Biologie 9",
         "publisher": "Schroedel",
         "subject": "Biologie",
@@ -75,7 +76,7 @@
         "Q13": "0"
     },
     {
-        "id": "5",
+        "id": 5,
         "name": "Netzwerk Biologie 10",
         "publisher": "Schroedel",
         "subject": "Biologie",
@@ -94,7 +95,7 @@
         "Q13": "0"
     },
     {
-        "id": "6",
+        "id": 6,
         "name": "Natura 11",
         "publisher": "Klett",
         "subject": "Biologie",
@@ -113,7 +114,7 @@
         "Q13": "0"
     },
     {
-        "id": "7",
+        "id": 7,
         "name": "Natura 11 Ökologie",
         "publisher": "Klett",
         "subject": "Biologie",
@@ -132,7 +133,7 @@
         "Q13": "0"
     },
     {
-        "id": "8",
+        "id": 8,
         "name": "Natura 12",
         "publisher": "Klett",
         "subject": "Biologie",
@@ -151,7 +152,7 @@
         "Q13": "0"
     },
     {
-        "id": "9",
+        "id": 9,
         "name": "Chemie heute 8",
         "publisher": "Schroedel",
         "subject": "Chemie",
@@ -170,7 +171,7 @@
         "Q13": "0"
     },
     {
-        "id": "10",
+        "id": 10,
         "name": "Chemie heute 9",
         "publisher": "Schroedel",
         "subject": "Chemie",
@@ -189,7 +190,7 @@
         "Q13": "0"
     },
     {
-        "id": "11",
+        "id": 11,
         "name": "Chemie heute 9 NTG",
         "publisher": "Schroedel",
         "subject": "Chemie",
@@ -208,7 +209,7 @@
         "Q13": "0"
     },
     {
-        "id": "12",
+        "id": 12,
         "name": "Chemie heute 10",
         "publisher": "Schroedel",
         "subject": "Chemie",
@@ -227,7 +228,7 @@
         "Q13": "0"
     },
     {
-        "id": "13",
+        "id": 13,
         "name": "Chemie heute 10 NTG",
         "publisher": "Schroedel",
         "subject": "Chemie",
@@ -246,7 +247,7 @@
         "Q13": "0"
     },
     {
-        "id": "14",
+        "id": 14,
         "name": "Chemie heute 11",
         "publisher": "Schroedel",
         "subject": "Chemie",
@@ -265,7 +266,7 @@
         "Q13": "0"
     },
     {
-        "id": "15",
+        "id": 15,
         "name": "Chemie heute 12",
         "publisher": "Schroedel",
         "subject": "Chemie",
@@ -284,7 +285,7 @@
         "Q13": "0"
     },
     {
-        "id": "16",
+        "id": 16,
         "name": "Deutschbuch 5",
         "publisher": "Cornelsen",
         "subject": "Deutsch",
@@ -303,7 +304,7 @@
         "Q13": "0"
     },
     {
-        "id": "17",
+        "id": 17,
         "name": "Deutschbuch 6",
         "publisher": "Cornelsen",
         "subject": "Deutsch",
@@ -322,7 +323,7 @@
         "Q13": "0"
     },
     {
-        "id": "18",
+        "id": 18,
         "name": "Deutschbuch 7",
         "publisher": "Cornelsen",
         "subject": "Deutsch",
@@ -341,7 +342,7 @@
         "Q13": "0"
     },
     {
-        "id": "19",
+        "id": 19,
         "name": "Deutschbuch 8",
         "publisher": "Cornelsen",
         "subject": "Deutsch",
@@ -360,7 +361,7 @@
         "Q13": "0"
     },
     {
-        "id": "20",
+        "id": 20,
         "name": "Deutschbuch 9",
         "publisher": "Cornelsen",
         "subject": "Deutsch",
@@ -379,7 +380,7 @@
         "Q13": "0"
     },
     {
-        "id": "21",
+        "id": 21,
         "name": "Deutschbuch 10",
         "publisher": "Cornelsen",
         "subject": "Deutsch",
@@ -398,7 +399,7 @@
         "Q13": "0"
     },
     {
-        "id": "22",
+        "id": 22,
         "name": "Deutschbuch 11",
         "publisher": "Oldenbourg",
         "subject": "Deutsch",
@@ -417,7 +418,7 @@
         "Q13": "0"
     },
     {
-        "id": "23",
+        "id": 23,
         "name": "Deutschbuch Litheraturgeschichte",
         "publisher": "Cornelsen",
         "subject": "Deutsch",
@@ -436,7 +437,7 @@
         "Q13": "0"
     },
     {
-        "id": "24",
+        "id": 24,
         "name": "Deutschbuch 12",
         "publisher": "Oldenbourg",
         "subject": "Deutsch",
@@ -455,7 +456,7 @@
         "Q13": "0"
     },
     {
-        "id": "25",
+        "id": 25,
         "name": "Green Line 1",
         "publisher": "Klett",
         "subject": "Englisch",
@@ -474,7 +475,7 @@
         "Q13": "0"
     },
     {
-        "id": "26",
+        "id": 26,
         "name": "Green Line 2",
         "publisher": "Klett",
         "subject": "Englisch",
@@ -493,7 +494,7 @@
         "Q13": "0"
     },
     {
-        "id": "27",
+        "id": 27,
         "name": "Green Line 3",
         "publisher": "Klett",
         "subject": "Englisch",
@@ -512,7 +513,7 @@
         "Q13": "0"
     },
     {
-        "id": "28",
+        "id": 28,
         "name": "Green Line New 4",
         "publisher": "Klett",
         "subject": "Englisch",
@@ -531,7 +532,7 @@
         "Q13": "0"
     },
     {
-        "id": "29",
+        "id": 29,
         "name": "Green Line New 5",
         "publisher": "Klett",
         "subject": "Englisch",
@@ -550,7 +551,7 @@
         "Q13": "0"
     },
     {
-        "id": "30",
+        "id": 30,
         "name": "Green Line New 6",
         "publisher": "Klett",
         "subject": "Englisch",
@@ -569,7 +570,7 @@
         "Q13": "0"
     },
     {
-        "id": "31",
+        "id": 31,
         "name": "English G Grammatik",
         "publisher": "Cornelsen",
         "subject": "Englisch",
@@ -588,7 +589,7 @@
         "Q13": "0"
     },
     {
-        "id": "32",
+        "id": 32,
         "name": "Context",
         "publisher": "Cornelsen",
         "subject": "Englisch",
@@ -607,7 +608,7 @@
         "Q13": "0"
     },
     {
-        "id": "33",
+        "id": 33,
         "name": "Ethicos 5",
         "publisher": "Oldenbourg",
         "subject": "Ethik",
@@ -626,7 +627,7 @@
         "Q13": "0"
     },
     {
-        "id": "34",
+        "id": 34,
         "name": "Abenteuer Ethik 6",
         "publisher": "C.C.Buchner",
         "subject": "Ethik",
@@ -645,7 +646,7 @@
         "Q13": "0"
     },
     {
-        "id": "35",
+        "id": 35,
         "name": "Abenteuer Ethik 7",
         "publisher": "C.C.Buchner",
         "subject": "Ethik",
@@ -664,7 +665,7 @@
         "Q13": "0"
     },
     {
-        "id": "36",
+        "id": 36,
         "name": "Abenteuer Ethik 8",
         "publisher": "C.C.Buchner",
         "subject": "Ethik",
@@ -683,7 +684,7 @@
         "Q13": "0"
     },
     {
-        "id": "37",
+        "id": 37,
         "name": "Abenteuer Ethik 9",
         "publisher": "C.C.Buchner",
         "subject": "Ethik",
@@ -702,7 +703,7 @@
         "Q13": "0"
     },
     {
-        "id": "38",
+        "id": 38,
         "name": "Abenteuer Ethik 10",
         "publisher": "C.C.Buchner",
         "subject": "Ethik",
@@ -721,7 +722,7 @@
         "Q13": "0"
     },
     {
-        "id": "39",
+        "id": 39,
         "name": "DenkArt 11",
         "publisher": "Schöningh",
         "subject": "Ethik",
@@ -740,7 +741,7 @@
         "Q13": "0"
     },
     {
-        "id": "40",
+        "id": 40,
         "name": "DenkArt 12",
         "publisher": "Schöningh",
         "subject": "Ethik",
@@ -759,7 +760,7 @@
         "Q13": "0"
     },
     {
-        "id": "41",
+        "id": 41,
         "name": "A plus! 1",
         "publisher": "Cornelsen",
         "subject": "Französisch",
@@ -778,7 +779,7 @@
         "Q13": "0"
     },
     {
-        "id": "42",
+        "id": 42,
         "name": "A plus! 1 Beiheft",
         "publisher": "Cornelsen",
         "subject": "Französisch",
@@ -797,7 +798,7 @@
         "Q13": "0"
     },
     {
-        "id": "43",
+        "id": 43,
         "name": "A plus! 2",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -816,7 +817,7 @@
         "Q13": "0"
     },
     {
-        "id": "44",
+        "id": 44,
         "name": "A plus! 2 Gramm. Beiheft",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -835,7 +836,7 @@
         "Q13": "0"
     },
     {
-        "id": "45",
+        "id": 45,
         "name": "Cours Intensif 1",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -854,7 +855,7 @@
         "Q13": "0"
     },
     {
-        "id": "46",
+        "id": 46,
         "name": "Cours Intensif 1 Gramm. Beiheft",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -873,7 +874,7 @@
         "Q13": "0"
     },
     {
-        "id": "47",
+        "id": 47,
         "name": "Decouvertes 3",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -892,7 +893,7 @@
         "Q13": "0"
     },
     {
-        "id": "48",
+        "id": 48,
         "name": "Decouvertes 3 Gramm. Beiheft",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -911,7 +912,7 @@
         "Q13": "0"
     },
     {
-        "id": "49",
+        "id": 49,
         "name": "Cours Intensif 2",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -930,7 +931,7 @@
         "Q13": "0"
     },
     {
-        "id": "50",
+        "id": 50,
         "name": "Cours Intensif 2 Gramm. Beiheft",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -949,7 +950,7 @@
         "Q13": "0"
     },
     {
-        "id": "51",
+        "id": 51,
         "name": "Decouvertes 4",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -968,7 +969,7 @@
         "Q13": "0"
     },
     {
-        "id": "52",
+        "id": 52,
         "name": "Decouvertes 4 Gramm. Beiheft",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -987,7 +988,7 @@
         "Q13": "0"
     },
     {
-        "id": "53",
+        "id": 53,
         "name": "Cours Intensif 3 Passarelle",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -1006,7 +1007,7 @@
         "Q13": "0"
     },
     {
-        "id": "54",
+        "id": 54,
         "name": "Cours Intensif 3 Passarelle Gramm. Beiheft",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -1025,7 +1026,7 @@
         "Q13": "0"
     },
     {
-        "id": "55",
+        "id": 55,
         "name": "Decouvertes 5 Passarelle",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -1044,7 +1045,7 @@
         "Q13": "0"
     },
     {
-        "id": "56",
+        "id": 56,
         "name": "Decouvertes 5 Passarelle Gramm. Beiheft",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -1063,7 +1064,7 @@
         "Q13": "0"
     },
     {
-        "id": "57",
+        "id": 57,
         "name": "Basisgrammatik Französisch",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -1082,7 +1083,7 @@
         "Q13": "0"
     },
     {
-        "id": "58",
+        "id": 58,
         "name": "Horizons",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -1101,7 +1102,7 @@
         "Q13": "0"
     },
     {
-        "id": "59",
+        "id": 59,
         "name": "Horizons Basisdossier Les jeunes",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -1120,7 +1121,7 @@
         "Q13": "0"
     },
     {
-        "id": "60",
+        "id": 60,
         "name": "Oberstufengrammatik Französisch",
         "publisher": "Klett",
         "subject": "Französisch",
@@ -1139,7 +1140,7 @@
         "Q13": "0"
     },
     {
-        "id": "61",
+        "id": 61,
         "name": "Parcours plus",
         "publisher": "Cornelsen",
         "subject": "Französisch",
@@ -1158,7 +1159,7 @@
         "Q13": "0"
     },
     {
-        "id": "62",
+        "id": 62,
         "name": "Geographie 5",
         "publisher": "Diercke",
         "subject": "Geographie",
@@ -1177,7 +1178,7 @@
         "Q13": "0"
     },
     {
-        "id": "63",
+        "id": 63,
         "name": "Geographie 7",
         "publisher": "Diercke",
         "subject": "Geographie",
@@ -1196,7 +1197,7 @@
         "Q13": "0"
     },
     {
-        "id": "64",
+        "id": 64,
         "name": "Geographie 8",
         "publisher": "Schroedel",
         "subject": "Geographie",
@@ -1215,7 +1216,7 @@
         "Q13": "0"
     },
     {
-        "id": "65",
+        "id": 65,
         "name": "Diercke Geographie 10",
         "publisher": "Westermann",
         "subject": "Geographie",
@@ -1234,7 +1235,7 @@
         "Q13": "0"
     },
     {
-        "id": "66",
+        "id": 66,
         "name": "Terra 11",
         "publisher": "Klett",
         "subject": "Geographie",
@@ -1253,7 +1254,7 @@
         "Q13": "0"
     },
     {
-        "id": "67",
+        "id": 67,
         "name": "Geographie 12",
         "publisher": "Schroedel",
         "subject": "Geographie",
@@ -1272,7 +1273,7 @@
         "Q13": "0"
     },
     {
-        "id": "68",
+        "id": 68,
         "name": "Das waren Zeiten 1",
         "publisher": "C.C.Buchner",
         "subject": "Geschichte",
@@ -1291,7 +1292,7 @@
         "Q13": "0"
     },
     {
-        "id": "69",
+        "id": 69,
         "name": "Das waren Zeiten 2",
         "publisher": "C.C.Buchner",
         "subject": "Geschichte",
@@ -1310,7 +1311,7 @@
         "Q13": "0"
     },
     {
-        "id": "70",
+        "id": 70,
         "name": "Forum Geschichte 3",
         "publisher": "Cornelsen",
         "subject": "Geschichte",
@@ -1329,7 +1330,7 @@
         "Q13": "0"
     },
     {
-        "id": "71",
+        "id": 71,
         "name": "Forum Geschichte 4",
         "publisher": "Cornelsen",
         "subject": "Geschichte",
@@ -1348,7 +1349,7 @@
         "Q13": "0"
     },
     {
-        "id": "72",
+        "id": 72,
         "name": "Forum Geschichte Weimarer Republik",
         "publisher": "Cornelsen",
         "subject": "Geschichte",
@@ -1367,7 +1368,7 @@
         "Q13": "0"
     },
     {
-        "id": "73",
+        "id": 73,
         "name": "Forum Geschichte 5",
         "publisher": "Cornelsen",
         "subject": "Geschichte",
@@ -1386,7 +1387,7 @@
         "Q13": "0"
     },
     {
-        "id": "74",
+        "id": 74,
         "name": "Kolleg Geschichte 11",
         "publisher": "C.C.Buchner",
         "subject": "Geschichte",
@@ -1405,7 +1406,7 @@
         "Q13": "0"
     },
     {
-        "id": "75",
+        "id": 75,
         "name": "Kolleg Geschichte 12",
         "publisher": "C.C.Buchner",
         "subject": "Geschichte",
@@ -1424,7 +1425,7 @@
         "Q13": "0"
     },
     {
-        "id": "76",
+        "id": 76,
         "name": "NuT Informatik 6",
         "publisher": "C.C.Buchner",
         "subject": "Informatik",
@@ -1443,7 +1444,7 @@
         "Q13": "0"
     },
     {
-        "id": "77",
+        "id": 77,
         "name": "NuT Informatik 7",
         "publisher": "C.C.Buchner",
         "subject": "Informatik",
@@ -1462,7 +1463,7 @@
         "Q13": "0"
     },
     {
-        "id": "78",
+        "id": 78,
         "name": "Informatik 1",
         "publisher": "Oldenbourg",
         "subject": "Informatik",
@@ -1481,7 +1482,7 @@
         "Q13": "0"
     },
     {
-        "id": "79",
+        "id": 79,
         "name": "Informatik 2",
         "publisher": "Oldenbourg",
         "subject": "Informatik",
@@ -1500,7 +1501,7 @@
         "Q13": "0"
     },
     {
-        "id": "80",
+        "id": 80,
         "name": "Informatik 4",
         "publisher": "Klett",
         "subject": "Informatik",
@@ -1519,7 +1520,7 @@
         "Q13": "0"
     },
     {
-        "id": "81",
+        "id": 81,
         "name": "Informatik 5",
         "publisher": "Klett",
         "subject": "Informatik",
@@ -1538,7 +1539,7 @@
         "Q13": "0"
     },
     {
-        "id": "82",
+        "id": 82,
         "name": "Campus neu 1",
         "publisher": "C.C.Buchner",
         "subject": "Latein",
@@ -1557,7 +1558,7 @@
         "Q13": "0"
     },
     {
-        "id": "83",
+        "id": 83,
         "name": "Auspicia 2",
         "publisher": "Latein-Buch-Verlag Lappersdorf",
         "subject": "Latein",
@@ -1576,7 +1577,7 @@
         "Q13": "0"
     },
     {
-        "id": "84",
+        "id": 84,
         "name": "Campus neu 2",
         "publisher": "C.C.Buchner",
         "subject": "Latein",
@@ -1595,7 +1596,7 @@
         "Q13": "0"
     },
     {
-        "id": "85",
+        "id": 85,
         "name": "Auspicia 3",
         "publisher": "Latein-Buch-Verlag Lappersdorf",
         "subject": "Latein",
@@ -1614,7 +1615,7 @@
         "Q13": "0"
     },
     {
-        "id": "86",
+        "id": 86,
         "name": "Latein Lesebuch A1",
         "publisher": "C.C.Buchner",
         "subject": "Latein",
@@ -1633,7 +1634,7 @@
         "Q13": "0"
     },
     {
-        "id": "87",
+        "id": 87,
         "name": "Latein Lesebuch A2",
         "publisher": "C.C.Buchner",
         "subject": "Latein",
@@ -1652,7 +1653,7 @@
         "Q13": "0"
     },
     {
-        "id": "88",
+        "id": 88,
         "name": "adeo PLUS",
         "publisher": "C.C.Buchner",
         "subject": "Latein",
@@ -1671,7 +1672,7 @@
         "Q13": "0"
     },
     {
-        "id": "89",
+        "id": 89,
         "name": "Grammadux",
         "publisher": "C.C.Buchner",
         "subject": "Latein",
@@ -1690,7 +1691,7 @@
         "Q13": "0"
     },
     {
-        "id": "90",
+        "id": 90,
         "name": "Latein Lesebuch Oberstufe 1",
         "publisher": "C.C.Buchner",
         "subject": "Latein",
@@ -1709,7 +1710,7 @@
         "Q13": "0"
     },
     {
-        "id": "91",
+        "id": 91,
         "name": "Latein Lesebuch Oberstufe 2",
         "publisher": "C.C.Buchner",
         "subject": "Latein",
@@ -1728,7 +1729,7 @@
         "Q13": "0"
     },
     {
-        "id": "92",
+        "id": 92,
         "name": "Mathematik 5",
         "publisher": "Klett",
         "subject": "Mathematik",
@@ -1747,7 +1748,7 @@
         "Q13": "0"
     },
     {
-        "id": "93",
+        "id": 93,
         "name": "Mathematik 6",
         "publisher": "Klett",
         "subject": "Mathematik",
@@ -1766,7 +1767,7 @@
         "Q13": "0"
     },
     {
-        "id": "94",
+        "id": 94,
         "name": "Mathematik 7",
         "publisher": "bsv",
         "subject": "Mathematik",
@@ -1785,7 +1786,7 @@
         "Q13": "0"
     },
     {
-        "id": "95",
+        "id": 95,
         "name": "Mathematik 8",
         "publisher": "bsv",
         "subject": "Mathematik",
@@ -1804,7 +1805,7 @@
         "Q13": "0"
     },
     {
-        "id": "96",
+        "id": 96,
         "name": "Mathematik 9",
         "publisher": "bsv",
         "subject": "Mathematik",
@@ -1823,7 +1824,7 @@
         "Q13": "0"
     },
     {
-        "id": "97",
+        "id": 97,
         "name": "Mathematik 10",
         "publisher": "bsv",
         "subject": "Mathematik",
@@ -1842,7 +1843,7 @@
         "Q13": "0"
     },
     {
-        "id": "98",
+        "id": 98,
         "name": "Mathematik 11",
         "publisher": "bsv",
         "subject": "Mathematik",
@@ -1861,7 +1862,7 @@
         "Q13": "0"
     },
     {
-        "id": "99",
+        "id": 99,
         "name": "Tafelwerk zur Stochastik",
         "publisher": "bsv",
         "subject": "Mathematik",
@@ -1880,7 +1881,7 @@
         "Q13": "0"
     },
     {
-        "id": "100",
+        "id": 100,
         "name": "Mathematik 12",
         "publisher": "bsv",
         "subject": "Mathematik",
@@ -1899,7 +1900,7 @@
         "Q13": "0"
     },
     {
-        "id": "101",
+        "id": 101,
         "name": "Tonart",
         "publisher": "Helbling",
         "subject": "Musik",
@@ -1918,7 +1919,7 @@
         "Q13": "0"
     },
     {
-        "id": "102",
+        "id": 102,
         "name": "Natur und Technik Physik 7",
         "publisher": "C.C.Buchner",
         "subject": "Physik",
@@ -1937,7 +1938,7 @@
         "Q13": "0"
     },
     {
-        "id": "103",
+        "id": 103,
         "name": "Galileo 8",
         "publisher": "Oldenbourg",
         "subject": "Physik",
@@ -1956,7 +1957,7 @@
         "Q13": "0"
     },
     {
-        "id": "104",
+        "id": 104,
         "name": "Physik 9",
         "publisher": "C.C.Buchner",
         "subject": "Physik",
@@ -1975,7 +1976,7 @@
         "Q13": "0"
     },
     {
-        "id": "105",
+        "id": 105,
         "name": "Physik 10",
         "publisher": "C.C.Buchner",
         "subject": "Physik",
@@ -1994,7 +1995,7 @@
         "Q13": "0"
     },
     {
-        "id": "106",
+        "id": 106,
         "name": "Astrophysik",
         "publisher": "",
         "subject": "Physik",
@@ -2013,7 +2014,7 @@
         "Q13": "0"
     },
     {
-        "id": "107",
+        "id": 107,
         "name": "Physik 11",
         "publisher": "C.C.Buchner",
         "subject": "Physik",
@@ -2032,7 +2033,7 @@
         "Q13": "0"
     },
     {
-        "id": "108",
+        "id": 108,
         "name": "Biophysik",
         "publisher": "C.C.Buchner",
         "subject": "Physik",
@@ -2051,7 +2052,7 @@
         "Q13": "0"
     },
     {
-        "id": "109",
+        "id": 109,
         "name": "Physik 12",
         "publisher": "C.C.Buchner",
         "subject": "Physik",
@@ -2070,7 +2071,7 @@
         "Q13": "0"
     },
     {
-        "id": "110",
+        "id": 110,
         "name": "Ortswechsel+ 5",
         "publisher": "Claudius",
         "subject": "Religion ev",
@@ -2089,7 +2090,7 @@
         "Q13": "0"
     },
     {
-        "id": "111",
+        "id": 111,
         "name": "Ortswechsel+ 6",
         "publisher": "Claudius",
         "subject": "Religion ev",
@@ -2108,7 +2109,7 @@
         "Q13": "0"
     },
     {
-        "id": "112",
+        "id": 112,
         "name": "Ortswechsel+ 7",
         "publisher": "Claudius",
         "subject": "Religion ev",
@@ -2127,7 +2128,7 @@
         "Q13": "0"
     },
     {
-        "id": "113",
+        "id": 113,
         "name": "Ortswechsel 8",
         "publisher": "Claudius",
         "subject": "Religion ev",
@@ -2146,7 +2147,7 @@
         "Q13": "0"
     },
     {
-        "id": "114",
+        "id": 114,
         "name": "Ortswechsel 9",
         "publisher": "Claudius",
         "subject": "Religion ev",
@@ -2165,7 +2166,7 @@
         "Q13": "0"
     },
     {
-        "id": "115",
+        "id": 115,
         "name": "Ortswechel 10",
         "publisher": "Claudius",
         "subject": "Religion ev",
@@ -2184,7 +2185,7 @@
         "Q13": "0"
     },
     {
-        "id": "116",
+        "id": 116,
         "name": "Ortswechsel 11",
         "publisher": "Claudius",
         "subject": "Religion ev",
@@ -2203,7 +2204,7 @@
         "Q13": "0"
     },
     {
-        "id": "117",
+        "id": 117,
         "name": "Ortswechsel 12",
         "publisher": "Claudius",
         "subject": "Religion ev",
@@ -2222,7 +2223,7 @@
         "Q13": "0"
     },
     {
-        "id": "118",
+        "id": 118,
         "name": "Vernetzt+ 5",
         "publisher": "Kösel",
         "subject": "Religion rk",
@@ -2241,7 +2242,7 @@
         "Q13": "0"
     },
     {
-        "id": "119",
+        "id": 119,
         "name": "Vernetzt+ 6",
         "publisher": "Kösel",
         "subject": "Religion rk",
@@ -2260,7 +2261,7 @@
         "Q13": "0"
     },
     {
-        "id": "120",
+        "id": 120,
         "name": "Vernetzt 7",
         "publisher": "Kösel",
         "subject": "Religion rk",
@@ -2279,7 +2280,7 @@
         "Q13": "0"
     },
     {
-        "id": "121",
+        "id": 121,
         "name": "Vernetzt 8",
         "publisher": "Kösel",
         "subject": "Religion rk",
@@ -2298,7 +2299,7 @@
         "Q13": "0"
     },
     {
-        "id": "122",
+        "id": 122,
         "name": "Vernetzt 9",
         "publisher": "Kösel",
         "subject": "Religion rk",
@@ -2317,7 +2318,7 @@
         "Q13": "0"
     },
     {
-        "id": "123",
+        "id": 123,
         "name": "Vernetzt 10",
         "publisher": "Kösel",
         "subject": "Religion rk",
@@ -2336,7 +2337,7 @@
         "Q13": "0"
     },
     {
-        "id": "124",
+        "id": 124,
         "name": "Vernetzt 11",
         "publisher": "Kösel",
         "subject": "Religion rk",
@@ -2355,7 +2356,7 @@
         "Q13": "0"
     },
     {
-        "id": "125",
+        "id": 125,
         "name": "Vernetzt 12",
         "publisher": "Kösel",
         "subject": "Religion rk",
@@ -2374,7 +2375,7 @@
         "Q13": "0"
     },
     {
-        "id": "126",
+        "id": 126,
         "name": "Mensch und Politik 10",
         "publisher": "Schroedel",
         "subject": "Sozialkunde",
@@ -2393,7 +2394,7 @@
         "Q13": "0"
     },
     {
-        "id": "127",
+        "id": 127,
         "name": "Mensch und Politik 11",
         "publisher": "Schroedel",
         "subject": "Sozialkunde",
@@ -2412,7 +2413,7 @@
         "Q13": "0"
     },
     {
-        "id": "128",
+        "id": 128,
         "name": "Mensch und Politik 12",
         "publisher": "Schroedel",
         "subject": "Sozialkunde",
@@ -2431,7 +2432,7 @@
         "Q13": "0"
     },
     {
-        "id": "129",
+        "id": 129,
         "name": "Linea verde 1",
         "publisher": "Klett",
         "subject": "Spanisch",
@@ -2450,7 +2451,7 @@
         "Q13": "0"
     },
     {
-        "id": "130",
+        "id": 130,
         "name": "Linea verde 1 Gramm. Beiheft",
         "publisher": "Klett",
         "subject": "Spanisch",
@@ -2469,7 +2470,7 @@
         "Q13": "0"
     },
     {
-        "id": "131",
+        "id": 131,
         "name": "Linea verde 2",
         "publisher": "Klett",
         "subject": "Spanisch",
@@ -2488,7 +2489,7 @@
         "Q13": "0"
     },
     {
-        "id": "132",
+        "id": 132,
         "name": "Linea verde 2 Gramm. Beiheft",
         "publisher": "Klett",
         "subject": "Spanisch",
@@ -2507,7 +2508,7 @@
         "Q13": "0"
     },
     {
-        "id": "133",
+        "id": 133,
         "name": "Linea verde 3",
         "publisher": "Klett",
         "subject": "Spanisch",
@@ -2526,7 +2527,7 @@
         "Q13": "0"
     },
     {
-        "id": "134",
+        "id": 134,
         "name": "Linea verde 3 Gramm. Beiheft",
         "publisher": "Klett",
         "subject": "Spanisch",
@@ -2545,7 +2546,7 @@
         "Q13": "0"
     },
     {
-        "id": "135",
+        "id": 135,
         "name": "Bachillerato",
         "publisher": "Klett",
         "subject": "Spanisch",
@@ -2564,7 +2565,7 @@
         "Q13": "0"
     },
     {
-        "id": "136",
+        "id": 136,
         "name": "Nuevos Enfoques",
         "publisher": "C.C.Buchner",
         "subject": "Spanisch",
@@ -2583,7 +2584,7 @@
         "Q13": "0"
     },
     {
-        "id": "137",
+        "id": 137,
         "name": "Spanische Grammatik",
         "publisher": "Cornelsen",
         "subject": "Spanisch",
@@ -2602,7 +2603,7 @@
         "Q13": "0"
     },
     {
-        "id": "138",
+        "id": 138,
         "name": "Weineck LK Sport 1",
         "publisher": "Weineck",
         "subject": "Sport",
@@ -2621,7 +2622,7 @@
         "Q13": "0"
     },
     {
-        "id": "139",
+        "id": 139,
         "name": "Weineck LK Sport 2",
         "publisher": "Weineck",
         "subject": "Sport",
@@ -2640,7 +2641,7 @@
         "Q13": "0"
     },
     {
-        "id": "140",
+        "id": 140,
         "name": "Weineck LK Sport 3",
         "publisher": "Weineck",
         "subject": "Sport",
@@ -2659,7 +2660,7 @@
         "Q13": "0"
     },
     {
-        "id": "141",
+        "id": 141,
         "name": "Wirtschaft und Recht 9",
         "publisher": "Klett",
         "subject": "W&R",
@@ -2678,7 +2679,7 @@
         "Q13": "0"
     },
     {
-        "id": "142",
+        "id": 142,
         "name": "Wirtschaft und Recht 10",
         "publisher": "Klett",
         "subject": "W&R",
@@ -2697,7 +2698,7 @@
         "Q13": "0"
     },
     {
-        "id": "143",
+        "id": 143,
         "name": "Wirtschaft und Recht 11",
         "publisher": "Klett",
         "subject": "W&R",
@@ -2716,7 +2717,7 @@
         "Q13": "0"
     },
     {
-        "id": "144",
+        "id": 144,
         "name": "Wirtschaft und Recht 12",
         "publisher": "Klett",
         "subject": "W&R",
@@ -2735,7 +2736,7 @@
         "Q13": "0"
     },
     {
-        "id": "145",
+        "id": 145,
         "name": "Astrophysik",
         "publisher": "C. C. Buchner",
         "subject": "Physik",
@@ -2754,7 +2755,7 @@
         "Q13": "0"
     },
     {
-        "id": "146",
+        "id": 146,
         "name": "Biophysik",
         "publisher": "C. C. Buchner",
         "subject": "Physik",
