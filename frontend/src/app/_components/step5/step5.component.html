@@ -2,7 +2,7 @@
 <h1 *ngIf="orderReady">Bestellung bereit</h1>
 <br /><br /><br />
 <div *ngIf="!orderReady" class="alert alert-success">
-    Vielen Dank für das Ausfüllen des Bestellformulars. Sie werden benachrichtigt, wenn Ihre Bestellung bearbeitet wurde.
+    Vielen Dank für das Ausfüllen des Bestellformulars. Sie werden benachrichtigt, wenn Ihre Bücher bereit liegen.
 </div>
 <div *ngIf="error" class="alert alert-danger">
     Die Verbindung ist abgebrochen. Versuche in 5s erneut zu verbinden...
@@ -17,4 +17,7 @@
     <h3>Ihre Bestellung ist bereit.</h3>
     <br />Bitte kommen Sie <b>jetzt</b> mit der <b>gesamten Klasse</b> zur Lehrmittelbücherei (Raum 123).<br /><br />
     <button class="btn btn-success" (click)="btnAccept()">Ich komme</button>
+</div>
+<div class="alert alert-success">
+    <b>Wichtig</b><br> Den Browser nicht schließen!
 </div>
