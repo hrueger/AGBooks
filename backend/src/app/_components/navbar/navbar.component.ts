@@ -18,4 +18,5 @@ export class NavbarComponent {
     @Output() orderAccepted: EventEmitter<void> = new EventEmitter<void>();
     @Output() getHandoverCodeForOrder: EventEmitter<void> = new EventEmitter<void>();
     @Output() deleteOrder: EventEmitter<void> = new EventEmitter<void>();
+    @Output() toggleMenu: EventEmitter<void> = new EventEmitter<void>();
 }

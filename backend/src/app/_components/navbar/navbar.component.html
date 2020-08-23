@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/"><img class="logo" src="assets/logo.png">AG-Books Backend</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink=""><img class="logo" src="assets/logo.png"><i class="fas fa-bars mr-2 d-md-none" (click)="toggleMenu.emit()"></i>AG-Books</a>
     <div class="navbar-middle" *ngIf="currentOrder">
         <p class="d-inline">
             {{ currentOrder.user.grade }} {{currentOrder.user.course}} - {{ currentOrder.user.teacher }} - Raum {{ currentOrder.user.room }}
@@ -20,13 +20,12 @@
     <div class="navbar-middle" *ngIf="!currentOrder">
         Bitte eine Bestellung auswählen!
     </div>
-    <ul class="navbar-nav px-3">
+    <ul class="navbar-nav px-3 d-none d-md-block">
         <li class="nav-item">
             <a class="nlink" routerLink="/availablebooks" title="Klassensatz"><i class="fas fa-list"></i></a>
             <a class="nlink mx-5" routerLink="/statistics" title="Statistiken"><i class="fas fa-chart-bar"></i></a>
             <a class="nlink mr-5" routerLink="/users" title="Benutzer verwalten"><i class="fas fa-users-cog"></i></a>
             <a class="nlink" routerLink="" (click)="authenticationService.logout()" title="Abmelden"><i class="fas fa-sign-out-alt"></i></a>
         </li>
-
     </ul>
 </nav>
