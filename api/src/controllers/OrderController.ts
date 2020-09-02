@@ -4,6 +4,7 @@ import * as SSE from "express-sse";
 import { User } from "../entity/User";
 import { Book } from "../entity/Book";
 import { Order } from "../entity/Order";
+import * as fs from "fs";
 
 class OrderController {
     public static order = async (req: Request, res: Response): Promise<void> => {
@@ -161,7 +162,8 @@ class OrderController {
             o.user = user;
             o.books = [];
             for (const [bookId, number] of Object.entries(user.order)) {
-                const book = books.find((b) => b.id == parseInt(bookId, 10));
+                // don't remove the { ... }, otherwise books with same ID will have the same number
+                const book = { ...books.find((b) => b.id == parseInt(bookId, 10)) };
                 book.number = number;
                 o.books.push(book);
             }
