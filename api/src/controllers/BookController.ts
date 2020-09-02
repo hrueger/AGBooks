@@ -94,9 +94,14 @@ class BookController {
     }
 
     public static cover = async (req: Request, res: Response): Promise<void> => {
+        const { id } = req.params;
+        if (typeof id !== "string") {
+            res.status(400).send({ message: "Invalid ID!" });
+            return;
+        }
         const bookRepository = getRepository(Book);
         try {
-            const book = await bookRepository.findOneOrFail(req.params.id);
+            const book = await bookRepository.findOneOrFail(id);
             res.sendFile(path.join(__dirname, `../../assets/images/cover/${book.short}.jpg`));
         } catch {
             res.send();

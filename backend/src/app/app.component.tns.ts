@@ -16,6 +16,8 @@ export class AppComponent {
     constructor() {
         appversion.getVersionName().then((v: string) => {
             this.version = v;
+        }, () => {
+            this.version = "Unknown";
         });
     }
 

@@ -16,6 +16,7 @@ export class Step5Component implements OnInit {
     public ordersLeft: any = "...";
     public orderReady = false;
     public error: any;
+    private source: EventSource;
 
     constructor(
         private navbarService: NavbarService,
@@ -29,14 +30,14 @@ export class Step5Component implements OnInit {
     public ngOnInit(): void {
         this.navbarService.setStep(5);
         const { token } = this.authService.currentUserValue;
-        const source = new EventSource(`${getApiUrl()}order/live?authorization=${token}`);
-        source.onmessage = (m) => {
+        this.source = new EventSource(`${getApiUrl()}order/live?authorization=${token}`);
+        this.source.onmessage = (m) => {
             const data = JSON.parse(m.data);
             this.ordersLeft = data.ordersLeft;
             this.orderReady = data.orderReady;
             this.cdr.detectChanges();
         };
-        source.onerror = (e) => {
+        this.source.onerror = (e) => {
             this.error = e;
             this.cdr.detectChanges();
             setTimeout(() => {
@@ -44,6 +45,10 @@ export class Step5Component implements OnInit {
                 location.reload();
             }, 5000);
         };
+    }
+
+    public ngOnDestroy(): void {
+        this.source?.close();
     }
 
     public previous(): void {

@@ -108,6 +108,10 @@ export class DashboardComponentCommon implements OnInit {
         };
     }
 
+    public ngOnDestroy(): void {
+        this.sse?.close();
+    }
+
     public orderDone(): void {
         this.remoteService.post(`order/${this.currentOrder.user.id}/done`, {}).subscribe((data) => {
             if (data.success == true) {

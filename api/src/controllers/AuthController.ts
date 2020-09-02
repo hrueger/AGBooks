@@ -56,7 +56,12 @@ class AuthController {
     }
 
     public static getHandoverCodeForId = async (req: Request, res: Response): Promise<void> => {
-        const code = await AuthController.generateHandoverCode(req.params.id);
+        const { id } = req.params;
+        if (typeof id !== "string") {
+            res.status(400).send({ message: "Invalid ID!" });
+            return;
+        }
+        const code = await AuthController.generateHandoverCode(id);
         res.send({ code });
     }
 

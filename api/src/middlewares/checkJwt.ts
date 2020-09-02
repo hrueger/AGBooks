@@ -7,7 +7,7 @@ export const checkJwt = async (req: Request, res: Response, next: NextFunction):
     if (!token) {
         token = req.query.authorization;
     }
-    if (!token) {
+    if (!token || typeof token !== "string") {
         res.status(401).send({ message: "Nicht authorisiert!" });
         return;
     }
