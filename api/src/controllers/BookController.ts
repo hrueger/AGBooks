@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import * as path from "path";
+import * as fs from "fs";
 import { Book } from "../entity/Book";
 import { User } from "../entity/User";
 
@@ -102,7 +103,11 @@ class BookController {
         const bookRepository = getRepository(Book);
         try {
             const book = await bookRepository.findOneOrFail(id);
-            res.sendFile(path.join(__dirname, `../../assets/images/cover/${book.short}.jpg`));
+            let coverPath = path.join(__dirname, `../../assets/images/cover/${book.short}.jpg`);
+            if (!fs.existsSync(coverPath)) {
+                coverPath = path.join(__dirname, "../../assets/images/no_cover_available.png");
+            }
+            res.sendFile(coverPath);
         } catch {
             res.send();
         }
