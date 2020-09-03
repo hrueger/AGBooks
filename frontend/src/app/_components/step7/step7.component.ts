@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import Stepper from "bs-stepper";
 import { NavbarService } from "../../_services/navbar.service";
+import { RemoteService } from "../../_services/remote.service";
 
 @Component({
     selector: "app-step7",
@@ -8,8 +9,9 @@ import { NavbarService } from "../../_services/navbar.service";
     styleUrls: ["./step7.component.scss"],
 })
 export class Step7Component implements OnInit {
+    public books: any[] = [];
     private stepper: Stepper;
-    constructor(private navbarService: NavbarService) { }
+    constructor(private navbarService: NavbarService, private remoteService: RemoteService) { }
     public next(): void {
         this.stepper.next();
     }
@@ -18,6 +20,9 @@ export class Step7Component implements OnInit {
         this.stepper = new Stepper(document.querySelector("#stepper1"), {
             linear: false,
             animation: true,
+        });
+        this.remoteService.get("books").subscribe((books) => {
+            this.books = books;
         });
     }
 }
