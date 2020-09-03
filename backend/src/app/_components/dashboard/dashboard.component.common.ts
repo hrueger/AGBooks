@@ -1,4 +1,4 @@
-import { OnInit, NgZone } from "@angular/core";
+import { OnInit, NgZone, Component } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
@@ -8,6 +8,7 @@ import { RemoteService } from "../../_services/remote.service";
 import { getApiUrl } from "../../_utils/utils";
 import { AuthenticationService } from "../../_services/authentication.service";
 
+@Component({ template: "" })
 export class DashboardComponentCommon implements OnInit {
     public currentOrder: Order = null;
     public orderCanBeDone = true;
