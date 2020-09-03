@@ -14,6 +14,7 @@ module.exports = {
                 /zone.js\//,
                 /tns-core-modules\//,
                 /@nativescript\/core\//,
+                /nativescript-angular\//,
             ],
         },
         "nativescript-localize": {
@@ -30,37 +31,5 @@ module.exports = {
                 /@nativescript\/core\//,
             ],
         },
-        "nativescript-ui-sidedrawer": {
-            entryPoints: {
-                angular: {
-                    override: {
-                        main: "./side-drawer-directives.js",
-                        typings: "./side-drawer-directives.d.ts",
-                    },
-                    ignoreMissingDependencies: true,
-                },
-            },
-            ignorableDeepImportMatchers: [
-                /tns-core-modules\//,
-                /@nativescript\/core\//,
-                /@nativescript\/angular\//,
-            ],
-        },
-        "nativescript-ui-listview": {
-            entryPoints: {
-                angular: {
-                    override: {
-                        main: "./listview-directives.js",
-                        typings: "./listview-directives.d.ts",
-                    },
-                    ignoreMissingDependencies: true,
-                },
-            },
-            ignorableDeepImportMatchers: [
-                /tns-core-modules\//,
-                /@nativescript\/core\//,
-                /@nativescript\/angular\//,
-            ],
-        }
     },
 };
