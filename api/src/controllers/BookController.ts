@@ -103,9 +103,10 @@ class BookController {
         const bookRepository = getRepository(Book);
         try {
             const book = await bookRepository.findOneOrFail(id);
-            let coverPath = path.join(__dirname, `../../assets/images/cover/${book.short}.jpg`);
+            const coverPath = path.join(__dirname, `../../assets/images/cover/${book.short}.jpg`);
             if (!fs.existsSync(coverPath)) {
-                coverPath = path.join(__dirname, "../../assets/images/no_cover_available.png");
+                res.sendFile(path.join(__dirname, "../../assets/images/no_cover_available.png"));
+                return;
             }
             res.sendFile(coverPath);
         } catch {
