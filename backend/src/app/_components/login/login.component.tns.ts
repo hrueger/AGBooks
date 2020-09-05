@@ -1,8 +1,6 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import { connectionType, getConnectionType } from "tns-core-modules/connectivity";
-import { Page } from "tns-core-modules/ui/page";
-import { ApplicationSettings } from "@nativescript/core";
+import { ApplicationSettings, Page, Connectivity } from "@nativescript/core";
 import { AuthenticationService } from "../../_services/authentication.service";
 
 @Component({
@@ -49,7 +47,7 @@ export class LoginComponent {
     }
 
     public login(): void {
-        if (getConnectionType() === connectionType.none) {
+        if (Connectivity.getConnectionType() === Connectivity.connectionType.none) {
             // eslint-disable-next-line no-alert
             alert("AGBooks benötigt eine Internetverbindung.");
             return;
