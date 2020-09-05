@@ -39,7 +39,6 @@ export class DashboardComponent extends DashboardComponentCommon {
             activeRoute,
             zone,
         );
-        page.actionBarHidden = true;
     }
     public onDrawerButtonTap(): void {
         const sideDrawer = Application.getRootView() as unknown as RadSideDrawer;
