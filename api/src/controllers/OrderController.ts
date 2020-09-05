@@ -4,7 +4,6 @@ import * as SSE from "express-sse";
 import { User } from "../entity/User";
 import { Book } from "../entity/Book";
 import { Order } from "../entity/Order";
-import * as fs from "fs";
 
 class OrderController {
     public static order = async (req: Request, res: Response): Promise<void> => {
