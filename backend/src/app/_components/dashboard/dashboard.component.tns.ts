@@ -1,15 +1,13 @@
 import { Component, NgZone } from "@angular/core";
-import { Application, Page } from "@nativescript/core";
+import { Application } from "@nativescript/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Title } from "@angular/platform-browser";
-// import { SSE } from "nativescript-sse";
 import { DashboardComponentCommon } from "./dashboard.component.common";
 import { AlertService } from "../../_services/alert.service";
 import { AuthenticationService } from "../../_services/authentication.service";
 import { RemoteService } from "../../_services/remote.service";
 import { Order } from "../../_models/Order";
-// import { getApiUrl } from "../../_utils/utils";
 
 @Component({
     selector: "app-dashboard",
@@ -27,7 +25,6 @@ export class DashboardComponent extends DashboardComponentCommon {
         remoteService: RemoteService,
         activeRoute: ActivatedRoute,
         zone: NgZone,
-        page: Page,
     ) {
         super(
             router,
@@ -63,8 +60,6 @@ export class DashboardComponent extends DashboardComponentCommon {
     }
 
     public setupSSE(): void {
-        setTimeout(() => {
-            this.ngOnInit();
-        }, 20000);
+        //
     }
 }
