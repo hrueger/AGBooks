@@ -16,7 +16,7 @@
       "es2015",
       "dom"
     ],
-    "module": "commonjs",
+    "module": "es2020",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "sourceMap": true,
