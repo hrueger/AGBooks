@@ -64,7 +64,7 @@ class OrderController {
         user.orderSubmitted = false;
         user.orderDone = false;
         user.orderAccepted = false;
-        user.orderTimestamp = undefined;
+        user.orderTimestamp = null;
         await userRepository.save(user);
         OrderController.sendChangesToBackend(res);
         res.send({ success: true });
