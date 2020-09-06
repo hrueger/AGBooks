@@ -8,4 +8,7 @@ export default {
         markingMode: "none",
     },
     appPath: "src",
+    nsext: ".tns",
+    webext: "",
+    shared: true,
 } as NativeScriptConfig;
