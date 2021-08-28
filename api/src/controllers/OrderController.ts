@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getRepository, LessThan } from "typeorm";
-import * as SSE from "express-sse";
+import SSE from "express-sse";
 import { User } from "../entity/User";
 import { Book } from "../entity/Book";
 import { Order } from "../entity/Order";
