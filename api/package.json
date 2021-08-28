@@ -37,7 +37,7 @@
     },
     "scripts": {
         "tsc": "tsc",
-        "start": "set debug=* && ts-node-dev ./src/index.ts --respawn --transpileOnly",
+        "start": "set debug=*&&set NODE_ENV=development&& ts-node-dev ./src/index.ts --respawn --transpileOnly",
         "prod": "tsc && node ./build/index.js",
         "build": "tsc",
         "lint": "eslint .",
