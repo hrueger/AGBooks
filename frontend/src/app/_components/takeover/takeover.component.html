@@ -1,7 +1,7 @@
 <h1>Sitzung übernehmen</h1>
 <br /><br />
 <div class="alert alert-success" *ngIf="!handoverSuccess">
-    Bitte geben Sie den Code ein:<br /><br /><input type="number" class="form-control" [(ngModel)]="code" (ngModelChange)="changed($event)" placeholder="5-Stelliger Code" />
+    Bitte geben Sie den Code ein:<br /><br /><input type="number" class="form-control" [(ngModel)]="code" (ngModelChange)="changed()" placeholder="5-Stelliger Code" />
 </div>
 <div class="alert alert-primary" *ngIf="showResult && checking">
     Bitte warten...
