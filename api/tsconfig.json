@@ -1,16 +1,17 @@
 {
-   "compilerOptions": {
-      "lib": [
-         "es5",
-         "es6",
-         "dom"
-      ],
-      "target": "es5",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "outDir": "./build",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "sourceMap": true
-   }
+    "compilerOptions": {
+        "lib": [
+            "es5",
+            "es6",
+            "dom"
+        ],
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "outDir": "./build",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true
+    }
 }

@@ -1,10 +1,9 @@
-import * as bodyParser from "body-parser";
-import * as cors from "cors";
-import * as express from "express";
-import * as helmet from "helmet";
+import cors from "cors";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import * as fs from "fs";
+import express from "express";
+import helmet from "helmet";
 import { Book } from "./entity/Book";
 import { Admin } from "./entity/Admin";
 import { User } from "./entity/User";
@@ -77,9 +76,9 @@ createConnection({
         // This sets up secure rules for CORS, see https://developer.mozilla.org/de/docs/Web/HTTP/CORS
         app.use(cors());
         // This secures the app with some http headers
-        app.use(helmet());
+        app.use(helmet() as any);
         // This transforms the incoming JSON body into objects
-        app.use(bodyParser.json());
+        app.use(express.json() as any);
 
         // Set all routes from routes folder
         app.use("/api", routes);
