@@ -38,7 +38,7 @@
         "nativescript-feedback": "^1.5.0",
         "nativescript-theme-core": "~2.0.24",
         "nativescript-ui-sidedrawer": "^9.0.3",
-        "ngx-toastr": "^13.0.0",
+        "ngx-toastr": "^14.1.0",
         "node-sass": "^4.14.1",
         "reflect-metadata": "~0.1.13",
         "resolve-url-loader": "^3.1.1",
