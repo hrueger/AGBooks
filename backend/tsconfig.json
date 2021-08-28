@@ -1,36 +1,30 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "module": "esnext",
+        "baseUrl": "./",
         "outDir": "./dist/out-tsc",
+        "forceConsistentCasingInFileNames": true,
+        "strict": false,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
         "sourceMap": true,
         "declaration": false,
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
+        "downlevelIteration": true,
         "experimentalDecorators": true,
-        "skipLibCheck": true,
-        "target": "es5",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "es2017",
+        "module": "es2020",
         "lib": [
-            "es2017",
-            "dom",
-            "es6"
-        ],
-        "baseUrl": ".",
-        "paths": {
-            "@src/*": [
-                "src/*.android.ts",
-                "src/*.ios.ts",
-                "src/*.tns.ts",
-                "src/*.web.ts",
-                "src/*.ts"
-            ]
-        }
+            "es2018",
+            "dom"
+        ]
     },
-    "files": [
-        "./src/main.ts",
-        "./src/polyfills.ts",
-    ]
+    "angularCompilerOptions": {
+        "enableI18nLegacyMessageIdFormat": false,
+        "strictInjectionParameters": true,
+        "strictInputAccessModifiers": true,
+        "strictTemplates": true
+    }
 }
