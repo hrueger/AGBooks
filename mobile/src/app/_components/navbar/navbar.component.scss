@@ -1,0 +1,18 @@
+@import "../../../variables.scss";
+ActionBar {
+    background-color: $primary;
+}
+
+.bg-primary {
+    background-color: $primary;
+}
+
+.headline {
+    font-weight: bold;
+    font-size: 22;
+    color: #ffffff;
+}
+
+.actionItemButton {
+    font-size: 25;
+}

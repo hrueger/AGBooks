@@ -1,51 +1,31 @@
-import { Component, OnInit } from '@angular/core'
-import { NavigationEnd, Router } from '@angular/router'
-import { RouterExtensions } from '@nativescript/angular'
-import {
-  DrawerTransitionBase,
-  RadSideDrawer,
-  SlideInOnTopTransition,
-} from 'nativescript-ui-sidedrawer'
-import { filter } from 'rxjs/operators'
-import { Application } from '@nativescript/core'
+import { Component, ElementRef, ViewChild } from "@angular/core";
+import * as appversion from "@nativescript/appversion";
+import { Utils } from "@nativescript/core";
 
 @Component({
-  selector: 'ns-app',
-  templateUrl: 'app.component.html',
+    selector: "app",
+    styleUrls: ["./app.component.scss"],
+    templateUrl: "./app.component.html",
 })
-export class AppComponent implements OnInit {
-  private _activatedUrl: string
-  private _sideDrawerTransition: DrawerTransitionBase
 
-  constructor(private router: Router, private routerExtensions: RouterExtensions) {
-    // Use the component constructor to inject services.
-  }
+export class AppComponent {
+    public version = "";
+    public currentYear = new Date().getFullYear().toString();
+    @ViewChild("rsd", { static: false }) public rSideDrawer: ElementRef;
 
-  ngOnInit(): void {
-    this._activatedUrl = '/home'
-    this._sideDrawerTransition = new SlideInOnTopTransition()
+    constructor() {
+        appversion.getVersionName().then((v: string) => {
+            this.version = v;
+        }, () => {
+            this.version = "Unknown";
+        });
+    }
 
-    this.router.events
-      .pipe(filter((event: any) => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => (this._activatedUrl = event.urlAfterRedirects))
-  }
+    public hideDrawer(): void {
+        this.rSideDrawer.nativeElement.toggleDrawerState();
+    }
 
-  get sideDrawerTransition(): DrawerTransitionBase {
-    return this._sideDrawerTransition
-  }
-
-  isComponentSelected(url: string): boolean {
-    return this._activatedUrl === url
-  }
-
-  onNavItemTap(navItemRoute: string): void {
-    this.routerExtensions.navigate([navItemRoute], {
-      transition: {
-        name: 'fade',
-      },
-    })
-
-    const sideDrawer = <RadSideDrawer>Application.getRootView()
-    sideDrawer.closeDrawer()
-  }
+    public goToGitHub(): void {
+        Utils.openUrl("https://github.com/hrueger/AGBooks");
+    }
 }
