@@ -123,7 +123,7 @@
                 <div class="spinner spinner-border text-primary"></div>
             </div>
             <div *ngIf="imageChangedEvent">
-                <image-cropper [autoCrop]="true" (imageCropped)="onImageCropped($event)" #imageCropper [imageChangedEvent]="imageChangedEvent" format="jpeg"></image-cropper>
+                <image-cropper [autoCrop]="true" [maintainAspectRatio]="false" (imageCropped)="onImageCropped($event)" #imageCropper [imageChangedEvent]="imageChangedEvent" format="jpeg"></image-cropper>
                 <button class="btn btn-outline-success" (click)="uploadCroppedImage()">Hochladen</button>
             </div>
         </div>
