@@ -9,6 +9,8 @@ const router = Router();
 router.get("/admin", [checkJwt, checkForAdmin], BookController.listAllAdmin);
 router.post("/admin", [checkJwt, checkForAdmin], BookController.createBook);
 router.post("/admin/:id", [checkJwt, checkForAdmin], BookController.editBook);
+router.post("/admin/:id/cover", [checkJwt, checkForAdmin], BookController.uploadCover);
+router.delete("/admin/:id/cover", [checkJwt, checkForAdmin], BookController.deleteCover);
 router.delete("/admin/:id", [checkJwt, checkForAdmin], BookController.deleteBook);
 
 // Usesrs
