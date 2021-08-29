@@ -10,6 +10,7 @@ import { RemoteService } from 'src/app/_services/remote.service';
 })
 export class ManageBooksComponent implements OnInit {
     public books: Book[] = [];
+    public editing = false;
     public apiUrl = "/api/";
     public loading = true;
     public subjects: string[] = [
@@ -74,6 +75,7 @@ export class ManageBooksComponent implements OnInit {
 
     public finishEditing(book: Book) {
         book.editing = false;
+        this.editing = false;
         this.remoteService.post(`books/admin/${book.id}`, {...book}).subscribe(() => {
             this.ngOnInit();
             this.alertService.success("Das Buch wurde erfolgreich gespeichert!")
@@ -85,11 +87,13 @@ export class ManageBooksComponent implements OnInit {
         for (const [key, value] of Object.entries(this.editingBackup)) {
             book[key] = value;
         }
+        this.editing = false;
     }
 
     public startEditing(book: Book) {
         this.editingBackup = { ...book };
         book.editing = true;
+        this.editing = true;
     }
 
 }
