@@ -7,6 +7,7 @@ const router = Router();
 
 // Admin
 router.get("/admin", [checkJwt, checkForAdmin], BookController.listAllAdmin);
+router.post("/admin", [checkJwt, checkForAdmin], BookController.createBook);
 
 // Usesrs
 router.get("/", [checkJwt], BookController.listAll);

@@ -21,6 +21,29 @@ class BookController {
         res.send(books);
     }
 
+    public static createBook = async (req: Request, res: Response): Promise<void> => {
+        const book: Partial<Book> = {
+            5: false,
+            6: false,
+            7: false,
+            8: false,
+            9: false,
+            10: false,
+            Q11: false,
+            Q12: false,
+            Q13: false,
+            branch: "",
+            language: "",
+            name: "Unbenanntes Buch",
+            subject: "",
+            publisher: "Unbekannter Verlag",
+            short: "",
+            uebergang: false,
+        };
+        await getRepository(Book).save(book);
+        BookController.listAllAdmin(req, res);
+    }
+
     public static availableBooks = async (req: Request, res: Response): Promise<void> => {
         const me = new User();
         me.grade = req.body.grade;
