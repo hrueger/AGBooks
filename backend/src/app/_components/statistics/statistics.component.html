@@ -1,6 +1,8 @@
 <div class="container mb-5 mt-3">
-    <button *ngIf="!showPrintOnly" (click)="print()" class="float-right btn btn-success"><i class="fas fa-print"></i> Drucken</button>
-    <a *ngIf="!showPrintOnly" routerLink="/dashboard" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Zurück</a>
+    <div class="d-flex justify-content-between">
+        <button *ngIf="!showPrintOnly" (click)="print()" class="btn btn-success"><i class="fas fa-print"></i> Drucken</button>
+        <a *ngIf="!showPrintOnly" routerLink="/dashboard" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Zurück</a>
+    </div>
 
 
 
