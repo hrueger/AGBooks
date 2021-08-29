@@ -10,6 +10,7 @@ class AuthController {
         // Get user from database
         const userRepository = getRepository(User);
         let user = new User();
+        user.order = {};
         user = await userRepository.save(user);
 
         const token = jwt.sign(
