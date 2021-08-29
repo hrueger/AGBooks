@@ -60,4 +60,6 @@ export class Book {
     public alert?: string;
 
     public number?: number;
+
+    public editing?: boolean;
 }

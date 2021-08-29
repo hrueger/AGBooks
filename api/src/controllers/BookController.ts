@@ -16,6 +16,11 @@ class BookController {
         res.send(books);
     }
 
+    public static listAllAdmin = async (req: Request, res: Response): Promise<void> => {
+        const books = await getRepository(Book).find();
+        res.send(books);
+    }
+
     public static availableBooks = async (req: Request, res: Response): Promise<void> => {
         const me = new User();
         me.grade = req.body.grade;
