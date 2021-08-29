@@ -15,6 +15,7 @@ export class NavbarComponent {
     @Input() public orderCanBeDone: boolean;
     @Input() public orderCanBeAccepted: boolean;
     @Input() public viewOrderList: boolean;
+    @Input() public title: string;
     @Output() orderDone: EventEmitter<void> = new EventEmitter<void>();
     @Output() orderAccepted: EventEmitter<void> = new EventEmitter<void>();
     @Output() getHandoverCodeForOrder: EventEmitter<void> = new EventEmitter<void>();
