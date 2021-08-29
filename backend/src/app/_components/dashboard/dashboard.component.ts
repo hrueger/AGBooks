@@ -7,6 +7,7 @@ import { AlertService } from "../../_services/alert.service";
 import { RemoteService } from "../../_services/remote.service";
 import { AuthenticationService } from "../../_services/authentication.service";
 import { Book } from "src/app/_models/Book";
+import { GridsterConfig } from "angular-gridster2";
 
 type ExtendedOrder = Order & ({
     books: (Book & {
@@ -32,6 +33,12 @@ export class DashboardComponent implements OnInit {
     public acceptedOrders: ExtendedOrder[] = [];
     public sse: EventSource;
     public showMobileMenu = false;
+    public gridsterOptions: GridsterConfig = {
+        itemInitCallback: (item, component) => {
+            this.boxHeight = parseFloat(component.el.style.height.replace("px", ""));
+        }
+    }
+    public boxHeight = 100;
 
     constructor(
         private router: Router,
