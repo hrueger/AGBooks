@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/_models/Book';
+import { AlertService } from 'src/app/_services/alert.service';
 import { RemoteService } from 'src/app/_services/remote.service';
 
 @Component({
@@ -32,7 +33,7 @@ export class ManageBooksComponent implements OnInit {
         "Sport",
         "W&R"
     ];
-    constructor(private remoteService: RemoteService) { }
+    constructor(private remoteService: RemoteService, private alertService: AlertService) { }
 
     public ngOnInit(): void {
         this.loading = true;
@@ -50,7 +51,7 @@ export class ManageBooksComponent implements OnInit {
         this.loading = true;
         this.remoteService.post(`books/admin`, {}).subscribe((books: Book[]) => {
             this.gotBooks(books);
-            alert("Das Buch wurde erstellt. Es befindet sich wahrscheinlich ganz unten auf der Liste.")
+            this.alertService.success("Das Buch wurde erstellt. Es befindet sich wahrscheinlich ganz unten auf der Liste.")
         });
     }
 
@@ -60,8 +61,9 @@ export class ManageBooksComponent implements OnInit {
             return;
         }
         this.loading = true;
-        this.remoteService.delete(`auth/books/${book.id}`).subscribe(() => {
+        this.remoteService.delete(`books/admin/${book.id}`).subscribe(() => {
             this.ngOnInit();
+            this.alertService.success("Das Buch wurde erfolgreich gelöscht!")
         });
     }
 
