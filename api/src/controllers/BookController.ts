@@ -151,10 +151,8 @@ class BookController {
             res.status(400).send({ message: "Invalid ID!" });
             return;
         }
-        const bookRepository = getRepository(Book);
         try {
-            const book = await bookRepository.findOneOrFail(id);
-            const coverPath = path.join(__dirname, `../../assets/images/cover/${book.short}.jpg`);
+            const coverPath = path.join(__dirname, `../../assets/images/cover/${id}.jpg`);
             if (!fs.existsSync(coverPath)) {
                 res.sendFile(path.join(__dirname, "../../assets/images/no_cover_available.png"));
                 return;
@@ -171,10 +169,8 @@ class BookController {
             res.status(400).send({ message: "Invalid ID!" });
             return;
         }
-        const bookRepository = getRepository(Book);
         try {
-            const book = await bookRepository.findOneOrFail(id);
-            const coverPath = path.join(__dirname, `../../assets/images/cover/${book.short}.jpg`);
+            const coverPath = path.join(__dirname, `../../assets/images/cover/${id}.jpg`);
             let data = req.body.cover;
             if (!data) {
                 res.status(400).send({ error: "No image data!" });
@@ -195,10 +191,8 @@ class BookController {
             res.status(400).send({ message: "Invalid ID!" });
             return;
         }
-        const bookRepository = getRepository(Book);
         try {
-            const book = await bookRepository.findOneOrFail(id);
-            const coverPath = path.join(__dirname, `../../assets/images/cover/${book.short}.jpg`);
+            const coverPath = path.join(__dirname, `../../assets/images/cover/${id}.jpg`);
             if (fs.existsSync(coverPath)) {
                 fs.unlinkSync(coverPath);
             }
