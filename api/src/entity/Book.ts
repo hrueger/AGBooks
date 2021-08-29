@@ -28,34 +28,34 @@ export class Book {
     public branch: string;
 
     @Column()
-    public uebergang: string;
+    public uebergang: boolean;
 
     @Column()
-    public 5: string;
+    public 5: boolean;
 
     @Column()
-    public 6: string;
+    public 6: boolean;
 
     @Column()
-    public 7: string;
+    public 7: boolean;
 
     @Column()
-    public 8: string;
+    public 8: boolean;
 
     @Column()
-    public 9: string;
+    public 9: boolean;
 
     @Column()
-    public 10: string;
+    public 10: boolean;
 
     @Column()
-    public Q11: string;
+    public Q11: boolean;
 
     @Column()
-    public Q12: string;
+    public Q12: boolean;
 
     @Column()
-    public Q13: string;
+    public Q13: boolean;
 
     public alert?: string;
 
