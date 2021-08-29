@@ -36,7 +36,7 @@ export class AuthenticationService {
 
         return this.http
             .post<any>(
-                `/api/auth/register`,
+                "/api/auth/register",
                 {
                     action,
                 },

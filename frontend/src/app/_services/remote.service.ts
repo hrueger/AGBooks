@@ -22,7 +22,7 @@ export class RemoteService {
         const action = "registerUser";
 
         return this.http
-            .post<string>(`/api/auth/userdata`, {
+            .post<string>("/api/auth/userdata", {
                 action,
                 teacher,
                 teacherShort,
