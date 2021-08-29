@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { AlertService } from "./alert.service";
-import { getApiUrl } from "../_utils/utils";
 
 @Injectable({ providedIn: "root" })
 export class RemoteService {
@@ -23,7 +22,7 @@ export class RemoteService {
         const action = "registerUser";
 
         return this.http
-            .post<string>(`${getApiUrl()}/auth/userdata`, {
+            .post<string>(`/api/auth/userdata`, {
                 action,
                 teacher,
                 teacherShort,
@@ -42,13 +41,13 @@ export class RemoteService {
     }
 
     get(url: string): Observable<any> {
-        return this.http.get<string>(`${getApiUrl()}${url}`).pipe(
+        return this.http.get<string>(`/api/${url}`).pipe(
             tap(() => this.log(`got ${url}`)),
             catchError(this.handleError<string>(`get ${url}`, "")),
         );
     }
     post(url: string, data?: Record<string, unknown>): Observable<any> {
-        return this.http.post<string>(`${getApiUrl()}${url}`, data).pipe(
+        return this.http.post<string>(`/api/${url}`, data).pipe(
             tap(() => this.log(`posted ${url}`)),
             catchError(this.handleError<string>(`post ${url}`, "")),
         );

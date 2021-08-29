@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { User } from "../_models/User";
-import { getApiUrl } from "../_utils/utils";
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -37,7 +36,7 @@ export class AuthenticationService {
 
         return this.http
             .post<any>(
-                `${getApiUrl()}auth/register`,
+                `/api/auth/register`,
                 {
                     action,
                 },

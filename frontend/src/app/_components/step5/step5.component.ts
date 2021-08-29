@@ -5,7 +5,6 @@ import { Router } from "@angular/router";
 import { NavbarService } from "../../_services/navbar.service";
 import { RemoteService } from "../../_services/remote.service";
 import { AuthenticationService } from "../../_services/authentication.service";
-import { getApiUrl } from "../../_utils/utils";
 
 @Component({
     selector: "app-step5",
@@ -30,7 +29,7 @@ export class Step5Component implements OnInit {
     public ngOnInit(): void {
         this.navbarService.setStep(5);
         const { token } = this.authService.currentUserValue;
-        this.source = new EventSource(`${getApiUrl()}order/live?authorization=${token}`);
+        this.source = new EventSource(`/api/order/live?authorization=${token}`);
         this.source.onmessage = (m) => {
             const data = JSON.parse(m.data);
             this.ordersLeft = data.ordersLeft;

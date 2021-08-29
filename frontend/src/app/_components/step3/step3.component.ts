@@ -8,7 +8,6 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RemoteService } from "../../_services/remote.service";
 import { Book } from "../../_models/Book";
 import { NavbarService } from "../../_services/navbar.service";
-import { getApiUrl } from "../../_utils/utils";
 
 @Component({
     selector: "app-step3",
@@ -22,7 +21,7 @@ export class Step3Component implements OnInit {
     fieldProps: any;
     formControls = {};
     classSize: number = null;
-    apiUrl = getApiUrl();
+    apiUrl = "/api/";
     constructor(
         public modalService: NgbModal,
         private remoteService: RemoteService,
