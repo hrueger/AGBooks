@@ -19,7 +19,7 @@ import { LoginComponent } from "./_components/login/login.component";
 import { AvailableBooksComponent } from "./_components/available-books/available-books.component";
 import { NavbarComponent } from "./_components/navbar/navbar.component";
 import { UsersComponent } from "./_components/users/users.component";
-import { ManageBooksComponent } from "./_components/manage-books/manage-books.component";
+import { ManageBooksComponent, NgbdSortableHeader } from "./_components/manage-books/manage-books.component";
 
 @NgModule({
     imports: [
@@ -42,7 +42,7 @@ import { ManageBooksComponent } from "./_components/manage-books/manage-books.co
         NavbarComponent,
         UsersComponent,
         ManageBooksComponent,
-
+        NgbdSortableHeader,
     ],
     providers: [
         { provide: LOCALE_ID, useValue: "de" },

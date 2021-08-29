@@ -1,9 +1,42 @@
-import { Component, OnInit } from "@angular/core";
+import {
+    Component, Directive, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren,
+} from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ImageCroppedEvent } from "ngx-image-cropper";
 import { Book } from "../../_models/Book";
 import { AlertService } from "../../_services/alert.service";
 import { RemoteService } from "../../_services/remote.service";
+
+export type SortColumn = keyof Book | any;
+export type SortDirection = "asc" | "desc" | "";
+const rotate: {[key: string]: SortDirection} = { asc: "desc", desc: "", "": "asc" };
+
+const compare = (v1: string | number, v2: string | number) => (v1 < v2 ? -1 : v1 > v2 ? 1 : 0);
+
+export interface SortEvent {
+  column: SortColumn;
+  direction: SortDirection;
+}
+
+@Directive({
+    selector: "th[sortable]",
+    host: {
+        "[class.asc]": "direction === \"asc\"",
+        "[class.desc]": "direction === \"desc\"",
+        "(click)": "rotate()",
+    },
+})
+export class NgbdSortableHeader {
+  @Input() sortable: SortColumn = "";
+  @Input() direction: SortDirection = "";
+  @Output() sort = new EventEmitter<SortEvent>();
+
+  public rotate(): void {
+      this.direction = rotate[this.direction];
+      console.log("rotate!");
+      this.sort.emit({ column: this.sortable, direction: this.direction });
+  }
+}
 
 @Component({
     selector: "app-manage-books",
@@ -42,6 +75,8 @@ export class ManageBooksComponent implements OnInit {
     ];
     public editingBackup: Book;
     private imageBase64: string;
+    private allBooks: Book[] = [];
+
     constructor(
         private remoteService: RemoteService,
         private alertService: AlertService,
@@ -71,6 +106,7 @@ export class ManageBooksComponent implements OnInit {
     private gotBooks(books: Book[]) {
         this.loading = false;
         this.books = books;
+        this.allBooks = books;
     }
 
     public newBook(): void {
@@ -150,5 +186,25 @@ export class ManageBooksComponent implements OnInit {
             this.croppingPicture = false;
             this.imageChangedEvent = "";
         });
+    }
+
+    @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+
+    onSort({ column, direction }: any): void {
+        this.headers.forEach((header) => {
+            if (header.sortable !== column) {
+                header.direction = "";
+            }
+        });
+
+        // sorting countries
+        if (direction === "" || column === "") {
+            this.books = this.allBooks;
+        } else {
+            this.books = [...this.allBooks].sort((a, b) => {
+                const res = compare(a[column as any], b[column as any]);
+                return direction === "asc" ? res : -res;
+            });
+        }
     }
 }

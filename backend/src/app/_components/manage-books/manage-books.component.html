@@ -6,31 +6,33 @@
     </div>
     <div *ngIf="!loading">
         <button class="btn btn-primary my-3" (click)="newBook()">Neues Buch</button><br>
-        <small>Klicke ein Buchcover an, um weitere Optionen zu sehen.</small>
+        <small>Klicke ein Buchcover an, um weitere Optionen zu sehen. Klicke auf einen Spaltennamen, um danach zu sortieren.</small>
         <table class="table table-striped table-hover">
             <thead class="position-sticky bg-white">
                 <tr>
-                    <th>Kürzel</th>
-                    <th>Cover</th>
-                    <th>Name</th>
-                    <th>Verlag</th>
-                    <th>Fach</th>
-                    <th>Sprache</th>
-                    <th>Zweig</th>
-                    <th>Überg.</th>
-                    <th>Jgst. 5</th>
-                    <th>Jgst. 6</th>
-                    <th>Jgst. 7</th>
-                    <th>Jgst. 8</th>
-                    <th>Jgst. 9</th>
-                    <th>Jgst. 10</th>
-                    <th>Q11</th>
-                    <th>Q12</th>
+                    <th scope="col">ID</th>
+                    <th scope="col" sortable="short" (sort)="onSort($event)">Kürzel</th>
+                    <th scope="col">Cover</th>
+                    <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+                    <th scope="col" sortable="publisher" (sort)="onSort($event)">Verlag</th>
+                    <th scope="col" sortable="subject" (sort)="onSort($event)">Fach</th>
+                    <th scope="col" sortable="language" (sort)="onSort($event)">Sprache</th>
+                    <th scope="col" sortable="branch" (sort)="onSort($event)">Zweig</th>
+                    <th scope="col" sortable="uebergang" (sort)="onSort($event)">Überg.</th>
+                    <th scope="col" sortable="5" (sort)="onSort($event)">Jgst. 5</th>
+                    <th scope="col" sortable="6" (sort)="onSort($event)">Jgst. 6</th>
+                    <th scope="col" sortable="7" (sort)="onSort($event)">Jgst. 7</th>
+                    <th scope="col" sortable="8" (sort)="onSort($event)">Jgst. 8</th>
+                    <th scope="col" sortable="9" (sort)="onSort($event)">Jgst. 9</th>
+                    <th scope="col" sortable="10" (sort)="onSort($event)">Jgst. 10</th>
+                    <th scope="col" sortable="Q11" (sort)="onSort($event)">Q11</th>
+                    <th scope="col" sortable="Q12" (sort)="onSort($event)">Q12</th>
                     <th>Aktionen</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let book of books">
+                    <th scope="row">{{book.id}}</th>
                     <td><input class="form-control" [(ngModel)]="book.short" *ngIf="book.editing"><span *ngIf="!book.editing">{{book.short}}</span></td>
                     <td><img src="{{ apiUrl }}books/{{ book.id }}?{{coverHash}}" class="bookcover cursor-pointer" alt="Cover" (click)="openCoverModal(coverModal, book)"></td>
                     <td><input class="form-control" [(ngModel)]="book.name" *ngIf="book.editing"><span *ngIf="!book.editing">{{book.name}}</span></td>
