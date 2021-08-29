@@ -2,12 +2,12 @@ import { OnInit, NgZone, Component } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
+import { Book } from "src/app/_models/Book";
+import { GridsterConfig } from "angular-gridster2";
 import { Order } from "../../_models/Order";
 import { AlertService } from "../../_services/alert.service";
 import { RemoteService } from "../../_services/remote.service";
 import { AuthenticationService } from "../../_services/authentication.service";
-import { Book } from "src/app/_models/Book";
-import { GridsterConfig } from "angular-gridster2";
 
 type ExtendedOrder = Order & ({
     books: (Book & {
@@ -21,8 +21,8 @@ type ExtendedOrder = Order & ({
 @Component({
     templateUrl: "./dashboard.component.html",
     styleUrls: [
-        "./dashboard.component.scss"
-    ]
+        "./dashboard.component.scss",
+    ],
 })
 export class DashboardComponent implements OnInit {
     public currentOrder: ExtendedOrder = null;
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
     public gridsterOptions: GridsterConfig = {
         itemInitCallback: (item, component) => {
             this.boxHeight = parseFloat(component.el.style.height.replace("px", ""));
-        }
+        },
     }
     public boxHeight = 100;
 

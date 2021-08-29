@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
-import { Book } from 'src/app/_models/Book';
-import { AlertService } from 'src/app/_services/alert.service';
-import { RemoteService } from 'src/app/_services/remote.service';
+import { Component, OnInit } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ImageCroppedEvent } from "ngx-image-cropper";
+import { Book } from "../../_models/Book";
+import { AlertService } from "../../_services/alert.service";
+import { RemoteService } from "../../_services/remote.service";
 
 @Component({
-    selector: 'app-manage-books',
-    templateUrl: './manage-books.component.html',
-    styleUrls: ['./manage-books.component.scss']
+    selector: "app-manage-books",
+    templateUrl: "./manage-books.component.html",
+    styleUrls: ["./manage-books.component.scss"],
 })
 export class ManageBooksComponent implements OnInit {
     public books: Book[] = [];
-    public imageChangedEvent: any = '';
+    public imageChangedEvent: any = "";
     public editing = false;
     public currentBookId: number;
     public coverHash = Math.random().toString();
@@ -38,11 +38,15 @@ export class ManageBooksComponent implements OnInit {
         "Sozialkunde",
         "Spanisch",
         "Sport",
-        "W&R"
+        "W&R",
     ];
     public editingBackup: Book;
     private imageBase64: string;
-    constructor(private remoteService: RemoteService, private alertService: AlertService, private modalService: NgbModal) { }
+    constructor(
+        private remoteService: RemoteService,
+        private alertService: AlertService,
+        private modalService: NgbModal,
+    ) { }
 
     public ngOnInit(): void {
         this.loading = true;
@@ -51,15 +55,13 @@ export class ManageBooksComponent implements OnInit {
         });
     }
 
-    public selectImage() {
+    public selectImage(): void {
         this.croppingPicture = true;
         const input = document.createElement("input");
         input.type = "file";
         input.accept = "image/*";
         input.addEventListener("change", (event: Event) => {
-            
             this.imageChangedEvent = event;
-            console.log(input.files);
         });
         document.body.appendChild(input);
         input.click();
@@ -73,9 +75,9 @@ export class ManageBooksComponent implements OnInit {
 
     public newBook(): void {
         this.loading = true;
-        this.remoteService.post(`books/admin`, {}).subscribe((books: Book[]) => {
+        this.remoteService.post("books/admin", {}).subscribe((books: Book[]) => {
             this.gotBooks(books);
-            this.alertService.success("Das Buch wurde erstellt. Es befindet sich wahrscheinlich ganz unten auf der Liste.")
+            this.alertService.success("Das Buch wurde erstellt. Es befindet sich wahrscheinlich ganz unten auf der Liste.");
         });
     }
 
@@ -87,7 +89,7 @@ export class ManageBooksComponent implements OnInit {
         this.loading = true;
         this.remoteService.delete(`books/admin/${book.id}`).subscribe(() => {
             this.ngOnInit();
-            this.alertService.success("Das Buch wurde erfolgreich gelöscht!")
+            this.alertService.success("Das Buch wurde erfolgreich gelöscht!");
         });
     }
 
@@ -103,16 +105,16 @@ export class ManageBooksComponent implements OnInit {
         });
     }
 
-    public finishEditing(book: Book) {
+    public finishEditing(book: Book): void {
         book.editing = false;
         this.editing = false;
-        this.remoteService.post(`books/admin/${book.id}`, {...book}).subscribe(() => {
+        this.remoteService.post(`books/admin/${book.id}`, { ...book }).subscribe(() => {
             this.ngOnInit();
-            this.alertService.success("Das Buch wurde erfolgreich gespeichert!")
+            this.alertService.success("Das Buch wurde erfolgreich gespeichert!");
         });
     }
 
-    public cancelEditing(book: Book) {
+    public cancelEditing(book: Book): void {
         book.editing = false;
         for (const [key, value] of Object.entries(this.editingBackup)) {
             book[key] = value;
@@ -120,17 +122,17 @@ export class ManageBooksComponent implements OnInit {
         this.editing = false;
     }
 
-    public startEditing(book: Book) {
+    public startEditing(book: Book): void {
         this.editingBackup = { ...book };
         book.editing = true;
         this.editing = true;
     }
 
-    public onImageCropped(event: ImageCroppedEvent) {
+    public onImageCropped(event: ImageCroppedEvent): void {
         this.imageBase64 = event.base64;
     }
 
-    public uploadCroppedImage() {
+    public uploadCroppedImage(): void {
         this.imageChangedEvent = "";
         this.remoteService.post(`books/admin/${this.currentBookId}/cover`, { cover: this.imageBase64 }).subscribe(() => {
             this.alertService.success("Das Buchcover wurde erfolgreich hochgeladen!");
@@ -139,7 +141,7 @@ export class ManageBooksComponent implements OnInit {
         });
     }
 
-    public openCoverModal(modal: unknown, book: Book) {
+    public openCoverModal(modal: unknown, book: Book): void {
         this.currentBookId = book.id;
         this.modalService.open(modal).result.then(() => {
             this.croppingPicture = false;
@@ -149,5 +151,4 @@ export class ManageBooksComponent implements OnInit {
             this.imageChangedEvent = "";
         });
     }
-
 }

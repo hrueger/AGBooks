@@ -8,6 +8,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
 import { GridsterModule } from "angular-gridster2";
+import { ImageCropperModule } from "ngx-image-cropper";
 import { ErrorInterceptor } from "./_interceptors/error.interceptor";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { StatisticsComponent } from "./_components/statistics/statistics.component";
@@ -18,8 +19,8 @@ import { LoginComponent } from "./_components/login/login.component";
 import { AvailableBooksComponent } from "./_components/available-books/available-books.component";
 import { NavbarComponent } from "./_components/navbar/navbar.component";
 import { UsersComponent } from "./_components/users/users.component";
-import { ManageBooksComponent } from './_components/manage-books/manage-books.component';
-import { ImageCropperModule } from "ngx-image-cropper";
+import { ManageBooksComponent } from "./_components/manage-books/manage-books.component";
+
 @NgModule({
     imports: [
         BrowserModule,
