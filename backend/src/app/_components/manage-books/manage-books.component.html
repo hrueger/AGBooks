@@ -31,7 +31,7 @@
             <tbody>
                 <tr *ngFor="let book of books">
                     <td><input class="form-control" [(ngModel)]="book.short" *ngIf="book.editing"><span *ngIf="!book.editing">{{book.short}}</span></td>
-                    <td><img src="{{ apiUrl }}books/{{ book.id }}" class="card-img bookcover" alt="Cover" /></td>
+                    <td><img src="{{ apiUrl }}books/{{ book.id }}?{{coverHash}}" class="bookcover cursor-pointer" alt="Cover" (click)="openCoverModal(coverModal, book)"></td>
                     <td><input class="form-control" [(ngModel)]="book.name" *ngIf="book.editing"><span *ngIf="!book.editing">{{book.name}}</span></td>
                     <td><input class="form-control" [(ngModel)]="book.publisher" *ngIf="book.editing"><span *ngIf="!book.editing">{{book.publisher}}</span></td>
                     <td>
@@ -104,3 +104,28 @@
         </table>
     </div>
 </div>
+
+<ng-template #coverModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Buchcover</h4>
+        <button type="button" class="close btn" (click)="modal.dismiss()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="!croppingPicture">
+            <img src="{{ apiUrl }}books/{{ currentBookId }}?{{coverHash}}" class="bookcover cover-big mb-4" alt="Cover"><br>
+            <button class="btn btn-outline-danger me-3" (click)="removeCover()">Bild löschen</button>
+            <button class="btn btn-outline-primary" (click)="selectImage()">Neues Bild hochladen</button>
+        </div>
+        <div *ngIf="croppingPicture">
+            <div class="text-center my-5" *ngIf="!imageChangedEvent">
+                <div class="spinner spinner-border text-primary"></div>
+            </div>
+            <div *ngIf="imageChangedEvent">
+                <image-cropper [autoCrop]="true" (imageCropped)="onImageCropped($event)" #imageCropper [imageChangedEvent]="imageChangedEvent" format="jpeg"></image-cropper>
+                <button class="btn btn-outline-success" (click)="uploadCroppedImage()">Hochladen</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

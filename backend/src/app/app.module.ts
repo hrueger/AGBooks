@@ -19,6 +19,7 @@ import { AvailableBooksComponent } from "./_components/available-books/available
 import { NavbarComponent } from "./_components/navbar/navbar.component";
 import { UsersComponent } from "./_components/users/users.component";
 import { ManageBooksComponent } from './_components/manage-books/manage-books.component';
+import { ImageCropperModule } from "ngx-image-cropper";
 @NgModule({
     imports: [
         BrowserModule,
@@ -29,6 +30,7 @@ import { ManageBooksComponent } from './_components/manage-books/manage-books.co
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
         GridsterModule,
+        ImageCropperModule,
     ],
     declarations: [
         AppComponent,

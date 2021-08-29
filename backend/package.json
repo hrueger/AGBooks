@@ -23,6 +23,7 @@
         "@ng-bootstrap/ng-bootstrap": "^10.0.0",
         "angular-gridster2": "^12.1.0",
         "bootstrap": "^5.1.0",
+        "ngx-image-cropper": "^4.0.1",
         "ngx-toastr": "^14.1.0",
         "rxjs": "~6.6.0",
         "tslib": "^2.3.0",

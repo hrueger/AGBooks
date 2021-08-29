@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 import { Book } from 'src/app/_models/Book';
 import { AlertService } from 'src/app/_services/alert.service';
 import { RemoteService } from 'src/app/_services/remote.service';
@@ -10,7 +12,11 @@ import { RemoteService } from 'src/app/_services/remote.service';
 })
 export class ManageBooksComponent implements OnInit {
     public books: Book[] = [];
+    public imageChangedEvent: any = '';
     public editing = false;
+    public currentBookId: number;
+    public coverHash = Math.random().toString();
+    public croppingPicture = false;
     public apiUrl = "/api/";
     public loading = true;
     public subjects: string[] = [
@@ -34,18 +40,30 @@ export class ManageBooksComponent implements OnInit {
         "Sport",
         "W&R"
     ];
-    editingBackup: {
-        id: number; name: string; publisher: string; subject: string; short: string; language: string; branch: string; uebergang: string; 5: string; 6: string; 7: string; 8: string; 9: string; // eslint-disable-next-line
-        // eslint-disable-next-line
-        10: string; Q11: string; Q12: string; Q13: string; alert?: string; number?: number; editing?: boolean;
-    };
-    constructor(private remoteService: RemoteService, private alertService: AlertService) { }
+    public editingBackup: Book;
+    private imageBase64: string;
+    constructor(private remoteService: RemoteService, private alertService: AlertService, private modalService: NgbModal) { }
 
     public ngOnInit(): void {
         this.loading = true;
         this.remoteService.get("books/admin").subscribe((books: Book[]) => {
             this.gotBooks(books);
         });
+    }
+
+    public selectImage() {
+        this.croppingPicture = true;
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.addEventListener("change", (event: Event) => {
+            
+            this.imageChangedEvent = event;
+            console.log(input.files);
+        });
+        document.body.appendChild(input);
+        input.click();
+        document.body.removeChild(input);
     }
 
     private gotBooks(books: Book[]) {
@@ -73,6 +91,18 @@ export class ManageBooksComponent implements OnInit {
         });
     }
 
+    public removeCover(): void {
+        // eslint-disable-next-line
+        if (!confirm("Soll dieses Buchcover wirklich entfernt werden?")) {
+            return;
+        }
+        this.modalService.dismissAll();
+        this.remoteService.delete(`books/admin/${this.currentBookId}/cover`).subscribe(() => {
+            this.alertService.success("Das Buchcover wurde erfolgreich entfernt!");
+            this.coverHash = Math.random().toString();
+        });
+    }
+
     public finishEditing(book: Book) {
         book.editing = false;
         this.editing = false;
@@ -94,6 +124,30 @@ export class ManageBooksComponent implements OnInit {
         this.editingBackup = { ...book };
         book.editing = true;
         this.editing = true;
+    }
+
+    public onImageCropped(event: ImageCroppedEvent) {
+        this.imageBase64 = event.base64;
+    }
+
+    public uploadCroppedImage() {
+        this.imageChangedEvent = "";
+        this.remoteService.post(`books/admin/${this.currentBookId}/cover`, { cover: this.imageBase64 }).subscribe(() => {
+            this.alertService.success("Das Buchcover wurde erfolgreich hochgeladen!");
+            this.coverHash = Math.random().toString();
+            this.croppingPicture = false;
+        });
+    }
+
+    public openCoverModal(modal: unknown, book: Book) {
+        this.currentBookId = book.id;
+        this.modalService.open(modal).result.then(() => {
+            this.croppingPicture = false;
+            this.imageChangedEvent = "";
+        }, () => {
+            this.croppingPicture = false;
+            this.imageChangedEvent = "";
+        });
     }
 
 }

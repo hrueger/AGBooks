@@ -16,4 +16,7 @@ select {
 
 .bookcover {
     max-height: 4rem;
+    &.cover-big {
+        max-height: 8rem;
+    }
 }
