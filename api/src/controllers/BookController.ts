@@ -21,6 +21,20 @@ class BookController {
         res.send(books);
     }
 
+    public static editBook = async (req: Request, res: Response): Promise<void> => {
+        try {
+            let book = await getRepository(Book).findOneOrFail(req.params.id);
+            book = {
+                ...book,
+                ...req.body,
+            };
+            await getRepository(Book).save(book);
+            res.send({ success: true });
+        } catch {
+            res.status(400).send({ error: "Unknown Error" });
+        }
+    }
+
     public static deleteBook = async (req: Request, res: Response): Promise<void> => {
         try {
             await getRepository(Book).delete(req.params.id);
