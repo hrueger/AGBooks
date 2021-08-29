@@ -1,0 +1,19 @@
+table {
+    thead.position-sticky {
+        top: 48px;
+        th {
+            border-bottom: 1px solid grey;
+        }
+    }
+    td {
+        border-right: 1px solid grey;
+    }
+}
+
+select {
+    min-width: 4rem;
+}
+
+.bookcover {
+    max-height: 4rem;
+}

@@ -18,6 +18,7 @@ import { LoginComponent } from "./_components/login/login.component";
 import { AvailableBooksComponent } from "./_components/available-books/available-books.component";
 import { NavbarComponent } from "./_components/navbar/navbar.component";
 import { UsersComponent } from "./_components/users/users.component";
+import { ManageBooksComponent } from './_components/manage-books/manage-books.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -37,6 +38,7 @@ import { UsersComponent } from "./_components/users/users.component";
         AvailableBooksComponent,
         NavbarComponent,
         UsersComponent,
+        ManageBooksComponent,
 
     ],
     providers: [

@@ -64,5 +64,7 @@
 /* do not edit */     public alert?: string;
 /* do not edit */
 /* do not edit */     public number?: number;
+/* do not edit */
+/* do not edit */     public editing?: boolean;
 /* do not edit */ }
 /* do not edit */

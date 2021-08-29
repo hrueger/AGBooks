@@ -5,6 +5,7 @@ import { StatisticsComponent } from "./_components/statistics/statistics.compone
 import { AvailableBooksComponent } from "./_components/available-books/available-books.component";
 import { LoginComponent } from "./_components/login/login.component";
 import { UsersComponent } from "./_components/users/users.component";
+import { ManageBooksComponent } from "./_components/manage-books/manage-books.component";
 
 export const routes: Routes = [
     /* Home paths */
@@ -24,6 +25,12 @@ export const routes: Routes = [
     {
         path: "users",
         component: UsersComponent,
+        canActivate: [AuthGuard],
+    },
+
+    {
+        path: "manage-books",
+        component: ManageBooksComponent,
         canActivate: [AuthGuard],
     },
 
