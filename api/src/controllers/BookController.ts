@@ -21,6 +21,15 @@ class BookController {
         res.send(books);
     }
 
+    public static deleteBook = async (req: Request, res: Response): Promise<void> => {
+        try {
+            await getRepository(Book).delete(req.params.id);
+            res.send({ success: true });
+        } catch {
+            res.status(400).send({ error: "Unknown Error" });
+        }
+    }
+
     public static createBook = async (req: Request, res: Response): Promise<void> => {
         const book: Partial<Book> = {
             5: false,
