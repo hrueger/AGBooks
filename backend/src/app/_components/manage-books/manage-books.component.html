@@ -94,9 +94,9 @@
                         <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book.Q12">
                     </td>
                     <td>
-                        <button class="btn btn-outline-success" *ngIf="!book.editing" (click)="book.editing = true"><i class="fas fa-pen"></i></button>
-                        <button class="btn btn-outline-success" *ngIf="book.editing" (click)="book.editing = false"><i class="fas fa-save"></i></button>
-                        <button class="btn btn-outline-dark" *ngIf="book.editing" (click)="book.editing = false"><i class="fas fa-times"></i></button>
+                        <button class="btn btn-outline-success" *ngIf="!book.editing" (click)="startEditing(book)"><i class="fas fa-pen"></i></button>
+                        <button class="btn btn-outline-success" *ngIf="book.editing" (click)="finishEditing(book)"><i class="fas fa-save"></i></button>
+                        <button class="btn btn-outline-dark" *ngIf="book.editing" (click)="cancelEditing(book)"><i class="fas fa-times"></i></button>
                         <button class="btn btn-outline-danger" *ngIf="!book.editing" (click)="removeBook(book)"><i class="fas fa-trash"></i></button>
                     </td>
                 </tr>

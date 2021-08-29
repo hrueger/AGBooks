@@ -33,6 +33,11 @@ export class ManageBooksComponent implements OnInit {
         "Sport",
         "W&R"
     ];
+    editingBackup: {
+        id: number; name: string; publisher: string; subject: string; short: string; language: string; branch: string; uebergang: string; 5: string; 6: string; 7: string; 8: string; 9: string; // eslint-disable-next-line
+        // eslint-disable-next-line
+        10: string; Q11: string; Q12: string; Q13: string; alert?: string; number?: number; editing?: boolean;
+    };
     constructor(private remoteService: RemoteService, private alertService: AlertService) { }
 
     public ngOnInit(): void {
@@ -65,6 +70,26 @@ export class ManageBooksComponent implements OnInit {
             this.ngOnInit();
             this.alertService.success("Das Buch wurde erfolgreich gelöscht!")
         });
+    }
+
+    public finishEditing(book: Book) {
+        book.editing = false;
+        this.remoteService.post(`books/admin/${book.id}`, {...book}).subscribe(() => {
+            this.ngOnInit();
+            this.alertService.success("Das Buch wurde erfolgreich gespeichert!")
+        });
+    }
+
+    public cancelEditing(book: Book) {
+        book.editing = false;
+        for (const [key, value] of Object.entries(this.editingBackup)) {
+            book[key] = value;
+        }
+    }
+
+    public startEditing(book: Book) {
+        this.editingBackup = { ...book };
+        book.editing = true;
     }
 
 }
