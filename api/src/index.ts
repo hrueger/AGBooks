@@ -81,7 +81,11 @@ createConnection({
         app.use(express.json() as any);
 
         // Set all routes from routes folder
-        app.use("/api", routes);
+        app.use("/api", (req, res, next) => {
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            (res as any).flush = () => {};
+            next();
+        }, routes);
 
         // Set routes for static built frontend
         app.use("/backend", express.static("/app/dist/backend"));
