@@ -7,7 +7,7 @@ export class createBooks1536535135468 implements MigrationInterface {
     public async up(): Promise<any> {
         const bookRepository = getRepository(Book);
         const books: Book[] = [];
-        for (const data of JSON.parse(fs.readFileSync(path.join(__dirname.endsWith("migration") ? path.join(__dirname, "../../") : "./", "./assets/books.json")).toString()) as Book[]) {
+        for (const data of JSON.parse(fs.readFileSync(path.join(__dirname.endsWith("migration") ? path.join(__dirname, "../../") : "/app/dist/", "assets/books.json")).toString()) as Book[]) {
             const book = new Book();
             Object.assign(book, data);
             books.push(book);

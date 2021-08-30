@@ -109,7 +109,7 @@ class BookController {
     }
 
     private static getAssetsFolderPath(): string {
-        return __dirname.endsWith("/controllers") ? path.join(__dirname, "../../assets") : "./assets";
+        return __dirname.endsWith("/controllers") ? path.join(__dirname, "../../assets") : "/app/dist/assets";
     }
 
     public static async findBooks(user: User): Promise<Book[] | false> {
