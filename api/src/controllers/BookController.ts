@@ -185,7 +185,7 @@ class BookController {
         try {
             const coverPath = path.join(`${BookController.getCoverFolderPath()}/${id}.jpg`);
             if (!fs.existsSync(coverPath)) {
-                res.sendFile(path.join("../../assets/images/no_cover_available.png"));
+                res.sendFile(path.join(`${BookController.getAssetsFolderPath()}/images/no_cover_available.png`));
                 return;
             }
             res.sendFile(coverPath);
