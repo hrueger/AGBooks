@@ -76,7 +76,9 @@ createConnection({
         // This sets up secure rules for CORS, see https://developer.mozilla.org/de/docs/Web/HTTP/CORS
         app.use(cors());
         // This secures the app with some http headers
-        app.use(helmet() as any);
+        app.use(helmet({
+            contentSecurityPolicy: false,
+        }) as any);
         // This transforms the incoming JSON body into objects
         app.use(express.json() as any);
 
