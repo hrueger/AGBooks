@@ -40,7 +40,7 @@ class BookController {
 
         archive.pipe(res);
         archive.append(JSON.stringify(books), { name: "books.json" });
-        archive.directory(path.join(__dirname, "../../assets/images/cover"), "cover");
+        archive.directory(BookController.getCoverFolderPath(), "cover");
         archive.finalize();
     }
 
@@ -102,6 +102,14 @@ class BookController {
             return;
         }
         res.send(books);
+    }
+
+    private static getCoverFolderPath(): string {
+        return `${BookController.getAssetsFolderPath()}/images/cover`;
+    }
+
+    private static getAssetsFolderPath(): string {
+        return __dirname.endsWith("/controllers") ? path.join(__dirname, "../../assets") : "./assets";
     }
 
     public static async findBooks(user: User): Promise<Book[] | false> {
@@ -175,9 +183,9 @@ class BookController {
             return;
         }
         try {
-            const coverPath = path.join(__dirname, `../../assets/images/cover/${id}.jpg`);
+            const coverPath = path.join(`${BookController.getCoverFolderPath()}/${id}.jpg`);
             if (!fs.existsSync(coverPath)) {
-                res.sendFile(path.join(__dirname, "../../assets/images/no_cover_available.png"));
+                res.sendFile(path.join("../../assets/images/no_cover_available.png"));
                 return;
             }
             res.sendFile(coverPath);
@@ -193,7 +201,7 @@ class BookController {
             return;
         }
         try {
-            const coverPath = path.join(__dirname, `../../assets/images/cover/${id}.jpg`);
+            const coverPath = path.join(`${BookController.getCoverFolderPath()}/${id}.jpg`);
             let data = req.body.cover;
             if (!data) {
                 res.status(400).send({ error: "No image data!" });
