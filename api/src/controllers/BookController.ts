@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import * as path from "path";
 import * as fs from "fs";
+import archiver from "archiver";
 import { Book } from "../entity/Book";
 import { User } from "../entity/User";
 
@@ -19,6 +20,28 @@ class BookController {
     public static listAllAdmin = async (req: Request, res: Response): Promise<void> => {
         const books = await getRepository(Book).find();
         res.send(books);
+    }
+
+    public static exportBackup = async (req: Request, res: Response): Promise<void> => {
+        const books = await getRepository(Book).find();
+        res.setHeader("Content-disposition", `attachment; filename=AGBooks_Export_${new Date().toISOString().replace(/[^\d]/g, "-")}.zip`);
+        res.setHeader("Content-type", "application/zip");
+
+        const archive = archiver("zip", {
+            zlib: { level: 9 },
+        });
+
+        archive.on("warning", (err) => {
+            throw err;
+        });
+        archive.on("error", (err) => {
+            throw err;
+        });
+
+        archive.pipe(res);
+        archive.append(JSON.stringify(books), { name: "books.json" });
+        archive.directory(path.join(__dirname, "../../assets/images/cover"), "cover");
+        archive.finalize();
     }
 
     public static editBook = async (req: Request, res: Response): Promise<void> => {
