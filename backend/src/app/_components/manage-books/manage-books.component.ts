@@ -3,6 +3,7 @@ import {
 } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ImageCroppedEvent } from "ngx-image-cropper";
+import { AuthenticationService } from "../../_services/authentication.service";
 import { Book } from "../../_models/Book";
 import { AlertService } from "../../_services/alert.service";
 import { RemoteService } from "../../_services/remote.service";
@@ -81,6 +82,7 @@ export class ManageBooksComponent implements OnInit {
         private remoteService: RemoteService,
         private alertService: AlertService,
         private modalService: NgbModal,
+        public authService: AuthenticationService,
     ) { }
 
     public ngOnInit(): void {
