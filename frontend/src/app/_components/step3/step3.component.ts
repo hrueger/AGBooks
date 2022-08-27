@@ -49,6 +49,7 @@ export class Step3Component implements OnInit {
                             this.formBuilder.group({
                                 bookNumber: book.number,
                                 name: book.name,
+                                comment: book.comment,
                                 subject: book.subject,
                                 id: book.id,
                             }),

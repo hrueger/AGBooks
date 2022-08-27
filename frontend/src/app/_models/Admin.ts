@@ -6,11 +6,11 @@
 /*    |    Then, run "npx redundancyjs" in the terminal.                      |    */
 /*    +-----------------------------------------------------------------------+    */
 
-/* do not edit */ 
-/* do not edit */ 
 /* do not edit */
-/* do not edit */ 
-/* do not edit */ 
+/* do not edit */
+/* do not edit */
+/* do not edit */
+/* do not edit */
 /* do not edit */ export class Admin {
 /* do not edit */   
 /* do not edit */   public id: number;

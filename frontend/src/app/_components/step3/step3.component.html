@@ -16,6 +16,9 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ book.name }}</h5>
                                 <p class="card-text">Fach: {{ book.subject }}</p>
+                                <div class="alert alert-warning" *ngIf="book.comment">
+                                    <b>Info:</b> {{book.comment}}
+                                </div>
                                 <p class="card-text">
                                     <small class="text-muted">Wie viele Schülerinnen und Schüler benötigen dieses Buch?</small>
                                 </p>

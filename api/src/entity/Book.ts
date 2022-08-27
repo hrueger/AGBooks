@@ -22,6 +22,9 @@ export class Book {
     public short: string;
 
     @Column()
+    public comment: string;
+
+    @Column()
     public language: string;
 
     @Column()

@@ -17,6 +17,7 @@
                     <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
                     <th scope="col" sortable="publisher" (sort)="onSort($event)">Verlag</th>
                     <th scope="col" sortable="subject" (sort)="onSort($event)">Fach</th>
+                    <th scope="col" sortable="comment" (sort)="onSort($event)">Kommentar</th>
                     <th scope="col" sortable="language" (sort)="onSort($event)">Sprache</th>
                     <th scope="col" sortable="branch" (sort)="onSort($event)">Zweig</th>
                     <th scope="col" sortable="uebergang" (sort)="onSort($event)">Überg.</th>
@@ -45,6 +46,10 @@
                         <span *ngIf="!book.editing">{{book.subject}}</span>
                     </td>
                     <td>
+                        <input type="text" class="form-control" *ngIf="book.editing" [(ngModel)]="book.comment">
+                        <span *ngIf="!book.editing">{{book.comment}}</span>
+                    </td>
+                    <td>
                         <select class="form-select" *ngIf="book.editing" [(ngModel)]="book.language">
                             <option value="">-</option>
                             <option value="f">Franz.</option>
@@ -62,39 +67,39 @@
                         <span *ngIf="!book.editing">{{book.branch}}</span>
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book.uebergang == '1'" class="fas fa-check"></i>
+                        <i *ngIf="!book.editing && book.uebergang" class="fas fa-check"></i>
                         <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book.uebergang">
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['5'] == '1'" class="fas fa-check"></i>
+                        <i *ngIf="!book.editing && book['5']" class="fas fa-check"></i>
                         <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['5']">
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['6'] == '1'" class="fas fa-check"></i>
+                        <i *ngIf="!book.editing && book['6']" class="fas fa-check"></i>
                         <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['6']">
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['7'] == '1'" class="fas fa-check"></i>
+                        <i *ngIf="!book.editing && book['7']" class="fas fa-check"></i>
                         <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['7']">
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['8'] == '1'" class="fas fa-check"></i>
+                        <i *ngIf="!book.editing && book['8']" class="fas fa-check"></i>
                         <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['8']">
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['9'] == '1'" class="fas fa-check"></i>
+                        <i *ngIf="!book.editing && book['9']" class="fas fa-check"></i>
                         <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['9']">
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['10'] == '1'" class="fas fa-check"></i>
+                        <i *ngIf="!book.editing && book['10']" class="fas fa-check"></i>
                         <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['10']">
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book.Q11 == '1'" class="fas fa-check"></i>
+                        <i *ngIf="!book.editing && book.Q11" class="fas fa-check"></i>
                         <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book.Q11">
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book.Q12 == '1'" class="fas fa-check"></i>
+                        <i *ngIf="!book.editing && book.Q12" class="fas fa-check"></i>
                         <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book.Q12">
                     </td>
                     <td>

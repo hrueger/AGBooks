@@ -83,6 +83,7 @@ class BookController {
             name: "Unbenanntes Buch",
             subject: "",
             publisher: "Unbekannter Verlag",
+            comment: "",
             short: "",
             uebergang: false,
         };
