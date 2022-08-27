@@ -4,7 +4,6 @@ import { first } from "rxjs/operators";
 import {
     FormBuilder, FormGroup, FormArray,
 } from "@angular/forms";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RemoteService } from "../../_services/remote.service";
 import { Book } from "../../_models/Book";
 import { NavbarService } from "../../_services/navbar.service";
@@ -23,7 +22,6 @@ export class Step3Component implements OnInit {
     classSize: number = null;
     apiUrl = "/api/";
     constructor(
-        public modalService: NgbModal,
         private remoteService: RemoteService,
         private router: Router,
         private formBuilder: FormBuilder,

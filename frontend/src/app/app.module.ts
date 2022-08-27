@@ -1,7 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, LOCALE_ID } from "@angular/core";
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
@@ -40,7 +39,6 @@ import { ErrorInterceptor } from "./_interceptors/error.interceptor";
     ],
     imports: [
         FormsModule,
-        NgbModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
