@@ -1,4 +1,4 @@
-FROM tarampampam/node:13.1-alpine
+FROM tarampampam/node:lts-alpine
 
 LABEL maintainer="Hannes Rüger"
 LABEL name="AGBooks"
