@@ -11,7 +11,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: 12
+        node-version: 18
     - name: Install dependencies
       working-directory: api
       run: npm i
@@ -26,7 +26,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: 12
+        node-version: 18
     - name: Install dependencies
       working-directory: frontend
       run: npm i
@@ -41,7 +41,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: 12
+        node-version: 18
     - name: Install dependencies
       working-directory: backend
       run: npm i
