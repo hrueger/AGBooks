@@ -80,7 +80,7 @@ createConnection({
             contentSecurityPolicy: false,
         }) as any);
         // This transforms the incoming JSON body into objects
-        app.use(express.json() as any);
+        app.use(express.json({ limit: "50mb" }));
 
         // Set all routes from routes folder
         app.use("/api", (req, res, next) => {
