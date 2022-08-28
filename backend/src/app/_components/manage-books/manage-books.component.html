@@ -1,6 +1,6 @@
 <app-navbar title="Bücher verwalten"></app-navbar>
 
-<div class="container my-5">
+<div class="container-fluid my-5">
     <div *ngIf="loading" class="text-center mt-5 pt-5">
         <div class="spinner spinner-border text-primary"></div>
     </div>
@@ -35,78 +35,60 @@
             <tbody>
                 <tr *ngFor="let book of books">
                     <th scope="row">{{book.id}}</th>
-                    <td><input class="form-control" [(ngModel)]="book.short" *ngIf="book.editing"><span *ngIf="!book.editing">{{book.short}}</span></td>
-                    <td><img src="{{ apiUrl }}books/{{ book.id }}?{{coverHash}}" class="bookcover cursor-pointer" alt="Cover" (click)="openCoverModal(coverModal, book)"></td>
-                    <td><input class="form-control" [(ngModel)]="book.name" *ngIf="book.editing"><span *ngIf="!book.editing">{{book.name}}</span></td>
-                    <td><input class="form-control" [(ngModel)]="book.publisher" *ngIf="book.editing"><span *ngIf="!book.editing">{{book.publisher}}</span></td>
                     <td>
-                        <select class="form-select" *ngIf="book.editing" [(ngModel)]="book.subject">
-                            <option *ngFor="let subject of subjects" [value]="subject">{{subject}}</option>
-                        </select>
-                        <span *ngIf="!book.editing">{{book.subject}}</span>
+                        <span>{{book.short}}</span>
                     </td>
                     <td>
-                        <input type="text" class="form-control" *ngIf="book.editing" [(ngModel)]="book.comment">
-                        <span *ngIf="!book.editing">{{book.comment}}</span>
+                        <img src="{{ apiUrl }}books/{{ book.id }}?{{coverHash}}" class="bookcover cursor-pointer" alt="Cover" (click)="openCoverModal(coverModal, book)">
                     </td>
                     <td>
-                        <select class="form-select" *ngIf="book.editing" [(ngModel)]="book.language">
-                            <option value="">-</option>
-                            <option value="f">Franz.</option>
-                            <option value="l">Latein</option>
-                        </select>
-                        <span *ngIf="!book.editing">{{book.language}}</span>
+                        <span>{{book.name}}</span>
                     </td>
                     <td>
-                        <select class="form-select" *ngIf="book.editing" [(ngModel)]="book.branch">
-                            <option value="">-</option>
-                            <option value="s">sprachl.</option>
-                            <option value="sf">franz. Spätbeginner</option>
-                            <option value="n">naturwis.</option>
-                        </select>
-                        <span *ngIf="!book.editing">{{book.branch}}</span>
+                        <span>{{book.publisher}}</span>
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book.uebergang" class="fas fa-check"></i>
-                        <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book.uebergang">
+                        <span>{{book.subject}}</span>
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['5']" class="fas fa-check"></i>
-                        <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['5']">
+                        <span>{{book.comment}}</span>
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['6']" class="fas fa-check"></i>
-                        <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['6']">
+                        <span>{{ {l: "Latein", f: "Französisch" }[book.language] || book.language}}</span>
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['7']" class="fas fa-check"></i>
-                        <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['7']">
+                        <span>{{ {s: "sprachlich", sf: "Französisch Spätbeginner", n: "naturwissensch."}[book.branch] || book.branch}}</span>
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['8']" class="fas fa-check"></i>
-                        <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['8']">
+                        <i *ngIf="book.uebergang" class="fas fa-check"></i>
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['9']" class="fas fa-check"></i>
-                        <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['9']">
+                        <i *ngIf="book['5']" class="fas fa-check"></i>
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book['10']" class="fas fa-check"></i>
-                        <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book['10']">
+                        <i *ngIf="book['6']" class="fas fa-check"></i>
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book.Q11" class="fas fa-check"></i>
-                        <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book.Q11">
+                        <i *ngIf="book['7']" class="fas fa-check"></i>
                     </td>
                     <td>
-                        <i *ngIf="!book.editing && book.Q12" class="fas fa-check"></i>
-                        <input *ngIf="book.editing" class="form-check-input" type="checkbox" [(ngModel)]="book.Q12">
+                        <i *ngIf="book['8']" class="fas fa-check"></i>
                     </td>
                     <td>
-                        <button class="btn btn-outline-success" *ngIf="!book.editing && !editing" (click)="startEditing(book)"><i class="fas fa-pen"></i></button>
-                        <button class="btn btn-outline-success" *ngIf="book.editing" (click)="finishEditing(book)"><i class="fas fa-save"></i></button>
-                        <button class="btn btn-outline-dark" *ngIf="book.editing" (click)="cancelEditing(book)"><i class="fas fa-times"></i></button>
-                        <button class="btn btn-outline-danger" *ngIf="!book.editing && !editing" (click)="removeBook(book)"><i class="fas fa-trash"></i></button>
+                        <i *ngIf="book['9']" class="fas fa-check"></i>
+                    </td>
+                    <td>
+                        <i *ngIf="book['10']" class="fas fa-check"></i>
+                    </td>
+                    <td>
+                        <i *ngIf="book.Q11" class="fas fa-check"></i>
+                    </td>
+                    <td>
+                        <i *ngIf="book.Q12" class="fas fa-check"></i>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-success" (click)="startEditing(book, editModal)"><i class="fas fa-pen"></i></button>
+                        <button class="btn btn-outline-danger" (click)="removeBook(book)"><i class="fas fa-trash"></i></button>
                     </td>
                 </tr>
             </tbody>
@@ -118,8 +100,8 @@
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Buchcover</h4>
         <button type="button" class="close btn" (click)="modal.dismiss()">
-        <i class="fas fa-times"></i>
-      </button>
+            <i class="fas fa-times"></i>
+        </button>
     </div>
     <div class="modal-body">
         <div *ngIf="!croppingPicture">
@@ -136,5 +118,94 @@
                 <button class="btn btn-outline-success" (click)="uploadCroppedImage()">Hochladen</button>
             </div>
         </div>
+    </div>
+</ng-template>
+
+<ng-template #editModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Book</h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+
+
+        <div class="row mb-3">
+            <label for="short" class="col-sm-2 col-form-label">Kürzel</label>
+            <div class="col-sm-10">
+                <input class="form-control" [(ngModel)]="currentBook.short">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input class="form-control" [(ngModel)]="currentBook.name">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="publisher" class="col-sm-2 col-form-label">Verlag</label>
+            <div class="col-sm-10">
+                <input class="form-control" [(ngModel)]="currentBook.publisher">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="subject" class="col-sm-2 col-form-label">Fach</label>
+            <div class="col-sm-10">
+                <select class="form-select" [(ngModel)]="currentBook.subject">
+                    <option *ngFor="let subject of subjects" [value]="subject">{{subject}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="comment" class="col-sm-2 col-form-label">Kommentar für die Lehrkräfte</label>
+            <div class="col-sm-10">
+                <input class="form-control" [(ngModel)]="currentBook.comment" placeholder="Optional">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="language" class="col-sm-2 col-form-label">Sprache</label>
+            <div class="col-sm-10">
+                <select class="form-select" [(ngModel)]="currentBook.language">
+                    <option value="">-</option>
+                    <option value="f">Franz.</option>
+                    <option value="l">Latein</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="row mb-3">
+            <label for="branch" class="col-sm-2 col-form-label">Zweig</label>
+            <div class="col-sm-10">
+                <select class="form-select" [(ngModel)]="currentBook.branch">
+                    <option value="">-</option>
+                    <option value="s">sprachl.</option>
+                    <option value="sf">franz. Spätbeginner</option>
+                    <option value="n">naturwis.</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-10 offset-sm-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="uebergang" [(ngModel)]="currentBook.uebergang">
+                    <label class="form-check-label" for="uebergang">Übergangsklasse</label>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngFor="let grade of ['5', '6', '7', '8', '9', '10', 'Q11', 'Q12']">
+            <div class="col-sm-10 offset-sm-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [id]="grade" [(ngModel)]="currentBook[grade]">
+                    <label class="form-check-label" [for]="grade">{{grade.startsWith('Q') ? grade : 'Jgst. ' + grade}}</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss()">Abbrechen</button>
+        <button type="button" class="btn btn-outline-success" (click)="modal.close()">Speichern</button>
     </div>
 </ng-template>

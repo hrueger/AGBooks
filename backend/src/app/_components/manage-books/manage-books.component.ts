@@ -22,28 +22,28 @@ export interface SortEvent {
 @Directive({
     selector: "th[sortable]",
     host: {
-        "[class.asc]": "direction === \"asc\"",
-        "[class.desc]": "direction === \"desc\"",
-        "(click)": "rotate()",
+    "[class.asc]": "direction === \"asc\"",
+    "[class.desc]": "direction === \"desc\"",
+    "(click)": "rotate()",
     },
-})
+    })
 export class NgbdSortableHeader {
-  @Input() sortable: SortColumn = "";
-  @Input() direction: SortDirection = "";
-  @Output() sort = new EventEmitter<SortEvent>();
+    @Input() sortable: SortColumn = "";
+    @Input() direction: SortDirection = "";
+    @Output() sort = new EventEmitter<SortEvent>();
 
-  public rotate(): void {
-      this.direction = rotate[this.direction];
-      console.log("rotate!");
-      this.sort.emit({ column: this.sortable, direction: this.direction });
-  }
+    public rotate(): void {
+        this.direction = rotate[this.direction];
+        console.log("rotate!");
+        this.sort.emit({ column: this.sortable, direction: this.direction });
+    }
 }
 
 @Component({
     selector: "app-manage-books",
     templateUrl: "./manage-books.component.html",
     styleUrls: ["./manage-books.component.scss"],
-})
+    })
 export class ManageBooksComponent implements OnInit {
     public books: Book[] = [];
     public imageChangedEvent: any = "";
@@ -77,6 +77,7 @@ export class ManageBooksComponent implements OnInit {
     public editingBackup: Book;
     private imageBase64: string;
     private allBooks: Book[] = [];
+    currentBook: Book;
 
     constructor(
         private remoteService: RemoteService,
@@ -160,10 +161,16 @@ export class ManageBooksComponent implements OnInit {
         this.editing = false;
     }
 
-    public startEditing(book: Book): void {
+    public startEditing(book: Book, modal: any): void {
         this.editingBackup = { ...book };
-        book.editing = true;
-        this.editing = true;
+        this.currentBook = book;
+        this.modalService.open(modal, { size: "lg" }).result.then(() => {
+            this.finishEditing(book);
+            console.log("finish");
+        }, () => {
+            console.log("this.cancelEditing");
+            this.cancelEditing(book);
+        });
     }
 
     public onImageCropped(event: ImageCroppedEvent): void {
