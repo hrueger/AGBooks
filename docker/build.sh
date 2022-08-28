@@ -1,9 +1,9 @@
 cd ../frontend
 npm install
-npm run build -- --outputPath=../docker/frontend
+npm run build -- --output-path=../docker/frontend
 cd ../backend
 npm install
-npm run build -- --outputPath=../docker/backend
+npm run build -- --output-path=../docker/backend
 cd ../api
 npm install
 npx @zeit/ncc build src/index.ts -o ../docker/api
