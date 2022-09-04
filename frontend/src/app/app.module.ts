@@ -15,7 +15,6 @@ import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { Step4Component } from "./_components/step4/step4.component";
 import { Step5Component } from "./_components/step5/step5.component";
 import { Step6Component } from "./_components/step6/step6.component";
-import { Step7Component } from "./_components/step7/step7.component";
 import { HandoverComponent } from "./_components/handover/handover.component";
 import { TakeoverComponent } from "./_components/takeover/takeover.component";
 import { StartsWithPipe } from "./_pipes/startswith.pipe";
@@ -32,7 +31,6 @@ import { ErrorInterceptor } from "./_interceptors/error.interceptor";
         Step4Component,
         Step5Component,
         Step6Component,
-        Step7Component,
         HandoverComponent,
         TakeoverComponent,
         StartsWithPipe,

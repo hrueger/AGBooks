@@ -9,7 +9,7 @@ import { NavbarService } from "../../_services/navbar.service";
 export class NavbarComponent implements OnInit {
     stepNumber = 0;
     pbwidth = "90%";
-    totalSteps = 7;
+    totalSteps = 6;
     constructor(private navbarService: NavbarService) { }
 
     public ngOnInit(): void {
