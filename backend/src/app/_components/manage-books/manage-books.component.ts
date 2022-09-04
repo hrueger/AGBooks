@@ -86,8 +86,10 @@ export class ManageBooksComponent implements OnInit {
         public authService: AuthenticationService,
     ) { }
 
-    public ngOnInit(): void {
-        this.loading = true;
+    public ngOnInit(skipLoading = false): void {
+        if (!skipLoading) {
+            this.loading = true;
+        }
         this.remoteService.get("books/admin").subscribe((books: Book[]) => {
             this.gotBooks(books);
         });
@@ -127,7 +129,7 @@ export class ManageBooksComponent implements OnInit {
         }
         this.loading = true;
         this.remoteService.delete(`books/admin/${book.id}`).subscribe(() => {
-            this.ngOnInit();
+            this.ngOnInit(true);
             this.alertService.success("Das Buch wurde erfolgreich gelöscht!");
         });
     }
@@ -148,7 +150,7 @@ export class ManageBooksComponent implements OnInit {
         book.editing = false;
         this.editing = false;
         this.remoteService.post(`books/admin/${book.id}`, { ...book }).subscribe(() => {
-            this.ngOnInit();
+            this.ngOnInit(true);
             this.alertService.success("Das Buch wurde erfolgreich gespeichert!");
         });
     }
