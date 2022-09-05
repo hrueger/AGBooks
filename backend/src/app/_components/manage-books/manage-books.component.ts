@@ -108,6 +108,28 @@ export class ManageBooksComponent implements OnInit {
         document.body.removeChild(input);
     }
 
+    public importBackup(): void {
+        // select a zip file and upload it with a post request as base64
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".zip";
+        input.addEventListener("change", (event: Event) => {
+            this.loading = true;
+            const file = (event.target as HTMLInputElement).files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                this.remoteService.post("books/admin/backup/import", { backupBase64: reader.result }).subscribe(() => {
+                    this.ngOnInit();
+                    this.alertService.success("Das Backup wurde erfolgreich importiert!");
+                });
+            };
+        });
+        document.body.appendChild(input);
+        input.click();
+        document.body.removeChild(input);
+    }
+
     private gotBooks(books: Book[]) {
         this.loading = false;
         this.books = books;

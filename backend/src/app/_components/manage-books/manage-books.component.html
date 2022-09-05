@@ -6,7 +6,8 @@
     </div>
     <div *ngIf="!loading">
         <button class="btn btn-outline-primary my-3 mx-2" (click)="newBook()">Neues Buch</button>
-        <a class="btn btn-outline-primary my-3 mx-2" href="/api/books/admin/backup/export?authorization={{authService.currentUserValue.token}}" target="_blank">Backup exportieren</a><br>
+        <a class="btn btn-outline-primary my-3 mx-2" href="/api/books/admin/backup/export?authorization={{authService.currentUserValue.token}}" target="_blank">Backup exportieren</a>
+        <button class="btn btn-outline-primary my-3 mx-2" (click)="importBackup()">Backup importieren</button><br>
         <small>Klicke ein Buchcover an, um weitere Optionen zu sehen. Klicke auf einen Spaltennamen, um danach zu sortieren.</small>
         <table class="table table-striped table-hover">
             <thead class="position-sticky bg-white">

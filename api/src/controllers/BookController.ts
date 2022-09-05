@@ -1,8 +1,10 @@
+/* eslint-disable max-len */
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import * as path from "path";
 import * as fs from "fs";
 import archiver from "archiver";
+import yauzl from "yauzl";
 import { Book } from "../entity/Book";
 import { User } from "../entity/User";
 
@@ -42,6 +44,46 @@ class BookController {
         archive.append(JSON.stringify(books), { name: "books.json" });
         archive.directory(BookController.getCoverFolderPath(), "cover");
         archive.finalize();
+    }
+
+    public static importBackup = async (req: Request, res: Response): Promise<void> => {
+        const buffer = Buffer.from(req.body.backupBase64.slice(req.body.backupBase64.indexOf(",") + 1), "base64url");
+
+        yauzl.fromBuffer(buffer, { lazyEntries: true }, (err, zipfile) => {
+            if (err) throw err;
+            zipfile.readEntry();
+            zipfile.on("entry", (entry) => {
+                console.log("-->", entry);
+                if (/\/$/.test(entry.fileName)) {
+                    zipfile.readEntry();
+                } else {
+                    zipfile.openReadStream(entry, (e, readStream) => {
+                        if (e) throw e;
+                        if (entry.fileName === "books.json") {
+                            let data = "";
+                            readStream.on("data", (chunk) => {
+                                data += chunk;
+                            });
+                            readStream.on("end", async () => {
+                                const books = JSON.parse(data);
+                                await getRepository(Book).save(books);
+                                zipfile.readEntry();
+                            });
+                        } else {
+                            const filePath = path.join(BookController.getCoverFolderPath(), entry.fileName.split("/")[1]);
+                            const writeStream = fs.createWriteStream(filePath);
+                            readStream.pipe(writeStream);
+                            readStream.on("end", () => {
+                                zipfile.readEntry();
+                            });
+                        }
+                    });
+                }
+            });
+            zipfile.on("end", () => {
+                res.send({ success: true });
+            });
+        });
     }
 
     public static editBook = async (req: Request, res: Response): Promise<void> => {

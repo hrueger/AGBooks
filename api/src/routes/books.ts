@@ -8,6 +8,7 @@ const router = Router();
 // Admin
 router.get("/admin", [checkJwt, checkForAdmin], BookController.listAllAdmin);
 router.get("/admin/backup/export", [checkJwt, checkForAdmin], BookController.exportBackup);
+router.post("/admin/backup/import", [checkJwt, checkForAdmin], BookController.importBackup);
 router.post("/admin", [checkJwt, checkForAdmin], BookController.createBook);
 router.post("/admin/:id", [checkJwt, checkForAdmin], BookController.editBook);
 router.post("/admin/:id/cover", [checkJwt, checkForAdmin], BookController.uploadCover);

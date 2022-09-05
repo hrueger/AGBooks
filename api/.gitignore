@@ -5,4 +5,6 @@ build/
 tmp/
 temp/
 src/config/*
+assets/images/cover/*
+!assets/images/cover/.gitkeep
 !.gitkeep
