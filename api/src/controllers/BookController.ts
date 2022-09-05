@@ -109,8 +109,8 @@ class BookController {
         return `${BookController.getAssetsFolderPath()}/images/cover`;
     }
 
-    private static getAssetsFolderPath(): string {
-        return __dirname.endsWith("controllers") ? path.join(__dirname, "../../assets") : "/app/dist/assets";
+    private static getAssetsFolderPath(shipped = false): string {
+        return __dirname.endsWith("controllers") ? path.join(__dirname, "../../assets") : shipped ? "/app/dist/assets/" : "/app/data";
     }
 
     public static async findBooks(user: User): Promise<Book[] | false> {
@@ -183,7 +183,7 @@ class BookController {
             res.status(400).send({ message: "Invalid ID!" });
             return;
         }
-        const defaultCoverPath = path.join(`${BookController.getAssetsFolderPath()}/images/no_cover_available.png`);
+        const defaultCoverPath = path.join(`${BookController.getAssetsFolderPath(true)}/images/no_cover_available.png`);
         try {
             const coverPath = path.join(`${BookController.getCoverFolderPath()}/${id}.jpg`);
             if (!fs.existsSync(coverPath)) {
