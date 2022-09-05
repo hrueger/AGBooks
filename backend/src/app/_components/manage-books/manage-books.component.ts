@@ -127,7 +127,6 @@ export class ManageBooksComponent implements OnInit {
         if (!confirm("Soll dieses Buch wirklich gelöscht werden?")) {
             return;
         }
-        this.loading = true;
         this.remoteService.delete(`books/admin/${book.id}`).subscribe(() => {
             this.ngOnInit(true);
             this.alertService.success("Das Buch wurde erfolgreich gelöscht!");
