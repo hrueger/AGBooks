@@ -9,7 +9,6 @@ import { Admin } from "./entity/Admin";
 import { User } from "./entity/User";
 import { createAdminUser1574018391679 } from "./migration/1574018391679-createAdminUser";
 import routes from "./routes";
-import { createBooks1536535135468 } from "./migration/1536535135468-createBooks";
 import { globals, envOptions } from "./globals";
 import { getConfig, setConfig } from "./utils/config";
 
@@ -47,7 +46,7 @@ createConnection({
     host: config.DB_HOST,
     logging: false,
     // List all your migrations here
-    migrations: [createAdminUser1574018391679, createBooks1536535135468],
+    migrations: [createAdminUser1574018391679],
     migrationsRun: true,
     password: config.DB_PASSWORD,
     port: config.DB_PORT,
