@@ -21,7 +21,7 @@ export class Book {
     @Column()
     public short: string;
 
-    @Column()
+    @Column({ default: "" })
     public comment: string;
 
     @Column()
