@@ -6,7 +6,8 @@ npm install
 npm run build -- --output-path=../docker/backend
 cd ../api
 npm install
-npx @vercel/ncc build src/index.ts -o ../docker/api
+npm i -g @vercel/ncc
+ncc build src/index.ts -o ../docker/api
 cp -r assets ../docker/api/
 cd ../docker
 PACKAGE_VERSION=$(cat ../frontend/package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
