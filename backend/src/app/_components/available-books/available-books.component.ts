@@ -101,7 +101,7 @@ export class AvailableBooksComponent implements OnInit {
           this.f.branch.enable();
           this.showBranch = true;
       }
-      if (value.startsWith("10")) {
+      if (value.startsWith("Q11")) {
           this.f.uebergang.enable();
           this.showUebergangsklasse = true;
       } else {

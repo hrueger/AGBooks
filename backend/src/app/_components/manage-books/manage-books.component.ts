@@ -70,6 +70,7 @@ export class ManageBooksComponent implements OnInit {
         "Religion ev",
         "Religion rk",
         "Sozialkunde",
+        "Politik & Gesellschaft",
         "Spanisch",
         "Sport",
         "W&R",

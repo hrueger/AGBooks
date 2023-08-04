@@ -175,18 +175,16 @@ class BookController {
         } else if (user.grade.startsWith("9")) {
             where += "`9` = 1";
         } else if (user.grade.startsWith("10")) {
-            where += "(`10` = 1";
+            where += "`10` = 1";
+        } else if (user.grade.startsWith("11")) {
+            where += "(`Q11` = 1";
             if (user.uebergang) {
-                where += " OR `10`= 0 ) AND `uebergang` = '1'";
+                where += " OR `Q11`= 0 ) AND `uebergang` = '1'";
                 checkBranch = false;
                 checkLang = false;
             } else {
                 where += ")";
             }
-        } else if (user.grade == "Q11") {
-            where += "`Q11` = 1";
-            checkLang = false;
-            checkBranch = false;
         } else if (user.grade == "Q12") {
             where += "`Q12` = 1";
             checkLang = false;

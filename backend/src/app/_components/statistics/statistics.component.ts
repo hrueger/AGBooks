@@ -12,7 +12,7 @@ export class StatisticsComponent implements OnInit {
   public orderedBySubject: any[];
   public totalBooks = 0;
   public grades = [
-      "5", "6", "7", "8", "9", "10", "Q11", "Q12",
+      "5", "6", "7", "8", "9", "10", "Q11", "Q12", "Q13",
   ];
   public total: number[] = [] as number[];
   public books: string[] = [] as string[];

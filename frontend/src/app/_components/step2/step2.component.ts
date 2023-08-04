@@ -133,7 +133,7 @@ export class Step2Component implements OnInit {
             this.f.branch.enable();
             this.showBranch = true;
         }
-        if (value.startsWith("10")) {
+        if (value.startsWith("11")) {
             this.f.uebergang.enable();
             this.showUebergangsklasse = true;
         } else {
@@ -142,7 +142,7 @@ export class Step2Component implements OnInit {
             this.showUebergangsklasse = false;
         }
 
-        if (value.startsWith("Q")) {
+        if (["Q12", "Q13"].includes(value)) {
             this.showCourse = true;
             this.f.course.enable();
         } else {
